@@ -200,6 +200,14 @@ textarea{resize:vertical;min-height:120px;line-height:1.55}
 .feedback.warn{background:var(--warn-soft);border-color:transparent}
 #syncChip{min-width:0;flex-shrink:1;overflow:hidden}#syncTxt{overflow:hidden;text-overflow:ellipsis}
 body.setup .tabbar,body.setup .rail{display:none!important}
+html.ts-l{font-size:112.5%}html.ts-l body{font-size:17px}html.ts-xl{font-size:125%}html.ts-xl body{font-size:19px}
+.say{border:0;background:var(--surface-2);color:var(--muted);border-radius:999px;width:34px;height:34px;display:inline-grid;place-items:center;flex:none;cursor:pointer}
+.say svg{width:17px;height:17px}.say:active{transform:scale(.94)}
+.conf{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:1px;margin-right:6px;background:var(--line)}
+.conf.r{background:var(--bad)}.conf.a{background:var(--warn)}.conf.g{background:var(--good)}
+.confbtn[aria-pressed="true"].r{background:var(--bad-soft);color:var(--bad)}.confbtn[aria-pressed="true"].a{background:var(--warn-soft);color:var(--warn)}.confbtn[aria-pressed="true"].g{background:var(--good-soft);color:var(--good)}
+.notes dt{font-weight:700;margin-top:12px}.notes dd{margin:2px 0 0 0;color:var(--fg)}
+@media print{.top,.tabbar,.rail,.study-top,.noprint{display:none!important}.layout{display:block;padding:0}body{background:#fff;color:#000}.card{box-shadow:none;border:1px solid #ccc}}
 body.setup .layout{grid-template-columns:minmax(0,1fr)}
 .match-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 @media (max-width:640px){.match-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -279,6 +287,8 @@ const PSYCH_STUBS = ['p-gen','p-cog','p-eat','p-str','p-agg','p-add'];
 TOPICS.forEach(t => { if (PSYCH_STUBS.includes(t.id)) t.stub = true; });
 const TOPIC = Object.fromEntries(TOPICS.map(t=>[t.id,t]));
 // ---------- your own subjects (any subject, board and options) ----------
+function boardBase(c){ const b = (c && c.board) || ''; return BOARDS.find(x => b === x || b.startsWith(x + ' ')) || b; }
+function boardLabel(c){ const base = boardBase(c); return [base, c && c.code && !base.includes(c.code) ? c.code : ''].filter(Boolean).join(' '); }
 const BOARDS = ['AQA','OCR','Pearson Edexcel','WJEC / Eduqas','CCEA','Cambridge International','Other'];
 const COMMON_SUBJ = ['Accounting','Ancient History','Art and Design','Biology','Business','Chemistry','Classical Civilisation','Computer Science','Design and Technology','Drama and Theatre','Economics','English Language','English Literature','Environmental Science','Film Studies','French','Further Maths','Geography','Geology','German','History','Italian','Law','Maths','Media Studies','Music','Philosophy','Physical Education','Physics','Politics','Psychology','Religious Studies','Sociology','Spanish','Statistics'];
 const PALETTE = ['#2563eb','#db2777','#059669','#d97706','#7c3aed','#0891b2','#dc2626','#4d7c0f'];
@@ -299,7 +309,7 @@ function applyCustom(){
   let css = '';
   customCourses().forEach((c, i) => {
     const key = c.id, col = PALETTE[i % PALETTE.length];
-    SUBJ[key] = { name: c.name, short: c.name.length > 11 ? c.name.slice(0, 10) + '…' : c.name, board: [c.board, c.options].filter(Boolean).join(' · ') || 'Your own subject', weight: 1, custom: true };
+    SUBJ[key] = { name: c.name, short: c.name.length > 11 ? c.name.slice(0, 10) + '…' : c.name, board: [boardLabel(c), c.options].filter(Boolean).join(' · ') || 'Your own subject', weight: 1, custom: true };
     if (!S.settings.grades[key]) S.settings.grades[key] = (c.grades || ['B','A']).slice();
     css += `.s-${key}{--sc:${col};--ss:color-mix(in srgb, ${col} 14%, var(--surface))}`;
     const papers = ['P1', ...(c.exams || []).map(e => e.label || 'Exam')];
@@ -353,7 +363,7 @@ function addCards(tid, pairs){
   let n = 0; pairs.forEach(([q, a]) => { if (have.has(q.toLowerCase())) return; have.add(q.toLowerCase()); set.push([rid('u'), q, a]); n++; });
   saveCards(tid, set); return n;
 }
-function courseLabel(c){ return `A-level ${c.name}${c.board && c.board !== 'Other' ? ' (' + c.board + ')' : ''}${c.options ? ', options/papers: ' + c.options : ''}`; }
+function courseLabel(c){ return `A-level ${c.name}${c.board && boardBase(c) !== 'Other' ? ' (' + boardLabel(c) + ')' : ''}${c.options ? ', options/papers: ' + c.options : ''}`; }
 function cardsPrompt(c, topic, n){ return `I'm revising ${courseLabel(c)} in the UK, for exams in summer ${examYear()}. Write ${n} flashcards for the topic "${topic}", matching the current specification for my exam board.
 
 Cover the key terms, facts, examples, studies/case studies, dates or formulae that examiners expect, with precise detail. Keep each answer to 1-3 sentences.
@@ -403,7 +413,7 @@ function courseFormHTML(c){
   c = c || {}; const g = c.grades || ['B','A'];
   return `<section class="card pad-lg stack" id="courseForm"><h2>${c.id ? 'Edit subject' : 'Add a subject'}</h2>
     <label class="stack" style="gap:4px"><span class="small muted">Subject</span><input type="text" id="cName" list="subjList" value="${esc(c.name||'')}" placeholder="e.g. Politics"><datalist id="subjList">${COMMON_SUBJ.map(x=>`<option value="${esc(x)}">`).join('')}</datalist></label>
-    <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Exam board</span><select id="cBoard">${BOARDS.map(b=>`<option ${c.board===b?'selected':''}>${b}</option>`).join('')}</select></label>
+    <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Exam board</span><select id="cBoard">${BOARDS.map(b=>`<option ${boardBase(c)===b?'selected':''}>${b}</option>`).join('')}</select></label>
       <label class="stack" style="gap:4px"><span class="small muted">Spec code (optional)</span><input type="text" id="cCode" value="${esc(c.code||'')}" placeholder="e.g. H472"></label></div>
     <label class="stack" style="gap:4px"><span class="small muted">Your options or optional papers (optional)</span><input type="text" id="cOpts" value="${esc(c.options||'')}" placeholder="e.g. Russia 1855-1964, The Tudors, coursework on the Cold War"></label>
     <div class="row" style="gap:8px"><span class="small muted">Predicted → target</span>${[0,1].map(i=>`<select id="cG${i}">${['A*','A','B','C','D','E','U'].map(x=>`<option ${g[i]===x?'selected':''}>${x}</option>`).join('')}</select>`).join('<span class="muted">→</span>')}</div>
@@ -415,7 +425,7 @@ function readCourseForm(m, base){
   const name = m.querySelector('#cName').value.trim(); if (!name) { toast('Type the subject name'); return null; }
   const c = Object.assign({ id: rid('c'), created: Date.now(), topics: [] }, base || {});
   c.name = name; c.board = m.querySelector('#cBoard').value; c.code = m.querySelector('#cCode').value.trim(); c.options = m.querySelector('#cOpts').value.trim();
-  if (c.code) c.board = c.board + ' ' + c.code.replace(new RegExp('^' + c.board + '\\s*'), ''), c.board = c.board.trim();
+  if (c.code) c.code = c.code.replace(new RegExp('^' + c.board.replace(/[^\w ]/g, '.') + '\\s*', 'i'), '').trim();
   c.grades = [m.querySelector('#cG0').value, m.querySelector('#cG1').value];
   c.exams = [0,1,2].map(i => ({ label: m.querySelector(`[data-elabel="${i}"]`).value.trim() || `Paper ${i+1}`, d: m.querySelector(`[data-edate="${i}"]`).value })).filter(e => e.d);
   return c;
@@ -485,6 +495,8 @@ const ICON = {
   back:'<path d="M15 18 9 12l6-6"/>',
   x:'<path d="M6 6l12 12M18 6 6 18"/>',
   check:'<path d="m5 12 5 5 9-10"/>',
+  speaker:'<path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>',
+  notes:'<path d="M6 3h9l4 4v14H6z"/><path d="M9 9h6M9 13h6M9 17h4"/>',
   shuffle:'<path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>',
 };
 const ic = (n, attrs='') => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${attrs}>${ICON[n]}</svg>`;
@@ -494,7 +506,7 @@ const NAV = [['home','Home'],['sets','Sets'],['review','Review'],['exam','Exam Q
 let CARDS = [], CARD = {}, BYTOPIC = {}, EXAMQ = [];
 // ---------- state ----------
 const LS_KEY = 'aaalab.v1';
-const blank = () => ({ v:1, ts:0, cards:{}, star:{}, exam:{}, drills:{}, match:{}, days:{}, done:{}, custom:{ courses:{}, sets:{} }, settings:{ name:'', subjects:['psych','maths','econ'], onboarded:false, goal:60, mock:{ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }, grades:{psych:['B','A'],maths:['B','A'],econ:['B','A']}, front:'term', examYear:0, psychOpts:null } });
+const blank = () => ({ v:1, ts:0, cards:{}, conf:{}, star:{}, exam:{}, drills:{}, match:{}, days:{}, done:{}, custom:{ courses:{}, sets:{} }, settings:{ name:'', subjects:['psych','maths','econ'], onboarded:false, goal:60, mock:{ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }, grades:{psych:['B','A'],maths:['B','A'],econ:['B','A']}, front:'term', examYear:0, psychOpts:null } });
 let S = blank();
 function loadLocal(){ try { const raw = localStorage.getItem(LS_KEY); if(raw){ const o = JSON.parse(raw); S = Object.assign(blank(), o); S.settings = Object.assign(blank().settings, o.settings||{}); if (!o.settings || o.settings.onboarded === undefined) { S.settings.onboarded = true; if (!S.settings.name) S.settings.name = 'Pedro'; } } } catch(e){} }
 const ALL_SUBJ = ['psych','maths','econ'];
@@ -629,6 +641,7 @@ function mergeState(a, b){ // merge b into a
   for (const [q, arr] of Object.entries(b.exam||{})) { const cur = out.exam[q] || []; const seen = new Set(cur.map(x=>x.at)); arr.forEach(x=>{ if(!seen.has(x.at)) cur.push(x); }); cur.sort((x,y)=>x.at-y.at); out.exam[q] = cur; }
   for (const [d, v] of Object.entries(b.days||{})) { const cur = out.days[d] || {}; for (const k of Object.keys(v)) cur[k] = Math.max(cur[k]||0, v[k]||0); out.days[d] = cur; }
   for (const [t, v] of Object.entries(b.drills||{})) { const cur = out.drills[t]; if(!cur || (v.at||0) > (cur.at||0)) out.drills[t] = v; }
+  out.conf ||= {}; for (const [t, v] of Object.entries(b.conf||{})) { const cur = out.conf[t]; if (!cur || (v[1]||0) > (cur[1]||0)) out.conf[t] = v; }
   for (const [t, v] of Object.entries(b.match||{})) { out.match[t] = out.match[t] ? Math.min(out.match[t], v) : v; }
   for (const [d, v] of Object.entries(b.done||{})) { out.done[d] = Array.from(new Set([...(out.done[d]||[]), ...v])); }
   out.custom = out.custom || { courses:{}, sets:{} }; out.custom.courses ||= {}; out.custom.sets ||= {};
@@ -750,7 +763,8 @@ function weakness(t){ // higher = needs work
   const acc = st.acc == null ? .5 : st.acc; const ex = st.exPct == null ? .5 : st.exPct;
   const next = EXAMS.filter(e=>e.s===t.s && t.papers.includes(e.p) && daysTo(e.d) >= 0).map(e=>daysTo(e.d)).sort((a,b)=>a-b)[0];
   const urgency = next == null ? 0 : next < 30 ? .25 : next < 75 ? .12 : 0;
-  return ((1 - st.mastery) * .5 + (1 - acc) * .3 + (1 - ex) * .2 + urgency) * w;
+  const cf = ((S.conf||{})[t.id]||[])[0]; const conf = cf==='r' ? .15 : cf==='a' ? .07 : cf==='g' ? -.05 : 0;
+  return ((1 - st.mastery) * .5 + (1 - acc) * .3 + (1 - ex) * .2 + urgency + conf) * w;
 }
 function bestExam(qid){ const a = S.exam[qid]; if (!a || !a.length) return null; return Math.max(...a.map(x => x.score / x.max)); }
 function subjStats(s){
@@ -804,7 +818,10 @@ const isDone = (key) => (S.done[dayNum()]||[]).includes(key);
 // ---------- router ----------
 let VIEW = 'home', STUDY = null;
 function go(v){ if (location.hash !== '#'+v) location.hash = v; else { VIEW = v; render(); } }
-window.addEventListener('hashchange', () => { const h = location.hash.slice(1) || 'home'; VIEW = NAV.some(n=>n[0]===h) ? h : 'home'; if (VIEW !== 'study') STUDY = null; render(); window.scrollTo(0,0); });
+const leaveOK = () => !(STUDY && STUDY.guard && STUDY.guard()) || confirm('Leave this mock paper? Your answers will be lost.');
+let PREV_HASH = location.hash;
+window.addEventListener('hashchange', () => { if (STUDY && !leaveOK()) { history.replaceState(null,'',PREV_HASH||'#home'); return; } PREV_HASH = location.hash; const h = location.hash.slice(1) || 'home'; VIEW = NAV.some(n=>n[0]===h) ? h : 'home'; if (VIEW !== 'study') STUDY = null; render(); window.scrollTo(0,0); });
+document.addEventListener('click', e => { const a = e.target.closest && e.target.closest('a.nav-a'); if (!a) return; const h = a.getAttribute('href'); if (h === location.hash || (h === '#home' && !location.hash)) { e.preventDefault(); if (!leaveOK()) return; STUDY = null; VIEW = h.slice(1); render(); window.scrollTo(0,0); } });
 function navItems(){ return NAV.filter(n => n[0] !== 'drills' || mySubj().includes('maths')); }
 function navHTML(){ return navItems().map(([k,l]) => `<a class="nav-a" href="#${k}" ${VIEW===k||(VIEW==='topic'&&k==='sets')?'aria-current="page"':''}>${ic(k)}<span>${l}</span></a>`).join(''); }
 function renderNav(){
@@ -816,6 +833,7 @@ function renderNav(){
 }
 function railFoot(){ const t = today(); const g = S.settings.goal; return `<div class="rail-foot"><div class="eyebrow">Today</div><div class="mono" style="font-size:1.4rem;font-weight:700">${t.c}<span class="faint" style="font-size:.9rem">/${g}</span></div><div class="tiny muted">cards studied</div><div class="bar" style="margin-top:8px"><i style="width:${Math.min(100, t.c/g*100)}%"></i></div></div>`; }
 function render(){
+  applyTextSize();
   if (EXAMQ.length) applyCustom();
   renderNav();
   const m = document.getElementById('main');
@@ -824,6 +842,10 @@ function render(){
   if (!S.settings.onboarded) { vWelcome(m); return; }
   ({ home:vHome, sets:vSets, topic:vTopic, review:vReview, exam:vExam, drills:vDrills, progress:vProgress }[VIEW] || vHome)(m);
 }
+const CAN_SAY = 'speechSynthesis' in window;
+function sayBtn(text){ return CAN_SAY ? `<button type="button" class="say" data-say="${esc(text)}" aria-label="Read aloud" title="Read aloud">${ic('speaker')}</button>` : ''; }
+document.addEventListener('click', e => { const b = e.target.closest('[data-say]'); if (!b) return; e.stopPropagation(); e.preventDefault(); try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(b.dataset.say); u.lang = 'en-GB'; const v = speechSynthesis.getVoices().find(v => v.lang === 'en-GB'); if (v) u.voice = v; u.rate = 0.95; speechSynthesis.speak(u); } catch(_){} }, true);
+function applyTextSize(){ const t = S.settings.textSize || 'm'; document.documentElement.classList.toggle('ts-l', t==='l'); document.documentElement.classList.toggle('ts-xl', t==='xl'); }
 function toast(msg){ const t = document.createElement('div'); t.className='toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(()=>t.remove(), 2200); }
 function on(root, sel, ev, fn){ root.querySelectorAll(sel).forEach(el => el.addEventListener(ev, fn)); }
 
@@ -904,7 +926,7 @@ function vSets(m){
     <div class="row">${(s==='maths'?['P1','P3']:['P1','P2','P3']).map(p=>{ const label = s==='maths'&&p==='P1'?'Pure (P1 & P2)':p==='P3'&&s==='econ'?'Paper 3 (all themes)':s==='maths'&&p==='P3'?'Paper 3 (Stats & Mech)':'Paper '+p.slice(1); return `<button class="btn sm s-${s}" data-paper="${p}">${ic('learn')} Study ${label}</button>`; }).join('')}
       ${stars.length?`<button class="btn sm" id="starSet">${ic('star')} Starred (${stars.length})</button>`:''}</div>
     ${Object.entries(groups).map(([p, ts])=>`<section class="stack" style="gap:8px"><div class="paper-h"><h3>${esc(PAPER_NAMES[s][p]||p)}</h3><span class="tiny muted">${SUBJ[s].board}</span></div>
-      ${ts.map(t=>{const st=topicStats(t.id);return `<button class="topic-row s-${s}" data-topic="${t.id}"><div><div class="nm">${esc(t.name)}</div><div class="tiny muted">Spec ${esc(t.spec)} · ${t.stub && !st.n ? 'No built-in cards: make them with Claude' : plural(st.n,'card')}${GEN[t.id]&&GEN[t.id].length?' · drills':''}${st.due?` · <b style="color:var(--sc)">${st.due} due</b>`:''}</div></div>
+      ${ts.map(t=>{const st=topicStats(t.id);return `<button class="topic-row s-${s}" data-topic="${t.id}"><div><div class="nm">${confDot(t.id)}${esc(t.name)}</div><div class="tiny muted">Spec ${esc(t.spec)} · ${t.stub && !st.n ? 'No built-in cards: make them with Claude' : plural(st.n,'card')}${GEN[t.id]&&GEN[t.id].length?' · drills':''}${st.due?` · <b style="color:var(--sc)">${st.due} due</b>`:''}</div></div>
         <div class="tb"><div class="bar"><i style="width:${Math.round(st.mastery*100)}%"></i></div><div class="tiny muted" style="margin-top:3px">${Math.round(st.mastery*100)}% mastered</div></div>
         <div style="text-align:right">${st.acc==null?'<span class="pill neutral">New</span>':`<span class="pill ${st.acc>=.8?'good':st.acc>=.6?'warn':'bad'}">${Math.round(st.acc*100)}%</span>`}</div></button>`}).join('')}
     </section>`).join('')}
@@ -933,7 +955,7 @@ function vCustomSets(m, s){
     ${ts.length ? '' : `<section class="card pad-lg stack"><h3>Add your topics</h3><p class="small muted">Ask Claude for the topic list for your exact spec and options, then paste it below. Or type your topics yourself, one per line.</p><button class="btn sm" id="askTopics" style="align-self:flex-start">${ic('spark')} Get my topic list from Claude</button></section>`}
     <section class="stack" style="gap:8px"><div class="paper-h"><h3>Topics</h3><button class="btn sm ghost" id="addTopics">+ Add topics</button></div>
       ${TOPIC_PASTE || !ts.length ? `<div class="card stack"><textarea id="topicTxt" style="min-height:120px" placeholder="One topic per line, e.g.&#10;The UK constitution&#10;Parliament&#10;The Prime Minister and executive"></textarea><div class="row"><button class="btn sm primary" id="topicGo">Add topics</button>${ts.length?'<button class="btn sm ghost" id="topicClose">Close</button>':''}</div></div>` : ''}
-      ${ts.map(t=>{const st=topicStats(t.id);return `<div class="topic-row s-${s}" style="grid-template-columns:minmax(0,1fr) auto"><button data-topic="${t.id}" style="all:unset;cursor:pointer;min-width:0"><div class="nm">${esc(t.name)}</div><div class="tiny muted">${st.n?plural(st.n,'card'):'No cards yet'}${st.due?` · <b style="color:var(--sc)">${st.due} due</b>`:''}${st.n?' · '+Math.round(st.mastery*100)+'% mastered':''}</div></button>
+      ${ts.map(t=>{const st=topicStats(t.id);return `<div class="topic-row s-${s}" style="grid-template-columns:minmax(0,1fr) auto"><button data-topic="${t.id}" style="all:unset;cursor:pointer;min-width:0"><div class="nm">${confDot(t.id)}${esc(t.name)}</div><div class="tiny muted">${st.n?plural(st.n,'card'):'No cards yet'}${st.due?` · <b style="color:var(--sc)">${st.due} due</b>`:''}${st.n?' · '+Math.round(st.mastery*100)+'% mastered':''}</div></button>
         ${st.n ? `<div class="tb" style="min-width:90px"><div class="bar"><i style="width:${Math.round(st.mastery*100)}%"></i></div></div>` : `<button class="btn sm" data-make="${t.id}">${ic('spark')} Make cards</button>`}</div>`}).join('')}
     </section></div>`;
   bindSeg(m);
@@ -973,9 +995,11 @@ function vTopic(m){
     ${cc && PASTE_FOR === t.id ? pasteBoxHTML(t.id) : ''}
     ${!ids.length ? `<div class="empty">No cards yet. Press <b>Make cards with Claude</b>: Claude writes them for your exact course, then you paste them here.</div>` : `<div class="modes">
       ${[['flash','Flashcards','Flip, then rate how well you knew it'],['learn','Learn','Adaptive rounds: choose, then recall'],['write','Write','Type the answer from memory'],['match','Match','Race to pair terms and answers'],['test','Test','A mixed practice test, scored']].map(([k,n,d])=>`<button class="mode" data-mode="${k}">${ic(k)}<b>${n}</b><span>${d}</span></button>`).join('')}
+      <button class="mode" data-notes="1">${ic('notes')}<b>Notes</b><span>One-page summary with exam tips, printable</span></button>
       ${hasDrill?`<button class="mode" data-drill="1">${ic('drills')}<b>Drill</b><span>Endless generated maths questions</span></button>`:''}
       ${exN?`<button class="mode" data-exam="1">${ic('exam')}<b>Exam Qs</b><span>${plural(exN,'question')} with mark schemes</span></button>`:''}
     </div>`}
+    ${t ? `<section class="card stack" style="gap:8px"><div class="row between"><h3>How confident are you with this topic?</h3><span class="tiny muted">Your spec checklist</span></div><div class="row">${[['r','Not yet'],['a','Getting there'],['g','Confident']].map(([k,l])=>`<button class="btn sm confbtn ${k}" data-conf="${k}" aria-pressed="${(S.conf[t.id]||[])[0]===k}"><span class="conf ${k}"></span>${l}</button>`).join('')}</div></section>` : ''}
     <section class="stack" style="gap:10px"><div class="row between"><h3>Terms in this set</h3><input type="text" id="termSearch" placeholder="Search this set" style="max-width:240px" value="${esc(TERM_Q)}"></div>
       <div class="term-list" id="termList"></div></section>
   </div>`;
@@ -996,16 +1020,86 @@ function vTopic(m){
   on(m,'[data-mode]','click',e=>startMode(e.currentTarget.dataset.mode, set));
   on(m,'[data-drill]','click',()=>startDrill(t.id));
   on(m,'[data-exam]','click',()=>{ EXAM_FILTER = t.s; EXAM_TOPIC = t.id; go('exam'); });
+  on(m,'[data-notes]','click',()=>{ STUDY = modeNotes(set); window.scrollTo(0,0); render(); });
+  on(m,'[data-conf]','click',e=>{ const k = e.currentTarget.dataset.conf; S.conf ||= {}; S.conf[t.id] = [k, Date.now()]; save(); render(); toast({r:'Marked: not yet',a:'Marked: getting there',g:'Marked: confident'}[k]); });
 }
 
 // ---------- study modes ----------
+function confDot(tid){ const c = (S.conf||{})[tid]; return c ? `<span class="conf ${c[0]}" title="${{r:'Not yet',a:'Getting there',g:'Confident'}[c[0]]}"></span>` : ''; }
+// Notes: a one-page summary of a set, with the examiner tips for its topic.
+function modeNotes(set){
+  return { render(m){
+    const t = set.topic ? TOPIC[set.topic] : null; const cards = set.ids.map(id=>CARD[id]).filter(Boolean);
+    const tips = t ? EXAMQ.filter(q=>q.t===t.id).map(q=>q.tip).filter((x,i,a)=>x && a.indexOf(x)===i) : [];
+    m.innerHTML = `<div class="stack ${set.s?'s-'+set.s:''}" style="gap:16px"><div class="row between noprint"><button class="btn ghost sm" id="quit">${ic('back')} Back</button><div class="row">${sayBtn(cards.map(c=>c[2]+'. '+c[3]).join(' '))}<button class="btn sm" id="print">Print or save as PDF</button></div></div>
+      <div><div class="eyebrow">${set.s?esc(SUBJ[set.s].name)+' · ':''}Notes</div><h1>${esc(set.title)}</h1>${t&&t.spec?`<p class="small muted">Spec ${esc(t.spec)} · ${plural(cards.length,'point')}</p>`:''}</div>
+      ${tips.length?`<section class="card stack" style="gap:6px"><h3>Examiner tips</h3><ul class="small" style="margin:0;padding-left:18px;line-height:1.6">${tips.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>`:''}
+      <section class="card"><dl class="notes" style="margin:0">${cards.map(c=>`<dt>${esc(c[2])}</dt><dd class="small">${esc(c[3])}</dd>`).join('') || '<p class="muted">No cards in this set yet.</p>'}</dl></section></div>`;
+    on(m,'#quit','click',endStudy); on(m,'#print','click',()=>window.print());
+  }};
+}
+// Mock paper: several exam questions under one timer, then marked against the mark schemes (or by Claude).
+function pickPaper(s, paper, target){
+  const pool = shuffle(EXAMQ.filter(q => q.s===s && topicOn(TOPIC[q.t]) && (paper==='all' || q.paper.startsWith(paper)))).sort((a,b)=>(bestExam(a.id)==null?0:1)-(bestExam(b.id)==null?0:1));
+  const out = []; let tot = 0;
+  for (const q of pool) { if (tot >= target) break; if (tot + q.marks <= target + 6) { out.push(q); tot += q.marks; } }
+  return out;
+}
+function modePaper(s, paper, target){
+  const qs = pickPaper(s, paper, target); const mins = qs.reduce((a,q)=>a+minsFor(q),0);
+  const st = { phase:'write', ans:{}, ticks:{}, level:{}, score:{}, start:Date.now(), timer:null, saved:false };
+  const total = qs.reduce((a,q)=>a+q.marks,0);
+  const sug = (q) => { const T = st.ticks[q.id] || new Set(); const L = st.level[q.id]; if (q.levels && L!=null) { const r = q.levels[L]; return Math.round(r[0] + (r[1]-r[0]) * Math.min(1, T.size/q.points.length*1.2)); } return Math.min(q.marks, Math.round(T.size / q.points.length * q.marks)); };
+  const o = { guard: () => !st.saved && Object.values(st.ans).some(x => x && x.trim()), render(m){
+    if (!qs.length) { m.innerHTML = summaryCard('Mock paper', '0', 'No questions for that paper yet', s, false); on(m,'#done','click',endStudy); return; }
+    const title = `${SUBJ[s].short} mock paper${paper!=='all'?' · '+paper:''}`;
+    if (st.phase==='write') {
+      m.innerHTML = studyShell(title, s, 0, `<p class="small muted">${plural(qs.length,'question')} · ${total} marks · about ${mins} minutes. Answer everything, then mark it.</p>
+        ${qs.map((q,i)=>`<section class="card stack s-${q.s}" style="gap:10px"><div class="row between"><span class="tiny muted mono">Q${i+1} · ${esc(q.paper)} · ${esc(TOPIC[q.t].name)}</span><span class="mono small"><b>${q.marks}</b> marks</span></div><div class="row between" style="flex-wrap:nowrap;align-items:flex-start;gap:10px"><div style="font-weight:600;line-height:1.5">${esc(q.q)}</div>${sayBtn(q.q)}</div><textarea data-pa="${q.id}" style="min-height:${q.marks>=12?260:140}px" placeholder="Your answer…">${esc(st.ans[q.id]||'')}</textarea></section>`).join('')}
+        <div class="row between"><span class="small muted mono" id="pclock">0:00 / ${mins}:00</span><button class="btn primary" id="pfin">Finish and mark</button></div>`, `<span id="ptop">${mins}:00</span>`);
+      quitHandler(m);
+      clearInterval(st.timer); st.timer = setInterval(()=>{ const c = document.getElementById('pclock'); if (!c) { clearInterval(st.timer); return; } const sec = Math.floor((Date.now()-st.start)/1000); c.textContent = `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')} / ${mins}:00`; const left = Math.max(0, mins*60 - sec); const tp = document.getElementById('ptop'); if (tp) tp.textContent = `${Math.floor(left/60)}:${String(left%60).padStart(2,'0')}`; if (sec > mins*60) c.style.color = 'var(--bad)'; }, 1000);
+      on(m,'[data-pa]','input',e=>{ st.ans[e.target.dataset.pa] = e.target.value; });
+      on(m,'#pfin','click',()=>{ clearInterval(st.timer); st.taken = Math.round((Date.now()-st.start)/60000); st.phase='mark'; o.render(m); window.scrollTo(0,0); });
+      return;
+    }
+    const got = qs.reduce((a,q)=>a+(st.score[q.id] ?? sug(q)),0);
+    m.innerHTML = studyShell(title, s, 100, `<section class="card pad-lg row between"><div><div class="eyebrow">${st.saved?'Saved':'Your mark so far'}</div><div class="result-big mono">${got}/${total}</div><p class="small muted">${Math.round(got/total*100)}% · took ${plural(st.taken||0,'minute')} of ${mins}</p></div>
+        <div class="stack" style="gap:8px">${SAMPLE?`<button class="btn" id="pai">${ic('spark')} Mark it with Claude</button>`:''}<button class="btn primary" id="psave">${st.saved?'Done':'Save marks'}</button></div></section>
+      <p class="small muted">Tick each mark-scheme point your answer clearly makes${qs.some(q=>q.levels)?', and pick a level for extended answers':''}. Or press Mark it with Claude for an examiner's view of the whole paper.</p>
+      ${qs.map((q,i)=>`<section class="card stack s-${q.s}" style="gap:10px"><div class="row between"><b class="small">Q${i+1} · ${esc(TOPIC[q.t].name)}</b><span class="mono small">${st.score[q.id] ?? sug(q)}/${q.marks}</span></div><div class="small" style="font-weight:600">${esc(q.q)}</div>
+        <div class="feedback small"><div class="eyebrow" style="margin-bottom:4px">Your answer</div>${esc(st.ans[q.id]||'(blank)')}</div>
+        <div>${q.points.map((p,j)=>`<label class="ms-item"><input type="checkbox" data-pt="${q.id}" data-j="${j}" ${(st.ticks[q.id]||new Set()).has(j)?'checked':''}><span class="small">${esc(p)}</span></label>`).join('')}</div>
+        ${q.levels?`<div class="row">${q.levels.map((L,j)=>`<button class="btn sm" data-pl="${q.id}" data-j="${j}" aria-pressed="${st.level[q.id]===j}" style="${st.level[q.id]===j?'border-color:var(--accent);background:var(--accent-soft)':''}">L${q.levels.length-j} · ${L[0]}-${L[1]}</button>`).join('')}</div>`:''}
+        <div class="row" style="gap:8px"><span class="small muted">Mark</span><input type="number" data-ps="${q.id}" min="0" max="${q.marks}" value="${st.score[q.id] ?? sug(q)}" style="width:80px"><span class="small muted">/ ${q.marks}</span></div>
+        <div class="tiny muted"><b>Examiner tip.</b> ${esc(q.tip)}</div></section>`).join('')}`, '');
+    quitHandler(m);
+    const y = () => window.scrollY;
+    on(m,'[data-pt]','change',e=>{ const id = e.target.dataset.pt; const T = st.ticks[id] ||= new Set(); e.target.checked ? T.add(+e.target.dataset.j) : T.delete(+e.target.dataset.j); delete st.score[id]; const k = y(); o.render(m); window.scrollTo(0,k); });
+    on(m,'[data-pl]','click',e=>{ const id = e.currentTarget.dataset.pl; st.level[id] = +e.currentTarget.dataset.j; delete st.score[id]; const k = y(); o.render(m); window.scrollTo(0,k); });
+    on(m,'[data-ps]','change',e=>{ const q = qs.find(x=>x.id===e.target.dataset.ps); st.score[q.id] = Math.max(0, Math.min(q.marks, +e.target.value||0)); const k = y(); setTimeout(()=>{ if (STUDY !== o) return; o.render(m); window.scrollTo(0,k); }, 0); });
+    on(m,'#pai','click',()=>handoff(paperPrompt(qs, st.ans)));
+    on(m,'#psave','click',()=>{ if (st.saved) { endStudy(); return; } qs.forEach(q=>{ (S.exam[q.id] ||= []).push({ at:Date.now(), score: st.score[q.id] ?? sug(q), max:q.marks, by:'paper' }); }); today().x += qs.length; save(); st.saved = true; toast(`Saved ${got}/${total}`); o.render(m); });
+  }};
+  return o;
+}
+function paperPrompt(qs, ans){ const q0 = qs[0]; return `You are a senior A-level examiner for ${SUBJ[q0.s].board} ${SUBJ[q0.s].name}, marking a student's mock paper for the summer ${examYear()} exams. Mark strictly but fairly, as a real examiner would.
+
+For each question give: the mark, the level if it is levels-based, what earned credit, and exactly what to add for more marks. Finish with the total, a grade estimate if you can, and the three most useful things to work on.
+
+${qs.map((q,i)=>`QUESTION ${i+1} (${q.marks} marks, ${q.paper}): ${q.q}
+MARK SCHEME POINTS:
+${q.points.map(p=>'- '+p).join('\n')}${q.levels?'\nLEVELS: '+q.levels.map((L,j)=>`Level ${q.levels.length-j} (${L[0]}-${L[1]}): ${L[2]}`).join(' | '):''}
+STUDENT ANSWER:
+${(ans[q.id]||'').trim() || '(no answer)'}`).join('\n\n')}`; }
+
 function priorityCards(ids, n){
   const now = dayNum();
   const score = (id) => { const c = cs(id); if (!c) return 2 + Math.random(); if (c[2] <= now) return 3 + (now - c[2]) * .01 + Math.random()*.1; return 1 - cardMastery(id) + Math.random()*.2; };
   return ids.slice().sort((a,b)=>score(b)-score(a)).slice(0, n);
 }
 function studyShell(title, s, pct, inner, extra=''){ return `<div class="stack ${s?'s-'+s:''}" style="gap:18px"><div class="study-top"><button class="btn ghost sm" id="quit" aria-label="Exit">${ic('x')}</button><div class="progress-line"><i style="width:${pct}%"></i></div><span class="small muted mono">${extra}</span></div><div class="row between"><div><div class="eyebrow">${esc(title)}</div></div></div>${inner}</div>`; }
-function endStudy(){ STUDY = null; render(); }
+function endStudy(){ if (!leaveOK()) return; STUDY = null; render(); }
 function startMode(mode, set, taskKey){
   if (!set.ids.length) { toast('This set has no cards yet'); return; }
   const fn = { flash:modeFlash, learn:modeLearn, write:modeWrite, match:modeMatch, test:modeTest }[mode];
@@ -1030,14 +1124,14 @@ function modeFlash(set, taskKey){
     const qside = front==='term' ? c[2] : c[3], aside = front==='term' ? c[3] : c[2];
     m.innerHTML = studyShell(set.title, t.s, st.i/st.order.length*100, `
       <div class="flash ${st.flipped?'flipped':''}" id="flash"><div class="flash-in" role="button" tabindex="0" aria-label="Flip card">
-        <div class="face front s-${t.s}"><div class="row between"><span class="pill subj">${esc(t.name)}</span><button class="star" aria-label="Star" aria-pressed="${!!S.star[c[0]]}" data-star>${ic('star','fill="'+(S.star[c[0]]?'currentColor':'none')+'"')}</button></div><div class="body"><div>${esc(qside)}</div></div><div class="tiny faint" style="text-align:center">Tap or press space to flip</div></div>
-        <div class="face back s-${t.s}"><div class="row between"><span class="pill subj">Answer</span>${SAMPLE?`<button class="btn ghost sm" data-explain>${ic('spark')} Explain</button>`:''}</div><div class="body"><div style="width:100%">${esc(aside)}${st.explain!=null?`<div class="feedback" style="margin-top:14px"><div class="eyebrow" style="margin-bottom:4px">Claude explains</div><div class="ai-out small" id="explainOut">${esc(st.explain)}</div></div>`:''}</div></div></div>
+        <div class="face front s-${t.s}"><div class="row between"><span class="pill subj">${esc(t.name)}</span><button class="star" aria-label="Star" aria-pressed="${!!S.star[c[0]]}" data-star>${ic('star','fill="'+(S.star[c[0]]?'currentColor':'none')+'"')}</button></div><div class="body"><div>${esc(qside)}</div></div><div class="row between"><span class="tiny faint">Tap or press space to flip</span>${sayBtn(qside)}</div></div>
+        <div class="face back s-${t.s}"><div class="row between"><span class="pill subj">Answer</span>${SAMPLE?`<button class="btn ghost sm" data-explain>${ic('spark')} Explain</button>`:''}</div><div class="body"><div style="width:100%"><div class="row between" style="flex-wrap:nowrap;align-items:flex-start;gap:10px"><span>${esc(aside)}</span>${sayBtn(aside)}</div>${st.explain!=null?`<div class="feedback" style="margin-top:14px"><div class="eyebrow" style="margin-bottom:4px">Claude explains</div><div class="ai-out small" id="explainOut">${esc(st.explain)}</div></div>`:''}</div></div></div>
       </div></div>
       ${st.flipped ? `<div class="grades">${[['again','Again',0],['hard','Hard',1],['goodb','Good',2],['easy','Easy',3]].map(([cl,l,g])=>`<button class="gbtn ${cl}" data-g="${g}">${l}<small>${ivLabel(previewInterval(c[0],g))} <span class="kbd">${g+1}</span></small></button>`).join('')}</div>` : `<div class="row" style="justify-content:center"><button class="btn primary" id="flipBtn">Show answer</button></div>`}
     `, `${st.i+1}/${st.order.length}`);
     quitHandler(m);
     const flip = () => { st.flipped = !st.flipped; o.render(m); };
-    on(m,'.flash-in','click',e=>{ if(e.target.closest('[data-explain],[data-star]')) return; flip(); });
+    on(m,'.flash-in','click',e=>{ if(e.target.closest('[data-explain],[data-star],[data-say]')) return; flip(); });
     on(m,'#flipBtn','click',flip);
     on(m,'[data-star]','click',e=>{ e.stopPropagation(); S.star[c[0]] = !S.star[c[0]]; if(!S.star[c[0]]) delete S.star[c[0]]; save(); o.render(m); });
     on(m,'[data-explain]','click',async e=>{ e.stopPropagation(); st.explain = 'Thinking…'; o.render(m);
@@ -1073,11 +1167,11 @@ function modeLearn(set, taskKey){
     const c = CARD[st.cur.id]; const t = TOPIC[c[1]];
     let inner = '';
     if (st.cur.stage === 0) {
-      inner = `<div class="qbox stack"><span class="pill subj s-${t.s}" style="align-self:flex-start">${esc(t.name)} · choose</span><div class="prompt">${esc(c[2])}</div>
+      inner = `<div class="qbox stack"><span class="pill subj s-${t.s}" style="align-self:flex-start">${esc(t.name)} · choose</span><div class="row between" style="flex-wrap:nowrap;align-items:flex-start;gap:10px"><div class="prompt">${esc(c[2])}</div>${sayBtn(c[2])}</div>
         <div class="stack" style="gap:8px">${st.opts.map((x,i)=>{ let cl=''; if(st.answered!=null){ if(x[0]===c[0]) cl='right'; else if(i===st.answered) cl='wrong'; } return `<button class="opt ${cl}" data-o="${i}" ${st.answered!=null?'disabled':''}><span class="k">${i+1}</span>${esc(brief(x[3], 200))}</button>`; }).join('')}</div>
-        ${st.answered!=null?`<div class="feedback ${st.opts[st.answered][0]===c[0]?'ok':'no'}"><b>${st.opts[st.answered][0]===c[0]?'Correct.':'Not quite.'}</b> <span class="small">${esc(c[3])}</span></div><button class="btn primary" id="next" style="align-self:flex-end">Continue</button>`:''}</div>`;
+        ${st.answered!=null?`<div class="feedback ${st.opts[st.answered][0]===c[0]?'ok':'no'}"><b>${st.opts[st.answered][0]===c[0]?'Correct.':'Not quite.'}</b> <span class="small">${esc(c[3])}</span>${st.opts[st.answered][0]!==c[0]?`<div class="small muted" style="margin-top:6px">The answer you picked describes <b>${esc(st.opts[st.answered][2])}</b>.</div>`:''}</div><button class="btn primary" id="next" style="align-self:flex-end">Continue</button>`:''}</div>`;
     } else {
-      inner = `<div class="qbox stack"><span class="pill subj s-${t.s}" style="align-self:flex-start">${esc(t.name)} · recall</span><div class="prompt">${esc(c[2])}</div>
+      inner = `<div class="qbox stack"><span class="pill subj s-${t.s}" style="align-self:flex-start">${esc(t.name)} · recall</span><div class="row between" style="flex-wrap:nowrap;align-items:flex-start;gap:10px"><div class="prompt">${esc(c[2])}</div>${sayBtn(c[2])}</div>
         ${st.check==null?`<textarea id="typed" placeholder="Write the key points from memory…">${esc(st.typed)}</textarea><div class="row between"><button class="btn ghost sm" id="dunno">I don't know</button><button class="btn primary" id="checkBtn">Check</button></div>`:
         `<div class="feedback"><div class="eyebrow" style="margin-bottom:6px">Model answer</div><div>${esc(c[3])}</div></div>${st.typed?`<div><div class="small muted" style="margin-bottom:4px">Key terms you used (${st.check.hits.length}/${st.check.keys.length}):</div>${kwHTML(st.check)}</div>`:''}
         <p class="small muted">${st.check.ratio>=.5?'Looks like you got the main ideas.':'You may have missed some key ideas.'} Be honest: did you know it?</p>
@@ -1165,7 +1259,7 @@ function modeTest(set, taskKey){
     const marked = st.phase==='results';
     const qHTML = st.qs.map((q,i)=>{ const c = CARD[q.id]; const t = TOPIC[c[1]]; const a = st.ans[i];
       let body = '';
-      if (q.kind==='mcq') body = `<div class="stack" style="gap:8px">${q.opts.map((x,j)=>{ let cl = a===j ? 'sel' : ''; if (marked) { if (x[0]===c[0]) cl='right'; else if (a===j) cl='wrong'; } return `<button class="opt ${cl}" data-q="${i}" data-a="${j}" ${marked?'disabled':''} style="${a===j&&!marked?'border-color:var(--accent);background:var(--accent-soft)':''}">${esc(brief(x[3],200))}</button>`; }).join('')}</div>`;
+      if (q.kind==='mcq') body = `<div class="stack" style="gap:8px">${q.opts.map((x,j)=>{ let cl = a===j ? 'sel' : ''; if (marked) { if (x[0]===c[0]) cl='right'; else if (a===j) cl='wrong'; } return `<button class="opt ${cl}" data-q="${i}" data-a="${j}" ${marked?'disabled':''} style="${a===j&&!marked?'border-color:var(--accent);background:var(--accent-soft)':''}">${esc(brief(x[3],200))}${marked && a===j && x[0]!==c[0] ? `<div class="tiny" style="margin-top:4px">This describes: ${esc(x[2])}</div>` : ''}</button>`; }).join('')}</div>`;
       else if (q.kind==='tf') body = `<div class="feedback small">${esc(q.shown)}</div><div class="row">${[['true','True'],['false','False']].map(([v,l])=>{ const sel = a===v; let style = sel && !marked ? 'border-color:var(--accent);background:var(--accent-soft)' : ''; let cl=''; if (marked) { const right = (v==='true')===q.truth; if (right) cl='right'; else if (sel) cl='wrong'; } return `<button class="opt ${cl}" style="width:auto;flex:1;text-align:center;${style}" data-q="${i}" data-a="${v}" ${marked?'disabled':''}>${l}</button>`; }).join('')}</div>`;
       else body = marked ? `<div class="feedback"><div class="eyebrow" style="margin-bottom:4px">Your answer</div>${esc(a||'(blank)')}</div><div class="feedback ok"><div class="eyebrow" style="margin-bottom:4px">Model answer</div>${esc(c[3])}</div>${st.self[i]==null?`<div class="row" style="justify-content:flex-end"><button class="btn sm" data-selfq="${i}" data-v="0">I was wrong</button><button class="btn sm primary" data-selfq="${i}" data-v="1">I was right</button></div>`:`<span class="pill ${st.self[i]?'good':'bad'}">${st.self[i]?'Marked right':'Marked wrong'}</span>`}` : `<textarea data-w="${i}" placeholder="Your answer…" style="min-height:90px">${esc(a||'')}</textarea>`;
       const prompt = q.kind==='tf' ? `Does this match “${esc(c[2])}”?` : esc(c[2]);
@@ -1187,6 +1281,7 @@ function modeTest(set, taskKey){
 }
 
 // ---------- review view ----------
+let BUILD_T = new Set();
 function vReview(m){
   const due = CARDS.filter(c=>cardOn(c) && isDue(c[0]));
   const bySubj = mySubj().map(s=>[s, due.filter(c=>TOPIC[c[1]].s===s).length]);
@@ -1199,6 +1294,9 @@ function vReview(m){
       <section class="card stack"><h3>Learn new cards</h3><p class="small muted">${newPool.length?`20 unseen cards from your weakest topics, mixed across subjects.`:'You have seen every card. Impressive.'}</p><button class="btn" id="new" ${newPool.length?'':'disabled'} style="align-self:flex-start">${ic('flash')} Start</button></section>
       <section class="card stack"><h3>Cards you keep missing</h3><p class="small muted">${weakCards.length?`Your ${weakCards.length} most-missed cards.`:'Once you miss some cards, they gather here.'}</p><button class="btn" id="weak" ${weakCards.length?'':'disabled'} style="align-self:flex-start">${ic('learn')} Learn them</button></section>
     </div>
+    <section class="card stack" style="gap:10px"><div><h3>Build a test</h3><p class="small muted">Pick topics and get a mixed, scored test from them.</p></div>
+      <div class="stack" style="gap:4px;max-height:260px;overflow:auto">${myTopics().filter(t=>(BYTOPIC[t.id]||[]).length).map(t=>`<label class="row small s-${t.s}" style="gap:8px;flex-wrap:nowrap"><input type="checkbox" data-bt="${t.id}" ${BUILD_T.has(t.id)?'checked':''}><span class="pill subj">${esc(SUBJ[t.s].short)}</span><span>${confDot(t.id)}${esc(t.name)}</span></label>`).join('') || '<span class="small muted">No cards yet.</span>'}</div>
+      <div class="row"><button class="btn sm ghost" id="btWeak">Pick my red and amber topics</button><button class="btn primary sm" id="btGo">${ic('test')} Start test</button></div></section>
     <section class="card stack"><h3>Flashcard settings</h3><div class="row"><span class="small muted">Show on front:</span><div class="seg"><button data-front="term" aria-pressed="${S.settings.front==='term'}">Term</button><button data-front="answer" aria-pressed="${S.settings.front==='answer'}">Answer</button></div></div>
       <p class="tiny muted">Keyboard: space flips, 1-4 rate (Again, Hard, Good, Easy).</p></section>
   </div>`;
@@ -1207,26 +1305,38 @@ function vReview(m){
   on(m,'#new','click',()=>{ STUDY = modeFlash({ title:'New cards', s:null, ids:newPool, review:true }, null); render(); });
   on(m,'#weak','click',()=>startMode('learn', { title:'Most-missed cards', s:null, ids:weakCards }));
   on(m,'[data-front]','click',e=>{ S.settings.front = e.currentTarget.dataset.front; save(); render(); });
+  on(m,'[data-bt]','change',e=>{ e.target.checked ? BUILD_T.add(e.target.dataset.bt) : BUILD_T.delete(e.target.dataset.bt); });
+  on(m,'#btWeak','click',()=>{ BUILD_T = new Set(myTopics().filter(t=>(BYTOPIC[t.id]||[]).length && ['r','a'].includes((S.conf[t.id]||[])[0])).map(t=>t.id)); if (!BUILD_T.size) toast('Rate topics on their page first (Not yet / Getting there)'); render(); });
+  on(m,'#btGo','click',()=>{ const ids = [...BUILD_T].flatMap(id=>BYTOPIC[id]||[]); if (!ids.length) { toast('Pick at least one topic'); return; } startMode('test', { title:'Your test', s:null, ids }); });
 }
 
 // ---------- exam questions ----------
-let EXAM_FILTER = 'psych', EXAM_TOPIC = null, EXAM_MOCK = true;
+let EXAM_FILTER = 'psych', EXAM_TOPIC = null, EXAM_MOCK = true, EXAM_LEN = 'all', PAPER_SEL = { p:'all', m:45 };
 function vExam(m){
   if (!mySubj().includes(EXAM_FILTER)) EXAM_FILTER = mySubj()[0];
   if (isCustom(EXAM_FILTER)) return vCustomExam(m, EXAM_FILTER);
   const useMock = EXAM_MOCK && mockOn() && !EXAM_TOPIC && mockExamQs(EXAM_FILTER).length;
-  const list = useMock ? mockExamQs(EXAM_FILTER) : EXAMQ.filter(q=>q.s===EXAM_FILTER && topicOn(TOPIC[q.t]) && (!EXAM_TOPIC || q.t===EXAM_TOPIC));
+  const lenOk = (q) => EXAM_LEN==='all' || (EXAM_LEN==='s' ? q.marks<=5 : EXAM_LEN==='m' ? q.marks>5 && q.marks<=10 : EXAM_LEN==='l' ? q.marks>10 : bestExam(q.id)==null);
+  const list = (useMock ? mockExamQs(EXAM_FILTER) : EXAMQ.filter(q=>q.s===EXAM_FILTER && topicOn(TOPIC[q.t]) && (!EXAM_TOPIC || q.t===EXAM_TOPIC))).filter(lenOk);
+  const papers = [...new Set(EXAMQ.filter(q=>q.s===EXAM_FILTER).map(q=>q.paper.slice(0,7)))].sort();
   m.innerHTML = `<div class="stack"><div class="row between"><div><div class="eyebrow">Exam-style practice</div><h1>Exam questions</h1></div>
       <div class="seg" role="group" aria-label="Subject" style="flex-wrap:wrap">${mySubj().map(k=>`<button aria-pressed="${k===EXAM_FILTER}" data-s="${k}">${esc(SUBJ[k].short)}</button>`).join('')}</div></div>
     <p class="muted" style="max-width:66ch">Original questions written in the style of the ${SUBJ[EXAM_FILTER].board} papers. Answer under timed conditions, then mark against the mark-scheme points${SAMPLE?' yourself or with Claude as your examiner':''}.</p>
     ${mockOn() && !EXAM_TOPIC ? `<div class="row"><button class="btn sm ${useMock?'primary':''}" id="mockOnly">${useMock?'Showing '+esc(mockCfg().title)+' topics':'Show only '+esc(mockCfg().title)+' topics'}</button>${useMock?'<button class="btn ghost sm" id="mockAll">Show everything</button>':''}</div>`:''}
+    <section class="card stack s-${EXAM_FILTER}" style="gap:10px"><div><h3>Timed mock paper</h3><p class="small muted">A set of questions under one timer, then marked against the mark schemes, or by Claude in one go. Questions you haven't tried come first.</p></div>
+      <div class="row" style="gap:8px"><select id="ppP" style="width:auto"><option value="all">All papers</option>${papers.map(p=>`<option ${PAPER_SEL.p===p?'selected':''}>${p}</option>`).join('')}</select><select id="ppM" style="width:auto">${[[25,'About 25 marks'],[45,'About 45 marks'],[80,'About 80 marks']].map(([v,l])=>`<option value="${v}" ${PAPER_SEL.m===v?'selected':''}>${l}</option>`).join('')}</select><button class="btn primary sm" id="ppGo">${ic('exam')} Start mock paper</button></div></section>
+    <div class="seg" role="group" aria-label="Question length">${[['all','All'],['s','Short (≤5)'],['m','Medium (6-10)'],['l','Extended (12+)'],['new','Not tried']].map(([k,l])=>`<button data-len="${k}" aria-pressed="${EXAM_LEN===k}">${l}</button>`).join('')}</div>
     ${EXAM_TOPIC?`<div class="row"><span class="pill subj s-${EXAM_FILTER}">${esc(TOPIC[EXAM_TOPIC].name)}</span><button class="btn ghost sm" id="clearT">Show all topics</button></div>`:''}
-    <div class="stack" style="gap:10px">${list.map(q=>{ const b = bestExam(q.id); const n = (S.exam[q.id]||[]).length; return `<button class="topic-row s-${q.s}" data-q="${q.id}" style="grid-template-columns:minmax(0,1fr) auto"><div><div class="tiny muted">${esc(q.paper)} · ${esc(TOPIC[q.t].name)} · <b>${q.marks} marks</b></div><div class="nm" style="margin-top:3px">${esc(q.q.length>150?q.q.slice(0,150)+'…':q.q)}</div></div><div style="text-align:right">${b==null?'<span class="pill neutral">Not tried</span>':`<span class="pill ${b>=.75?'good':b>=.55?'warn':'bad'}">Best ${Math.round(b*100)}%</span><div class="tiny muted" style="margin-top:3px">${plural(n,'attempt')}</div>`}</div></button>`; }).join('')}</div>
+    <div class="stack" style="gap:10px">${list.length ? '' : '<div class="empty">No questions match. Try another filter.</div>'}${list.map(q=>{ const b = bestExam(q.id); const n = (S.exam[q.id]||[]).length; return `<button class="topic-row s-${q.s}" data-q="${q.id}" style="grid-template-columns:minmax(0,1fr) auto"><div><div class="tiny muted">${esc(q.paper)} · ${esc(TOPIC[q.t].name)} · <b>${q.marks} marks</b></div><div class="nm" style="margin-top:3px">${esc(q.q.length>150?q.q.slice(0,150)+'…':q.q)}</div></div><div style="text-align:right">${b==null?'<span class="pill neutral">Not tried</span>':`<span class="pill ${b>=.75?'good':b>=.55?'warn':'bad'}">Best ${Math.round(b*100)}%</span><div class="tiny muted" style="margin-top:3px">${plural(n,'attempt')}</div>`}</div></button>`; }).join('')}</div>
   </div>`;
   on(m,'[data-s]','click',e=>{ EXAM_FILTER = e.currentTarget.dataset.s; EXAM_TOPIC = null; render(); });
   on(m,'#clearT','click',()=>{ EXAM_TOPIC = null; render(); });
   on(m,'#mockOnly','click',()=>{ EXAM_MOCK = true; render(); });
   on(m,'#mockAll','click',()=>{ EXAM_MOCK = false; render(); });
+  on(m,'[data-len]','click',e=>{ EXAM_LEN = e.currentTarget.dataset.len; render(); });
+  on(m,'#ppP','change',e=>{ PAPER_SEL.p = e.target.value; });
+  on(m,'#ppM','change',e=>{ PAPER_SEL.m = +e.target.value; });
+  on(m,'#ppGo','click',()=>{ STUDY = modePaper(EXAM_FILTER, PAPER_SEL.p, PAPER_SEL.m); window.scrollTo(0,0); render(); });
   on(m,'[data-q]','click',e=>openExam(e.currentTarget.dataset.q));
 }
 function vCustomExam(m, s){
@@ -1249,7 +1359,7 @@ function modeExam(q, taskKey){
   const o = { render(m){
     const mins = minsFor(q);
     let inner = `<div class="qbox stack"><section class="card pad-lg stack s-${q.s}"><div class="row between"><span class="pill subj">${SUBJ[q.s].short} ${esc(q.paper)} · ${esc(t.name)}</span><span class="mono small"><b>${q.marks}</b> marks${q.ao?` · <span class="muted">${esc(q.ao)}</span>`:''}</span></div>
-      <div style="font-size:1.08rem;font-weight:600;line-height:1.5">${esc(q.q)}</div><div class="tiny muted">Suggested time: about ${mins} minutes</div></section>`;
+      <div class="row between" style="flex-wrap:nowrap;align-items:flex-start;gap:10px"><div style="font-size:1.08rem;font-weight:600;line-height:1.5">${esc(q.q)}</div>${sayBtn(q.q)}</div><div class="tiny muted">Suggested time: about ${mins} minutes</div></section>`;
     if (st.phase==='write') {
       inner += `<textarea id="ans" style="min-height:${q.marks>=12?320:180}px" placeholder="${q.s==='maths'?'Write your working and answer. Show every step, as you would on the paper.':'Write your answer here.'}">${esc(st.answer)}</textarea>
         <div class="row between"><span class="small muted mono" id="clock">0:00 / ${mins}:00</span><div class="row"><button class="btn ghost" id="showMs">Skip to mark scheme</button><button class="btn primary" id="markBtn">Check against mark scheme</button></div></div>`;
@@ -1323,7 +1433,15 @@ function vDrills(m){
   on(m,'#mixed','click',()=>startDrill('mixed'));
   on(m,'#mockDrill','click',()=>startDrill('mock'));
 }
-function parseNum(s){ s = String(s).trim().replace(/−/g,'-').replace(/,/g,'').replace(/\s+/g,''); if (!s) return NaN; const f = s.match(/^(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)$/); if (f) return +f[1] / +f[2]; return Number(s); }
+// Accepts 2.35, 7/4, -3, x = 4, 2√3, √(5)/2, 3π, 2pi/3, e^2, 2^10, 45° (exact forms are evaluated).
+function parseNum(s){
+  s = String(s).trim().replace(/[−–]/g,'-').replace(/×/g,'*').replace(/÷/g,'/').replace(/,/g,'').replace(/^[a-zθ]\s*=\s*/i,'').replace(/\s+/g,'').replace(/°$/,'');
+  if (!s) return NaN; if (isFinite(Number(s))) return Number(s);
+  let e = s.replace(/pi|π/gi,'(P)').replace(/(^|[^A-Za-z])e(?![A-Za-z])/g,'$1(E)').replace(/sqrt\(/gi,'S(').replace(/√(\d+(?:\.\d+)?)/g,'S($1)').replace(/√\(/g,'S(').replace(/\^/g,'**');
+  e = e.replace(/(\d|\))(?=[S(])/g,'$1*').replace(/\)(?=\d)/g,')*');
+  if (!/^[0-9+\-*/().SPE]+$/.test(e)) return NaN;
+  try { const v = Function('S','P','E','"use strict";return ('+e+')')(Math.sqrt, Math.PI, Math.E); return typeof v === 'number' ? v : NaN; } catch(_) { return NaN; }
+}
 function closeEnough(x, ans, dp){ if (!isFinite(x)) return false; const tol = Math.max(0.51 * Math.pow(10, -dp), Math.abs(ans) * 0.0015, 1e-9); return Math.abs(x - ans) <= tol; }
 function modeDrill(tid, taskKey){
   const pool = tid==='mock' ? mockTopics('maths').filter(id=>GEN[id] && GEN[id].length) : tid==='mixed' ? TOPICS.filter(t=>t.s==='maths' && GEN[t.id] && GEN[t.id].length).sort((a,b)=>weakness(b)-weakness(a)).slice(0, 5).map(t=>t.id) : [tid];
@@ -1341,7 +1459,7 @@ function modeDrill(tid, taskKey){
     on(m,'#val','input',e=>{ st.val = e.target.value; });
     on(m,'#val','keydown',e=>{ if (e.key==='Enter') { e.preventDefault(); m.querySelector('#chk')?.click(); } });
     const finish = (ok) => { st.res = { ok }; if (ok) st.right++; const d = S.drills[q.t] ||= { r:0, n:0, at:0 }; d.n++; if (ok) d.r++; d.at = Date.now(); today().d++; save(); o.render(m); m.querySelector('#nx')?.focus(); };
-    on(m,'#chk','click',()=>{ const x = parseNum(st.val); if (!isFinite(x)) { toast('Enter a number, e.g. 2.35 or 7/4'); return; } finish(closeEnough(x, q.ans, q.dp)); });
+    on(m,'#chk','click',()=>{ const x = parseNum(st.val); if (!isFinite(x)) { toast('Enter a number, e.g. 2.35, 7/4, 2√3 or 3π'); return; } finish(closeEnough(x, q.ans, q.dp)); });
     on(m,'#reveal','click',()=>finish(false));
     on(m,'#nx','click',()=>{ st.i++; gen(); o.render(m); });
   }};
@@ -1350,7 +1468,7 @@ function modeDrill(tid, taskKey){
 
 // ---------- welcome / setup ----------
 const WELCOME = { subjects: null, goal: 30 };
-function yearSegHTML(attr){ const y = y13Year(); return `<div class="seg" role="group" aria-label="Year group">${[[y,'Year 13'],[y+1,'Year 12']].map(([v,l])=>`<button type="button" ${attr}="${v}" aria-pressed="${examYear()===v}">${l} <span class="muted" style="font-weight:500">· exams ${v}</span></button>`).join('')}</div>`; }
+function yearSegHTML(attr, cur){ const y = y13Year(); return `<div class="seg" role="group" aria-label="Year group">${[[y+1,'Year 12'],[y,'Year 13']].map(([v,l])=>`<button type="button" ${attr}="${v}" aria-pressed="${cur===v}">${l} <span class="muted" style="font-weight:500">· exams ${v}</span></button>`).join('')}</div>`; }
 function psychOptsHTML(){ return `<div class="stack" style="gap:6px"><span class="small muted">Psychology Paper 3: your options</span><div class="grid g3">${PSYCH_OPT_GROUPS.map((g,i)=>`<label class="stack" style="gap:4px"><span class="tiny muted">Option ${i+1}</span><select data-popt="${i}">${g.map(id=>`<option value="${id}" ${psychOpts()[i]===id?'selected':''}>${esc(TOPIC[id].name)}${TOPIC[id].stub?' (make cards with Claude)':''}</option>`).join('')}</select></label>`).join('')}</div></div>`; }
 function bindPsychOpts(m, after){ on(m,'[data-popt]','change',e=>{ const o = psychOpts().slice(); o[+e.target.dataset.popt] = e.target.value; S.settings.psychOpts = o; CUSTOM_SIG = null; save(); if (after) after(); }); }
 function vWelcome(m){
@@ -1361,7 +1479,7 @@ function vWelcome(m){
     ${FIREBASE_CONFIG && !(window.claude && window.claude.use) ? `<section class="card pad-lg stack">${ACCOUNT.user ? `<p class="small">Signed in as <b>${esc(ACCOUNT.user.email || ACCOUNT.user.displayName || 'you')}</b>. Finish setting up below.</p>` : accountHTML('welcome')}</section>` : ''}
     <section class="card pad-lg stack">
       <label class="stack" style="gap:4px"><span class="small muted">Your first name</span><input type="text" id="wName" value="${esc(W.name ?? S.settings.name ?? '')}" autocomplete="given-name"></label>
-      <div class="stack" style="gap:6px"><span class="small muted">Which year are you in?</span>${yearSegHTML('data-wyear')}</div>
+      <div class="stack" style="gap:6px"><span class="small muted">Which year are you in?</span>${yearSegHTML('data-wyear', W.year)}</div>
       <div class="stack" style="gap:6px"><span class="small muted">Which of these courses do you take?</span>
         ${ALL_SUBJ.map(x=>`<label class="row s-${x}" style="gap:10px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" data-wsub="${x}" ${W.subjects.has(x)?'checked':''} style="margin-top:4px"><span><b>${SUBJ[x].name}</b> <span class="small muted">${SUBJ[x].board}</span></span></label>`).join('')}
         <p class="tiny muted">These three come with ready-made cards, exam questions and drills.</p></div>
@@ -1372,8 +1490,8 @@ function vWelcome(m){
       ${[...W.subjects].length ? `<div class="stack" style="gap:6px"><span class="small muted">Predicted grade → target grade</span>${[...W.subjects].map(x=>`<div class="row s-${x}" style="gap:8px;flex-wrap:nowrap"><span class="small" style="min-width:110px">${SUBJ[x].name}</span>${[0,1].map(i=>`<select data-wgrade="${x}" data-i="${i}">${['A*','A','B','C','D','E','U'].map(gr=>`<option ${g[x][i]===gr?'selected':''}>${gr}</option>`).join('')}</select>`).join('<span class="muted">→</span>')}</div>`).join('')}</div>` : ''}
       <div class="stack" style="gap:6px"><span class="small muted">How many cards a day? You can change this later.</span><div class="seg" role="group" aria-label="Daily cards">${[[15,'Light · 15'],[30,'Steady · 30'],[60,'Serious · 60'],[100,'Intense · 100']].map(([v,l])=>`<button type="button" data-wgoal="${v}" aria-pressed="${W.goal===v}">${l}</button>`).join('')}</div><span class="tiny muted">About ${Math.max(5, Math.round(W.goal/3))} minutes a day.</span></div>
         <label class="stack" style="gap:4px;max-width:260px"><span class="small muted">Next mocks start (optional)</span><input type="date" id="wMock" value="${esc(W.mock||'')}"></label>
-      <button class="btn primary" id="wGo" style="align-self:flex-start" ${[...W.subjects].length || (W.extra||[]).length ?'':'disabled'}>Start revising</button>
-      ${[...W.subjects].length || (W.extra||[]).length ? '' : '<span class="tiny muted">Pick or add at least one subject to start.</span>'}
+      <button class="btn primary" id="wGo" style="align-self:flex-start" ${([...W.subjects].length || (W.extra||[]).length) && W.year ?'':'disabled'}>Start revising</button>
+      ${!W.year ? '<span class="tiny muted">Pick your year group to start.</span>' : [...W.subjects].length || (W.extra||[]).length ? '' : '<span class="tiny muted">Pick or add at least one subject to start.</span>'}
     </section></div>`;
   bindAccount(m);
   on(m,'#wName','input',e=>{ W.name = e.target.value; });
@@ -1385,7 +1503,7 @@ function vWelcome(m){
   on(m,'[data-wsub]','change',e=>{ const x = e.target.dataset.wsub; e.target.checked ? W.subjects.add(x) : W.subjects.delete(x); render(); });
   on(m,'[data-wgrade]','change',e=>{ g[e.target.dataset.wgrade][+e.target.dataset.i] = e.target.value; });
   on(m,'[data-wgoal]','click',e=>{ W.goal = +e.currentTarget.dataset.wgoal; render(); });
-  on(m,'[data-wyear]','click',e=>{ S.settings.examYear = +e.currentTarget.dataset.wyear; CUSTOM_SIG = null; render(); });
+  on(m,'[data-wyear]','click',e=>{ W.year = S.settings.examYear = +e.currentTarget.dataset.wyear; CUSTOM_SIG = null; render(); });
   bindPsychOpts(m, render);
   on(m,'#wGo','click',()=>{
     S.settings.name = (W.name ?? S.settings.name ?? '').trim(); S.settings.goal = W.goal; S.settings.examYear = examYear(); S.settings.psychOpts = psychOpts();
@@ -1420,6 +1538,7 @@ function vProgress(m){
     <div class="grid g3">${mySubj().map(s=>{ const st = subjStats(s); return `<section class="card subj-card s-${s} stack" style="gap:8px"><div class="row between"><h3>${SUBJ[s].name}</h3><span class="mono" style="font-weight:700;font-size:1.3rem">${st.ready}%</span></div><div class="bar"><i style="width:${st.ready}%"></i></div>
       <div class="small muted">Mastery ${Math.round(st.mastery*100)}% · Accuracy ${st.acc==null?'–':Math.round(st.acc*100)+'%'} · Exam Qs ${st.exPct==null?'–':Math.round(st.exPct*100)+'%'} (${st.exN})</div></section>`; }).join('')}</div>
     <p class="tiny muted">Readiness blends card mastery (55%), answer accuracy (20%) and exam-question marks (25%). It is a guide to effort, not a grade prediction.</p>
+    <section class="card stack" style="gap:8px"><div class="row between"><h3>Spec checklist</h3><span class="tiny muted">Rate topics on their page in Sets</span></div>${(()=>{ const ts = myTopics(); const n = k => ts.filter(t=>(S.conf[t.id]||[])[0]===k).length; const none = ts.length - n('r') - n('a') - n('g'); return `<div class="row small"><span><span class="conf g"></span>${n('g')} confident</span><span><span class="conf a"></span>${n('a')} getting there</span><span><span class="conf r"></span>${n('r')} not yet</span><span class="muted"><span class="conf"></span>${none} not rated</span></div>`; })()}</section>
     <section class="card pad-lg stack"><div class="row between"><h2>Weakest topics</h2><span class="tiny muted">Ranked by mastery, accuracy, exam marks and how soon the paper is</span></div>
       <div class="tbl-wrap"><table><thead><tr><th>Topic</th><th>Subject</th><th>Mastery</th><th>Accuracy</th><th></th></tr></thead><tbody>${weakest.map(({t,st})=>`<tr class="s-${t.s}"><td style="font-weight:600">${esc(t.name)}</td><td><span class="pill subj">${SUBJ[t.s].short}</span></td><td style="min-width:110px"><div class="bar"><i style="width:${Math.round(st.mastery*100)}%"></i></div></td><td class="mono">${st.acc==null?'–':Math.round(st.acc*100)+'%'}</td><td><button class="btn sm" data-learn="${t.id}">Learn</button></td></tr>`).join('')}</tbody></table></div></section>
     <div class="grid g2">
@@ -1435,7 +1554,8 @@ function vProgress(m){
     <section class="card pad-lg stack"><h2>Settings</h2>
       <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Name</span><input type="text" id="setName" value="${esc(S.settings.name)}"></label>
       <label class="stack" style="gap:4px"><span class="small muted">Daily card goal</span><input type="number" id="setGoal" min="10" max="400" value="${S.settings.goal}"></label></div>
-      <div class="stack" style="gap:6px"><span class="small muted">Year group</span>${yearSegHTML('data-syear')}</div>
+      <div class="stack" style="gap:6px"><span class="small muted">Text size</span><div class="seg" role="group" aria-label="Text size">${[['m','Normal'],['l','Large'],['xl','Extra large']].map(([k,l])=>`<button data-tsz="${k}" aria-pressed="${(S.settings.textSize||'m')===k}">${l}</button>`).join('')}</div></div>
+      <div class="stack" style="gap:6px"><span class="small muted">Year group</span>${yearSegHTML('data-syear', examYear())}</div>
       <div class="stack" style="gap:6px"><span class="small muted">Built-in courses (add any other subject in Sets, with + Subject)</span><div class="row">${ALL_SUBJ.map(x=>`<label class="row small s-${x}" style="gap:6px"><input type="checkbox" data-mysub="${x}" ${mySubj().includes(x)?'checked':''}> ${SUBJ[x].name} <span class="muted">${SUBJ[x].board}</span></label>`).join('')}</div></div>
       ${mySubj().includes('psych') ? psychOptsHTML() : ''}
       <div class="grid g3">${mySubj().map(s=>`<div class="stack" style="gap:4px"><span class="small muted">${SUBJ[s].name}: predicted → target</span><div class="row" style="flex-wrap:nowrap">${[0,1].map(i=>`<select data-grade="${s}" data-i="${i}">${['A*','A','B','C','D','E','U'].map(g=>`<option ${S.settings.grades[s][i]===g?'selected':''}>${g}</option>`).join('')}</select>`).join('<span class="muted">→</span>')}</div></div>`).join('')}</div>
@@ -1460,6 +1580,7 @@ ${FIREBASE_CONFIG && !(window.claude && window.claude.use) ? `<div class="stack"
   on(m,'[data-learn]','click',e=>startMode('learn', setFromTopic(e.currentTarget.dataset.learn)));
   on(m,'[data-mysub]','change',e=>{ const a = new Set(mySubj()); e.target.checked ? a.add(e.target.dataset.mysub) : a.delete(e.target.dataset.mysub); if (!a.size) { e.target.checked = true; toast('Keep at least one course'); return; } S.settings.subjects = ALL_SUBJ.filter(x=>a.has(x)); save(); render(); });
   on(m,'#setName','change',e=>{ S.settings.name = e.target.value.trim(); save(); });
+  on(m,'[data-tsz]','click',e=>{ S.settings.textSize = e.currentTarget.dataset.tsz; save(); render(); });
   on(m,'[data-syear]','click',e=>{ S.settings.examYear = +e.currentTarget.dataset.syear; CUSTOM_SIG = null; save(); render(); toast(`Exams set to summer ${S.settings.examYear}`); });
   bindPsychOpts(m, ()=>{ render(); toast('Paper 3 options saved'); });
   const mockSave = () => { S.settings.mock = Object.assign({}, mockCfg(), S.settings.mock || {}); save(); renderNav(); };
