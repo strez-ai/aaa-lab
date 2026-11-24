@@ -74,6 +74,16 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .nav-a[aria-current="page"]{background:var(--accent-soft);color:var(--accent)}
 .rail .rail-foot{margin-top:18px;padding:12px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
 .main{min-width:0}
+.pp-grid{display:grid;gap:6px;align-items:stretch}
+.pp-cell{min-height:38px;border:1px solid var(--line);border-radius:9px;background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:2px;font:inherit;color:inherit}
+.pp-cell:hover{border-color:var(--sc,var(--accent))}
+.pp-cell.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.pp-cell .pill{font-size:.72rem;padding:2px 6px}
+.pp-trend{display:flex;align-items:flex-end;gap:4px;height:38px;margin-top:4px}
+.pp-trend i{flex:1;max-width:18px;border-radius:3px 3px 0 0;background:var(--good)}
+.pp-trend i.warn{background:var(--warn)}.pp-trend i.bad{background:var(--bad)}
+.pp-steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;line-height:1.5}
+.pp-clock{font-size:clamp(2.6rem,12vw,4.4rem);font-weight:700;letter-spacing:-.02em}
 .tabbar{display:none}
 @media (max-width:820px){
   .layout{grid-template-columns:minmax(0,1fr);padding-block:16px 96px}
@@ -534,16 +544,17 @@ const ICON = {
   check:'<path d="m5 12 5 5 9-10"/>',
   speaker:'<path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>',
   notes:'<path d="M6 3h9l4 4v14H6z"/><path d="M9 9h6M9 13h6M9 17h4"/>',
+  papers:'<path d="M8 3h9l3 3v13H8z"/><path d="M5 6v15h11"/><path d="M11 9h5M11 13h5"/>',
   shuffle:'<path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>',
 };
 const ic = (n, attrs='') => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${attrs}>${ICON[n]}</svg>`;
-const NAV = [['home','Home'],['sets','Sets'],['review','Review'],['exam','Exam Qs'],['drills','Maths drills'],['progress','Progress']];
+const NAV = [['home','Home'],['sets','Sets'],['review','Review'],['exam','Exam Qs'],['papers','Past papers'],['drills','Maths drills'],['progress','Progress']];
 
 // ---------- data ----------
 let CARDS = [], CARD = {}, BYTOPIC = {}, EXAMQ = [];
 // ---------- state ----------
 const LS_KEY = 'aaalab.v1';
-const blank = () => ({ v:1, ts:0, cards:{}, conf:{}, star:{}, exam:{}, drills:{}, match:{}, days:{}, done:{}, custom:{ courses:{}, sets:{} }, settings:{ name:'', subjects:['psych','maths','econ'], onboarded:false, goal:60, mock:{ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }, grades:{psych:['B','A'],maths:['B','A'],econ:['B','A']}, front:'term', examYear:0, psychOpts:null } });
+const blank = () => ({ v:1, ts:0, cards:{}, conf:{}, star:{}, exam:{}, pp:{}, drills:{}, match:{}, days:{}, done:{}, custom:{ courses:{}, sets:{} }, settings:{ name:'', subjects:['psych','maths','econ'], onboarded:false, goal:60, mock:{ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }, grades:{psych:['B','A'],maths:['B','A'],econ:['B','A']}, front:'term', examYear:0, psychOpts:null } });
 let S = blank();
 function loadLocal(){ try { const raw = localStorage.getItem(LS_KEY); if(raw){ const o = JSON.parse(raw); S = Object.assign(blank(), o); S.settings = Object.assign(blank().settings, o.settings||{}); if (!o.settings || o.settings.onboarded === undefined) { S.settings.onboarded = true; if (!S.settings.name) S.settings.name = 'Pedro'; } } } catch(e){} }
 const ALL_SUBJ = ['psych','maths','econ'];
@@ -676,6 +687,7 @@ function mergeState(a, b){ // merge b into a
   const out = JSON.parse(JSON.stringify(a));
   for (const [id, cb] of Object.entries(b.cards||{})) { const ca = out.cards[id]; if (!ca || (cb[7]||0) > (ca[7]||0)) out.cards[id] = cb; }
   for (const [q, arr] of Object.entries(b.exam||{})) { const cur = out.exam[q] || []; const seen = new Set(cur.map(x=>x.at)); arr.forEach(x=>{ if(!seen.has(x.at)) cur.push(x); }); cur.sort((x,y)=>x.at-y.at); out.exam[q] = cur; }
+  out.pp ||= {}; for (const [k, arr] of Object.entries(b.pp||{})) { const cur = out.pp[k] || []; const by = new Map(cur.map(x=>[x.at, x])); arr.forEach(x=>{ const y = by.get(x.at); if (!y) { cur.push(x); by.set(x.at, x); } else if (x.del) y.del = true; }); cur.sort((x,y)=>x.at-y.at); out.pp[k] = cur; }
   for (const [d, v] of Object.entries(b.days||{})) { const cur = out.days[d] || {}; for (const k of Object.keys(v)) cur[k] = Math.max(cur[k]||0, v[k]||0); out.days[d] = cur; }
   for (const [t, v] of Object.entries(b.drills||{})) { const cur = out.drills[t]; if(!cur || (v.at||0) > (cur.at||0)) out.drills[t] = v; }
   out.conf ||= {}; for (const [t, v] of Object.entries(b.conf||{})) { const cur = out.conf[t]; if (!cur || (v[1]||0) > (cur[1]||0)) out.conf[t] = v; }
@@ -855,7 +867,7 @@ const isDone = (key) => (S.done[dayNum()]||[]).includes(key);
 // ---------- router ----------
 let VIEW = 'home', STUDY = null;
 function go(v){ if (location.hash !== '#'+v) location.hash = v; else { VIEW = v; render(); } }
-const leaveOK = () => !(STUDY && STUDY.guard && STUDY.guard()) || confirm('Leave this mock paper? Your answers will be lost.');
+const leaveOK = () => !(STUDY && STUDY.guard && STUDY.guard()) || confirm(STUDY.leaveMsg || 'Leave this mock paper? Your answers will be lost.');
 let PREV_HASH = location.hash;
 window.addEventListener('hashchange', () => { if (STUDY && !leaveOK()) { history.replaceState(null,'',PREV_HASH||'#home'); return; } PREV_HASH = location.hash; const h = location.hash.slice(1) || 'home'; VIEW = NAV.some(n=>n[0]===h) ? h : 'home'; if (VIEW !== 'study') STUDY = null; render(); window.scrollTo(0,0); });
 document.addEventListener('click', e => { const a = e.target.closest && e.target.closest('a.nav-a'); if (!a) return; const h = a.getAttribute('href'); if (h === location.hash || (h === '#home' && !location.hash)) { e.preventDefault(); if (!leaveOK()) return; STUDY = null; VIEW = h.slice(1); render(); window.scrollTo(0,0); } });
@@ -864,7 +876,7 @@ function navHTML(){ return navItems().map(([k,l]) => `<a class="nav-a" href="#${
 function renderNav(){
   document.body.classList.toggle('setup', !S.settings.onboarded);
   document.getElementById('rail').innerHTML = navHTML() + railFoot();
-  document.getElementById('tabbar').innerHTML = NAV.filter(n=>n[0]!=='drills').map(([k,l]) => `<a class="nav-a" href="#${k}" ${VIEW===k||(VIEW==='topic'&&k==='sets')?'aria-current="page"':''}>${ic(k)}<span>${l==='Exam Qs'?'Exam':l}</span></a>`).join('');
+  document.getElementById('tabbar').innerHTML = NAV.filter(n=>n[0]!=='drills').map(([k,l]) => `<a class="nav-a" href="#${k}" ${VIEW===k||(VIEW==='topic'&&k==='sets')?'aria-current="page"':''}>${ic(k)}<span>${l==='Exam Qs'?'Exam':l==='Past papers'?'Papers':l}</span></a>`).join('');
   const ne = nextExam(); const cc = document.getElementById('countChip');
   cc.textContent = ne ? `${daysTo(ne.d)} days to ${SUBJ[ne.s].short} ${ne.p}` : '';  cc.hidden = !ne;
 }
@@ -877,7 +889,7 @@ function render(){
   if (!CARDS.length) return;
   if (STUDY) { STUDY.render(m); return; }
   if (!S.settings.onboarded) { vWelcome(m); return; }
-  ({ home:vHome, sets:vSets, topic:vTopic, review:vReview, exam:vExam, drills:vDrills, progress:vProgress }[VIEW] || vHome)(m);
+  ({ home:vHome, sets:vSets, topic:vTopic, review:vReview, exam:vExam, papers:vPapers, drills:vDrills, progress:vProgress }[VIEW] || vHome)(m);
 }
 const CAN_SAY = 'speechSynthesis' in window;
 function sayBtn(text){ return CAN_SAY ? `<button type="button" class="say" data-say="${esc(text)}" aria-label="Read aloud" title="Read aloud">${ic('speaker')}</button>` : ''; }
@@ -1352,6 +1364,143 @@ function vReview(m){
   on(m,'#btGo','click',()=>{ const ids = [...BUILD_T].flatMap(id=>BYTOPIC[id]||[]); if (!ids.length) { toast('Pick at least one topic'); return; } startMode('test', { title:'Your test', s:null, ids }); });
 }
 
+// ---------- past papers ----------
+// Real board papers can't be copied into the app, so this links to each board's official finder,
+// times the paper like the real exam and keeps a log of scores marked with the official mark scheme.
+const PP_YEARS = ['2025','2024','2023','2022','2019','2018','Specimen'];
+const P = (name, sub, mins, marks) => ({ name, sub, mins, marks });
+const PP_SPECS = {
+  'builtin|psych': { code:'7182', papers:[P('Paper 1','Introductory topics',120,96),P('Paper 2','Psychology in context',120,96),P('Paper 3','Issues and options',120,96)] },
+  'builtin|maths': { code:'9MA0', url:'https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/mathematics-2017.coursematerials.html', papers:[P('Paper 1','Pure mathematics 1',120,100),P('Paper 2','Pure mathematics 2',120,100),P('Paper 3','Statistics and mechanics',120,100)] },
+  'builtin|econ': { code:'9EC0', url:'https://qualifications.pearson.com/en/qualifications/edexcel-a-levels/economics-a-2015.coursematerials.html', papers:[P('Paper 1','Markets and business behaviour',120,100),P('Paper 2','The national and global economy',120,100),P('Paper 3','Microeconomics and macroeconomics',120,100)] },
+  'AQA|biology': { code:'7402', papers:[P('Paper 1','Topics 1-4',120,91),P('Paper 2','Topics 5-8',120,91),P('Paper 3','All topics and practical skills',120,78)] },
+  'AQA|chemistry': { code:'7405', papers:[P('Paper 1','Physical and inorganic',120,105),P('Paper 2','Physical and organic',120,105),P('Paper 3','Practical skills and all content',120,90)] },
+  'AQA|physics': { code:'7408', papers:[P('Paper 1','Sections 1-5 and 6.1',120,85),P('Paper 2','Sections 6.2-8',120,85),P('Paper 3','Practical skills and option',120,80)] },
+  'AQA|psychology': { code:'7182', papers:[P('Paper 1','Introductory topics',120,96),P('Paper 2','Psychology in context',120,96),P('Paper 3','Issues and options',120,96)] },
+  'AQA|sociology': { code:'7192', papers:[P('Paper 1','Education with theory and methods',120,80),P('Paper 2','Topics in sociology',120,80),P('Paper 3','Crime and deviance with theory and methods',120,80)] },
+  'AQA|business': { code:'7132', papers:[P('Paper 1','Business 1',120,100),P('Paper 2','Business 2',120,100),P('Paper 3','Business 3 (case study)',120,100)] },
+  'AQA|economics': { code:'7136', papers:[P('Paper 1','Markets and market failure',120,80),P('Paper 2','National and international economy',120,80),P('Paper 3','Economic principles and issues',120,80)] },
+  'OCR|economics': { code:'H460', papers:[P('Paper 1','Microeconomics',120,80),P('Paper 2','Macroeconomics',120,80),P('Paper 3','Themes in economics',120,80)] },
+  'AQA|geography': { code:'7037', papers:[P('Paper 1','Physical geography',150,120),P('Paper 2','Human geography',150,120)] },
+  'AQA|law': { code:'7162', papers:[P('Paper 1','Legal system and criminal law',120,100),P('Paper 2','Legal system and tort',120,100),P('Paper 3','Further law',120,100)] },
+  'AQA|history': { code:'7042', papers:[P('Component 1','Breadth study',150,80),P('Component 2','Depth study',150,80)] },
+  'AQA|english literature': { code:'7712', papers:[P('Paper 1','Love through the ages',180,75),P('Paper 2','Texts in shared contexts',150,75)] },
+  'AQA|further maths': { code:'7367', papers:[P('Paper 1','Pure',120,100),P('Paper 2','Pure',120,100),P('Paper 3','Options',120,100)] },
+  'OCR|biology': { code:'H420', papers:[P('Paper 1','Biological processes',135,100),P('Paper 2','Biological diversity',135,100),P('Paper 3','Unified biology',90,70)] },
+  'OCR|chemistry': { code:'H432', papers:[P('Paper 1','Periodic table, elements and physical chemistry',135,100),P('Paper 2','Synthesis and analytical techniques',135,100),P('Paper 3','Unified chemistry',90,70)] },
+  'OCR|physics': { code:'H556', papers:[P('Paper 1','Modelling physics',135,100),P('Paper 2','Exploring physics',135,100),P('Paper 3','Unified physics',90,70)] },
+  'OCR|computer science': { code:'H446', papers:[P('Paper 1','Computer systems',150,140),P('Paper 2','Algorithms and programming',150,140)] },
+  'OCR|religious studies': { code:'H573', papers:[P('Paper 1','Philosophy of religion',120,120),P('Paper 2','Religion and ethics',120,120),P('Paper 3','Developments in religious thought',120,120)] },
+  'OCR|further maths': { code:'H245', papers:[P('Paper 1','Pure core 1',90,75),P('Paper 2','Pure core 2',90,75),P('Paper 3','Option 1',90,75),P('Paper 4','Option 2',90,75)] },
+  'Pearson Edexcel|business': { code:'9BS0', papers:[P('Paper 1','Marketing, people and global businesses',120,100),P('Paper 2','Business activities, decisions and strategy',120,100),P('Paper 3','Investigating business in a competitive environment',120,100)] },
+  'Pearson Edexcel|politics': { code:'9PL0', papers:[P('Paper 1','UK politics and core political ideas',120,84),P('Paper 2','UK government and non-core ideas',120,84),P('Paper 3','Comparative politics',120,84)] },
+  'Pearson Edexcel|further maths': { code:'9FM0', papers:[P('Paper 1','Core pure 1',90,75),P('Paper 2','Core pure 2',90,75),P('Paper 3','Option 1',90,75),P('Paper 4','Option 2',90,75)] },
+  'Pearson Edexcel|economics a': { code:'9EC0', papers:[P('Paper 1','Markets and business behaviour',120,100),P('Paper 2','The national and global economy',120,100),P('Paper 3','Microeconomics and macroeconomics',120,100)] },
+  'Pearson Edexcel|maths': { code:'9MA0', papers:[P('Paper 1','Pure mathematics 1',120,100),P('Paper 2','Pure mathematics 2',120,100),P('Paper 3','Statistics and mechanics',120,100)] },
+};
+const PP_FINDER = { 'AQA':'https://www.aqa.org.uk/past-papers-and-mark-schemes-finder', 'OCR':'https://www.ocr.org.uk/qualifications/past-paper-finder/', 'Pearson Edexcel':'https://qualifications.pearson.com/en/support/support-topics/exams/past-papers.html' };
+function ppInfo(s){
+  const sj = SUBJ[s]; if (!sj) return null;
+  if (!sj.custom) { const sp = PP_SPECS['builtin|'+s]; const board = sj.board.split(' ')[0] === 'Edexcel' ? 'Pearson Edexcel' : sj.board.split(' ')[0]; return { s, name: sj.name, board, code: sp.code, papers: sp.papers, url: sp.url || PP_FINDER[board], known:true }; }
+  const c = courseOf(s); const board = boardBase(c); const p = c.pack && packInfo(c.pack);
+  const names = [c.name, ...(p ? p.names : [])].map(normName);
+  for (const n of names) { const sp = PP_SPECS[board+'|'+n]; if (sp) return { s, name: c.name, board, code: sp.code, papers: sp.papers, url: PP_FINDER[board], known:true }; }
+  const labels = (c.exams||[]).map(e=>e.label).filter(Boolean);
+  return { s, name: c.name, board, code: c.code || '', papers: (labels.length ? labels : ['Paper 1','Paper 2','Paper 3']).map(l=>P(l,'',120,0)), url: PP_FINDER[board] || 'https://www.google.com/search?q=' + encodeURIComponent(`${board && board!=='Other' ? board+' ' : ''}A level ${c.name} past papers and mark schemes`), known:false };
+}
+const ppKey = (s, y, i) => `${s}|${y}|${i}`;
+const ppAttempts = (k) => ((S.pp||{})[k] || []).filter(a => !a.del);
+function ppAll(s){ return Object.entries(S.pp||{}).filter(([k]) => k.startsWith(s+'|')).flatMap(([k, arr]) => arr.filter(a=>!a.del).map(a => ({...a, k}))).sort((a,b)=>a.at-b.at); }
+const pctCls = (p) => p>=.7 ? 'good' : p>=.5 ? 'warn' : 'bad';
+let PP_FILTER = null, PP_SEL = null, PP_DRAFT = null;
+function vPapers(m){
+  if (!mySubj().includes(PP_FILTER)) PP_FILTER = mySubj()[0];
+  const s = PP_FILTER, info = ppInfo(s);
+  const all = ppAll(s), avg = all.length ? all.reduce((a,x)=>a+x.score/x.max,0)/all.length : 0;
+  const last = all.slice(-8);
+  const sel = PP_SEL && PP_SEL.s === s ? PP_SEL : null;
+  const cell = (y, i) => { const at = ppAttempts(ppKey(s,y,i)); const b = at.length ? at[at.length-1] : null; const on = sel && sel.y===y && sel.i===i;
+    return `<button class="pp-cell ${on?'on':''}" data-pp="${y}|${i}" aria-label="${esc(y)} ${esc(info.papers[i].name)}${b?', '+Math.round(b.score/b.max*100)+'%':''}">${b ? `<span class="pill ${pctCls(b.score/b.max)}">${Math.round(b.score/b.max*100)}%</span>` : '<span class="faint">·</span>'}</button>`; };
+  m.innerHTML = `<div class="stack"><div class="row between"><div><div class="eyebrow">Real exam papers</div><h1>Past papers</h1></div>
+      <div class="seg" role="group" aria-label="Subject" style="flex-wrap:wrap">${mySubj().map(k=>`<button aria-pressed="${k===s}" data-s="${k}">${esc(SUBJ[k].short)}</button>`).join('')}</div></div>
+    <p class="muted" style="max-width:68ch">Sit real ${esc(info.board || 'exam board')} papers like the actual exam: get the paper and mark scheme free from the board, time yourself here, mark it with the official mark scheme, then log your score to track how you're improving.</p>
+    <section class="card stack s-${s}" style="gap:12px">
+      <div class="row between"><div><h3>${esc(info.name)}${info.code?` <span class="muted mono small">${esc(info.board)} ${esc(info.code)}</span>`:''}</h3>
+        <div class="small muted">${info.known ? info.papers.map(p=>`${esc(p.name)}${p.sub?' ('+esc(p.sub)+')':''}: ${fmtMins(p.mins)}, ${p.marks} marks`).join(' · ') : 'Enter the total marks from the front of each paper when you log a score.'}</div></div>
+        <a class="btn sm" href="${esc(info.url)}" target="_blank" rel="noopener">Open ${esc(PP_FINDER[info.board] ? info.board.replace('Pearson ','') : 'the')} past papers ↗</a></div>
+      <div class="row" style="gap:18px">
+        <div><div class="tiny muted">Papers sat</div><div class="mono" style="font-size:1.3rem;font-weight:700">${all.length}</div></div>
+        <div><div class="tiny muted">Average</div><div class="mono" style="font-size:1.3rem;font-weight:700">${all.length?Math.round(avg*100)+'%':'–'}</div></div>
+        ${last.length ? `<div style="flex:1;min-width:140px"><div class="tiny muted">Last ${plural(last.length,'paper')}</div><div class="pp-trend">${last.map(a=>`<i class="${pctCls(a.score/a.max)}" style="height:${Math.max(6,Math.round(a.score/a.max*100))}%" title="${Math.round(a.score/a.max*100)}%"></i>`).join('')}</div></div>` : ''}
+      </div>
+      <div class="pp-grid" style="grid-template-columns:auto repeat(${info.papers.length}, minmax(0,1fr))">
+        <span></span>${info.papers.map(p=>`<span class="tiny muted" style="text-align:center">${esc(p.name.replace('Component ','C').replace('Paper ','P'))}</span>`).join('')}
+        ${PP_YEARS.map(y=>`<span class="small" style="align-self:center">${y==='Specimen'?'Specimen':'June '+y}</span>${info.papers.map((_,i)=>cell(y,i)).join('')}`).join('')}
+      </div>
+      <p class="tiny muted">Tap a paper to sit it or log a score. There were no summer exams in 2020 or 2021, and boards release each summer's papers about a year later.</p>
+    </section>
+    ${sel ? ppPanel(info, sel) : ''}
+  </div>`;
+  on(m,'[data-s]','click',e=>{ PP_FILTER = e.currentTarget.dataset.s; PP_SEL = null; render(); });
+  on(m,'[data-pp]','click',e=>{ const [y,i] = e.currentTarget.dataset.pp.split('|'); PP_SEL = { s, y, i:+i }; PP_DRAFT = null; render(); setTimeout(()=>document.getElementById('ppPanel')?.scrollIntoView({block:'start', behavior:'smooth'}), 50); });
+  if (sel) bindPanel(m, info, sel);
+}
+function fmtMins(n){ const h = Math.floor(n/60), r = n%60; return h ? `${h}h${r?' '+r+'m':''}` : `${r}m`; }
+function ppTitle(info, sel){ const p = info.papers[sel.i]; return `${sel.y==='Specimen'?'Specimen':'June '+sel.y} · ${p.name}${p.sub?': '+p.sub:''}`; }
+function ppPanel(info, sel){
+  const p = info.papers[sel.i], k = ppKey(sel.s, sel.y, sel.i), at = ppAttempts(k), d = PP_DRAFT || {};
+  const where = PP_FINDER[info.board] ? `choose A-level ${esc(info.name)}${info.code?' ('+esc(info.code)+')':''}, then ${sel.y==='Specimen'?'the specimen (sample) assessment materials':'the June '+sel.y+' series'}` : 'search for this paper and its mark scheme';
+  return `<section class="card stack s-${sel.s}" id="ppPanel" style="gap:12px">
+    <div class="row between"><h3>${esc(ppTitle(info, sel))}</h3><button class="btn ghost sm" id="ppClose" aria-label="Close">${ic('x')}</button></div>
+    <ol class="small pp-steps">
+      <li><b>Get the paper.</b> On the ${esc(PP_FINDER[info.board] ? info.board : 'exam board')} site, ${where}. Download the question paper and the mark scheme, and the examiner's report if you want tips. <a href="${esc(info.url)}" target="_blank" rel="noopener">Open the past papers ↗</a></li>
+      <li><b>Sit it under exam conditions.</b> Print it or work on paper, no notes. ${p.mins ? `It's ${fmtMins(p.mins)} in the real exam.` : ''}<div class="row" style="margin-top:8px;gap:8px"><button class="btn primary sm" id="ppTime">${ic('review')} Start ${fmtMins(p.mins)} timer</button><label class="row small muted" style="gap:6px"><input type="checkbox" id="ppExtra" ${S.settings.extraTime?'checked':''}> 25% extra time</label></div></li>
+      <li><b>Mark it with the mark scheme</b>, then log your score.</li>
+    </ol>
+    <div class="row" style="gap:8px;align-items:flex-end">
+      <label class="stack" style="gap:4px"><span class="tiny muted">Your marks</span><input type="number" id="ppScore" min="0" value="${esc(d.score ?? '')}" style="width:90px"></label>
+      <label class="stack" style="gap:4px"><span class="tiny muted">Out of</span><input type="number" id="ppMax" min="1" value="${esc(d.max ?? (p.marks || ''))}" style="width:90px"></label>
+      <label class="stack" style="gap:4px"><span class="tiny muted">Minutes taken</span><input type="number" id="ppMins" min="0" value="${esc(d.mins ?? '')}" style="width:90px"></label>
+    </div>
+    <label class="stack" style="gap:4px"><span class="tiny muted">Where you lost marks (optional)</span><textarea id="ppNote" style="min-height:70px" placeholder="e.g. ran out of time on the 16-marker, forgot the formula for…">${esc(d.note || '')}</textarea></label>
+    <div class="row"><button class="btn primary" id="ppSave">Save score</button></div>
+    ${at.length ? `<div class="stack" style="gap:6px"><div class="eyebrow">Your attempts</div>${at.slice().reverse().map(a=>`<div class="row between small" style="flex-wrap:nowrap;gap:8px;align-items:flex-start"><div style="min-width:0"><span class="pill ${pctCls(a.score/a.max)}">${a.score}/${a.max} · ${Math.round(a.score/a.max*100)}%</span> <span class="muted">${fmtDate(new Date(a.at).toISOString().slice(0,10),{day:'numeric',month:'short'})}${a.mins?' · '+fmtMins(a.mins):''}</span>${a.note?`<div class="tiny muted" style="margin-top:3px">${esc(a.note)}</div>`:''}</div><button class="btn ghost sm" data-ppdel="${a.at}" aria-label="Delete attempt">${ic('x')}</button></div>`).join('')}</div>` : ''}
+  </section>`;
+}
+function bindPanel(m, info, sel){
+  const k = ppKey(sel.s, sel.y, sel.i);
+  const draft = () => { PP_DRAFT = { score: m.querySelector('#ppScore').value, max: m.querySelector('#ppMax').value, mins: m.querySelector('#ppMins').value, note: m.querySelector('#ppNote').value }; };
+  on(m,'#ppScore, #ppMax, #ppMins, #ppNote','input',draft);
+  on(m,'#ppClose','click',()=>{ PP_SEL = null; render(); });
+  on(m,'#ppExtra','change',e=>{ S.settings.extraTime = e.target.checked; save(); });
+  on(m,'#ppTime','click',()=>{ draft(); STUDY = modePastTimer(info, sel); window.scrollTo(0,0); render(); });
+  on(m,'#ppSave','click',()=>{ draft(); const sc = +PP_DRAFT.score, mx = +PP_DRAFT.max;
+    if (PP_DRAFT.score === '' || !(mx > 0)) { toast('Enter your marks and the total'); return; }
+    if (sc < 0 || sc > mx) { toast(`Marks should be between 0 and ${mx}`); return; }
+    (S.pp ||= {})[k] ||= []; S.pp[k].push({ at: Date.now(), score: sc, max: mx, mins: +PP_DRAFT.mins || 0, note: PP_DRAFT.note.trim() });
+    today().x++; save(); PP_DRAFT = null; toast(`Saved ${sc}/${mx} (${Math.round(sc/mx*100)}%)`); render(); });
+  on(m,'[data-ppdel]','click',e=>{ const a = (S.pp[k]||[]).find(x=>String(x.at)===e.currentTarget.dataset.ppdel); if (!a) return; a.del = true; save(); toast('Attempt removed'); render(); });
+}
+function modePastTimer(info, sel){
+  const p = info.papers[sel.i]; const total = Math.round((p.mins || 120) * (S.settings.extraTime ? 1.25 : 1)) * 60;
+  const st = { used: 0, from: Date.now(), paused: false, timer: null, done: false };
+  const used = () => st.used + (st.paused ? 0 : (Date.now() - st.from) / 1000);
+  const fmt = (sec) => { sec = Math.max(0, Math.round(sec)); const h = Math.floor(sec/3600), mm = Math.floor(sec%3600/60), ss = sec%60; return (h ? h+':'+String(mm).padStart(2,'0') : mm) + ':' + String(ss).padStart(2,'0'); };
+  const finish = () => { clearInterval(st.timer); st.done = true; const mins = Math.round(used()/60); PP_SEL = sel; PP_DRAFT = Object.assign(PP_DRAFT || {}, { mins }); STUDY = null; VIEW = 'papers'; if (location.hash !== '#papers') history.replaceState(null, '', '#papers'); render(); setTimeout(()=>document.getElementById('ppPanel')?.scrollIntoView({block:'start'}), 50); toast(`Time recorded: ${fmtMins(mins)}. Now mark it.`); };
+  const o = { leaveMsg: 'Stop the timer and leave this paper?', guard: () => !st.done && used() > 30, render(m){
+    m.innerHTML = studyShell(ppTitle(info, sel), sel.s, 0, `<section class="card pad-lg stack" style="align-items:center;text-align:center;gap:14px">
+        <div class="eyebrow">Time left</div><div class="mono pp-clock" id="ppLeft">${fmt(total - used())}</div>
+        <div class="small muted" id="ppUsed">${fmt(used())} used of ${fmt(total)}${S.settings.extraTime ? ' (with 25% extra time)' : ''}</div>
+        <div class="row" style="justify-content:center"><button class="btn" id="ppPause">${st.paused ? 'Resume' : 'Pause'}</button><button class="btn primary" id="ppDone">I've finished</button></div>
+        <p class="tiny muted" style="max-width:46ch">Work on the printed paper or on lined paper. Keep this screen open. When time's up, finish the sentence you're on and stop, just like the real exam.</p></section>`, '');
+    on(m,'#quit','click',()=>{ if (!leaveOK()) return; clearInterval(st.timer); st.done = true; STUDY = null; render(); });
+    on(m,'#ppPause','click',()=>{ if (st.paused) { st.from = Date.now(); st.paused = false; } else { st.used = used(); st.paused = true; } o.render(m); });
+    on(m,'#ppDone','click',finish);
+    clearInterval(st.timer); st.timer = setInterval(()=>{ const l = document.getElementById('ppLeft'); if (!l || STUDY !== o) { clearInterval(st.timer); return; } const left = total - used(); l.textContent = left >= 0 ? fmt(left) : '-' + fmt(-left); l.style.color = left < 0 ? 'var(--bad)' : left < 600 ? 'var(--warn)' : ''; const u = document.getElementById('ppUsed'); if (u) u.textContent = `${fmt(used())} used of ${fmt(total)}${S.settings.extraTime ? ' (with 25% extra time)' : ''}`; if (left <= 0 && !st.beeped) { st.beeped = true; toast("Time's up. Pens down."); try { navigator.vibrate && navigator.vibrate([300,150,300]); } catch(_){} } }, 1000);
+  }};
+  return o;
+}
+
 // ---------- exam questions ----------
 let EXAM_FILTER = 'psych', EXAM_TOPIC = null, EXAM_MOCK = true, EXAM_LEN = 'all', PAPER_SEL = { p:'all', m:45 };
 function vExam(m){
@@ -1365,6 +1514,7 @@ function vExam(m){
       <div class="seg" role="group" aria-label="Subject" style="flex-wrap:wrap">${mySubj().map(k=>`<button aria-pressed="${k===EXAM_FILTER}" data-s="${k}">${esc(SUBJ[k].short)}</button>`).join('')}</div></div>
     <p class="muted" style="max-width:66ch">Original questions written in the style of the ${SUBJ[EXAM_FILTER].board} papers. Answer under timed conditions, then mark against the mark-scheme points${SAMPLE?' yourself or with Claude as your examiner':''}.</p>
     ${mockOn() && !EXAM_TOPIC ? `<div class="row"><button class="btn sm ${useMock?'primary':''}" id="mockOnly">${useMock?'Showing '+esc(mockCfg().title)+' topics':'Show only '+esc(mockCfg().title)+' topics'}</button>${useMock?'<button class="btn ghost sm" id="mockAll">Show everything</button>':''}</div>`:''}
+    <a class="card row between s-${EXAM_FILTER}" href="#papers" id="toPP" style="text-decoration:none;color:inherit;gap:10px"><div><h3>Real past papers</h3><p class="small muted">Sit the board's own papers under a timer and track your scores.</p></div><span class="btn sm">${ic('papers')} Past papers</span></a>
     <section class="card stack s-${EXAM_FILTER}" style="gap:10px"><div><h3>Timed mock paper</h3><p class="small muted">A set of questions under one timer, then marked against the mark schemes, or by Claude in one go. Questions you haven't tried come first.</p></div>
       <div class="row" style="gap:8px"><select id="ppP" style="width:auto"><option value="all">All papers</option>${papers.map(p=>`<option ${PAPER_SEL.p===p?'selected':''}>${p}</option>`).join('')}</select><select id="ppM" style="width:auto">${[[25,'About 25 marks'],[45,'About 45 marks'],[80,'About 80 marks']].map(([v,l])=>`<option value="${v}" ${PAPER_SEL.m===v?'selected':''}>${l}</option>`).join('')}</select><button class="btn primary sm" id="ppGo">${ic('exam')} Start mock paper</button></div></section>
     <div class="seg" role="group" aria-label="Question length">${[['all','All'],['s','Short (≤5)'],['m','Medium (6-10)'],['l','Extended (12+)'],['new','Not tried']].map(([k,l])=>`<button data-len="${k}" aria-pressed="${EXAM_LEN===k}">${l}</button>`).join('')}</div>
@@ -1374,6 +1524,7 @@ function vExam(m){
   on(m,'[data-s]','click',e=>{ EXAM_FILTER = e.currentTarget.dataset.s; EXAM_TOPIC = null; render(); });
   on(m,'#clearT','click',()=>{ EXAM_TOPIC = null; render(); });
   on(m,'#mockOnly','click',()=>{ EXAM_MOCK = true; render(); });
+  on(m,'#toPP','click',()=>{ PP_FILTER = EXAM_FILTER; PP_SEL = null; });
   on(m,'#mockAll','click',()=>{ EXAM_MOCK = false; render(); });
   on(m,'[data-len]','click',e=>{ EXAM_LEN = e.currentTarget.dataset.len; render(); });
   on(m,'#ppP','change',e=>{ PAPER_SEL.p = e.target.value; });
