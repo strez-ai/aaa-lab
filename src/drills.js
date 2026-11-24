@@ -19,6 +19,12 @@ const G = 9.8;
 
 const GEN = {
   'm-diff': [
+    () => { const a = R(2, 5), b = R(-4, 5), n = R(3, 5), x = R(0, 2); const ans = n * a * Math.pow(a * x + b, n - 1);
+      return { q: `Use the chain rule to find the gradient of y = (${a}x${sgn(b)})${['', '', '', '³', '⁴', '⁵'][n]} at x = ${x}.`, ans, dp: 0, sol: `dy/dx = ${n}(${a})(${a}x${sgn(b)})${['', '', '', '²', '³', '⁴'][n]} = ${n * a}(${a * x + b})${['', '', '', '²', '³', '⁴'][n]} = ${ans}.` }; },
+    () => { const c = R(1, 9), x = R(1, 4); const ans = 2 * x / (x * x + c);
+      return { q: `Find the gradient of y = ln(x² + ${c}) at x = ${x}, to 3 d.p.`, ans, dp: 3, sol: `dy/dx = 2x/(x² + ${c}) = ${2 * x}/${x * x + c} = ${fmt(ans, 5)}.` }; },
+    () => { const a = nz(-2, 3), b = R(-5, 5), x = nz(-2, 3); const m = 2 * a * x + b; if (m === 0) return GEN['m-diff'][0](); const ans = -1 / m;
+      return { q: `Find the gradient of the normal to y = ${poly([[a, 'x²'], [b, 'x']])} at x = ${x}, to 3 d.p. if needed.`, ans, dp: 3, sol: `dy/dx = ${poly([[2 * a, 'x'], [b, '']])} = ${m} at x = ${x}. Normal gradient = −1/${m} = ${fmt(ans, 4)}.` }; },
     () => { const a = nz(-3, 4), b = R(-6, 6), c = R(-9, 9), k = nz(-3, 3);
       const ans = 3 * a * k * k + 2 * b * k + c;
       return { q: `Find the gradient of y = ${poly([[a, 'x³'], [b, 'x²'], [c, 'x']])} at x = ${k}.`, ans, dp: 0,
@@ -60,6 +66,12 @@ const GEN = {
         sol: `Sₙ = a(1 − rⁿ)/(1 − r) = ${a}(1 − ${r}^${n})/(1 − ${r}) = ${fmt(ans, 4)}.` }; },
   ],
   'm-exp': [
+    () => { const a = pick([2, 3]), p = pick([1, a, a * a]), q = pick([a * a * a, a * a]); const xs = [p, q].map(v => Math.round(Math.log(v) / Math.log(a))); const ans = Math.max(...xs);
+      return { q: `Solve ${a}²ˣ − ${p + q}(${a}ˣ) + ${p * q} = 0. Give the larger value of x.`, ans, dp: 0, sol: `Let y = ${a}ˣ: y² − ${p + q}y + ${p * q} = 0, so (y − ${p})(y − ${q}) = 0. ${a}ˣ = ${p} gives x = ${xs[0]}; ${a}ˣ = ${q} gives x = ${xs[1]}. Larger: ${ans}.` }; },
+    () => { const b = pick([2, 3]), n = pick([1, 2]), k = R(1, 4); const c = k * (Math.pow(b, n) - 1); const ans = k;
+      return { q: `Solve log${b === 2 ? '₂' : '₃'}(x + ${c}) − log${b === 2 ? '₂' : '₃'} x = ${n}.`, ans, dp: 2, sol: `log((x + ${c})/x) = ${n}, so (x + ${c})/x = ${Math.pow(b, n)}, x + ${c} = ${Math.pow(b, n)}x, x = ${c}/${Math.pow(b, n) - 1} = ${ans}.` }; },
+    () => { const k = pick([0.02, 0.05, 0.08, 0.1, 0.15, 0.2]); const ans = Math.log(2) / k;
+      return { q: `A substance decays according to m = m₀e^(−${k}t). Find its half-life (the value of t when m = m₀/2), to 2 d.p.`, ans, dp: 2, sol: `½ = e^(−${k}t), so −${k}t = ln ½, t = ln 2 / ${k} = ${fmt(ans, 4)}.` }; },
     () => { const a = pick([2, 3, 5, 7]), b = R(10, 200); const ans = Math.log(b) / Math.log(a);
       return { q: `Solve ${a}ˣ = ${b}, giving x to 3 d.p.`, ans, dp: 3, sol: `x = ln ${b} / ln ${a} = ${fmt(ans, 5)}.` }; },
     () => { const k = pick([0.2, 0.5, 2, 3]), c = R(3, 40); const ans = Math.log(c) / k;
@@ -132,6 +144,14 @@ const GEN = {
       return { q: `X ~ N(${mu}, ${s}²). A sample of ${n} has mean ${xbar}. Find P(X̄ ≥ ${xbar}) to 4 d.p.`, ans, dp: 4, sol: `X̄ ~ N(${mu}, ${s}²/${n}), so SE = ${fmt(s / Math.sqrt(n), 4)}. z = ${fmt(z, 4)}. P(Z ≥ z) = ${fmt(ans, 5)}.` }; },
   ],
   'm-kin': [
+    () => { const H = pick([10, 20, 30, 40, 45, 60]), u = R(5, 20); const t = Math.sqrt(2 * H / G), ans = u * t;
+      return { q: `A ball is projected horizontally at ${u} m s⁻¹ from the top of a cliff ${H} m high. Find the horizontal distance it travels before hitting the ground, in m to 1 d.p. (g = 9.8).`, ans, dp: 1, sol: `Vertical: ${H} = 4.9t², so t = √(${H}/4.9) = ${fmt(t, 4)} s. Horizontal: ${u} × ${fmt(t, 4)} = ${fmt(ans, 3)} m.` }; },
+    () => { const u = R(12, 30), th = pick([25, 30, 35, 40, 50, 60]); const r = th * Math.PI / 180; const ans = Math.pow(u * Math.sin(r), 2) / (2 * G);
+      return { q: `A projectile is launched from ground level at ${u} m s⁻¹ at ${th}° above the horizontal. Find its greatest height in m to 2 d.p. (g = 9.8).`, ans, dp: 2, sol: `Vertical component ${u} sin ${th}° = ${fmt(u * Math.sin(r), 4)}. At the top v = 0: 0 = (${fmt(u * Math.sin(r), 4)})² − 19.6h, so h = ${fmt(ans, 4)} m.` }; },
+    () => { const u = R(15, 30), th = pick([30, 40, 45, 50, 60]), t = pick([0.5, 1, 1.5, 2]); const r = th * Math.PI / 180; const vx = u * Math.cos(r), vy = u * Math.sin(r) - G * t; const ans = Math.hypot(vx, vy);
+      return { q: `A particle is projected at ${u} m s⁻¹ at ${th}° above the horizontal. Find its speed ${t} s later, in m s⁻¹ to 2 d.p. (g = 9.8).`, ans, dp: 2, sol: `Horizontal: ${fmt(vx, 4)}. Vertical: ${u} sin ${th}° − 9.8(${t}) = ${fmt(vy, 4)}. Speed = √(${fmt(vx, 3)}² + ${fmt(vy, 3)}²) = ${fmt(ans, 4)} m s⁻¹.` }; },
+    () => { const H = pick([10, 15, 20, 25, 30]), u = R(8, 20), th = pick([20, 30, 40]); const r = th * Math.PI / 180; const vy = u * Math.sin(r); const ans = (vy + Math.sqrt(vy * vy + 2 * G * H)) / G;
+      return { q: `A stone is thrown from a point ${H} m above the ground at ${u} m s⁻¹, ${th}° above the horizontal. Find the time until it hits the ground, in s to 2 d.p. (g = 9.8).`, ans, dp: 2, sol: `Taking up as positive: −${H} = ${fmt(vy, 4)}t − 4.9t², so 4.9t² − ${fmt(vy, 4)}t − ${H} = 0. Positive root: t = ${fmt(ans, 4)} s.` }; },
     () => { const u = R(0, 12), a = R(1, 6), t = R(2, 9); const ans = u * t + 0.5 * a * t * t;
       return { q: `A particle starts with speed ${u} m s⁻¹ and accelerates at ${a} m s⁻² for ${t} s. Find the distance travelled in m.`, ans, dp: 1, sol: `s = ut + ½at² = ${u}(${t}) + 0.5(${a})(${t * t}) = ${ans} m.` }; },
     () => { const u = R(2, 15), a = R(1, 5), s = R(5, 40); const ans = Math.sqrt(u * u + 2 * a * s);

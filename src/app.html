@@ -267,6 +267,16 @@ const TOPICS = [
   ['e-4.1','econ','International economics','4.1',['P2','P3']],['e-4.2','econ','Poverty and inequality','4.2',['P2','P3']],['e-4.3','econ','Emerging and developing economies','4.3',['P2','P3']],['e-4.4','econ','The financial sector','4.4',['P2','P3']],['e-4.5','econ','Role of the state in the macroeconomy','4.5',['P2','P3']],
 ].map(([id,s,name,spec,papers])=>({id,s,name,spec,papers}));
 const TOPIC = Object.fromEntries(TOPICS.map(t=>[t.id,t]));
+// ---------- mocks ----------
+const MOCK_DEFAULT_TOPICS = ['p-id','p-app','p-att','p-rm','m-diff','m-kin','m-exp','m-proof', ...TOPICS.filter(t=>t.s==='econ').map(t=>t.id)];
+const MOCK_NOTE = { econ:'Paper 3 mock: synoptic, every theme' };
+function mockCfg(){ const m = S.settings.mock; return (m && Array.isArray(m.topics)) ? m : { title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }; }
+function mockOn(){ const c = mockCfg(); return !!c.date && daysTo(c.date) >= 0 && c.topics.length > 0; }
+function mockTopics(s){ return mockCfg().topics.filter(id => TOPIC[id] && (!s || TOPIC[id].s === s)); }
+function mockCards(s){ return mockTopics(s).flatMap(id => BYTOPIC[id] || []); }
+function mockExamQs(s){ const ts = mockTopics(s); return EXAMQ.filter(q => (!s || q.s === s) && ts.includes(q.t)).sort((a,b) => (a.s==='econ' && b.s==='econ' ? (b.paper==='Paper 3') - (a.paper==='Paper 3') : 0)); }
+function startMockReview(s){ const ids = mockCards(s); if (!ids.length) { toast('No cards in your mock topics'); return; } STUDY = modeFlash({ title: mockCfg().title + ' review', s: s||null, ids: priorityCards(ids, 40), review:true }, 'mock-review'); window.scrollTo(0,0); render(); }
+function nextMockQ(s){ return mockExamQs(s).sort((a,b)=>(bestExam(a.id)??-1)-(bestExam(b.id)??-1) || weakness(TOPIC[b.t])-weakness(TOPIC[a.t]))[0]; }
 const EXAMS = [
   {s:'econ',p:'P1',title:'Markets and business behaviour',d:'2027-05-10',t:'AM'},
   {s:'econ',p:'P2',title:'The national and global economy',d:'2027-05-17',t:'PM'},
@@ -319,7 +329,7 @@ const NAV = [['home','Home'],['sets','Sets'],['review','Review'],['exam','Exam Q
 let CARDS = [], CARD = {}, BYTOPIC = {}, EXAMQ = [];
 // ---------- state ----------
 const LS_KEY = 'aaalab.v1';
-const blank = () => ({ v:1, ts:0, cards:{}, star:{}, exam:{}, drills:{}, match:{}, days:{}, done:{}, settings:{ name:'Pedro', goal:60, grades:{psych:['C','A'],maths:['C','A'],econ:['B','A']}, front:'term' } });
+const blank = () => ({ v:1, ts:0, cards:{}, star:{}, exam:{}, drills:{}, match:{}, days:{}, done:{}, settings:{ name:'Pedro', goal:60, mock:{ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }, grades:{psych:['C','A'],maths:['C','A'],econ:['B','A']}, front:'term' } });
 let S = blank();
 function loadLocal(){ try { const raw = localStorage.getItem(LS_KEY); if(raw){ const o = JSON.parse(raw); S = Object.assign(blank(), o); S.settings = Object.assign(blank().settings, o.settings||{}); } } catch(e){} }
 let saveTimer = null;
@@ -509,19 +519,21 @@ function dailyTasks(){
   const d = dayNum(), tasks = [];
   const due = CARDS.filter(c=>isDue(c[0])).length;
   if (due) tasks.push({ key:'review', s:null, icon:'review', title:`Review ${Math.min(due, 80)} due cards`, sub:'Spaced repetition keeps what you have learned', go:()=>startReview() });
-  const ranked = TOPICS.slice().sort((a,b)=>weakness(b)-weakness(a));
+  const mockPool = mockOn() ? TOPICS.filter(t=>mockTopics().includes(t.id)) : null;
+  const ranked = TOPICS.slice().sort((a,b)=>weakness(b)-weakness(a)).sort((a,b)=> mockPool ? mockPool.includes(b) - mockPool.includes(a) : 0);
+  if (mockPool) tasks.push({ key:'mock-review', s:null, icon:'flash', title:`${mockCfg().title}: 40-card focus review`, sub:`Your weakest and due cards from the mock topics · ${plural(daysTo(mockCfg().date),'day')} to go`, go:()=>startMockReview() });
   const ph = phase();
   // rotate subjects: psych and maths get more days
   const rota = ['psych','maths','econ','psych','maths','psych','maths'];
   const s1 = rota[d % 7], s2 = rota[(d + 3) % 7] === s1 ? (s1==='maths'?'psych':'maths') : rota[(d + 3) % 7];
   [s1, s2].forEach((s, i) => {
     const t = ranked.filter(t=>t.s===s && (BYTOPIC[t.id]||[]).length)[i===0?0:(s1===s2?1:0)];
-    if (t) tasks.push({ key:'learn-'+t.id, s, icon:'learn', title:`Learn: ${t.name}`, sub:`${SUBJ[s].short} · one of your weakest topics right now`, go:()=>startMode('learn', setFromTopic(t.id), 'learn-'+t.id) });
+    if (t) tasks.push({ key:'learn-'+t.id, s, icon:'learn', title:`Learn: ${t.name}`, sub:`${SUBJ[s].short} · ${mockPool && mockPool.includes(t) ? 'mock topic, one of your weakest' : 'one of your weakest topics right now'}`, go:()=>startMode('learn', setFromTopic(t.id), 'learn-'+t.id) });
   });
   const mt = ranked.filter(t=>t.s==='maths' && GEN[t.id] && GEN[t.id].length)[0];
   if (mt) tasks.push({ key:'drill-'+mt.id, s:'maths', icon:'drills', title:`Maths drill: ${mt.name}`, sub:'10 fresh questions with worked solutions', go:()=>startDrill(mt.id, 'drill-'+mt.id) });
   const xs = ph >= 2 ? ['psych','econ','maths'][d % 3] : ['psych','econ'][d % 2];
-  const xq = EXAMQ.filter(q=>q.s===xs).sort((a,b)=>(bestExam(a.id)??-1)-(bestExam(b.id)??-1) || weakness(TOPIC[b.t])-weakness(TOPIC[a.t]))[0];
+  const xq = (mockPool && mockExamQs(xs).length ? mockExamQs(xs) : EXAMQ.filter(q=>q.s===xs)).slice().sort((a,b)=>(bestExam(a.id)??-1)-(bestExam(b.id)??-1) || weakness(TOPIC[b.t])-weakness(TOPIC[a.t]))[0];
   if (xq) tasks.push({ key:'exam-'+xq.id, s:xs, icon:'exam', title:`Exam question: ${xq.marks}-marker`, sub:`${SUBJ[xs].short} · ${TOPIC[xq.t].name}`, go:()=>openExam(xq.id, 'exam-'+xq.id) });
   return tasks;
 }
@@ -560,6 +572,7 @@ function vHome(m){
   m.innerHTML = `<div class="stack">
     <div class="row between"><div><div class="eyebrow">${phaseTxt}</div><h1>${greeting()}, ${esc(S.settings.name)}</h1></div>
       <div class="row">${['psych','maths','econ'].map(s=>`<span class="pill subj s-${s}">${SUBJ[s].short} ${S.settings.grades[s][0]} → ${S.settings.grades[s][1]}</span>`).join('')}</div></div>
+    ${mockOn() ? mockBanner() : ''}
     <div class="hero">
       <section class="card pad-lg stack" style="gap:14px">
         ${ne ? `<div class="row between" style="align-items:flex-end"><div><div class="eyebrow">Next exam</div><div class="count-big mono">${daysTo(ne.d)}<span style="font-size:1.1rem;font-family:var(--f-body);font-weight:600;letter-spacing:0" class="muted"> days</span></div></div>
@@ -586,7 +599,28 @@ function vHome(m){
   </div>`;
   on(m,'[data-task]','click',e=>tasks[+e.currentTarget.dataset.task].go());
   on(m,'#quickReview','click',()=>startReview());
+  on(m,'[data-mockrev]','click',e=>startMockReview(e.currentTarget.dataset.mockrev || null));
+  on(m,'[data-mockq]','click',e=>{ const q = nextMockQ(e.currentTarget.dataset.mockq); if (q) openExam(q.id); else toast('No exam questions for these topics yet'); });
+  on(m,'#mockDrill','click',()=>startDrill('mock'));
+  on(m,'[data-mockt]','click',e=>openTopic(e.currentTarget.dataset.mockt));
+  on(m,'#mockEdit','click',()=>{ go('progress'); setTimeout(()=>document.getElementById('mockBox')?.scrollIntoView({block:'start'}), 80); });
   on(m,'[data-topic]','click',e=>{ e.preventDefault(); openTopic(e.currentTarget.dataset.topic); });
+}
+
+function mockBanner(){
+  const c = mockCfg(), n = daysTo(c.date);
+  const subj = ['psych','maths','econ'].filter(s=>mockTopics(s).length);
+  const all = mockCards(); const ready = all.length ? Math.round(all.reduce((a,id)=>a+cardMastery(id),0)/all.length*100) : 0;
+  return `<section class="card pad-lg stack" style="gap:14px;border:2px solid var(--accent)">
+    <div class="row between" style="align-items:flex-end"><div><div class="eyebrow" style="color:var(--accent)">Focus mode</div><h2>${esc(c.title)}</h2><div class="small muted">From ${fmtDate(c.date,{weekday:'long',day:'numeric',month:'long'})} · ${ready}% of mock cards mastered</div></div>
+      <div style="text-align:right"><div class="count-big mono" style="color:var(--accent)">${n}</div><div class="small muted">${n===1?'day':'days'} to go</div></div></div>
+    <div class="grid g3">${subj.map(s=>`<div class="stack s-${s}" style="gap:6px"><div class="row between"><b>${SUBJ[s].name}</b><button class="btn sm ghost" data-mockrev="${s}">Review</button></div>
+      ${MOCK_NOTE[s] && mockTopics(s).length >= 10 ? `<div class="small muted">${MOCK_NOTE[s]}</div>` : ''}
+      <div class="stack" style="gap:5px">${(MOCK_NOTE[s] && mockTopics(s).length >= 10 ? mockTopics(s).map(id=>TOPIC[id]).sort((a,b)=>weakness(b)-weakness(a)).slice(0,3) : mockTopics(s).map(id=>TOPIC[id])).map(t=>{ const st = topicStats(t.id); return `<a href="#sets" data-mockt="${t.id}" class="small" style="display:block;color:inherit;text-decoration:none"><div class="row between"><span>${esc(t.name)}</span><span class="mono tiny muted">${Math.round(st.mastery*100)}%</span></div><div class="bar" style="margin-top:3px"><i style="width:${Math.round(st.mastery*100)}%"></i></div></a>`; }).join('')}</div>
+      ${MOCK_NOTE[s] && mockTopics(s).length >= 10 ? '<div class="tiny muted">Weakest 3 shown</div>' : ''}
+      <button class="btn sm" data-mockq="${s}" style="align-self:flex-start">${ic('exam')} Exam question</button></div>`).join('')}</div>
+    <div class="row"><button class="btn primary sm" data-mockrev="">${ic('flash')} Mixed mock review</button>${mockTopics('maths').some(id=>GEN[id]&&GEN[id].length)?`<button class="btn sm" id="mockDrill">${ic('drills')} Maths mock drill</button>`:''}<button class="btn ghost sm" id="mockEdit">Change topics or date</button></div>
+  </section>`;
 }
 
 // ---------- views: sets ----------
@@ -858,17 +892,21 @@ function vReview(m){
 }
 
 // ---------- exam questions ----------
-let EXAM_FILTER = 'psych', EXAM_TOPIC = null;
+let EXAM_FILTER = 'psych', EXAM_TOPIC = null, EXAM_MOCK = true;
 function vExam(m){
-  const list = EXAMQ.filter(q=>q.s===EXAM_FILTER && (!EXAM_TOPIC || q.t===EXAM_TOPIC));
+  const useMock = EXAM_MOCK && mockOn() && !EXAM_TOPIC && mockExamQs(EXAM_FILTER).length;
+  const list = useMock ? mockExamQs(EXAM_FILTER) : EXAMQ.filter(q=>q.s===EXAM_FILTER && (!EXAM_TOPIC || q.t===EXAM_TOPIC));
   m.innerHTML = `<div class="stack"><div class="row between"><div><div class="eyebrow">Exam-style practice</div><h1>Exam questions</h1></div>
       <div class="seg" role="group" aria-label="Subject">${['psych','maths','econ'].map(k=>`<button aria-pressed="${k===EXAM_FILTER}" data-s="${k}">${SUBJ[k].short}</button>`).join('')}</div></div>
     <p class="muted" style="max-width:66ch">Original questions written in the style of the ${SUBJ[EXAM_FILTER].board} papers. Answer under timed conditions, then mark against the mark-scheme points${SAMPLE?' yourself or with Claude as your examiner':''}.</p>
+    ${mockOn() && !EXAM_TOPIC ? `<div class="row"><button class="btn sm ${useMock?'primary':''}" id="mockOnly">${useMock?'Showing '+esc(mockCfg().title)+' topics':'Show only '+esc(mockCfg().title)+' topics'}</button>${useMock?'<button class="btn ghost sm" id="mockAll">Show everything</button>':''}</div>`:''}
     ${EXAM_TOPIC?`<div class="row"><span class="pill subj s-${EXAM_FILTER}">${esc(TOPIC[EXAM_TOPIC].name)}</span><button class="btn ghost sm" id="clearT">Show all topics</button></div>`:''}
     <div class="stack" style="gap:10px">${list.map(q=>{ const b = bestExam(q.id); const n = (S.exam[q.id]||[]).length; return `<button class="topic-row s-${q.s}" data-q="${q.id}" style="grid-template-columns:minmax(0,1fr) auto"><div><div class="tiny muted">${esc(q.paper)} · ${esc(TOPIC[q.t].name)} · <b>${q.marks} marks</b></div><div class="nm" style="margin-top:3px">${esc(q.q.length>150?q.q.slice(0,150)+'…':q.q)}</div></div><div style="text-align:right">${b==null?'<span class="pill neutral">Not tried</span>':`<span class="pill ${b>=.75?'good':b>=.55?'warn':'bad'}">Best ${Math.round(b*100)}%</span><div class="tiny muted" style="margin-top:3px">${plural(n,'attempt')}</div>`}</div></button>`; }).join('')}</div>
   </div>`;
   on(m,'[data-s]','click',e=>{ EXAM_FILTER = e.currentTarget.dataset.s; EXAM_TOPIC = null; render(); });
   on(m,'#clearT','click',()=>{ EXAM_TOPIC = null; render(); });
+  on(m,'#mockOnly','click',()=>{ EXAM_MOCK = true; render(); });
+  on(m,'#mockAll','click',()=>{ EXAM_MOCK = false; render(); });
   on(m,'[data-q]','click',e=>openExam(e.currentTarget.dataset.q));
 }
 function minsFor(q){ return q.s==='maths' ? Math.round(q.marks * 1.2) : q.s==='psych' ? Math.round(q.marks * 1.25) : Math.round(q.marks * 1.2); }
@@ -947,22 +985,23 @@ function startDrill(tid, taskKey){ STUDY = modeDrill(tid, taskKey); window.scrol
 function vDrills(m){
   const ts = TOPICS.filter(t=>t.s==='maths' && GEN[t.id] && GEN[t.id].length);
   m.innerHTML = `<div class="stack s-maths"><div><div class="eyebrow">Edexcel 9MA0</div><h1>Maths drills</h1><p class="muted" style="margin-top:6px;max-width:64ch">Unlimited questions with new numbers every time, checked instantly with a worked solution. Rounding: give the accuracy asked for; small rounding differences are accepted.</p></div>
-    <button class="btn primary" id="mixed" style="align-self:flex-start">${ic('shuffle')} Mixed drill from your weakest topics</button>
+    <div class="row">${mockOn() && mockTopics('maths').some(id=>GEN[id]&&GEN[id].length) ? `<button class="btn primary" id="mockDrill">${ic('drills')} ${esc(mockCfg().title)} drill</button>` : ''}<button class="btn ${mockOn()?'':'primary'}" id="mixed">${ic('shuffle')} Mixed drill from your weakest topics</button></div>
     <div class="grid g2">${ts.map(t=>{ const d = S.drills[t.id]; return `<button class="topic-row s-maths" data-t="${t.id}" style="grid-template-columns:minmax(0,1fr) auto"><div><div class="nm">${esc(t.name)}</div><div class="tiny muted">${esc(t.spec)} · Paper ${t.papers.map(p=>p.slice(1)).join(' & ')}</div></div><div>${d?`<span class="pill ${d.r/d.n>=.8?'good':d.r/d.n>=.6?'warn':'bad'}">${d.r}/${d.n}</span>`:'<span class="pill neutral">New</span>'}</div></button>`; }).join('')}</div></div>`;
   on(m,'[data-t]','click',e=>startDrill(e.currentTarget.dataset.t));
   on(m,'#mixed','click',()=>startDrill('mixed'));
+  on(m,'#mockDrill','click',()=>startDrill('mock'));
 }
 function parseNum(s){ s = String(s).trim().replace(/−/g,'-').replace(/,/g,'').replace(/\s+/g,''); if (!s) return NaN; const f = s.match(/^(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)$/); if (f) return +f[1] / +f[2]; return Number(s); }
 function closeEnough(x, ans, dp){ if (!isFinite(x)) return false; const tol = Math.max(0.51 * Math.pow(10, -dp), Math.abs(ans) * 0.0015, 1e-9); return Math.abs(x - ans) <= tol; }
 function modeDrill(tid, taskKey){
-  const pool = tid==='mixed' ? TOPICS.filter(t=>t.s==='maths' && GEN[t.id] && GEN[t.id].length).sort((a,b)=>weakness(b)-weakness(a)).slice(0, 5).map(t=>t.id) : [tid];
+  const pool = tid==='mock' ? mockTopics('maths').filter(id=>GEN[id] && GEN[id].length) : tid==='mixed' ? TOPICS.filter(t=>t.s==='maths' && GEN[t.id] && GEN[t.id].length).sort((a,b)=>weakness(b)-weakness(a)).slice(0, 5).map(t=>t.id) : [tid];
   const st = { i:0, n:10, cur:null, val:'', res:null, right:0 };
   const gen = () => { const t = pool[Math.floor(Math.random()*pool.length)]; const g = pick(GEN[t]); st.cur = Object.assign({ t }, g()); st.val=''; st.res=null; };
   gen();
   const o = { render(m){
     if (st.i >= st.n) { markDone(taskKey); m.innerHTML = summaryCard('Drill complete', `${st.right}/${st.n}`, 'correct', 'maths', true); on(m,'#done','click',endStudy); on(m,'#again','click',()=>{ STUDY = modeDrill(tid, taskKey); render(); }); return; }
     const q = st.cur;
-    m.innerHTML = studyShell(`Drill · ${tid==='mixed'?'Mixed':TOPIC[tid].name}`, 'maths', st.i/st.n*100, `<div class="qbox stack"><span class="pill subj s-maths" style="align-self:flex-start">${esc(TOPIC[q.t].name)}</span><div class="prompt" style="font-family:var(--f-body);font-weight:600;font-size:1.15rem">${esc(q.q)}</div>
+    m.innerHTML = studyShell(`Drill · ${tid==='mixed'?'Mixed':tid==='mock'?mockCfg().title:TOPIC[tid].name}`, 'maths', st.i/st.n*100, `<div class="qbox stack"><span class="pill subj s-maths" style="align-self:flex-start">${esc(TOPIC[q.t].name)}</span><div class="prompt" style="font-family:var(--f-body);font-weight:600;font-size:1.15rem">${esc(q.q)}</div>
       <div class="row" style="flex-wrap:nowrap"><input type="text" inputmode="decimal" id="val" placeholder="Your answer" value="${esc(st.val)}" ${st.res?'disabled':''} autocomplete="off"><button class="btn primary" id="chk" ${st.res?'hidden':''}>Check</button></div>
       ${st.res?`<div class="feedback ${st.res.ok?'ok':'no'}"><b>${st.res.ok?'Correct.':'Not this time.'}</b> Answer: <span class="mono">${esc(fmt(q.ans, q.dp))}</span><div class="small" style="margin-top:6px">${esc(q.sol)}</div></div><button class="btn primary" id="nx" style="align-self:flex-end">Next</button>`:'<button class="btn ghost sm" id="reveal" style="align-self:flex-start">Show solution</button>'}</div>`, `${st.i+1}/${st.n}`);
     quitHandler(m);
@@ -1001,6 +1040,11 @@ function vProgress(m){
       <section class="card stack"><h3>Exam questions</h3>${(()=>{ const rows = EXAMQ.filter(q=>S.exam[q.id]).map(q=>({q, b:bestExam(q.id)})).sort((a,b)=>a.b-b.b).slice(0,6); return rows.length ? rows.map(({q,b})=>`<div class="row between small"><span style="min-width:0;flex:1">${esc(SUBJ[q.s].short)} · ${esc(TOPIC[q.t].name)} (${q.marks})</span><span class="pill ${b>=.75?'good':b>=.55?'warn':'bad'}">${Math.round(b*100)}%</span></div>`).join('') : '<p class="small muted">No questions marked yet. Your lowest scores will show here so you can retry them.</p>'; })()}</section>
     </div>
     <section class="card pad-lg"><h2>Revision plan to June</h2><div style="margin-top:8px">${phases.map(([n,when,name,txt])=>`<div class="phase ${ph===n?'now':''}"><div><div class="mono small ph-n" style="font-weight:700">${when}</div>${ph===n?'<span class="pill good" style="margin-top:4px">You are here</span>':''}</div><div><h3>${name}</h3><p class="small muted" style="margin-top:3px">${txt}</p></div></div>`).join('')}</div></section>
+    <section class="card pad-lg stack" id="mockBox"><div class="row between"><h2>Mocks focus</h2><span class="tiny muted">${mockOn()?plural(daysTo(mockCfg().date),'day')+' to go':'Not active'}</span></div>
+      <p class="small muted">Pick the date and the topics in your next mocks. Until that date, Home, Today's plan, exam questions and drills focus on these topics. Clear the date to turn focus mode off.</p>
+      <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Name</span><input type="text" id="mockTitle" value="${esc(mockCfg().title)}"></label><label class="stack" style="gap:4px"><span class="small muted">First mock date</span><input type="date" id="mockDate" value="${esc(mockCfg().date||'')}"></label></div>
+      <div class="grid g3">${['psych','maths','econ'].map(s=>`<div class="stack s-${s}" style="gap:4px"><b class="small">${SUBJ[s].name}</b>${TOPICS.filter(t=>t.s===s).map(t=>`<label class="row small" style="gap:8px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" data-mtopic="${t.id}" ${mockCfg().topics.includes(t.id)?'checked':''} style="margin-top:3px"><span>${esc(t.name)}</span></label>`).join('')}</div>`).join('')}</div>
+    </section>
     <section class="card pad-lg stack"><h2>Settings</h2>
       <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Name</span><input type="text" id="setName" value="${esc(S.settings.name)}"></label>
       <label class="stack" style="gap:4px"><span class="small muted">Daily card goal</span><input type="number" id="setGoal" min="10" max="400" value="${S.settings.goal}"></label></div>
@@ -1024,6 +1068,10 @@ ${!(window.claude && window.claude.use) ? `<div class="stack" style="gap:8px"><h
   </div>`;
   on(m,'[data-learn]','click',e=>startMode('learn', setFromTopic(e.currentTarget.dataset.learn)));
   on(m,'#setName','change',e=>{ S.settings.name = e.target.value.trim() || 'Pedro'; save(); });
+  const mockSave = () => { S.settings.mock = Object.assign({}, mockCfg(), S.settings.mock || {}); save(); renderNav(); };
+  on(m,'#mockTitle','change',e=>{ mockSave(); S.settings.mock.title = e.target.value.trim() || 'Mocks'; save(); });
+  on(m,'#mockDate','change',e=>{ mockSave(); S.settings.mock.date = e.target.value || ''; save(); render(); toast(e.target.value ? 'Mock date saved' : 'Focus mode off'); });
+  on(m,'[data-mtopic]','change',e=>{ mockSave(); const id = e.target.dataset.mtopic; const ts = new Set(S.settings.mock.topics); e.target.checked ? ts.add(id) : ts.delete(id); S.settings.mock.topics = TOPICS.map(t=>t.id).filter(x=>ts.has(x)); save(); });
   on(m,'#setGoal','change',e=>{ S.settings.goal = Math.max(10, Math.min(400, +e.target.value || 60)); save(); renderNav(); });
   on(m,'[data-grade]','change',e=>{ S.settings.grades[e.target.dataset.grade][+e.target.dataset.i] = e.target.value; save(); });
   on(m,'#copyBk','click',async ()=>{ const code = btoa(unescape(encodeURIComponent(JSON.stringify(S)))); try { await navigator.clipboard.writeText(code); toast('Backup code copied'); } catch(e){ const b = m.querySelector('#impBox'); b.hidden = false; const ta = m.querySelector('#impTxt'); ta.value = code; ta.select(); toast('Select all and copy the code'); } });
