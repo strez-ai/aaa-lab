@@ -117,7 +117,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 
 textarea{resize:vertical;min-height:120px;line-height:1.55}
 .hr{height:1px;background:var(--line);margin:4px 0}
 .empty{padding:28px;text-align:center;color:var(--muted);border:1.5px dashed var(--line);border-radius:var(--r)}
-.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:11px;font-weight:600;font-size:.9rem;z-index:50;box-shadow:var(--shadow);max-width:calc(100% - 32px)}
+.toast{pointer-events:none;position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:11px;font-weight:600;font-size:.9rem;z-index:50;box-shadow:var(--shadow);max-width:calc(100% - 32px)}
 @media (min-width:821px){.toast{bottom:28px}}
 
 /* home */
@@ -197,6 +197,10 @@ textarea{resize:vertical;min-height:120px;line-height:1.55}
 .feedback{padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2)}
 .feedback.ok{background:var(--good-soft);border-color:transparent}
 .feedback.no{background:var(--bad-soft);border-color:transparent}
+.feedback.warn{background:var(--warn-soft);border-color:transparent}
+#syncChip{min-width:0;flex-shrink:1;overflow:hidden}#syncTxt{overflow:hidden;text-overflow:ellipsis}
+body.setup .tabbar,body.setup .rail{display:none!important}
+body.setup .layout{grid-template-columns:minmax(0,1fr)}
 .match-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 @media (max-width:640px){.match-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .tile{min-height:104px;padding:10px;border-radius:13px;border:1.5px solid var(--line);background:var(--surface);font-size:.82rem;line-height:1.3;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
@@ -450,7 +454,9 @@ const SUBJ = {
 const TOPICS = [
   ['p-si','psych','Social influence','3.1.1',['P1']],['p-mem','psych','Memory','3.1.2',['P1']],['p-att','psych','Attachment','3.1.3',['P1']],['p-clin','psych','Clinical psychology and mental health','3.1.4',['P1']],
   ['p-app','psych','Approaches in psychology','3.2.1',['P2']],['p-bio','psych','Biopsychology','3.2.2',['P2']],['p-rm','psych','Research methods','3.2.3',['P2','P1','P3']],
-  ['p-id','psych','Issues and debates','3.3.1',['P3']],['p-rel','psych','Relationships','3.3.2',['P3']],['p-sz','psych','Schizophrenia','3.3.5',['P3']],['p-for','psych','Forensic psychology','3.3.9',['P3']],
+  ['p-id','psych','Issues and debates','3.3.1',['P3']],['p-rel','psych','Relationships','3.3.2',['P3']],['p-gen','psych','Gender','3.3.3',['P3']],['p-cog','psych','Cognition and development','3.3.4',['P3']],
+  ['p-sz','psych','Schizophrenia','3.3.5',['P3']],['p-eat','psych','Eating behaviour','3.3.6',['P3']],['p-str','psych','Stress','3.3.7',['P3']],
+  ['p-agg','psych','Aggression','3.3.8',['P3']],['p-for','psych','Forensic psychology','3.3.9',['P3']],['p-add','psych','Addiction','3.3.10',['P3']],
   ['m-proof','maths','Proof','Pure 1',['P1','P2']],['m-alg','maths','Algebra and functions','Pure 2',['P1','P2']],['m-coord','maths','Coordinate geometry','Pure 3',['P1','P2']],['m-seq','maths','Sequences and series','Pure 4',['P1','P2']],['m-trig','maths','Trigonometry','Pure 5',['P1','P2']],['m-exp','maths','Exponentials and logarithms','Pure 6',['P1','P2']],['m-diff','maths','Differentiation','Pure 7',['P1','P2']],['m-int','maths','Integration','Pure 8',['P1','P2']],['m-num','maths','Numerical methods','Pure 9',['P1','P2']],['m-vec','maths','Vectors','Pure 10',['P1','P2']],
   ['m-samp','maths','Sampling and the large data set','Stats 1',['P3']],['m-data','maths','Data presentation','Stats 2',['P3']],['m-prob','maths','Probability','Stats 3',['P3']],['m-dist','maths','Statistical distributions','Stats 4',['P3']],['m-hyp','maths','Hypothesis testing','Stats 5',['P3']],
   ['m-kin','maths','Kinematics','Mech 6-7',['P3']],['m-force','maths','Forces and Newton\'s laws','Mech 8',['P3']],['m-mom','maths','Moments','Mech 9',['P3']],
@@ -459,6 +465,11 @@ const TOPICS = [
   ['e-3.1','econ','Business growth','3.1',['P1','P3']],['e-3.2','econ','Business objectives','3.2',['P1','P3']],['e-3.3','econ','Revenues, costs and profits','3.3',['P1','P3']],['e-3.4','econ','Market structures','3.4',['P1','P3']],['e-3.5','econ','Labour market','3.5',['P1','P3']],['e-3.6','econ','Government intervention in markets','3.6',['P1','P3']],
   ['e-4.1','econ','International economics','4.1',['P2','P3']],['e-4.2','econ','Poverty and inequality','4.2',['P2','P3']],['e-4.3','econ','Emerging and developing economies','4.3',['P2','P3']],['e-4.4','econ','The financial sector','4.4',['P2','P3']],['e-4.5','econ','Role of the state in the macroeconomy','4.5',['P2','P3']],
 ].map(([id,s,name,spec,papers])=>({id,s,name,spec,papers}));
+// Psychology Paper 3: one option from each group. Built-in cards exist for Relationships, Schizophrenia and Forensic; the others start empty and the student makes cards with Claude.
+const PSYCH_OPT_GROUPS = [['p-rel','p-gen','p-cog'],['p-sz','p-eat','p-str'],['p-agg','p-for','p-add']];
+const PSYCH_OPT_IDS = PSYCH_OPT_GROUPS.flat();
+const PSYCH_STUBS = ['p-gen','p-cog','p-eat','p-str','p-agg','p-add'];
+TOPICS.forEach(t => { if (PSYCH_STUBS.includes(t.id)) t.stub = true; });
 const TOPIC = Object.fromEntries(TOPICS.map(t=>[t.id,t]));
 // ---------- your own subjects (any subject, board and options) ----------
 const BOARDS = ['AQA','OCR','Pearson Edexcel','WJEC / Eduqas','CCEA','Cambridge International','Other'];
@@ -470,12 +481,14 @@ const rid = (p) => p + Date.now().toString(36).slice(-5) + Math.random().toStrin
 function customCourses(){ return Object.values((S.custom||{}).courses||{}).filter(c=>c && !c.deleted).sort((a,b)=>(a.created||0)-(b.created||0)); }
 function courseOf(sub){ return (S.custom && S.custom.courses || {})[sub]; }
 function applyCustom(){
-  const sig = JSON.stringify(S.custom || {}); if (sig === CUSTOM_SIG) return; CUSTOM_SIG = sig;
+  const sig = JSON.stringify([S.custom || {}, examYear()]); if (sig === CUSTOM_SIG) return; CUSTOM_SIG = sig;
   for (let i = TOPICS.length - 1; i >= 0; i--) if (TOPICS[i].custom) { delete TOPIC[TOPICS[i].id]; delete BYTOPIC[TOPICS[i].id]; TOPICS.splice(i, 1); }
   for (let i = CARDS.length - 1; i >= 0; i--) if (CARDS[i].custom) { delete CARD[CARDS[i][0]]; CARDS.splice(i, 1); }
   for (const k of Object.keys(SUBJ)) if (SUBJ[k].custom) delete SUBJ[k];
   if (!BASE_EXAMS) BASE_EXAMS = EXAMS.slice();
-  EXAMS.length = 0; EXAMS.push(...BASE_EXAMS);
+  EXAMS.length = 0; EXAMS.push(...BASE_EXAMS.filter(e => e.d.startsWith(String(examYear()))));
+  TOPICS.filter(t => t.stub).forEach(T => { BYTOPIC[T.id] = []; const set = (S.custom.sets || {})[T.id];
+    ((set && set.cards) || []).forEach(([id, q, a]) => { const card = [id, T.id, q, a]; card.custom = true; CARDS.push(card); CARD[id] = card; BYTOPIC[T.id].push(id); }); });
   let css = '';
   customCourses().forEach((c, i) => {
     const key = c.id, col = PALETTE[i % PALETTE.length];
@@ -495,16 +508,38 @@ function applyCustom(){
 }
 function saveCourse(c){ c.at = Date.now(); S.custom.courses[c.id] = c; save(); }
 function saveCards(tid, cards){ S.custom.sets[tid] = { cards, at: Date.now() }; save(); }
-function parseCards(txt){
-  const out = [];
-  String(txt).split(/\r?\n/).forEach(line => {
-    line = line.trim().replace(/^[-*•\d.)\s]+(?=\S)/, m => /::|\t/.test(line) ? m : m); if (!line) return;
-    let parts = line.includes(' :: ') ? line.split(' :: ') : line.includes('::') ? line.split('::') : line.includes('\t') ? line.split('\t') : line.includes(' - ') ? line.split(' - ') : null;
-    if (!parts || parts.length < 2) return;
-    const q = parts[0].replace(/\*\*/g, '').replace(/^[-*•]\s+/, '').trim(), a = parts.slice(1).join(' - ').replace(/\*\*/g, '').trim();
-    if (q && a && q.length < 300) out.push([q, a]);
+// Forgiving parser for pasted cards: strips numbering and markdown, accepts ::, tab, dashes or a colon, and skips Claude's chat lines.
+function cleanLine(x){ return String(x).trim().replace(/^(?:[-*•–]\s*|\d{1,3}[.)]\s+|[a-z][.)]\s+)+/i, '').replace(/\*\*|__|`/g, '').replace(/^#+\s*/, '').trim(); }
+function isChatter(x){ return /^(here (are|is)|here's|sure|certainly|of course|absolutely|great|i hope|i've|i have|let me know|feel free|note:|these (cards|flashcards|topics)|this (list|set)|hope this)/i.test(x) || /[:!]$/.test(x) || (/\?$/.test(x) && x.split(' ').length > 8 && /\b(you|your)\b/i.test(x)); }
+function splitCard(line){
+  for (const sep of [' :: ', '::', '\t', ' – ', ' — ', ' - ']) { const i = line.indexOf(sep); if (i > 0) return [line.slice(0, i), line.slice(i + sep.length)]; }
+  const c = line.indexOf(': '); if (c > 0 && c < 90) return [line.slice(0, c), line.slice(c + 2)];
+  return null;
+}
+function parseCardLines(lines){
+  const out = []; let skipped = 0;
+  lines.forEach(raw => {
+    const line = cleanLine(raw); if (!line || isChatter(line)) return;
+    const parts = splitCard(line); if (!parts) { skipped++; return; }
+    const q = parts[0].trim(), a = parts[1].replace(/^::\s*/, '').trim();
+    if (q && a && q.length < 300) out.push([q, a]); else skipped++;
   });
-  return out;
+  return { pairs: out, skipped };
+}
+function parseCards(txt){ return parseCardLines(String(txt).split(/\r?\n/)).pairs; }
+// A reply covering several topics: "# Topic name" lines, each followed by its cards.
+function parseMultiCards(txt, topics){
+  const norm = x => x.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const find = h => { const n = norm(h); return topics.find(t => norm(t.name) === n) || topics.find(t => n && (norm(t.name).includes(n) || n.includes(norm(t.name)))); };
+  const groups = new Map(); let cur = null, lost = 0, skipped = 0, buf = [];
+  const flush = () => { if (!buf.length) return; const r = parseCardLines(buf); skipped += r.skipped; if (cur) { if (!groups.has(cur)) groups.set(cur, []); groups.get(cur).push(...r.pairs); } else lost += r.pairs.length; buf = []; };
+  String(txt).split(/\r?\n/).forEach(line => {
+    const h = line.trim().match(/^#{1,4}\s*(.+)$/) || line.trim().match(/^\*\*([^*:]+)\*\*$/);
+    if (h) { flush(); cur = find(h[1].replace(/\*\*/g, '').trim()) || null; if (!cur) lost++; return; }
+    buf.push(line);
+  });
+  flush();
+  return { groups, lost, skipped };
 }
 function addCards(tid, pairs){
   const set = (S.custom.sets[tid] && S.custom.sets[tid].cards || []).slice(); const have = new Set(set.map(c => c[1].toLowerCase()));
@@ -512,7 +547,7 @@ function addCards(tid, pairs){
   saveCards(tid, set); return n;
 }
 function courseLabel(c){ return `A-level ${c.name}${c.board && c.board !== 'Other' ? ' (' + c.board + ')' : ''}${c.options ? ', options/papers: ' + c.options : ''}`; }
-function cardsPrompt(c, topic, n){ return `I'm revising ${courseLabel(c)} in the UK, for exams in summer 2027. Write ${n} flashcards for the topic "${topic}", matching the current specification for my exam board.
+function cardsPrompt(c, topic, n){ return `I'm revising ${courseLabel(c)} in the UK, for exams in summer ${examYear()}. Write ${n} flashcards for the topic "${topic}", matching the current specification for my exam board.
 
 Cover the key terms, facts, examples, studies/case studies, dates or formulae that examiners expect, with precise detail. Keep each answer to 1-3 sentences.
 
@@ -520,6 +555,16 @@ Output ONLY the flashcards, one per line, in exactly this format:
 term or question :: answer
 
 No numbering, no headings, no blank lines, no other text.`; }
+function allCardsPrompt(c, ts, n){ return `I'm revising ${courseLabel(c)} in the UK, for exams in summer ${examYear()}. Write ${n} flashcards for EACH of these topics, matching the current specification for my exam board:
+
+${ts.map(t => t.name).join('\n')}
+
+Cover the key terms, facts, examples, studies/case studies, dates or formulae that examiners expect, with precise detail. Keep each answer to 1-3 sentences.
+
+Format: before each topic's cards, write a line starting with # followed by the topic name exactly as listed above. Then its cards, one per line, in exactly this format:
+term or question :: answer
+
+No numbering, no other headings, no other text.`; }
 function topicsPrompt(c){ return `List the topics in the current specification for ${courseLabel(c)} in the UK. Split them into revision-sized topics (roughly 8-25 topics in total), in specification order, including only the options I named if there are optional units.
 
 Output ONLY the topic names, one per line, with no numbering and no other text.`; }
@@ -536,7 +581,13 @@ let PASTE_FOR = null;
 function pasteBoxHTML(tid){ return `<section class="card stack" id="pasteBox"><h3>Paste cards</h3><p class="small muted">Paste Claude's reply, or your own cards: one per line as <span class="mono">term :: answer</span>. A Quizlet export (term, tab, definition) works too.</p><textarea id="pasteTxt" style="min-height:160px" placeholder="Photosynthesis :: The process plants use to make glucose from carbon dioxide and water using light energy."></textarea><div class="row"><button class="btn primary sm" id="pasteGo">Add cards</button><button class="btn sm" id="pasteClip">Paste from clipboard</button><button class="btn ghost sm" id="pasteClose">Close</button></div></section>`; }
 function bindPaste(m, tid){
   on(m,'#pasteClip','click',async ()=>{ try { m.querySelector('#pasteTxt').value = await navigator.clipboard.readText(); } catch(e){ toast('Press and hold in the box, then Paste'); } });
-  on(m,'#pasteGo','click',()=>{ const pairs = parseCards(m.querySelector('#pasteTxt').value); if (!pairs.length) { toast('No cards found. Use term :: answer on each line'); return; } const k = addCards(tid, pairs); PASTE_FOR = null; toast(`Added ${plural(k,'card')}`); render(); });
+  on(m,'#pasteGo','click',()=>{ const txt = m.querySelector('#pasteTxt').value;
+    if (String(tid).startsWith('all:')) { const s = tid.slice(4); const r = parseMultiCards(txt, TOPICS.filter(t=>t.s===s)); let k = 0, nt = 0; r.groups.forEach((pairs, t) => { const added = addCards(t.id, pairs); k += added; if (added) nt++; });
+      if (!k) { toast(r.lost ? 'No topic headings matched. Keep the # Topic lines from Claude\'s reply' : 'No cards found. Use term :: answer on each line'); return; }
+      PASTE_FOR = null; render(); toast(`Added ${plural(k,'card')} to ${plural(nt,'topic')}${r.skipped ? ` · ${plural(r.skipped,'line')} skipped` : ''}`); return; }
+    const r = parseCardLines(txt.split(/\r?\n/)); if (!r.pairs.length) { toast('No cards found. Use term :: answer on each line'); return; }
+    const k = addCards(tid, r.pairs); const dup = r.pairs.length - k; PASTE_FOR = null; render();
+    toast(`Added ${plural(k,'card')}${dup ? ` · ${dup} already there` : ''}${r.skipped ? ` · ${plural(r.skipped,'line')} skipped (not term :: answer)` : ''}`); });
   on(m,'#pasteClose','click',()=>{ PASTE_FOR = null; render(); });
 }
 // course editor (add or edit a subject)
@@ -566,9 +617,19 @@ function readCourseForm(m, base){
 // ---------- mocks ----------
 const MOCK_DEFAULT_TOPICS = ['p-id','p-app','p-att','p-rm','m-diff','m-kin','m-exp','m-proof', ...TOPICS.filter(t=>t.s==='econ').map(t=>t.id)];
 const MOCK_NOTE = { econ:'Paper 3 mock: synoptic, every theme' };
+// Year 13 sit their exams in the summer of this academic year; Year 12 a year later.
+function y13Year(){ const d = new Date(); return d.getMonth() >= 7 ? d.getFullYear() + 1 : d.getFullYear(); }
+function examYear(){ return S.settings.examYear || y13Year(); }
+function psychOpts(){ const o = S.settings.psychOpts; return Array.isArray(o) && o.length === 3 ? o : ['p-rel','p-sz','p-for']; }
+function topicOn(t){ return !!t && !(t.s === 'psych' && PSYCH_OPT_IDS.includes(t.id) && !psychOpts().includes(t.id)); }
+function liveTopics(s){ return TOPICS.filter(t => topicOn(t) && (!s || t.s === s)); }
+function cardOn(c){ const t = TOPIC[c[1]]; return !!t && mySubj().includes(t.s) && topicOn(t); }
+const GRADES = ['A*','A','B','C','D','E','U'];
+function gradeGap(s){ const g = S.settings.grades[s]; return g ? Math.max(0, GRADES.indexOf(g[0]) - GRADES.indexOf(g[1])) : 1; }
+function subjWeight(s){ return Math.min(1.15, 0.7 + 0.15 * gradeGap(s)); }
 function mockCfg(){ const m = S.settings.mock; return (m && Array.isArray(m.topics)) ? m : { title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }; }
-function mockOn(){ const c = mockCfg(); return !!c.date && daysTo(c.date) >= 0 && c.topics.length > 0; }
-function mockTopics(s){ return mockCfg().topics.filter(id => TOPIC[id] && (!s || TOPIC[id].s === s)); }
+function mockOn(){ const c = mockCfg(); return !!c.date && daysTo(c.date) >= 0 && c.topics.length > 0 && mockTopics().length > 0; }
+function mockTopics(s){ return mockCfg().topics.filter(id => TOPIC[id] && topicOn(TOPIC[id]) && mySubj().includes(TOPIC[id].s) && (!s || TOPIC[id].s === s)); }
 function mockCards(s){ return mockTopics(s).flatMap(id => BYTOPIC[id] || []); }
 function mockExamQs(s){ const ts = mockTopics(s); return EXAMQ.filter(q => (!s || q.s === s) && ts.includes(q.t)).sort((a,b) => (a.s==='econ' && b.s==='econ' ? (b.paper==='Paper 3') - (a.paper==='Paper 3') : 0)); }
 function startMockReview(s){ const ids = mockCards(s); if (!ids.length) { toast('No cards in your mock topics'); return; } STUDY = modeFlash({ title: mockCfg().title + ' review', s: s||null, ids: priorityCards(ids, 40), review:true }, 'mock-review'); window.scrollTo(0,0); render(); }
@@ -596,7 +657,8 @@ const daysTo = (s) => dayNum(dateOf(s)) - dayNum();
 const fmtDate = (s, o={weekday:'short',day:'numeric',month:'short'}) => dateOf(s).toLocaleDateString('en-GB',o);
 const esc = (s) => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const shuffle = (a) => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
-const brief = (a, n=170) => { let s=a.split(/(?<=[.!?])\s/)[0]; if(s.length>n) s=s.slice(0,n).replace(/\s\S*$/,'')+'…'; return s; };
+const ABBR = /(?:\b(?:e\.g|i\.e|etc|vs|cf|al|approx|c|ca|Dr|Mr|Mrs|Ms|St|No|Fig)\.|\b[A-Z]\.)$/;
+const brief = (a, n=170) => { let s = a; const re = /[.!?](?=\s)/g; let mm; while ((mm = re.exec(a))) { const head = a.slice(0, mm.index + 1); const open = (head.match(/\(/g)||[]).length > (head.match(/\)/g)||[]).length; if (!ABBR.test(head) && !open) { s = head; break; } } if (s.length > n) s = s.slice(0, n).replace(/\s\S*$/, '') + '…'; return s; };
 const plural = (n,w,p) => `${n} ${n===1?w:(p||w+'s')}`;
 
 const ICON = {
@@ -625,13 +687,13 @@ const NAV = [['home','Home'],['sets','Sets'],['review','Review'],['exam','Exam Q
 let CARDS = [], CARD = {}, BYTOPIC = {}, EXAMQ = [];
 // ---------- state ----------
 const LS_KEY = 'aaalab.v1';
-const blank = () => ({ v:1, ts:0, cards:{}, star:{}, exam:{}, drills:{}, match:{}, days:{}, done:{}, custom:{ courses:{}, sets:{} }, settings:{ name:'', subjects:['psych','maths','econ'], onboarded:false, goal:60, mock:{ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }, grades:{psych:['C','A'],maths:['C','A'],econ:['B','A']}, front:'term' } });
+const blank = () => ({ v:1, ts:0, cards:{}, star:{}, exam:{}, drills:{}, match:{}, days:{}, done:{}, custom:{ courses:{}, sets:{} }, settings:{ name:'', subjects:['psych','maths','econ'], onboarded:false, goal:60, mock:{ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }, grades:{psych:['B','A'],maths:['B','A'],econ:['B','A']}, front:'term', examYear:0, psychOpts:null } });
 let S = blank();
 function loadLocal(){ try { const raw = localStorage.getItem(LS_KEY); if(raw){ const o = JSON.parse(raw); S = Object.assign(blank(), o); S.settings = Object.assign(blank().settings, o.settings||{}); if (!o.settings || o.settings.onboarded === undefined) { S.settings.onboarded = true; if (!S.settings.name) S.settings.name = 'Pedro'; } } } catch(e){} }
 const ALL_SUBJ = ['psych','maths','econ'];
 function mySubj(){ return [...(S.settings.subjects || ALL_SUBJ).filter(x => ALL_SUBJ.includes(x)), ...customCourses().map(c => c.id)]; }
 const isCustom = (sub) => !!(SUBJ[sub] && SUBJ[sub].custom);
-function myTopics(){ const a = mySubj(); return TOPICS.filter(t => a.includes(t.s)); }
+function myTopics(){ const a = mySubj(); return TOPICS.filter(t => a.includes(t.s) && topicOn(t)); }
 let saveTimer = null;
 function save(){ S.ts = Date.now(); try { localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch(e){} clearTimeout(saveTimer); saveTimer = setTimeout(pushRemote, 3500); }
 function today(){ const k = dayNum(); return (S.days[k] ||= {c:0, l:0, x:0, d:0, m:0}); }
@@ -877,7 +939,7 @@ function topicStats(tid){
   return { n: ids.length, seen, due, mastery: ids.length ? m / ids.length : 0, acc: att ? right / att : null, att, exPct };
 }
 function weakness(t){ // higher = needs work
-  const st = topicStats(t.id); const w = SUBJ[t.s].weight;
+  const st = topicStats(t.id); const w = subjWeight(t.s);
   const acc = st.acc == null ? .5 : st.acc; const ex = st.exPct == null ? .5 : st.exPct;
   const next = EXAMS.filter(e=>e.s===t.s && t.papers.includes(e.p) && daysTo(e.d) >= 0).map(e=>daysTo(e.d)).sort((a,b)=>a-b)[0];
   const urgency = next == null ? 0 : next < 30 ? .25 : next < 75 ? .12 : 0;
@@ -885,9 +947,9 @@ function weakness(t){ // higher = needs work
 }
 function bestExam(qid){ const a = S.exam[qid]; if (!a || !a.length) return null; return Math.max(...a.map(x => x.score / x.max)); }
 function subjStats(s){
-  const ts = TOPICS.filter(t=>t.s===s); let n=0, m=0, due=0, seen=0, r=0, att=0;
+  const ts = liveTopics(s); let n=0, m=0, due=0, seen=0, r=0, att=0;
   ts.forEach(t=>{ const st=topicStats(t.id); n+=st.n; m+=st.mastery*st.n; due+=st.due; seen+=st.seen; if(st.acc!=null){ r+=st.acc*st.att; att+=st.att; } });
-  const ex = EXAMQ.filter(q=>q.s===s).map(q=>bestExam(q.id)).filter(x=>x!=null);
+  const ex = EXAMQ.filter(q=>q.s===s && topicOn(TOPIC[q.t])).map(q=>bestExam(q.id)).filter(x=>x!=null);
   const exPct = ex.length ? ex.reduce((a,b)=>a+b,0)/ex.length : null;
   const mastery = n ? m/n : 0; const acc = att ? r/att : null;
   const ready = Math.round(100 * (mastery * .55 + (acc==null?0:acc) * .2 + (exPct==null?0:exPct) * .25));
@@ -896,22 +958,25 @@ function subjStats(s){
 
 // ---------- plan ----------
 function phase(){
-  const d = dayNum(), p2 = dayNum(dateOf('2027-02-15')), p3 = dayNum(dateOf('2027-04-12')), first = dayNum(dateOf(EXAMS[0].d)), last = dayNum(dateOf('2027-06-16'));
+  const Y = examYear(), d = dayNum(), p2 = dayNum(dateOf(Y+'-02-15')), p3 = dayNum(dateOf(Y+'-04-12')), last = dayNum(dateOf(lastExamDate()));
   if (d < p2) return 1; if (d < p3) return 2; if (d <= last) return 3; return 4;
 }
+function lastExamDate(){ const mine = EXAMS.filter(e => mySubj().includes(e.s)).map(e => e.d).sort(); return mine.length && mine[mine.length-1].startsWith(String(examYear())) ? mine[mine.length-1] : examYear() + '-06-24'; }
 function nextExam(){ return EXAMS.find(e => mySubj().includes(e.s) && daysTo(e.d) >= 0); }
 function dailyTasks(){
   const d = dayNum(), tasks = [];
-  const due = CARDS.filter(c=>isDue(c[0])).length;
+  const due = CARDS.filter(c=>cardOn(c) && isDue(c[0])).length;
   if (due) tasks.push({ key:'review', s:null, icon:'review', title:`Review ${Math.min(due, 80)} due cards`, sub:'Spaced repetition keeps what you have learned', go:()=>startReview() });
-  const mockPool = mockOn() ? TOPICS.filter(t=>mockTopics().includes(t.id)) : null;
+  const mockPool = mockOn() && mockTopics().length ? TOPICS.filter(t=>mockTopics().includes(t.id)) : null;
   const subs = mySubj(); if (!subs.length) return tasks;
   const ranked = myTopics().sort((a,b)=>weakness(b)-weakness(a)).sort((a,b)=> mockPool ? mockPool.includes(b) - mockPool.includes(a) : 0);
   if (mockPool) tasks.push({ key:'mock-review', s:null, icon:'flash', title:`${mockCfg().title}: 40-card focus review`, sub:`Your weakest and due cards from the mock topics · ${plural(daysTo(mockCfg().date),'day')} to go`, go:()=>startMockReview() });
   const ph = phase();
   // rotate subjects: psych and maths get more days
-  const rota = [...['psych','maths','econ','psych','maths','psych','maths'].filter(x=>subs.includes(x)), ...subs.filter(isCustom)];
-  const empty = myTopics().find(t => t.custom && !(BYTOPIC[t.id]||[]).length);
+  // rotate subjects; ones with a bigger gap between predicted and target grade come up more often
+  const rota = subs.flatMap(x => Array(Math.max(1, Math.min(3, gradeGap(x)))).fill(x));
+  customCourses().filter(c => !(c.topics||[]).length).forEach(c => tasks.push({ key:'setup-'+c.id, s:c.id, icon:'spark', title:`Set up ${c.name}: add your topics`, sub:'Get the topic list from Claude, or type your own', go:()=>{ SETS_FILTER = c.id; go('sets'); } }));
+  const empty = myTopics().find(t => (t.custom || t.stub) && !(BYTOPIC[t.id]||[]).length);
   if (empty) tasks.push({ key:'make-'+empty.id, s:empty.s, icon:'spark', title:`Make cards: ${empty.name}`, sub:`${SUBJ[empty.s].name} · Claude writes them, you paste them in`, go:()=>openTopic(empty.id) });
   const s1 = rota[d % rota.length], s2r = rota[(d + 3) % rota.length], s2 = s2r !== s1 ? s2r : (subs.find(x=>x!==s1) || s1);
   [s1, s2].forEach((s, i) => {
@@ -922,7 +987,7 @@ function dailyTasks(){
   const mt = subs.includes('maths') ? ranked.filter(t=>t.s==='maths' && GEN[t.id] && GEN[t.id].length)[0] : null;
   if (mt) tasks.push({ key:'drill-'+mt.id, s:'maths', icon:'drills', title:`Maths drill: ${mt.name}`, sub:'10 fresh questions with worked solutions', go:()=>startDrill(mt.id, 'drill-'+mt.id) });
   const xsl = (ph >= 2 ? ['psych','econ','maths'] : ['psych','econ']).filter(x=>subs.includes(x)), xs = xsl.length ? xsl[d % xsl.length] : subs[0];
-  const xq = (mockPool && mockExamQs(xs).length ? mockExamQs(xs) : EXAMQ.filter(q=>q.s===xs)).slice().sort((a,b)=>(bestExam(a.id)??-1)-(bestExam(b.id)??-1) || weakness(TOPIC[b.t])-weakness(TOPIC[a.t]))[0];
+  const xq = (mockPool && mockExamQs(xs).length ? mockExamQs(xs) : EXAMQ.filter(q=>q.s===xs && topicOn(TOPIC[q.t]))).slice().sort((a,b)=>(bestExam(a.id)??-1)-(bestExam(b.id)??-1) || weakness(TOPIC[b.t])-weakness(TOPIC[a.t]))[0];
   if (xq) tasks.push({ key:'exam-'+xq.id, s:xs, icon:'exam', title:`Exam question: ${xq.marks}-marker`, sub:`${SUBJ[xs].short} · ${TOPIC[xq.t].name}`, go:()=>openExam(xq.id, 'exam-'+xq.id) });
   return tasks;
 }
@@ -936,6 +1001,7 @@ window.addEventListener('hashchange', () => { const h = location.hash.slice(1) |
 function navItems(){ return NAV.filter(n => n[0] !== 'drills' || mySubj().includes('maths')); }
 function navHTML(){ return navItems().map(([k,l]) => `<a class="nav-a" href="#${k}" ${VIEW===k||(VIEW==='topic'&&k==='sets')?'aria-current="page"':''}>${ic(k)}<span>${l}</span></a>`).join(''); }
 function renderNav(){
+  document.body.classList.toggle('setup', !S.settings.onboarded);
   document.getElementById('rail').innerHTML = navHTML() + railFoot();
   document.getElementById('tabbar').innerHTML = NAV.filter(n=>n[0]!=='drills').map(([k,l]) => `<a class="nav-a" href="#${k}" ${VIEW===k||(VIEW==='topic'&&k==='sets')?'aria-current="page"':''}>${ic(k)}<span>${l==='Exam Qs'?'Exam':l}</span></a>`).join('');
   const ne = nextExam(); const cc = document.getElementById('countChip');
@@ -968,9 +1034,9 @@ function vHome(m){
     <div class="hero">
       <section class="card pad-lg stack" style="gap:14px">
         ${ne ? `<div class="row between" style="align-items:flex-end"><div><div class="eyebrow">Next exam</div><div class="count-big mono">${daysTo(ne.d)}<span style="font-size:1.1rem;font-family:var(--f-body);font-weight:600;letter-spacing:0" class="muted"> days</span></div></div>
-          <div style="text-align:right" class="s-${ne.s}"><span class="pill subj">${SUBJ[ne.s].name} ${ne.p}</span><div class="small muted" style="margin-top:4px">${fmtDate(ne.d,{weekday:'long',day:'numeric',month:'long'})} · ${ne.t}</div></div></div>` : EXAMS.some(e=>mySubj().includes(e.s)) ? '<h2>All exams done. Results day: Thursday 12 August 2027.</h2>' : `<div class="stack" style="gap:6px"><div class="eyebrow">Exams</div><h2>Add your exam dates</h2><p class="small muted">Add them to each subject in <a href="#sets">Sets</a> (Edit subject) to get a countdown here.</p></div>`}
+          <div style="text-align:right" class="s-${ne.s}"><span class="pill subj">${SUBJ[ne.s].name} ${ne.p}</span><div class="small muted" style="margin-top:4px">${fmtDate(ne.d,{weekday:'long',day:'numeric',month:'long'})} · ${ne.t}</div></div></div>` : EXAMS.some(e=>mySubj().includes(e.s)) ? `<h2>All exams done.${examYear()===2027?' Results day: Thursday 12 August 2027.':''}</h2>` : mySubj().some(x=>ALL_SUBJ.includes(x)) && examYear() !== 2027 ? `<div class="stack" style="gap:6px"><div class="eyebrow">Exams</div><h2>Summer ${examYear()}</h2><p class="small muted">The boards haven't published the ${examYear()} timetable yet. ${customCourses().length ? 'You can add dates you know to your own subjects in <a href="#sets">Sets</a> (Edit subject).' : 'Until then, keep building up every topic.'}</p></div>` : `<div class="stack" style="gap:6px"><div class="eyebrow">Exams</div><h2>Add your exam dates</h2><p class="small muted">Add them to each subject in <a href="#sets">Sets</a> (Edit subject) to get a countdown here.</p></div>`}
         <div class="timeline" aria-label="All exam dates">${EXAMS.filter(e=>mySubj().includes(e.s)).map(e=>{const n=daysTo(e.d);return `<div class="tl s-${e.s} ${n<0?'past':''} ${e===ne?'next':''}" title="${esc(SUBJ[e.s].name+' '+e.p+': '+e.title)}"><div class="d">${fmtDate(e.d,{day:'numeric',month:'short'})}</div><div class="n">${SUBJ[e.s].short} ${e.p}</div><div class="tiny muted">${e.t} · ${n<0?'done':n+'d'}</div></div>`}).join('')}</div>
-        ${mySubj().some(x=>ALL_SUBJ.includes(x)) ? `<p class="tiny faint">Final timetables: AQA and Pearson Edexcel, summer 2027. Contingency day Wed 23 June. Results Thu 12 August.</p>` : ''}
+        ${EXAMS.some(e=>ALL_SUBJ.includes(e.s) && mySubj().includes(e.s)) ? `<p class="tiny faint">Final timetables: AQA and Pearson Edexcel, summer 2027. Contingency day Wed 23 June. Results Thu 12 August.</p>` : ''}
       </section>
       <section class="card pad-lg row" style="gap:18px;align-items:center;flex-wrap:nowrap">
         <div class="ring" style="--p:${Math.min(100, t.c/goal*100)}"><div><div class="mono" style="font-weight:700;font-size:1.2rem">${t.c}</div><div class="tiny muted">of ${goal}</div></div></div>
@@ -982,11 +1048,11 @@ function vHome(m){
     <section class="card pad-lg"><div class="row between"><h2>Today's plan</h2><span class="tiny muted">${tasks.filter(x=>isDone(x.key)).length}/${tasks.length} done</span></div>
       <div style="margin-top:6px">${tasks.map((x,i)=>`<div class="task ${isDone(x.key)?'done':''} ${x.s?'s-'+x.s:''}"><div class="ic">${ic(x.icon)}</div><div class="tx"><b>${esc(x.title)}</b><span class="small muted">${esc(x.sub)}</span></div><button class="btn sm" data-task="${i}">${isDone(x.key)?'Again':'Start'}</button></div>`).join('')}</div>
     </section>
-    <div class="grid g3">${mySubj().map(s=>{const st=subjStats(s);const weak=TOPICS.filter(t=>t.s===s).sort((a,b)=>weakness(b)-weakness(a)).slice(0,2);return `<section class="card subj-card s-${s} stack" style="gap:10px">
+    <div class="grid g3">${mySubj().map(s=>{const st=subjStats(s);const weak=liveTopics(s).sort((a,b)=>weakness(b)-weakness(a)).slice(0,2);return `<section class="card subj-card s-${s} stack" style="gap:10px">
       <div class="row between"><div><div class="eyebrow">${SUBJ[s].board}</div><h3>${SUBJ[s].name}</h3></div><div class="grade">${S.settings.grades[s][0]}<span class="arrow">→</span><span style="color:var(--sc)">${S.settings.grades[s][1]}</span></div></div>
       <div><div class="row between small"><span class="muted">Readiness</span><b class="mono">${st.ready}%</b></div><div class="bar" style="margin-top:4px"><i style="width:${st.ready}%"></i></div></div>
-      <div class="small muted">Cards seen ${st.seen}/${st.n}${st.due?` · <b style="color:var(--sc)">${st.due} due</b>`:''}</div>
-      <div class="small"><span class="muted">Focus next:</span> ${weak.map(w=>`<a href="#sets" data-topic="${w.id}" style="color:var(--sc);font-weight:600">${esc(w.name)}</a>`).join(', ')}</div>
+      ${st.n ? `<div class="small muted">Cards seen ${st.seen}/${st.n}${st.due?` · <b style="color:var(--sc)">${st.due} due</b>`:''}</div>
+      <div class="small"><span class="muted">Focus next:</span> ${weak.map(w=>`<a href="#sets" data-topic="${w.id}" style="color:var(--sc);font-weight:600">${esc(w.name)}</a>`).join(', ')}</div>` : `<div class="small muted">No cards yet.</div><a href="#sets" data-setup="${s}" class="small" style="color:var(--sc);font-weight:600">${isCustom(s) && !liveTopics(s).length ? 'Add your topics' : 'Make your first cards'} →</a>`}
     </section>`}).join('')}</div>
   </div>`;
   on(m,'[data-task]','click',e=>tasks[+e.currentTarget.dataset.task].go());
@@ -997,6 +1063,7 @@ function vHome(m){
   on(m,'[data-mockt]','click',e=>openTopic(e.currentTarget.dataset.mockt));
   on(m,'#mockEdit','click',()=>{ go('progress'); setTimeout(()=>document.getElementById('mockBox')?.scrollIntoView({block:'start'}), 80); });
   on(m,'[data-topic]','click',e=>{ e.preventDefault(); openTopic(e.currentTarget.dataset.topic); });
+  on(m,'[data-setup]','click',e=>{ e.preventDefault(); SETS_FILTER = e.currentTarget.dataset.setup; go('sets'); });
 }
 
 function mockBanner(){
@@ -1008,8 +1075,8 @@ function mockBanner(){
       <div style="text-align:right"><div class="count-big mono" style="color:var(--accent)">${n}</div><div class="small muted">${n===1?'day':'days'} to go</div></div></div>
     <div class="grid g3">${subj.map(s=>`<div class="stack s-${s}" style="gap:6px"><div class="row between"><b>${SUBJ[s].name}</b><button class="btn sm ghost" data-mockrev="${s}">Review</button></div>
       ${MOCK_NOTE[s] && mockTopics(s).length >= 10 ? `<div class="small muted">${MOCK_NOTE[s]}</div>` : ''}
-      <div class="stack" style="gap:5px">${(MOCK_NOTE[s] && mockTopics(s).length >= 10 ? mockTopics(s).map(id=>TOPIC[id]).sort((a,b)=>weakness(b)-weakness(a)).slice(0,3) : mockTopics(s).map(id=>TOPIC[id])).map(t=>{ const st = topicStats(t.id); return `<a href="#sets" data-mockt="${t.id}" class="small" style="display:block;color:inherit;text-decoration:none"><div class="row between"><span>${esc(t.name)}</span><span class="mono tiny muted">${Math.round(st.mastery*100)}%</span></div><div class="bar" style="margin-top:3px"><i style="width:${Math.round(st.mastery*100)}%"></i></div></a>`; }).join('')}</div>
-      ${MOCK_NOTE[s] && mockTopics(s).length >= 10 ? '<div class="tiny muted">Weakest 3 shown</div>' : ''}
+      <div class="stack" style="gap:5px">${(mockTopics(s).length > 4 ? mockTopics(s).map(id=>TOPIC[id]).sort((a,b)=>weakness(b)-weakness(a)).slice(0,3) : mockTopics(s).map(id=>TOPIC[id])).map(t=>{ const st = topicStats(t.id); return `<a href="#sets" data-mockt="${t.id}" class="small" style="display:block;color:inherit;text-decoration:none"><div class="row between"><span>${esc(t.name)}</span><span class="mono tiny muted">${Math.round(st.mastery*100)}%</span></div><div class="bar" style="margin-top:3px"><i style="width:${Math.round(st.mastery*100)}%"></i></div></a>`; }).join('')}</div>
+      ${mockTopics(s).length > 4 ? `<div class="tiny muted">Weakest 3 of ${mockTopics(s).length} topics shown</div>` : ''}
       <button class="btn sm" data-mockq="${s}" style="align-self:flex-start">${ic('exam')} Exam question</button></div>`).join('')}</div>
     <div class="row"><button class="btn primary sm" data-mockrev="">${ic('flash')} Mixed mock review</button>${mockTopics('maths').some(id=>GEN[id]&&GEN[id].length)?`<button class="btn sm" id="mockDrill">${ic('drills')} Maths mock drill</button>`:''}<button class="btn ghost sm" id="mockEdit">Change topics or date</button></div>
   </section>`;
@@ -1022,7 +1089,7 @@ function vSets(m){
   if (!mySubj().includes(SETS_FILTER)) SETS_FILTER = mySubj()[0]; const s = SETS_FILTER;
   if (isCustom(s)) return vCustomSets(m, s);
   const groups = {};
-  TOPICS.filter(t=>t.s===s).forEach(t=>{ const p = t.papers[0]; (groups[p] ||= []).push(t); });
+  liveTopics(s).forEach(t=>{ const p = t.papers[0]; (groups[p] ||= []).push(t); });
   const stars = Object.keys(S.star).filter(id=>S.star[id] && CARD[id]);
   m.innerHTML = `<div class="stack">
     <div class="row between"><div><div class="eyebrow">Study sets</div><h1>Sets</h1></div>
@@ -1030,14 +1097,14 @@ function vSets(m){
     <div class="row">${(s==='maths'?['P1','P3']:['P1','P2','P3']).map(p=>{ const label = s==='maths'&&p==='P1'?'Pure (P1 & P2)':p==='P3'&&s==='econ'?'Paper 3 (all themes)':s==='maths'&&p==='P3'?'Paper 3 (Stats & Mech)':'Paper '+p.slice(1); return `<button class="btn sm s-${s}" data-paper="${p}">${ic('learn')} Study ${label}</button>`; }).join('')}
       ${stars.length?`<button class="btn sm" id="starSet">${ic('star')} Starred (${stars.length})</button>`:''}</div>
     ${Object.entries(groups).map(([p, ts])=>`<section class="stack" style="gap:8px"><div class="paper-h"><h3>${esc(PAPER_NAMES[s][p]||p)}</h3><span class="tiny muted">${SUBJ[s].board}</span></div>
-      ${ts.map(t=>{const st=topicStats(t.id);return `<button class="topic-row s-${s}" data-topic="${t.id}"><div><div class="nm">${esc(t.name)}</div><div class="tiny muted">Spec ${esc(t.spec)} · ${plural(st.n,'card')}${GEN[t.id]&&GEN[t.id].length?' · drills':''}${st.due?` · <b style="color:var(--sc)">${st.due} due</b>`:''}</div></div>
+      ${ts.map(t=>{const st=topicStats(t.id);return `<button class="topic-row s-${s}" data-topic="${t.id}"><div><div class="nm">${esc(t.name)}</div><div class="tiny muted">Spec ${esc(t.spec)} · ${t.stub && !st.n ? 'No built-in cards: make them with Claude' : plural(st.n,'card')}${GEN[t.id]&&GEN[t.id].length?' · drills':''}${st.due?` · <b style="color:var(--sc)">${st.due} due</b>`:''}</div></div>
         <div class="tb"><div class="bar"><i style="width:${Math.round(st.mastery*100)}%"></i></div><div class="tiny muted" style="margin-top:3px">${Math.round(st.mastery*100)}% mastered</div></div>
         <div style="text-align:right">${st.acc==null?'<span class="pill neutral">New</span>':`<span class="pill ${st.acc>=.8?'good':st.acc>=.6?'warn':'bad'}">${Math.round(st.acc*100)}%</span>`}</div></button>`}).join('')}
     </section>`).join('')}
   </div>`;
   bindSeg(m);
   on(m,'[data-topic]','click',e=>openTopic(e.currentTarget.dataset.topic));
-  on(m,'[data-paper]','click',e=>{ const p = e.currentTarget.dataset.paper; const ts = TOPICS.filter(t=>t.s===s && (p==='P3' && s==='econ' ? true : t.papers.includes(p) || (s==='maths'&&p==='P1'&&t.papers.includes('P2')))); const set = { title: `${SUBJ[s].short} ${p==='P1'&&s==='maths'?'Pure':'Paper '+p.slice(1)}`, s, ids: ts.flatMap(t=>BYTOPIC[t.id]||[]) }; openSet(set); });
+  on(m,'[data-paper]','click',e=>{ const p = e.currentTarget.dataset.paper; const ts = liveTopics(s).filter(t=>(p==='P3' && s==='econ' ? true : t.papers.includes(p) || (s==='maths'&&p==='P1'&&t.papers.includes('P2')))); const set = { title: `${SUBJ[s].short} ${p==='P1'&&s==='maths'?'Pure':'Paper '+p.slice(1)}`, s, ids: ts.flatMap(t=>BYTOPIC[t.id]||[]) }; openSet(set); });
   on(m,'#starSet','click',()=>openSet({ title:'Starred cards', s:null, ids: stars }));
 }
 function subjSeg(s){ return `<div class="row" style="gap:8px"><div class="seg" role="group" aria-label="Subject" style="flex-wrap:wrap">${mySubj().map(k=>`<button aria-pressed="${k===s}" data-s="${k}">${esc(SUBJ[k].short)}</button>`).join('')}</div><button class="btn sm ghost" id="addCourse">+ Subject</button></div>`; }
@@ -1055,6 +1122,7 @@ function vCustomSets(m, s){
     <div class="row between"><div><div class="eyebrow">Study sets</div><h1>Sets</h1></div>${subjSeg(s)}</div>
     <section class="card pad-lg stack" style="gap:10px"><div class="row between"><div><span class="pill subj">${esc(SUBJ[s].board)}</span><h2 style="margin-top:6px">${esc(c.name)}</h2></div><button class="btn sm ghost" id="editCourse">Edit subject</button></div>
       <div class="row">${all.length?`<button class="btn sm primary" id="studyAll">${ic('learn')} Study all ${plural(all.length,'card')}</button>`:''}<button class="btn sm" id="practice">${ic('exam')} Practice question</button></div></section>
+    ${ts.length ? `<section class="card stack" style="gap:8px"><h3>${all.length ? 'Add cards to every topic' : 'Make cards for every topic at once'}</h3><p class="small muted">One request to Claude covers all ${plural(ts.length,'topic')}. Copy its whole reply and paste it here: the cards go into the right topics.</p><div class="row"><button class="btn sm ${all.length?'':'primary'}" id="mkAll">${ic('spark')} Ask Claude for all topics</button><button class="btn sm" id="pstAll">Paste reply</button></div>${PASTE_FOR === 'all:'+s ? pasteBoxHTML('all:'+s) : ''}</section>` : ''}
     ${ts.length ? '' : `<section class="card pad-lg stack"><h3>Add your topics</h3><p class="small muted">Ask Claude for the topic list for your exact spec and options, then paste it below. Or type your topics yourself, one per line.</p><button class="btn sm" id="askTopics" style="align-self:flex-start">${ic('spark')} Get my topic list from Claude</button></section>`}
     <section class="stack" style="gap:8px"><div class="paper-h"><h3>Topics</h3><button class="btn sm ghost" id="addTopics">+ Add topics</button></div>
       ${TOPIC_PASTE || !ts.length ? `<div class="card stack"><textarea id="topicTxt" style="min-height:120px" placeholder="One topic per line, e.g.&#10;The UK constitution&#10;Parliament&#10;The Prime Minister and executive"></textarea><div class="row"><button class="btn sm primary" id="topicGo">Add topics</button>${ts.length?'<button class="btn sm ghost" id="topicClose">Close</button>':''}</div></div>` : ''}
@@ -1068,9 +1136,12 @@ function vCustomSets(m, s){
   on(m,'#askTopics','click',()=>{ handoff(topicsPrompt(c)); TOPIC_PASTE = true; render(); toast('Claude opened. Copy the list, then paste it here.'); });
   on(m,'#addTopics','click',()=>{ TOPIC_PASTE = true; render(); });
   on(m,'#topicClose','click',()=>{ TOPIC_PASTE = false; render(); });
-  on(m,'#topicGo','click',()=>{ const names = m.querySelector('#topicTxt').value.split(/\r?\n/).map(x=>x.replace(/^[-*•\d.)\s]+/,'').replace(/\*\*/g,'').trim()).filter(x=>x && x.length < 120); if (!names.length) { toast('Type at least one topic'); return; } const have = new Set((c.topics||[]).map(t=>t.name.toLowerCase())); c.topics = [...(c.topics||[]), ...names.filter(x=>!have.has(x.toLowerCase())).map(x=>({ id: rid('t'), name: x }))]; saveCourse(c); TOPIC_PASTE = false; render(); toast(`Added ${plural(names.length,'topic')}`); });
+  on(m,'#topicGo','click',()=>{ const names = m.querySelector('#topicTxt').value.split(/\r?\n/).map(cleanLine).filter(x=>x && x.length < 120 && !isChatter(x)); if (!names.length) { toast('Type at least one topic'); return; } const have = new Set((c.topics||[]).map(t=>t.name.toLowerCase())); c.topics = [...(c.topics||[]), ...names.filter(x=>!have.has(x.toLowerCase())).map(x=>({ id: rid('t'), name: x }))]; saveCourse(c); TOPIC_PASTE = false; render(); toast(`Added ${plural(names.length,'topic')}`); });
   on(m,'[data-topic]','click',e=>openTopic(e.currentTarget.dataset.topic));
   on(m,'[data-make]','click',e=>{ openTopic(e.currentTarget.dataset.make); const t = TOPIC[e.currentTarget.dataset.make]; genCards(c, t, 20); });
+  on(m,'#mkAll','click',()=>{ handoff(allCardsPrompt(c, ts, ts.length > 12 ? 12 : 15)); PASTE_FOR = 'all:'+s; render(); toast('Claude opened. Copy its whole reply, then paste it here.'); });
+  on(m,'#pstAll','click',()=>{ PASTE_FOR = 'all:'+s; render(); setTimeout(()=>m.querySelector('#pasteTxt')?.focus(), 50); });
+  bindPaste(m, 'all:'+s);
 }
 function setFromTopic(tid){ const t = TOPIC[tid]; return { title: t.name, s: t.s, ids: BYTOPIC[tid] || [], topic: tid }; }
 function openTopic(tid){ CUR_TOPIC = setFromTopic(tid); SETS_FILTER = TOPIC[tid].s; VIEW = 'topic'; STUDY = null; if (location.hash !== '#sets') history.replaceState(null,'','#sets'); render(); window.scrollTo(0,0); }
@@ -1078,12 +1149,12 @@ function openSet(set){ CUR_TOPIC = set; VIEW = 'topic'; STUDY = null; render(); 
 let TERM_Q = '';
 let TOPIC_EDIT = false;
 function vTopic(m){
-  if (CUR_TOPIC && CUR_TOPIC.topic) { if (!TOPIC[CUR_TOPIC.topic]) CUR_TOPIC = null; else CUR_TOPIC = setFromTopic(CUR_TOPIC.topic); }
+  if (CUR_TOPIC && CUR_TOPIC.topic) { if (!TOPIC[CUR_TOPIC.topic] || !topicOn(TOPIC[CUR_TOPIC.topic])) CUR_TOPIC = null; else CUR_TOPIC = setFromTopic(CUR_TOPIC.topic); }
   const set = CUR_TOPIC; if (!set) { VIEW='sets'; return vSets(m); }
   const s = set.s; const t = set.topic ? TOPIC[set.topic] : null;
   const st = t ? topicStats(t.id) : null;
   const exN = t ? EXAMQ.filter(q=>q.t===t.id).length : 0;
-  const cc = t && t.custom ? courseOf(t.s) : null;
+  const cc = t && t.custom ? courseOf(t.s) : t && t.stub ? { name:'Psychology', board:'AQA', options: t.name + ' (Paper 3 option)' } : null;
   const hasDrill = t && GEN[t.id] && GEN[t.id].length;
   const ids = set.ids;
   const due = ids.filter(isDue).length;
@@ -1134,7 +1205,7 @@ function startMode(mode, set, taskKey){
   STUDY = fn(set, taskKey); window.scrollTo(0,0); render();
 }
 function startReview(filter){
-  const ids = CARDS.filter(c=>isDue(c[0]) && (!filter || TOPIC[c[1]].s===filter)).map(c=>c[0]);
+  const ids = CARDS.filter(c=>cardOn(c) && isDue(c[0]) && (!filter || TOPIC[c[1]].s===filter)).map(c=>c[0]);
   if (!ids.length) { go('review'); return; }
   STUDY = modeFlash({ title:'Daily review', s:filter||null, ids: priorityCards(ids, 80), review:true }, 'review'); window.scrollTo(0,0); render();
 }
@@ -1163,7 +1234,7 @@ function modeFlash(set, taskKey){
     on(m,'#flipBtn','click',flip);
     on(m,'[data-star]','click',e=>{ e.stopPropagation(); S.star[c[0]] = !S.star[c[0]]; if(!S.star[c[0]]) delete S.star[c[0]]; save(); o.render(m); });
     on(m,'[data-explain]','click',async e=>{ e.stopPropagation(); st.explain = 'Thinking…'; o.render(m);
-      try { await SAMPLE(`You are an expert A-level ${SUBJ[t.s].name} tutor (${SUBJ[t.s].board} specification, exams in summer 2027). A student is revising this flashcard.\nTerm: ${c[2]}\nAnswer: ${c[3]}\n\nExplain it in plain English in under 120 words: what it means, a memorable example or analogy, and one exam tip (how it tends to be examined or a common mistake). No headings, no markdown.`, { modelTier:'quick', onText:({text})=>{ st.explain = text; const el = document.getElementById('explainOut'); if (el) el.textContent = text; } }); }
+      try { await SAMPLE(`You are an expert A-level ${SUBJ[t.s].name} tutor (${SUBJ[t.s].board} specification, exams in summer ${examYear()}). A student is revising this flashcard.\nTerm: ${c[2]}\nAnswer: ${c[3]}\n\nExplain it in plain English in under 120 words: what it means, a memorable example or analogy, and one exam tip (how it tends to be examined or a common mistake). No headings, no markdown.`, { modelTier:'quick', onText:({text})=>{ st.explain = text; const el = document.getElementById('explainOut'); if (el) el.textContent = text; } }); }
       catch(err){ st.explain = err && err.code==='not_granted' ? 'Explanations are switched off for this page.' : 'Could not get an explanation just now. Try again in a moment.'; }
       o.render(m); });
     on(m,'[data-g]','click',e=>{ const g = +e.currentTarget.dataset.g; grade(c[0], g); st.tally[g]++; if (g===0 && !set.noRequeue) st.order.push(c[0]); st.i++; st.flipped=false; st.explain=null; o.render(m); });
@@ -1178,7 +1249,7 @@ function distractors(c, n=3){
   return shuffle(pool).slice(0, n).map(id=>CARD[id]);
 }
 // keyword check
-const STOP = new Set('about above after again against also among because been before being below between both could does doing down during each from further have having here into itself just more most other over same should some such than that their them then there these they this those through under until very were what when where which while will with would your only like used make made many much must often then therefore thus usually within without people person something someone things thing called known'.split(' '));
+const STOP = new Set('said says found find gave give gives leads lead want wants process using used based show shows shown means mean less high higher lower another first second third each also into onto upon example examples way ways tend tends likely type types part parts kind role able around rather quite however whereas although though while about above after again against also among because been before being below between both could does doing down during each from further have having here into itself just more most other over same should some such than that their them then there these they this those through under until very were what when where which while will with would your only like used make made many much must often then therefore thus usually within without people person something someone things thing called known'.split(' '));
 function keywords(a){ const words = a.replace(/\([^)]*\d{4}[^)]*\)/g,' ').toLowerCase().match(/[a-zà-ÿ][a-zà-ÿ'-]{3,}/g) || []; const out = []; words.forEach(w=>{ if(!STOP.has(w) && !out.includes(w)) out.push(w); }); return out.slice(0, 14); }
 function checkTyped(input, answer){ const keys = keywords(answer); const inp = input.toLowerCase(); const stem = (w) => w.slice(0, Math.max(4, Math.min(6, w.length-2))); const hits = keys.filter(k => inp.includes(stem(k))); return { keys, hits, ratio: keys.length ? hits.length / keys.length : 0 }; }
 function kwHTML(r){ return r.keys.map(k=>`<span class="kw ${r.hits.includes(k)?'hit':'miss'}">${esc(k)}</span>`).join(''); }
@@ -1227,8 +1298,9 @@ function modeWrite(set, taskKey){
     const c = CARD[order[st.i]]; const t = TOPIC[c[1]];
     m.innerHTML = studyShell(set.title + ' · Write', set.s||t.s, st.i/order.length*100, `<div class="qbox stack"><span class="pill subj s-${t.s}" style="align-self:flex-start">${esc(t.name)}</span><div class="prompt">${esc(c[2])}</div>
       ${st.check==null?`<textarea id="typed" placeholder="Type your answer…">${esc(st.typed)}</textarea><div class="row between"><span class="tiny faint">Ctrl/⌘ + Enter to check</span><button class="btn primary" id="checkBtn">Check</button></div>`:
-      `<div class="feedback ${st.check.ratio>=.5?'ok':'no'}"><div class="eyebrow" style="margin-bottom:6px">${st.check.ratio>=.5?'Good coverage':'Missing key ideas'} · ${st.check.hits.length}/${st.check.keys.length} key terms</div>${kwHTML(st.check)}</div>
-       <div class="feedback"><div class="eyebrow" style="margin-bottom:6px">Model answer</div>${esc(c[3])}</div>
+      `<div class="feedback"><div class="eyebrow" style="margin-bottom:6px">Model answer</div>${esc(c[3])}</div>
+       ${st.typed.trim() ? `<div class="feedback ${st.check.ratio>=.5?'ok':'warn'}"><div class="eyebrow" style="margin-bottom:6px">${st.check.ratio>=.5?'Good coverage':'Compare with the model answer'} · ${st.check.hits.length}/${st.check.keys.length} key terms used</div>${kwHTML(st.check)}${st.check.ratio<.5?'<div class="small" style="margin-top:6px">Your own wording can still be right. Decide below.</div>':''}</div>` : ''}
+       <p class="small muted">Did your answer say the same thing?</p>
        <div class="row" style="justify-content:flex-end"><button class="btn" data-self="0">I was wrong</button><button class="btn primary" data-self="1">I was right</button></div>`}</div>`, `${st.i+1}/${order.length}`);
     quitHandler(m);
     on(m,'#typed','input',e=>{ st.typed = e.target.value; });
@@ -1243,7 +1315,7 @@ function modeWrite(set, taskKey){
 // Match
 function modeMatch(set, taskKey){
   const key = set.topic || set.title;
-  const pick = shuffle(set.ids).slice(0, Math.min(6, set.ids.length));
+  const pick = shuffle(set.ids).slice(0, Math.min(window.innerWidth <= 560 ? 4 : 6, set.ids.length));
   const tiles = shuffle(pick.flatMap(id=>[{ id, kind:'t', text: CARD[id][2] }, { id, kind:'a', text: brief(CARD[id][3], 110) }]));
   const st = { sel:null, gone:new Set(), start: Date.now(), pen:0, bad:null, finished:null, timer:null };
   const o = { render(m){
@@ -1309,10 +1381,10 @@ function modeTest(set, taskKey){
 
 // ---------- review view ----------
 function vReview(m){
-  const due = CARDS.filter(c=>isDue(c[0]));
+  const due = CARDS.filter(c=>cardOn(c) && isDue(c[0]));
   const bySubj = mySubj().map(s=>[s, due.filter(c=>TOPIC[c[1]].s===s).length]);
   const newPool = myTopics().sort((a,b)=>weakness(b)-weakness(a)).flatMap(t=>(BYTOPIC[t.id]||[]).filter(id=>!cs(id))).slice(0, 20);
-  const weakCards = CARDS.filter(c=>{ const x = cs(c[0]); return x && x[6] > 0; }).sort((a,b)=>(cs(b[0])[6]-cs(b[0])[5]*.3)-(cs(a[0])[6]-cs(a[0])[5]*.3)).slice(0, 25).map(c=>c[0]);
+  const weakCards = CARDS.filter(c=>{ const x = cs(c[0]); return cardOn(c) && x && x[6] > 0; }).sort((a,b)=>(cs(b[0])[6]-cs(b[0])[5]*.3)-(cs(a[0])[6]-cs(a[0])[5]*.3)).slice(0, 25).map(c=>c[0]);
   m.innerHTML = `<div class="stack"><div><div class="eyebrow">Spaced repetition</div><h1>Review</h1><p class="muted" style="margin-top:6px;max-width:62ch">Cards come back just before you would forget them. Rate each one honestly and the schedule adapts. Ten minutes a day here does more than an hour of rereading notes.</p></div>
     <section class="card pad-lg stack"><div class="row between"><div><div class="mono" style="font-size:2.4rem;font-weight:700;line-height:1">${due.length}</div><div class="muted small">cards due now</div></div><button class="btn primary" id="all" ${due.length?'':'disabled'}>${ic('review')} Review all due</button></div>
       <div class="row">${bySubj.map(([s,n])=>`<button class="btn sm s-${s}" data-s="${s}" ${n?'':'disabled'}><span class="pill subj">${SUBJ[s].short}</span> ${n} due</button>`).join('')}</div></section>
@@ -1336,7 +1408,7 @@ function vExam(m){
   if (!mySubj().includes(EXAM_FILTER)) EXAM_FILTER = mySubj()[0];
   if (isCustom(EXAM_FILTER)) return vCustomExam(m, EXAM_FILTER);
   const useMock = EXAM_MOCK && mockOn() && !EXAM_TOPIC && mockExamQs(EXAM_FILTER).length;
-  const list = useMock ? mockExamQs(EXAM_FILTER) : EXAMQ.filter(q=>q.s===EXAM_FILTER && (!EXAM_TOPIC || q.t===EXAM_TOPIC));
+  const list = useMock ? mockExamQs(EXAM_FILTER) : EXAMQ.filter(q=>q.s===EXAM_FILTER && topicOn(TOPIC[q.t]) && (!EXAM_TOPIC || q.t===EXAM_TOPIC));
   m.innerHTML = `<div class="stack"><div class="row between"><div><div class="eyebrow">Exam-style practice</div><h1>Exam questions</h1></div>
       <div class="seg" role="group" aria-label="Subject" style="flex-wrap:wrap">${mySubj().map(k=>`<button aria-pressed="${k===EXAM_FILTER}" data-s="${k}">${esc(SUBJ[k].short)}</button>`).join('')}</div></div>
     <p class="muted" style="max-width:66ch">Original questions written in the style of the ${SUBJ[EXAM_FILTER].board} papers. Answer under timed conditions, then mark against the mark-scheme points${SAMPLE?' yourself or with Claude as your examiner':''}.</p>
@@ -1373,7 +1445,7 @@ function modeExam(q, taskKey){
       <div style="font-size:1.08rem;font-weight:600;line-height:1.5">${esc(q.q)}</div><div class="tiny muted">Suggested time: about ${mins} minutes</div></section>`;
     if (st.phase==='write') {
       inner += `<textarea id="ans" style="min-height:${q.marks>=12?320:180}px" placeholder="${q.s==='maths'?'Write your working and answer. Show every step, as you would on the paper.':'Write your answer here.'}">${esc(st.answer)}</textarea>
-        <div class="row between"><span class="small muted mono" id="clock">0:00 / ${mins}:00</span><div class="row"><button class="btn ghost" id="showMs">Skip to mark scheme</button><button class="btn primary" id="markBtn">Mark my answer</button></div></div>`;
+        <div class="row between"><span class="small muted mono" id="clock">0:00 / ${mins}:00</span><div class="row"><button class="btn ghost" id="showMs">Skip to mark scheme</button><button class="btn primary" id="markBtn">Check against mark scheme</button></div></div>`;
     } else {
       const auto = st.level ? null : null;
       inner += `<section class="card stack"><div class="row between"><h3>Mark scheme points</h3><span class="tiny muted">Tick each point your answer clearly makes</span></div>
@@ -1414,7 +1486,7 @@ function aiHTML(a){ if (a.handoff) return `<p class="small">Opened Claude with y
     ${a.strengths&&a.strengths.length?`<div><div class="eyebrow" style="color:var(--good)">What earned credit</div><ul class="small" style="margin:6px 0 0;padding-left:18px">${list(a.strengths)}</ul></div>`:''}
     ${a.improvements&&a.improvements.length?`<div><div class="eyebrow" style="color:var(--warn)">To get more marks</div><ul class="small" style="margin:6px 0 0;padding-left:18px">${list(a.improvements)}</ul></div>`:''}`; }
 function examPrompt(q, answer){
-  return `You are a senior A-level examiner for ${SUBJ[q.s].board} ${SUBJ[q.s].name}, marking a student's answer for the summer 2027 exams. Mark strictly but fairly, as a real examiner would.
+  return `You are a senior A-level examiner for ${SUBJ[q.s].board} ${SUBJ[q.s].name}, marking a student's answer for the summer ${examYear()} exams. Mark strictly but fairly, as a real examiner would.
 
 QUESTION (${q.marks} marks${q.ao?', '+q.ao:''}):
 ${q.q}
@@ -1470,7 +1542,10 @@ function modeDrill(tid, taskKey){
 }
 
 // ---------- welcome / setup ----------
-const WELCOME = { subjects: null };
+const WELCOME = { subjects: null, goal: 30 };
+function yearSegHTML(attr){ const y = y13Year(); return `<div class="seg" role="group" aria-label="Year group">${[[y,'Year 13'],[y+1,'Year 12']].map(([v,l])=>`<button type="button" ${attr}="${v}" aria-pressed="${examYear()===v}">${l} <span class="muted" style="font-weight:500">· exams ${v}</span></button>`).join('')}</div>`; }
+function psychOptsHTML(){ return `<div class="stack" style="gap:6px"><span class="small muted">Psychology Paper 3: your options</span><div class="grid g3">${PSYCH_OPT_GROUPS.map((g,i)=>`<label class="stack" style="gap:4px"><span class="tiny muted">Option ${i+1}</span><select data-popt="${i}">${g.map(id=>`<option value="${id}" ${psychOpts()[i]===id?'selected':''}>${esc(TOPIC[id].name)}${TOPIC[id].stub?' (make cards with Claude)':''}</option>`).join('')}</select></label>`).join('')}</div></div>`; }
+function bindPsychOpts(m, after){ on(m,'[data-popt]','change',e=>{ const o = psychOpts().slice(); o[+e.target.dataset.popt] = e.target.value; S.settings.psychOpts = o; CUSTOM_SIG = null; save(); if (after) after(); }); }
 function vWelcome(m){
   const W = WELCOME; if (!W.subjects) W.subjects = new Set();
   const g = S.settings.grades;
@@ -1479,15 +1554,17 @@ function vWelcome(m){
     ${FIREBASE_CONFIG && !(window.claude && window.claude.use) ? `<section class="card pad-lg stack">${ACCOUNT.user ? `<p class="small">Signed in as <b>${esc(ACCOUNT.user.email || ACCOUNT.user.displayName || 'you')}</b>. Finish setting up below.</p>` : accountHTML('welcome')}</section>` : ''}
     <section class="card pad-lg stack">
       <label class="stack" style="gap:4px"><span class="small muted">Your first name</span><input type="text" id="wName" value="${esc(W.name ?? S.settings.name ?? '')}" autocomplete="given-name"></label>
+      <div class="stack" style="gap:6px"><span class="small muted">Which year are you in?</span>${yearSegHTML('data-wyear')}</div>
       <div class="stack" style="gap:6px"><span class="small muted">Which of these courses do you take?</span>
         ${ALL_SUBJ.map(x=>`<label class="row s-${x}" style="gap:10px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" data-wsub="${x}" ${W.subjects.has(x)?'checked':''} style="margin-top:4px"><span><b>${SUBJ[x].name}</b> <span class="small muted">${SUBJ[x].board}</span></span></label>`).join('')}
         <p class="tiny muted">These three come with ready-made cards, exam questions and drills.</p></div>
+      ${W.subjects.has('psych') ? psychOptsHTML() : ''}
       <div class="stack" style="gap:6px"><span class="small muted">Any other subjects? Add each one with its exam board and options. Claude can write the cards for you.</span>
         ${(W.extra||[]).map((c,i)=>`<div class="row between small"><span><b>${esc(c.name)}</b> <span class="muted">${esc([c.board,c.options].filter(Boolean).join(' · '))}</span></span><button class="btn sm ghost" data-wdel="${i}">Remove</button></div>`).join('')}
         ${W.adding ? courseFormHTML(null) : `<button class="btn sm" id="wAdd" style="align-self:flex-start">+ Add a subject</button>`}</div>
       ${[...W.subjects].length ? `<div class="stack" style="gap:6px"><span class="small muted">Predicted grade → target grade</span>${[...W.subjects].map(x=>`<div class="row s-${x}" style="gap:8px;flex-wrap:nowrap"><span class="small" style="min-width:110px">${SUBJ[x].name}</span>${[0,1].map(i=>`<select data-wgrade="${x}" data-i="${i}">${['A*','A','B','C','D','E','U'].map(gr=>`<option ${g[x][i]===gr?'selected':''}>${gr}</option>`).join('')}</select>`).join('<span class="muted">→</span>')}</div>`).join('')}</div>` : ''}
-      <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Cards to study a day</span><input type="number" id="wGoal" min="10" max="400" value="${S.settings.goal}"></label>
-        <label class="stack" style="gap:4px"><span class="small muted">Next mocks start (optional)</span><input type="date" id="wMock" value="${esc(W.mock||'')}"></label></div>
+      <div class="stack" style="gap:6px"><span class="small muted">How many cards a day? You can change this later.</span><div class="seg" role="group" aria-label="Daily cards">${[[15,'Light · 15'],[30,'Steady · 30'],[60,'Serious · 60'],[100,'Intense · 100']].map(([v,l])=>`<button type="button" data-wgoal="${v}" aria-pressed="${W.goal===v}">${l}</button>`).join('')}</div><span class="tiny muted">About ${Math.max(5, Math.round(W.goal/3))} minutes a day.</span></div>
+        <label class="stack" style="gap:4px;max-width:260px"><span class="small muted">Next mocks start (optional)</span><input type="date" id="wMock" value="${esc(W.mock||'')}"></label>
       <button class="btn primary" id="wGo" style="align-self:flex-start" ${[...W.subjects].length || (W.extra||[]).length ?'':'disabled'}>Start revising</button>
       ${[...W.subjects].length || (W.extra||[]).length ? '' : '<span class="tiny muted">Pick or add at least one subject to start.</span>'}
     </section></div>`;
@@ -1500,9 +1577,11 @@ function vWelcome(m){
   on(m,'#wMock','change',e=>{ W.mock = e.target.value; });
   on(m,'[data-wsub]','change',e=>{ const x = e.target.dataset.wsub; e.target.checked ? W.subjects.add(x) : W.subjects.delete(x); render(); });
   on(m,'[data-wgrade]','change',e=>{ g[e.target.dataset.wgrade][+e.target.dataset.i] = e.target.value; });
-  on(m,'#wGoal','change',e=>{ S.settings.goal = Math.max(10, Math.min(400, +e.target.value || 60)); });
+  on(m,'[data-wgoal]','click',e=>{ W.goal = +e.currentTarget.dataset.wgoal; render(); });
+  on(m,'[data-wyear]','click',e=>{ S.settings.examYear = +e.currentTarget.dataset.wyear; CUSTOM_SIG = null; render(); });
+  bindPsychOpts(m, render);
   on(m,'#wGo','click',()=>{
-    S.settings.name = (W.name ?? S.settings.name ?? '').trim();
+    S.settings.name = (W.name ?? S.settings.name ?? '').trim(); S.settings.goal = W.goal; S.settings.examYear = examYear(); S.settings.psychOpts = psychOpts();
     S.settings.subjects = ALL_SUBJ.filter(x=>W.subjects.has(x));
     (W.extra||[]).forEach((c,i)=>{ c.created = Date.now() + i; S.settings.grades[c.id] = c.grades.slice(); c.at = Date.now(); S.custom.courses[c.id] = c; });
     if ((W.extra||[]).length && !W.subjects.size) SETS_FILTER = W.extra[0].id;
@@ -1521,10 +1600,14 @@ function vProgress(m){
   const cells = []; for (let d = d0 - weeks*7 + 1; d <= d0; d++) { const v = S.days[d]?.c || 0; cells.push(`<i data-l="${v===0?0:v<15?1:v<40?2:v<80?3:4}" title="${v} cards"></i>`); }
   const totalCards = Object.values(S.days).reduce((a,b)=>a+(b.c||0),0);
   const ph = phase();
+  const Y = examYear(), subs = mySubj(), dm = (x) => fmtDate(x, {day:'numeric', month:'short'}), lastD = lastExamDate();
+  const gaps = subs.map(x => [x, gradeGap(x)]).sort((a,b) => b[1]-a[1]);
+  const focus = subs.length > 1 && gaps[0][1] > gaps[gaps.length-1][1] ? `Give ${gaps.filter(g=>g[1]===gaps[0][1]).map(g=>SUBJ[g[0]].name).join(' and ')} the most time: the biggest gap between your predicted and target grade.` : 'Split your time evenly across your subjects.';
+  const first = EXAMS.find(e => subs.includes(e.s));
   const phases = [
-    [1,'Now → 14 Feb','Learn everything','Work through every topic once with Learn and Flashcards. Daily review keeps it. Psychology and Maths get about 70% of your time, Economics 30%. One exam question a day from February.'],
-    [2,'15 Feb → 11 Apr','Practise like the exam','Timed exam questions every day, marked against mark schemes. Maths drills on weak topics. Fix the topics flagged red on this page. Easter: full past papers from your teachers.'],
-    [3,'12 Apr → 16 Jun','Exam season','Follow the paper order: Econ P1 (10 May) first. In the week before each paper, focus on that paper\'s topics and its exam questions. Keep daily review going throughout.'],
+    [1,`Now → ${dm(Y+'-02-14')}${Y > y13Year() ? ' '+Y : ''}`,'Learn everything',`Work through every topic once with Learn and Flashcards. Daily review keeps it. ${focus} One exam question a day from February.`],
+    [2,`${dm(Y+'-02-15')} → ${dm(Y+'-04-11')}`,'Practise like the exam',`Timed exam questions every day, marked against mark schemes.${subs.includes('maths') ? ' Maths drills on weak topics.' : ''} Fix the topics flagged red on this page. Easter: full past papers from your teachers.`],
+    [3,`${dm(Y+'-04-12')} → ${dm(lastD)}`,'Exam season',`Follow the paper order${first ? `: ${SUBJ[first.s].short} ${first.p} (${dm(first.d)}) first` : ''}. In the week before each paper, focus on that paper\'s topics and its exam questions. Keep daily review going throughout.`],
   ];
   m.innerHTML = `<div class="stack"><div><div class="eyebrow">How you are doing</div><h1>Progress</h1></div>
     <div class="grid g3">${mySubj().map(s=>{ const st = subjStats(s); return `<section class="card subj-card s-${s} stack" style="gap:8px"><div class="row between"><h3>${SUBJ[s].name}</h3><span class="mono" style="font-weight:700;font-size:1.3rem">${st.ready}%</span></div><div class="bar"><i style="width:${st.ready}%"></i></div>
@@ -1536,16 +1619,18 @@ function vProgress(m){
       <section class="card stack"><div class="row between"><h3>Activity</h3><span class="tiny muted">${totalCards} cards studied in total</span></div><div style="overflow-x:auto"><div class="heat">${cells.join('')}</div></div><span class="tiny muted">Last 12 weeks</span></section>
       <section class="card stack"><h3>Exam questions</h3>${(()=>{ const rows = EXAMQ.filter(q=>S.exam[q.id]).map(q=>({q, b:bestExam(q.id)})).sort((a,b)=>a.b-b.b).slice(0,6); return rows.length ? rows.map(({q,b})=>`<div class="row between small"><span style="min-width:0;flex:1">${esc(SUBJ[q.s].short)} · ${esc(TOPIC[q.t].name)} (${q.marks})</span><span class="pill ${b>=.75?'good':b>=.55?'warn':'bad'}">${Math.round(b*100)}%</span></div>`).join('') : '<p class="small muted">No questions marked yet. Your lowest scores will show here so you can retry them.</p>'; })()}</section>
     </div>
-    <section class="card pad-lg"><h2>Revision plan to June</h2><div style="margin-top:8px">${phases.map(([n,when,name,txt])=>`<div class="phase ${ph===n?'now':''}"><div><div class="mono small ph-n" style="font-weight:700">${when}</div>${ph===n?'<span class="pill good" style="margin-top:4px">You are here</span>':''}</div><div><h3>${name}</h3><p class="small muted" style="margin-top:3px">${txt}</p></div></div>`).join('')}</div></section>
+    <section class="card pad-lg"><h2>Revision plan to summer ${examYear()}</h2><div style="margin-top:8px">${phases.map(([n,when,name,txt])=>`<div class="phase ${ph===n?'now':''}"><div><div class="mono small ph-n" style="font-weight:700">${when}</div>${ph===n?'<span class="pill good" style="margin-top:4px">You are here</span>':''}</div><div><h3>${name}</h3><p class="small muted" style="margin-top:3px">${txt}</p></div></div>`).join('')}</div></section>
     <section class="card pad-lg stack" id="mockBox"><div class="row between"><h2>Mocks focus</h2><span class="tiny muted">${mockOn()?plural(daysTo(mockCfg().date),'day')+' to go':'Not active'}</span></div>
       <p class="small muted">Pick the date and the topics in your next mocks. Until that date, Home, Today's plan, exam questions and drills focus on these topics. Clear the date to turn focus mode off.</p>
       <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Name</span><input type="text" id="mockTitle" value="${esc(mockCfg().title)}"></label><label class="stack" style="gap:4px"><span class="small muted">First mock date</span><input type="date" id="mockDate" value="${esc(mockCfg().date||'')}"></label></div>
-      <div class="grid g3">${mySubj().map(s=>`<div class="stack s-${s}" style="gap:4px"><b class="small">${SUBJ[s].name}</b>${TOPICS.filter(t=>t.s===s).map(t=>`<label class="row small" style="gap:8px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" data-mtopic="${t.id}" ${mockCfg().topics.includes(t.id)?'checked':''} style="margin-top:3px"><span>${esc(t.name)}</span></label>`).join('')}</div>`).join('')}</div>
+      <div class="grid g3">${mySubj().map(s=>`<div class="stack s-${s}" style="gap:4px"><b class="small">${SUBJ[s].name}</b>${liveTopics(s).map(t=>`<label class="row small" style="gap:8px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" data-mtopic="${t.id}" ${mockCfg().topics.includes(t.id)?'checked':''} style="margin-top:3px"><span>${esc(t.name)}</span></label>`).join('')}</div>`).join('')}</div>
     </section>
     <section class="card pad-lg stack"><h2>Settings</h2>
       <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Name</span><input type="text" id="setName" value="${esc(S.settings.name)}"></label>
       <label class="stack" style="gap:4px"><span class="small muted">Daily card goal</span><input type="number" id="setGoal" min="10" max="400" value="${S.settings.goal}"></label></div>
+      <div class="stack" style="gap:6px"><span class="small muted">Year group</span>${yearSegHTML('data-syear')}</div>
       <div class="stack" style="gap:6px"><span class="small muted">Built-in courses (add any other subject in Sets, with + Subject)</span><div class="row">${ALL_SUBJ.map(x=>`<label class="row small s-${x}" style="gap:6px"><input type="checkbox" data-mysub="${x}" ${mySubj().includes(x)?'checked':''}> ${SUBJ[x].name} <span class="muted">${SUBJ[x].board}</span></label>`).join('')}</div></div>
+      ${mySubj().includes('psych') ? psychOptsHTML() : ''}
       <div class="grid g3">${mySubj().map(s=>`<div class="stack" style="gap:4px"><span class="small muted">${SUBJ[s].name}: predicted → target</span><div class="row" style="flex-wrap:nowrap">${[0,1].map(i=>`<select data-grade="${s}" data-i="${i}">${['A*','A','B','C','D','E','U'].map(g=>`<option ${S.settings.grades[s][i]===g?'selected':''}>${g}</option>`).join('')}</select>`).join('<span class="muted">→</span>')}</div></div>`).join('')}</div>
       <div class="hr"></div>
       ${SAMPLE && SAMPLE.offline ? `<div class="stack" style="gap:8px"><h3>Explain and Claude marking</h3><p class="small muted">Without a key, these buttons open Claude with the card, or your answer and the mark scheme, ready to send. That uses your Claude plan, so it is free. To get the answer inside this app instead, paste an Anthropic API key from console.anthropic.com. It is saved only on this device, never uploaded anywhere else, and each use is charged to your API account (about 1p per explanation and 5p per marked answer).</p>
@@ -1563,11 +1648,13 @@ ${FIREBASE_CONFIG && !(window.claude && window.claude.use) ? `<div class="stack"
         <div id="impBox" hidden class="stack" style="gap:8px"><textarea id="impTxt" placeholder="Paste a backup code here"></textarea><button class="btn sm primary" id="doImp" style="align-self:flex-start">Restore</button></div>
         <div id="resetBox" hidden class="feedback no row between"><span class="small">This deletes all card progress and exam marks on every device. It cannot be undone.</span><button class="btn sm" id="doReset">Yes, reset everything</button></div></div>
     </section>
-    <section class="card stack"><h3>About the content</h3><p class="small muted">Cards follow the current specifications: AQA A-level Psychology 7182 (updated for first A-level exams in 2027, including the new Clinical Psychology and Mental Health topic; options Relationships, Schizophrenia and Forensic Psychology), Pearson Edexcel A-level Mathematics 9MA0 (Issue 4, large data set: Met Office weather 1987 and 2015), and Pearson Edexcel A-level Economics A 9EC0 (Issue 2). Exam questions are original practice questions in the style of each board, not past-paper questions. Check anything surprising against your class notes and the official specification.</p></section>
+    <section class="card stack"><h3>About the content</h3><p class="small muted">Cards follow the current specifications: AQA A-level Psychology 7182 (updated for first A-level exams in 2027, including the new Clinical Psychology and Mental Health topic; built-in cards for the options Relationships, Schizophrenia and Forensic Psychology, and you make cards for any other options with Claude), Pearson Edexcel A-level Mathematics 9MA0 (Issue 4, large data set: Met Office weather 1987 and 2015), and Pearson Edexcel A-level Economics A 9EC0 (Issue 2). Exam questions are original practice questions in the style of each board, not past-paper questions. Check anything surprising against your class notes and the official specification.</p></section>
   </div>`;
   on(m,'[data-learn]','click',e=>startMode('learn', setFromTopic(e.currentTarget.dataset.learn)));
   on(m,'[data-mysub]','change',e=>{ const a = new Set(mySubj()); e.target.checked ? a.add(e.target.dataset.mysub) : a.delete(e.target.dataset.mysub); if (!a.size) { e.target.checked = true; toast('Keep at least one course'); return; } S.settings.subjects = ALL_SUBJ.filter(x=>a.has(x)); save(); render(); });
   on(m,'#setName','change',e=>{ S.settings.name = e.target.value.trim(); save(); });
+  on(m,'[data-syear]','click',e=>{ S.settings.examYear = +e.currentTarget.dataset.syear; CUSTOM_SIG = null; save(); render(); toast(`Exams set to summer ${S.settings.examYear}`); });
+  bindPsychOpts(m, ()=>{ render(); toast('Paper 3 options saved'); });
   const mockSave = () => { S.settings.mock = Object.assign({}, mockCfg(), S.settings.mock || {}); save(); renderNav(); };
   on(m,'#mockTitle','change',e=>{ mockSave(); S.settings.mock.title = e.target.value.trim() || 'Mocks'; save(); });
   on(m,'#mockDate','change',e=>{ mockSave(); S.settings.mock.date = e.target.value || ''; save(); render(); toast(e.target.value ? 'Mock date saved' : 'Focus mode off'); });
