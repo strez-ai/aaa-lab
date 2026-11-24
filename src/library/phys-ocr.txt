@@ -1,0 +1,66 @@
+@name Physics
+@aliases Physics A|OCR Physics
+@board OCR
+@code H556
+# foundations | 2 | Foundations of physics
++ phys-aqa:measurements
+# motion | 3.1-3.2 | Motion and forces
++ phys-aqa:mechanics
+Drag :: Depends on speed, shape and the medium. Objects falling through fluids reach terminal velocity when drag equals weight.
+Archimedes' principle :: Upthrust on an object equals the weight of the fluid it displaces.
+Pressure in fluids :: p = hρg.
+Stopping distance :: Thinking distance + braking distance. Reaction time affects thinking distance; speed, road and tyres affect braking distance.
+# energy | 3.3-3.5 | Work, energy, materials and momentum
++ phys-aqa:materials
+Elastic potential energy :: E = ½kx² for a material obeying Hooke's law.
+Ductile and brittle :: Ductile materials (copper) can be drawn into wires; brittle materials (glass) break without plastic deformation. Polymeric materials such as rubber show hysteresis.
+# electricity | 4.1-4.3 | Charge, current and circuits
++ phys-aqa:electricity
+Mean drift velocity :: I = Anev, where n is the number density of charge carriers. Conductors have high n; semiconductors low n.
+Kilowatt-hour :: A unit of energy equal to 3.6 MJ. Cost = energy in kWh × cost per kWh.
+Light-emitting diodes and Planck's constant :: LEDs emit light when the pd exceeds a threshold; eV = hc/λ allows h to be estimated.
+# waves | 4.4 | Waves
++ phys-aqa:waves
++ phys-aqa:optics
+Intensity of a wave :: I = P/A; intensity ∝ amplitude².
+Malus' law :: For polarised light through a polariser: I = I0 cos²θ.
+# quantum | 4.5 | Quantum physics
++ phys-aqa:quantum
+# thermal | 5.1-5.2 | Thermal physics and ideal gases
++ phys-aqa:thermal
+# circular | 5.3-5.4 | Circular motion and oscillations
++ phys-aqa:circular
++ phys-aqa:shm
+# gravity | 5.4 | Gravitational fields
++ phys-aqa:gravity
+# astro | 5.5 | Astrophysics and cosmology
++ phys-aqa:option-astro
+Formation of a star :: Gravitational collapse of dust and gas forms a protostar; nuclear fusion starts when the core is hot enough.
+Life cycle of stars :: Low-mass stars become red giants then white dwarfs; high-mass stars become red supergiants, explode as supernovae and leave neutron stars or black holes.
+Chandrasekhar limit :: About 1.44 solar masses: the maximum mass of a white dwarf, supported by electron degeneracy pressure.
+Energy levels and spectra in stars :: Emission and absorption line spectra identify elements in stars.
+Astronomical distances :: Astronomical unit, light-year and parsec. Stellar parallax: d (pc) = 1/p (arcseconds).
+Cosmological principle :: On a large scale the universe is homogeneous and isotropic, and the laws of physics are universal.
+Evidence for the Big Bang :: Hubble's law (galaxies receding) and the cosmic microwave background radiation at about 2.7 K.
+Dark matter and dark energy :: Dark matter explains galaxy rotation curves; dark energy explains the accelerating expansion of the universe.
+# capacitors | 6.1 | Capacitors
++ phys-aqa:capacitors
+Capacitors in series and parallel :: Parallel: C = C1 + C2. Series: 1/C = 1/C1 + 1/C2.
+# fields | 6.2-6.3 | Electric fields and electromagnetism
++ phys-aqa:efields
++ phys-aqa:magnetic
+Velocity selector :: Crossed electric and magnetic fields let through only particles with v = E/B.
+# particles | 6.4 | Nuclear and particle physics
++ phys-aqa:particles
++ phys-aqa:nuclear
+# medical | 6.5 | Medical imaging
+X-ray production :: Electrons accelerated by a high pd hit a metal target, producing X-ray photons (bremsstrahlung).
+X-ray attenuation :: I = I0e^(-μx). Mechanisms: simple scatter, photoelectric effect, Compton scattering and pair production.
+Contrast media :: Substances such as barium or iodine with high attenuation make soft tissues visible in X-ray images.
+CAT scans :: A rotating X-ray tube and detectors build a 3D image from many slices. More detailed than X-rays but a higher radiation dose.
+Medical tracers :: Radioactive substances such as technetium-99m and fluorine-18, detected by gamma cameras.
+Gamma camera :: Collimator, scintillator and photomultiplier tubes produce an image from gamma photons emitted by a tracer.
+PET scans :: Fluorine-18 emits positrons, which annihilate with electrons to produce two gamma photons in opposite directions, detected to locate the source.
+Ultrasound :: Sound above 20 kHz produced by piezoelectric transducers. Reflections at tissue boundaries create images; A-scans and B-scans.
+Acoustic impedance :: Z = ρc. Reflected intensity ratio = (Z2 - Z1)² ÷ (Z2 + Z1)². Coupling gel avoids almost total reflection at the skin.
+Doppler imaging :: The Doppler effect in ultrasound measures the speed of blood flow.

@@ -299,7 +299,7 @@ const rid = (p) => p + Date.now().toString(36).slice(-5) + Math.random().toStrin
 let LIB = [], PACKS = {}, PACK_LOADING = {};
 const normName = (x) => String(x || '').toLowerCase().replace(/^a[ -]?level\s+/, '').replace(/[^a-z0-9]+/g, ' ').trim();
 function findPack(c){ const n = normName(c && c.name), b = boardBase(c); return n ? LIB.find(p => (p.boards || [p.board]).includes(b) && p.names.some(x => normName(x) === n)) || null : null; }
-const packBoardText = (p) => (p.boards || []).length > 1 ? 'core content, the same on every board' : p.board + (p.code ? ' ' + p.code : '');
+const packBoardText = (p) => (p.boards || []).length > 2 ? 'core content, the same on every board' : (p.boards || [p.board]).join(' or ') + ((p.boards || []).length > 1 ? '' : p.code ? ' ' + p.code : '');
 function packInfo(id){ return LIB.find(p => p.id === id) || null; }
 const isMathsName = (x) => /^(maths?|mathematics)$/.test(normName(x));
 function linkPacks(){
@@ -315,6 +315,9 @@ async function loadPacks(){
 }
 function packHintHTML(c){ const p = findPack(c);
   if (p) return `<div class="feedback ok small"><b>Ready-made:</b> ${p.t} topics and ${p.n} flashcards for ${esc(p.name)} (${esc(packBoardText(p))}) load straight away. No Claude needed.</div>`;
+  const bn = normName(c && c.name), bb = boardBase(c);
+  if (/^psychology$/.test(bn) && bb === 'AQA') return `<div class="feedback small">AQA Psychology is already built in, with cards and exam questions. Tick <b>Psychology</b> instead of adding it here.</div>`;
+  if (/^economics( a)?$/.test(bn) && bb === 'Pearson Edexcel') return `<div class="feedback small">Edexcel Economics A is already built in, with cards and exam questions. Tick <b>Economics A</b> instead of adding it here.</div>`;
   if (isMathsName(c && c.name)) return `<div class="feedback small">Maths is already built in, with cards, exam questions and drills. The content is the same for every exam board, so tick <b>Maths</b> instead of adding it here.</div>`;
   return ''; }
 function bindPackHint(m){ const draw = () => { const el = m.querySelector('#packHint'); if (el) el.innerHTML = packHintHTML({ name: m.querySelector('#cName').value, board: m.querySelector('#cBoard').value }); };
@@ -1524,7 +1527,7 @@ function vWelcome(m){
         <p class="tiny muted">These three come with ready-made cards, exam questions and drills.</p></div>
       ${W.subjects.has('psych') ? psychOptsHTML() : ''}
       <div class="stack" style="gap:6px"><span class="small muted">Any other subjects? Add each one with its exam board and options.</span>
-        ${LIB.length ? `<div class="stack" style="gap:6px"><span class="tiny muted">Ready-made, tap to add:</span><div class="row" style="gap:6px">${LIB.filter(p=>!(W.extra||[]).some(c=>c.pack===p.id)).map(p=>`<button type="button" class="btn sm" data-wlib="${p.id}">+ ${esc(p.name)} <span class="muted" style="font-weight:500">${esc((p.boards||[]).length > 1 ? "any board" : p.board)}</span></button>`).join('')}</div><span class="tiny muted">For any other subject, Claude can write the cards for you.</span></div>` : ''}
+        ${LIB.length ? `<label class="stack" style="gap:4px"><span class="tiny muted">Ready-made subjects come with topics and flashcards, no Claude needed:</span><select id="wLib"><option value="">Add a ready-made subject…</option>${LIB.filter(p=>!(W.extra||[]).some(c=>c.pack===p.id)).slice().sort((a,b)=>a.name.localeCompare(b.name)||a.board.localeCompare(b.board)).map(p=>`<option value="${p.id}">${esc(p.name)} · ${esc((p.boards||[]).length > 2 ? 'any board' : (p.boards||[p.board]).join(' or '))}</option>`).join('')}</select><span class="tiny muted">For any other subject, add it below and Claude can write the cards for you.</span></label>` : ''}
         ${(W.extra||[]).map((c,i)=>`<div class="row between small"><span><b>${esc(c.name)}</b> <span class="muted">${esc([boardLabel(c),c.options].filter(Boolean).join(' · '))}</span>${findPack(c) ? ' <span class="pill" style="font-size:.7rem">Ready-made</span>' : ''}</span><button class="btn sm ghost" data-wdel="${i}">Remove</button></div>`).join('')}
         ${W.adding ? courseFormHTML(null) : `<button class="btn sm" id="wAdd" style="align-self:flex-start">+ Add a subject</button>`}</div>
       ${[...W.subjects].length ? `<div class="stack" style="gap:6px"><span class="small muted">Predicted grade → target grade</span>${[...W.subjects].map(x=>`<div class="row s-${x}" style="gap:8px;flex-wrap:nowrap"><span class="small" style="min-width:110px">${SUBJ[x].name}</span>${[0,1].map(i=>`<select data-wgrade="${x}" data-i="${i}">${['A*','A','B','C','D','E','U'].map(gr=>`<option ${g[x][i]===gr?'selected':''}>${gr}</option>`).join('')}</select>`).join('<span class="muted">→</span>')}</div>`).join('')}</div>` : ''}
@@ -1536,7 +1539,7 @@ function vWelcome(m){
   bindAccount(m);
   on(m,'#wName','input',e=>{ W.name = e.target.value; });
   on(m,'#wAdd','click',()=>{ W.adding = true; render(); });
-  on(m,'[data-wlib]','click',e=>{ const p = packInfo(e.currentTarget.dataset.wlib); if (!p) return; (W.extra ||= []).push({ id: rid('c'), created: Date.now(), topics: [], name: p.name, board: p.board, code: p.code, options: '', grades: ['B','A'], exams: [], pack: p.id }); render(); });
+  on(m,'#wLib','change',e=>{ const p = packInfo(e.target.value); if (!p) return; (W.extra ||= []).push({ id: rid('c'), created: Date.now(), topics: [], name: p.name, board: p.board, code: p.code, options: '', grades: ['B','A'], exams: [], pack: p.id }); render(); toast(`${p.name} added`); });
   if (W.adding) bindPackHint(m);
   on(m,'[data-wdel]','click',e=>{ W.extra.splice(+e.currentTarget.dataset.wdel, 1); render(); });
   on(m,'#cCancel','click',()=>{ W.adding = false; render(); });

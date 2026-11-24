@@ -1,0 +1,48 @@
+@name Business
+@aliases Business Studies|Edexcel Business
+@board Pearson Edexcel
+@code 9BS0
+# marketing | 1.1-1.2 | Theme 1: Meeting customer needs and the market
++ bus-aqa:marketing-obj
++ bus-aqa:marketing-mix
+Supply and demand in business :: Price is set where demand equals supply; changes in incomes, tastes or costs shift the curves.
+Product differentiation and USP :: A unique selling point makes a product stand out, allowing higher prices and loyalty.
+# people | 1.4 | Theme 1: Managing people
++ bus-aqa:hr
+Entrepreneurs :: Take risks to start businesses; motivated by profit, independence and ethics. Characteristics: creativity, determination and risk-taking.
+Moving from entrepreneur to leader :: As a business grows, the founder must delegate and manage rather than do everything.
+# entrepreneurs | 1.5 | Theme 1: Entrepreneurs, leaders and business forms
++ bus-aqa:what-is
++ bus-aqa:managers
+# finance | 2.1-2.3 | Theme 2: Managing business activities, finance
++ bus-aqa:finance
+Business plans :: Set out objectives, finance, marketing and operations; help secure funding and plan, but may be inaccurate.
+Liquidity :: The ability to pay short-term debts. Measured by the current ratio and the acid test ratio ((current assets - inventory) ÷ current liabilities).
+Business failure :: Internal causes (poor cash flow, management) and external causes (economic downturn, competition).
+# operations | 2.4 | Theme 2: Resource management
++ bus-aqa:operations
+# environment | 2.5 | Theme 2: External influences
+Effects of economic factors :: Inflation, exchange rates, interest rates, taxation, government spending and the business cycle affect demand and costs.
+Legislation :: Consumer protection, employment protection, environmental protection and competition policy constrain businesses.
+Unemployment and business :: High unemployment lowers demand but makes recruiting easier and keeps wage costs down.
+# strategy | 3.1-3.6 | Theme 3: Business decisions and strategy
++ bus-aqa:strategic-position
++ bus-aqa:strategic-direction
++ bus-aqa:strategic-methods
++ bus-aqa:change
+Corporate social responsibility :: Taking account of the impact of decisions on stakeholders and the environment beyond legal requirements. Carroll's CSR pyramid: economic, legal, ethical, philanthropic.
+Kaplan and Norton's balanced scorecard :: Measures performance using financial, customer, internal process, and learning and growth perspectives.
+Elkington's triple bottom line :: Profit, people and planet.
+# global | 4.1-4.5 | Theme 4: Global business
+Globalisation and trade :: Reduced trade barriers, improved transport and communication, and the growth of emerging economies increase global trade.
+Protectionism :: Tariffs, quotas, domestic subsidies and legislation protect home industries but can reduce efficiency and provoke retaliation.
+Trading blocs :: Groups of countries with reduced trade barriers between them, e.g. the EU, ASEAN and the USMCA.
+Assessing a country as a market :: Consider income levels, ease of doing business, infrastructure, political stability and exchange rates.
+Assessing a production location :: Costs of production, skills, infrastructure, government incentives and ethical considerations.
+Reasons for global mergers and joint ventures :: Spread risk, enter new markets, acquire brands and resources, and gain economies of scale.
+Global competitiveness :: Achieved through cost competitiveness or differentiation, and affected by exchange rates.
+Global marketing strategies :: Ethnocentric, polycentric and geocentric approaches; Ansoff's matrix in an international context; glocalisation.
+Niche and cultural factors :: Cultural differences in language, customs and tastes require businesses to adapt products and promotion.
+Multinational corporations :: Impacts on host countries: jobs, investment and technology but also exploitation and profit repatriation. Controlled by legislation, pressure groups and social media.
+Ethics in global business :: Stakeholder conflicts over pay, working conditions, environmental damage and supply chain ethics.
+Transfer pricing and tax avoidance :: MNCs may shift profits to low-tax countries, which raises ethical concerns.

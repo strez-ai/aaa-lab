@@ -1,0 +1,163 @@
+@name Biology
+@aliases Biology A|OCR Biology
+@board OCR
+@code H420
+# cells | 2.1.1 | Cell structure
++ bio-aqa:cells
+Cytoskeleton :: A network of protein fibres (microfilaments, microtubules) that supports the cell, moves organelles and enables cell movement.
+Centrioles :: Made of microtubules; involved in forming the spindle during cell division.
+Cilia and flagella :: Hair-like extensions made of microtubules in a 9+2 arrangement, used for movement of the cell or of fluid past it.
+Staining in microscopy :: Differential staining (e.g. Gram staining, methylene blue) increases contrast so structures can be seen.
+Laser scanning confocal microscopy :: Uses a laser to scan a specimen at set depths, producing clear, high-resolution images, often of fluorescent-tagged structures.
+Eyepiece graticule calibration :: The eyepiece graticule is calibrated against a stage micrometer at each magnification to measure specimens.
+# molecules | 2.1.2 | Biological molecules
++ bio-aqa:molecules
++ bio-aqa:proteins
+Fibrous vs globular proteins :: Fibrous proteins (collagen, keratin, elastin) are insoluble and structural. Globular proteins (haemoglobin, insulin, pepsin) are soluble with specific shapes for metabolic roles.
+Collagen :: A fibrous protein of three polypeptide chains wound together, with many cross-links, giving high tensile strength in tendons, skin and bones.
+Quantitative tests :: Colorimetry measures colour intensity, e.g. of Benedict's solution after a test, to estimate concentration using a calibration curve. Biosensors can also be used.
+Thin layer chromatography :: Separates biological molecules such as amino acids; Rf value = distance moved by spot ÷ distance moved by solvent.
+# nucleic | 2.1.3 | Nucleotides and nucleic acids
++ bio-aqa:nucleic
+ADP and ATP :: Phosphorylated nucleotides; ATP releases energy when hydrolysed to ADP and Pi.
+Purines and pyrimidines :: Purines (adenine and guanine) have two rings; pyrimidines (cytosine, thymine, uracil) have one. A purine always pairs with a pyrimidine.
+Extracting DNA :: Grind tissue with detergent and salt, add protease, then layer ice-cold ethanol so DNA precipitates out.
+# enzymes | 2.1.4 | Enzymes
+Cofactors and coenzymes :: Cofactors are non-protein substances needed for enzyme activity (e.g. Cl⁻ for amylase). Coenzymes are organic cofactors, often from vitamins. Prosthetic groups are permanently bound.
+End-product inhibition :: The product of a metabolic pathway inhibits an earlier enzyme, regulating the pathway by negative feedback.
+Temperature coefficient Q10 :: Q10 = rate at (T + 10 °C) ÷ rate at T. For enzyme-controlled reactions it is about 2 below the optimum.
+Intracellular and extracellular enzymes :: Catalase works inside cells; amylase and trypsin work outside cells.
+Inactive precursor enzymes :: Some enzymes are produced inactive (e.g. pepsinogen) to prevent damage to cells, then activated where needed.
+Effect of enzyme concentration :: Rate increases with enzyme concentration if substrate is in excess.
+Poisons and medicinal drugs :: Many act as enzyme inhibitors, e.g. cyanide inhibits cytochrome c oxidase; penicillin inhibits enzymes making bacterial cell walls.
+# membranes | 2.1.5 | Biological membranes
++ bio-aqa:membranes
+Endocytosis and exocytosis :: Bulk transport using vesicles and ATP: endocytosis takes substances in; exocytosis releases substances out of the cell.
+Water potential in plant cells :: In a hypotonic solution plant cells become turgid; in a hypertonic solution they lose water and become plasmolysed.
+Water potential in animal cells :: Animal cells burst (haemolysis) in pure water and shrink (crenate) in concentrated solutions.
+Cell signalling :: Glycoproteins and glycolipids on membranes act as receptors and antigens, allowing cell recognition and communication.
+# division | 2.1.6 | Cell division, diversity and organisation
++ bio-aqa:division
++ bio-aqa:variation
+Checkpoints in the cell cycle :: G1, G2 and spindle assembly checkpoints check for DNA damage and correct replication before division continues.
+Specialised cells :: Erythrocytes (no nucleus, biconcave), neutrophils (lobed nucleus, many lysosomes), sperm, palisade cells, root hair cells and guard cells.
+Animal tissues :: Squamous and ciliated epithelia, cartilage and muscle.
+Stem cells and their uses :: Stem cells divide and differentiate. Uses: treating heart disease, type 1 diabetes, Parkinson's, Alzheimer's and repairing nervous tissue. Bone marrow and meristems contain stem cells.
+Meristems :: Plant stem cells in the cambium give rise to xylem and phloem.
+# exchange | 3.1.1 | Exchange surfaces and breathing
++ bio-aqa:exchange
+Mammalian gas exchange tissues :: Cartilage keeps airways open; ciliated epithelium and goblet cells trap and move mucus; smooth muscle and elastic fibres control airway size.
+Spirometer :: Measures vital capacity, tidal volume, breathing rate and oxygen uptake. Soda lime absorbs CO2.
+Vital capacity :: The maximum volume of air that can be breathed out after a maximum breath in.
+Ventilation in bony fish :: The mouth and opercula create pressure changes that keep water flowing over the gills in one direction.
+# transport-animals | 3.1.2 | Transport in animals
++ bio-aqa:transport-animals
+Single, double, open and closed circulatory systems :: Fish have a single closed system; mammals a double closed system; insects have an open system where haemolymph bathes organs.
+Electrocardiogram (ECG) :: Records the heart's electrical activity. Abnormalities include tachycardia, bradycardia, ectopic heartbeat and atrial fibrillation.
+Chloride shift :: As hydrogencarbonate ions leave red blood cells, chloride ions move in to keep the charge balanced.
+Carbon dioxide transport :: About 85% as hydrogencarbonate ions (carbonic anhydrase), some as carbaminohaemoglobin and some dissolved in plasma.
+Fetal haemoglobin :: Has a higher affinity for oxygen than adult haemoglobin, so it takes oxygen from the mother's blood in the placenta.
+# transport-plants | 3.1.3 | Transport in plants
++ bio-aqa:transport-plants
+Xylem and phloem structure :: Xylem: dead, hollow, lignified vessels for water and minerals. Phloem: living sieve tube elements with sieve plates, supported by companion cells.
+Water movement through roots :: Symplast (through cytoplasm and plasmodesmata) and apoplast (through cell walls) pathways. The Casparian strip forces water into the symplast at the endodermis.
+Root pressure :: Active pumping of minerals into the xylem lowers water potential, so water moves in by osmosis and is pushed up.
+Hydrophytes :: Plants adapted to water, e.g. water lilies have air spaces (aerenchyma) and stomata on the upper surface.
+# immune | 4.1.1 | Communicable diseases and immunity
++ bio-aqa:immune
+Pathogens and diseases :: Bacteria (tuberculosis, bacterial meningitis, ring rot), viruses (HIV/AIDS, influenza, TMV), protoctista (malaria, potato blight) and fungi (black sigatoka, ringworm, athlete's foot).
+Transmission of disease :: Direct (contact, inoculation, ingestion) and indirect (fomites, droplets, vectors such as mosquitoes for malaria).
+Plant defences :: Passive: cellulose cell walls, waxy cuticle, bark, stomatal closure. Active: callose deposition, chemical defences such as tannins, and necrosis.
+Non-specific defences :: Skin, mucous membranes, blood clotting, inflammation, wound repair and expulsive reflexes.
+Opsonins :: Proteins that bind to pathogens and make them easier for phagocytes to engulf.
+Antibiotic resistance :: Overuse allows resistant bacteria to survive and multiply, e.g. MRSA and C. difficile.
+Sources of new medicines :: Many drugs come from plants and microorganisms (e.g. penicillin), so biodiversity must be protected. Personalised medicine and synthetic biology create new drugs.
+# biodiversity | 4.2.1 | Biodiversity
++ bio-aqa:taxonomy
+Levels of biodiversity :: Habitat biodiversity, species biodiversity (richness and evenness) and genetic biodiversity.
+Simpson's index of diversity :: D = 1 - Σ(n/N)². Values close to 1 mean high diversity; close to 0 mean low diversity.
+Sampling techniques :: Random and non-random (opportunistic, stratified, systematic) sampling, using pooters, sweep nets, pitfall traps, kick sampling and quadrats.
+Factors reducing biodiversity :: Human population growth, agriculture (monoculture), climate change and habitat loss.
+Reasons to maintain biodiversity :: Ecological (protecting keystone species), economic (new drugs, soil fertility) and aesthetic reasons.
+In situ and ex situ conservation :: In situ: protecting species in their natural habitat (marine reserves). Ex situ: outside their habitat (zoos, seed banks, botanic gardens).
+International conservation agreements :: CITES regulates trade in endangered species; the Rio Convention on Biological Diversity; the UK Countryside Stewardship Scheme.
+# evolution | 4.2.2 | Classification and evolution
++ bio-aqa:selection
+Five kingdoms :: Prokaryotae, Protoctista, Fungi, Plantae and Animalia.
+Phylogeny :: The evolutionary relationships between organisms, shown in phylogenetic trees.
+Evidence for evolution :: Palaeontology (fossils), comparative anatomy (homologous structures) and comparative biochemistry (DNA and protein sequences).
+Types of variation :: Intraspecific and interspecific variation; continuous (shown by histograms, normal distribution) and discontinuous (bar charts).
+Statistical tests for variation :: Standard deviation, Student's t-test and Spearman's rank correlation coefficient.
+Pesticide resistance :: Pesticides select for resistant insects; resistant alleles become more common.
+# homeostasis | 5.1.1-5.1.2 | Communication, homeostasis and excretion
++ bio-aqa:homeostasis
+Thermoregulation in ectotherms :: Ectotherms rely on behaviour (basking, burrowing) to control body temperature.
+Thermoregulation in endotherms :: Vasodilation, sweating and lowering body hair to cool; vasoconstriction, shivering and raising hairs to warm. Controlled by the hypothalamus.
+Liver structure :: Hepatocytes arranged in lobules; blood from the hepatic artery and hepatic portal vein mixes in sinusoids; bile flows to the bile duct.
+Liver functions :: Storage of glycogen, detoxification of alcohol and drugs, and formation of urea from excess amino acids via the ornithine cycle.
+Kidney failure treatments :: Dialysis (haemodialysis or peritoneal dialysis) and kidney transplants.
+Urine testing :: Pregnancy tests detect hCG using monoclonal antibodies; drug tests detect anabolic steroids.
+# neuronal | 5.1.3 | Neuronal communication
++ bio-aqa:nerves
+Sensory receptors as transducers :: Receptors convert one form of energy into an electrical impulse, e.g. Pacinian corpuscles convert pressure.
+Types of neurone :: Sensory, relay and motor neurones differ in structure and position.
+# hormones | 5.1.4 | Hormonal communication
+Endocrine system :: Ductless glands secrete hormones into the blood, which act on target cells with specific receptors.
+Adrenal glands :: The cortex secretes steroid hormones (cortisol, aldosterone); the medulla secretes adrenaline and noradrenaline.
+Pancreas histology :: Exocrine tissue makes digestive enzymes; endocrine islets of Langerhans contain α cells (glucagon) and β cells (insulin).
+Insulin secretion :: High glucose enters β cells and is respired, raising ATP; ATP-sensitive K⁺ channels close, depolarising the cell; Ca²⁺ channels open and insulin is released by exocytosis.
+Potential treatments for diabetes :: Insulin from genetically modified bacteria and stem cell therapy to replace β cells.
+# responses | 5.1.5 | Plant and animal responses
++ bio-aqa:stimuli
++ bio-aqa:muscles
+Plant hormones :: Auxins (cell elongation, apical dominance), gibberellins (stem elongation, seed germination), abscisic acid (stomatal closure), ethene (fruit ripening, leaf abscission).
+Commercial uses of plant hormones :: Auxins in rooting powders and weedkillers; gibberellins in fruit production and brewing; ethene to ripen fruit.
+Brain structure :: Cerebrum (voluntary actions), cerebellum (balance and coordination), medulla oblongata (heart rate, breathing), hypothalamus (homeostasis) and pituitary gland.
+Peripheral nervous system :: Somatic (voluntary) and autonomic (involuntary) systems; the autonomic is divided into sympathetic and parasympathetic.
+Fight or flight response :: The hypothalamus activates the sympathetic nervous system and adrenal medulla, raising heart rate, breathing rate and blood glucose.
+Types of muscle :: Skeletal (striated, voluntary), cardiac (myogenic, branched) and involuntary smooth muscle (in walls of hollow organs).
+Knee jerk and blinking reflexes :: Simple reflex arcs that protect the body and help maintain balance.
+# photosynthesis | 5.2.1 | Photosynthesis
++ bio-aqa:photosynthesis
+Cyclic and non-cyclic photophosphorylation :: Non-cyclic uses PSII and PSI, producing ATP, reduced NADP and oxygen. Cyclic uses PSI only, producing only ATP.
+Compensation point :: The light intensity at which the rate of photosynthesis equals the rate of respiration.
+# respiration | 5.2.2 | Respiration
++ bio-aqa:respiration
+Respiratory quotient :: RQ = CO2 produced ÷ O2 consumed. Carbohydrates have RQ 1.0, proteins about 0.9 and lipids about 0.7.
+Mitochondrial structure :: Outer and inner membranes, cristae, intermembrane space and matrix, each suited to different stages of respiration.
+# control | 6.1.1 | Cellular control
++ bio-aqa:gene-expression
+Lac operon :: In E. coli, the repressor binds the operator when lactose is absent. Lactose binds the repressor, changing its shape so RNA polymerase can transcribe the genes for β-galactosidase and lactose permease.
+Post-transcriptional control :: Splicing of pre-mRNA removes introns. Post-translational control includes activation of proteins by cAMP.
+Homeobox genes :: Highly conserved genes that control body plans. Hox genes control the development of body segments.
+Apoptosis and mitosis in development :: Programmed cell death removes unwanted cells, e.g. separating fingers. Stress and stimuli can affect expression of genes controlling development.
+# inheritance | 6.1.2 | Patterns of inheritance
++ bio-aqa:inheritance
++ bio-aqa:populations
+Founder effect and genetic bottleneck :: A small group starts a new population, or a population is drastically reduced, cutting genetic diversity.
+Artificial selection :: Humans choose individuals with desired traits to breed, e.g. high-yield crops or dairy cattle; reduces genetic diversity.
+# genomes | 6.1.3 | Manipulating genomes
++ bio-aqa:gene-tech
+DNA sequencing :: Sanger sequencing uses terminator bases; high-throughput sequencing is fast and automated.
+Electrophoresis :: DNA fragments move through a gel towards the positive electrode; smaller fragments travel further.
+Gene therapy :: Somatic cell therapy affects only the treated person; germ line therapy affects future generations and is banned in humans.
+Synthetic biology :: Designing and building new biological parts or systems, e.g. producing drugs in microorganisms.
+# cloning | 6.2.1 | Cloning and biotechnology
+Natural clones in plants :: Vegetative propagation produces clones, e.g. runners, bulbs and suckers.
+Artificial plant cloning :: Cuttings and micropropagation by tissue culture. Produces many identical plants quickly but reduces genetic variation.
+Animal cloning :: Artificial embryo twinning (splitting an early embryo) and somatic cell nuclear transfer (as with Dolly the sheep).
+Arguments about cloning :: Advantages: copies of high-value animals and conservation of rare species. Disadvantages: low success rates, reduced diversity and ethical concerns.
+Microorganisms in biotechnology :: Used for brewing, baking, cheese, yoghurt, penicillin, insulin and bioremediation because they grow fast and in cheap conditions.
+Batch vs continuous fermentation :: Batch culture runs for a set time then stops; continuous culture keeps microbes in the log phase with nutrients added constantly.
+Growth curve of microorganisms :: Lag, log (exponential), stationary and death phases.
+Immobilised enzymes :: Enzymes fixed in a matrix (e.g. alginate beads) so they can be reused and don't contaminate the product. Used to make lactose-free milk and fructose syrup.
+Aseptic technique :: Sterilise equipment, work near a Bunsen flame and keep cultures covered to prevent contamination.
+# ecosystems | 6.3.1-6.3.2 | Ecosystems, populations and sustainability
++ bio-aqa:energy-eco
++ bio-aqa:ecosystems
+Biotic and abiotic factors :: Biotic: living factors such as predation and competition. Abiotic: non-living factors such as light, temperature and water.
+Efficiency of energy transfer :: Usually about 10% of energy passes to the next trophic level; the rest is lost through respiration, heat, excretion and uneaten parts.
+Predator-prey relationships :: Populations rise and fall in cycles, with predator numbers lagging behind prey.
+Interspecific and intraspecific competition :: Competition between species can exclude one species; competition within a species limits population size.
+Sustainable management :: Coppicing, rotational felling and fishing quotas allow resources to be used without depleting them.
+Conflict between conservation and human needs :: e.g. the Masai Mara, the Terai region of Nepal and the Peak District balance tourism, farming and wildlife.
