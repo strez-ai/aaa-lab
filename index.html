@@ -501,7 +501,39 @@ function save(){ S.ts = Date.now(); try { localStorage.setItem(LS_KEY, JSON.stri
 function today(){ const k = dayNum(); return (S.days[k] ||= {c:0, l:0, x:0, d:0, m:0}); }
 
 // ---------- sync ----------
-const SYNC = { ref:null, state:'local', busy:false, pending:false };
+const SYNC = { ref:null, gh:false, state:'local', busy:false, pending:false };
+// ---------- sync through a private GitHub gist (used outside Claude) ----------
+// The token (gist scope only) is stored only in this browser. Progress lives in one secret gist on Pedro's GitHub account.
+const GH_KEY = 'aaalab.ghsync', GIST_FILE = 'aaa-lab-progress.json';
+function ghGet(){ try { return JSON.parse(localStorage.getItem(GH_KEY) || 'null'); } catch(e){ return null; } }
+function ghSet(v){ try { v ? localStorage.setItem(GH_KEY, JSON.stringify(v)) : localStorage.removeItem(GH_KEY); } catch(e){} }
+async function gh(path, opts={}){
+  const g = ghGet(); if (!g) throw Object.assign(new Error('no token'), { status:401 });
+  const r = await fetch('https://api.github.com' + path, Object.assign({ cache:'no-store' }, opts, { headers: Object.assign({ Authorization:'Bearer ' + g.token, Accept:'application/vnd.github+json' }, opts.body ? { 'Content-Type':'application/json' } : {}) }));
+  if (!r.ok) throw Object.assign(new Error('GitHub ' + r.status), { status:r.status });
+  return r.json();
+}
+async function ghFindGist(){
+  for (let page = 1; page <= 10; page++) { const list = await gh('/gists?per_page=100&page=' + page); const hit = list.find(x => x.files && x.files[GIST_FILE]); if (hit) return hit.id; if (list.length < 100) break; }
+  const made = await gh('/gists', { method:'POST', body: JSON.stringify({ description:'AAA Lab progress (synced by the app, do not edit)', public:false, files:{ [GIST_FILE]: { content: JSON.stringify(S) } } }) });
+  return made.id;
+}
+async function ghPull(){
+  const g = ghGet(); let d;
+  try { d = await gh('/gists/' + g.gist); } catch(e){ if (e.status !== 404) throw e; g.gist = await ghFindGist(); ghSet(g); d = await gh('/gists/' + g.gist); }
+  const f = d.files && d.files[GIST_FILE]; if (!f) return null;
+  let txt = f.content; if (f.truncated) txt = await (await fetch(f.raw_url, { cache:'no-store' })).text();
+  try { const o = JSON.parse(txt); return o && o.cards ? o : null; } catch(e){ return null; }
+}
+async function ghMergeRemote(){ const remote = await ghPull(); if (remote) { const before = JSON.stringify(S); S = mergeState(S, remote); if (JSON.stringify(S) !== before) { try { localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch(e){} if (!STUDY) render(); } } }
+async function ghPush(){ if (SYNC.overwrite) SYNC.overwrite = false; else await ghMergeRemote(); const g = ghGet(); await gh('/gists/' + g.gist, { method:'PATCH', body: JSON.stringify({ files:{ [GIST_FILE]: { content: JSON.stringify(S) } } }) }); }
+async function initGhSync(){
+  setSync('warn','Connecting…');
+  try { const g = ghGet(); if (!g.gist) { g.gist = await ghFindGist(); ghSet(g); } SYNC.gh = true; await ghMergeRemote(); setSync('ok','Synced'); pushRemote(); }
+  catch(e){ if (e.status === 401) { SYNC.gh = false; setSync('warn','Sync key not accepted'); } else { SYNC.gh = !!(ghGet()||{}).gist; setSync('local', navigator.onLine ? 'Sync retrying' : 'Offline, saved here'); } }
+}
+document.addEventListener('visibilitychange', () => { if (!document.hidden && ghGet() && !(window.claude && window.claude.use)) { if (SYNC.gh) ghMergeRemote().then(()=>setSync('ok','Synced')).catch(()=>{}); else initGhSync(); } });
+window.addEventListener('online', () => { if (ghGet() && !(window.claude && window.claude.use)) initGhSync(); });
 function setSync(state, txt){ SYNC.state = state; const c = document.getElementById('syncChip'); c.className = 'chip ' + (state==='ok'?'ok':state==='warn'?'warn':''); document.getElementById('syncTxt').textContent = txt; }
 function mergeState(a, b){ // merge b into a
   const out = JSON.parse(JSON.stringify(a));
@@ -516,7 +548,7 @@ function mergeState(a, b){ // merge b into a
   return out;
 }
 async function initSync(){
-  if (!window.claude || typeof window.claude.use !== 'function') { setSync('local','Saved on this device'); return; }
+  if (!window.claude || typeof window.claude.use !== 'function') { if (ghGet()) return initGhSync(); setSync('local','Saved on this device'); return; }
   setSync('warn','Connecting…');
   const timer = setTimeout(()=>{ if(SYNC.state==='warn') setSync('local','Saved on this device'); }, 10000);
   try {
@@ -536,11 +568,11 @@ async function initSync(){
   } catch(e) { clearTimeout(timer); setSync('local','Saved on this device'); }
 }
 async function pushRemote(){
-  if (!SYNC.ref) return;
+  if (!SYNC.ref && !SYNC.gh) return;
   if (SYNC.busy) { SYNC.pending = true; return; }
   SYNC.busy = true;
-  try { await SYNC.ref.set({ v:1, ts:S.ts, p: JSON.stringify(S) }); setSync('ok','Synced'); }
-  catch(e){ if (e && (e.code==='invalid_argument'||e.code==='revoked'||e.code==='not_granted')) { SYNC.ref = null; setSync('local','Saved on this device'); } else setSync('warn','Sync retrying'); }
+  try { if (SYNC.gh) await ghPush(); else await SYNC.ref.set({ v:1, ts:S.ts, p: JSON.stringify(S) }); setSync('ok','Synced'); }
+  catch(e){ if (SYNC.gh) { if (e.status === 401) { SYNC.gh = false; setSync('warn','Sync key not accepted'); } else setSync('warn','Sync retrying'); } else if (e && (e.code==='invalid_argument'||e.code==='revoked'||e.code==='not_granted')) { SYNC.ref = null; setSync('local','Saved on this device'); } else setSync('warn','Sync retrying'); }
   SYNC.busy = false;
   if (SYNC.pending) { SYNC.pending = false; setTimeout(pushRemote, 1500); }
 }
@@ -1151,6 +1183,12 @@ function vProgress(m){
       ${SAMPLE && SAMPLE.offline ? `<div class="stack" style="gap:8px"><h3>Explain and Claude marking</h3><p class="small muted">Without a key, these buttons open Claude with the card, or your answer and the mark scheme, ready to send. That uses your Claude plan, so it is free. To get the answer inside this app instead, paste an Anthropic API key from console.anthropic.com. It is saved only on this device, never uploaded anywhere else, and each use is charged to your API account (about 1p per explanation and 5p per marked answer).</p>
         <div class="row"><input type="password" id="apiKey" placeholder="${getKey()?'Key saved':'sk-ant-...'}" autocomplete="off" style="flex:1;min-width:200px"><button class="btn sm" id="saveKey">Save key</button>${getKey()?'<button class="btn sm ghost" id="clearKey">Remove key</button>':''}</div>
         <span class="tiny muted">${getKey()?'Key saved. Answers appear in the app.':'No key saved. Buttons open Claude.'}</span></div><div class="hr"></div>` : ''}
+${!(window.claude && window.claude.use) ? `<div class="stack" style="gap:8px"><h3>Sync across your devices</h3>${ghGet() ? `<p class="small muted">${SYNC.gh ? 'On. Your progress is saved to a private gist on your GitHub account and loads on any device where you have connected the same account.' : 'Your sync key was not accepted or GitHub could not be reached. If the key expired, make a new one and connect again.'}</p>
+        <div class="row"><button class="btn sm" id="ghNow">Sync now</button><button class="btn sm ghost" id="ghOff">Turn off on this device</button></div>`
+      : `<p class="small muted">Free, using your GitHub account. Do this once on each device:</p>
+        <ol class="small" style="margin:0;padding-left:20px;line-height:1.6"><li>Open <a href="https://github.com/settings/tokens/new?scopes=gist&description=AAA%20Lab%20sync" target="_blank" rel="noopener">this GitHub page</a> (sign in if asked).</li><li>Set <b>Expiration</b> to <b>No expiration</b>. Leave only <b>gist</b> ticked.</li><li>Press <b>Generate token</b>, copy the code starting <span class="mono">ghp_</span> and paste it below.</li></ol>
+        <p class="tiny muted">Keep that code in your phone's notes so you can paste it on your other devices. It can only read and write gists, and it is saved only on each device you paste it on.</p>
+        <div class="row"><input type="password" id="ghTok" placeholder="ghp_..." autocomplete="off" style="flex:1;min-width:200px"><button class="btn sm primary" id="ghOn">Connect</button></div>`}</div><div class="hr"></div>` : ''}
       <div class="stack" style="gap:8px"><h3>Back up or move your progress</h3><p class="small muted">Progress ${SYNC.ref?'syncs between your devices when you are signed in to Claude, and is':'is'} also saved in this browser. Copy the backup code to keep a copy, or paste one to restore.</p>
         <div class="row"><button class="btn sm" id="copyBk">Copy backup code</button><button class="btn sm" id="showImp">Restore from code</button><button class="btn sm ghost" id="reset" style="color:var(--bad)">Reset progress</button></div>
         <div id="impBox" hidden class="stack" style="gap:8px"><textarea id="impTxt" placeholder="Paste a backup code here"></textarea><button class="btn sm primary" id="doImp" style="align-self:flex-start">Restore</button></div>
@@ -1167,8 +1205,11 @@ function vProgress(m){
   on(m,'#doImp','click',()=>{ try { const o = JSON.parse(decodeURIComponent(escape(atob(m.querySelector('#impTxt').value.trim())))); if (!o || !o.cards) throw 0; S = mergeState(S, o); save(); toast('Progress restored'); render(); } catch(e){ toast('That code is not valid. Copy it again in full.'); } });
   on(m,'#saveKey','click',()=>{ const v = m.querySelector('#apiKey').value.trim(); if (!/^sk-ant-/.test(v)) { toast('That does not look like an Anthropic API key'); return; } setKey(v); toast('Key saved on this device'); render(); });
   on(m,'#clearKey','click',()=>{ setKey(''); toast('Key removed'); render(); });
+  on(m,'#ghOn','click',async ()=>{ const v = m.querySelector('#ghTok').value.trim(); if (!/^(ghp_|github_pat_|gho_)/.test(v)) { toast('That does not look like a GitHub token'); return; } ghSet({ token:v, gist:null }); toast('Connecting…'); await initGhSync(); if (SYNC.gh) { toast('Sync is on'); } else { ghSet(null); toast('GitHub did not accept that token. Check it and try again.'); } render(); });
+  on(m,'#ghNow','click',async ()=>{ if (!SYNC.gh) await initGhSync(); else { setSync('warn','Syncing…'); try { await ghPush(); setSync('ok','Synced'); toast('Synced'); } catch(e){ setSync('warn','Sync retrying'); toast('Could not reach GitHub just now'); } } render(); });
+  on(m,'#ghOff','click',()=>{ ghSet(null); SYNC.gh = false; setSync('local','Saved on this device'); toast('Sync turned off on this device'); render(); });
   on(m,'#reset','click',()=>{ m.querySelector('#resetBox').hidden = false; });
-  on(m,'#doReset','click',()=>{ const keep = S.settings; S = blank(); S.settings = keep; save(); toast('Progress reset'); render(); });
+  on(m,'#doReset','click',()=>{ const keep = S.settings; SYNC.overwrite = true; S = blank(); S.settings = keep; save(); toast('Progress reset'); render(); });
 }
 
 // ---------- boot ----------
