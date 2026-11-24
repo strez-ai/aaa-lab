@@ -10,7 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="AAA Lab">
-<title>Pedro's AAA Lab</title>
+<title>AAA Lab</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
@@ -231,10 +231,10 @@ th{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mu
 </style>
 
 <header class="top"><div class="top-in">
-  <a class="brand" href="#home" aria-label="Pedro's AAA Lab home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>AAA Lab</a>
+  <a class="brand" href="#home" aria-label="AAA Lab home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>AAA Lab</a>
   <div class="top-sp"></div>
   <span class="chip hide-sm" id="countChip"></span>
-  <span class="chip" id="syncChip" title="Where your progress is saved"><span class="dot"></span><span id="syncTxt">This device</span></span>
+  <span class="chip" id="syncChip" title="Where your progress is saved" role="button" tabindex="0" style="cursor:pointer" onclick="go('progress')"><span class="dot"></span><span id="syncTxt">This device</span></span>
 </div></header>
 
 <div class="layout">
@@ -267,6 +267,109 @@ const TOPICS = [
   ['e-4.1','econ','International economics','4.1',['P2','P3']],['e-4.2','econ','Poverty and inequality','4.2',['P2','P3']],['e-4.3','econ','Emerging and developing economies','4.3',['P2','P3']],['e-4.4','econ','The financial sector','4.4',['P2','P3']],['e-4.5','econ','Role of the state in the macroeconomy','4.5',['P2','P3']],
 ].map(([id,s,name,spec,papers])=>({id,s,name,spec,papers}));
 const TOPIC = Object.fromEntries(TOPICS.map(t=>[t.id,t]));
+// ---------- your own subjects (any subject, board and options) ----------
+const BOARDS = ['AQA','OCR','Pearson Edexcel','WJEC / Eduqas','CCEA','Cambridge International','Other'];
+const COMMON_SUBJ = ['Accounting','Ancient History','Art and Design','Biology','Business','Chemistry','Classical Civilisation','Computer Science','Design and Technology','Drama and Theatre','Economics','English Language','English Literature','Environmental Science','Film Studies','French','Further Maths','Geography','Geology','German','History','Italian','Law','Maths','Media Studies','Music','Philosophy','Physical Education','Physics','Politics','Psychology','Religious Studies','Sociology','Spanish','Statistics'];
+const PALETTE = ['#2563eb','#db2777','#059669','#d97706','#7c3aed','#0891b2','#dc2626','#4d7c0f'];
+let BASE_EXAMS = null;
+let CUSTOM_SIG = null;
+const rid = (p) => p + Date.now().toString(36).slice(-5) + Math.random().toString(36).slice(2, 7);
+function customCourses(){ return Object.values((S.custom||{}).courses||{}).filter(c=>c && !c.deleted).sort((a,b)=>(a.created||0)-(b.created||0)); }
+function courseOf(sub){ return (S.custom && S.custom.courses || {})[sub]; }
+function applyCustom(){
+  const sig = JSON.stringify(S.custom || {}); if (sig === CUSTOM_SIG) return; CUSTOM_SIG = sig;
+  for (let i = TOPICS.length - 1; i >= 0; i--) if (TOPICS[i].custom) { delete TOPIC[TOPICS[i].id]; delete BYTOPIC[TOPICS[i].id]; TOPICS.splice(i, 1); }
+  for (let i = CARDS.length - 1; i >= 0; i--) if (CARDS[i].custom) { delete CARD[CARDS[i][0]]; CARDS.splice(i, 1); }
+  for (const k of Object.keys(SUBJ)) if (SUBJ[k].custom) delete SUBJ[k];
+  if (!BASE_EXAMS) BASE_EXAMS = EXAMS.slice();
+  EXAMS.length = 0; EXAMS.push(...BASE_EXAMS);
+  let css = '';
+  customCourses().forEach((c, i) => {
+    const key = c.id, col = PALETTE[i % PALETTE.length];
+    SUBJ[key] = { name: c.name, short: c.name.length > 11 ? c.name.slice(0, 10) + '…' : c.name, board: [c.board, c.options].filter(Boolean).join(' · ') || 'Your own subject', weight: 1, custom: true };
+    if (!S.settings.grades[key]) S.settings.grades[key] = (c.grades || ['B','A']).slice();
+    css += `.s-${key}{--sc:${col};--ss:color-mix(in srgb, ${col} 14%, var(--surface))}`;
+    const papers = ['P1', ...(c.exams || []).map(e => e.label || 'Exam')];
+    (c.topics || []).forEach(t => {
+      const T = { id: t.id, s: key, name: t.name, spec: '', papers, custom: true }; TOPICS.push(T); TOPIC[t.id] = T; BYTOPIC[t.id] = [];
+      const set = (S.custom.sets || {})[t.id];
+      ((set && set.cards) || []).forEach(([id, q, a]) => { const card = [id, t.id, q, a]; card.custom = true; CARDS.push(card); CARD[id] = card; BYTOPIC[t.id].push(id); });
+    });
+    (c.exams || []).forEach(e => { if (e.d) EXAMS.push({ s: key, p: e.label || 'Exam', title: e.label || 'Exam', d: e.d, t: '' }); });
+  });
+  EXAMS.sort((a, b) => a.d.localeCompare(b.d));
+  let st = document.getElementById('customCss'); if (!st) { st = document.createElement('style'); st.id = 'customCss'; document.head.appendChild(st); } st.textContent = css;
+}
+function saveCourse(c){ c.at = Date.now(); S.custom.courses[c.id] = c; save(); }
+function saveCards(tid, cards){ S.custom.sets[tid] = { cards, at: Date.now() }; save(); }
+function parseCards(txt){
+  const out = [];
+  String(txt).split(/\r?\n/).forEach(line => {
+    line = line.trim().replace(/^[-*•\d.)\s]+(?=\S)/, m => /::|\t/.test(line) ? m : m); if (!line) return;
+    let parts = line.includes(' :: ') ? line.split(' :: ') : line.includes('::') ? line.split('::') : line.includes('\t') ? line.split('\t') : line.includes(' - ') ? line.split(' - ') : null;
+    if (!parts || parts.length < 2) return;
+    const q = parts[0].replace(/\*\*/g, '').replace(/^[-*•]\s+/, '').trim(), a = parts.slice(1).join(' - ').replace(/\*\*/g, '').trim();
+    if (q && a && q.length < 300) out.push([q, a]);
+  });
+  return out;
+}
+function addCards(tid, pairs){
+  const set = (S.custom.sets[tid] && S.custom.sets[tid].cards || []).slice(); const have = new Set(set.map(c => c[1].toLowerCase()));
+  let n = 0; pairs.forEach(([q, a]) => { if (have.has(q.toLowerCase())) return; have.add(q.toLowerCase()); set.push([rid('u'), q, a]); n++; });
+  saveCards(tid, set); return n;
+}
+function courseLabel(c){ return `A-level ${c.name}${c.board && c.board !== 'Other' ? ' (' + c.board + ')' : ''}${c.options ? ', options/papers: ' + c.options : ''}`; }
+function cardsPrompt(c, topic, n){ return `I'm revising ${courseLabel(c)} in the UK, for exams in summer 2027. Write ${n} flashcards for the topic "${topic}", matching the current specification for my exam board.
+
+Cover the key terms, facts, examples, studies/case studies, dates or formulae that examiners expect, with precise detail. Keep each answer to 1-3 sentences.
+
+Output ONLY the flashcards, one per line, in exactly this format:
+term or question :: answer
+
+No numbering, no headings, no blank lines, no other text.`; }
+function topicsPrompt(c){ return `List the topics in the current specification for ${courseLabel(c)} in the UK. Split them into revision-sized topics (roughly 8-25 topics in total), in specification order, including only the options I named if there are optional units.
+
+Output ONLY the topic names, one per line, with no numbering and no other text.`; }
+function practicePrompt(c, topic, marks){ return `Act as an examiner for ${courseLabel(c)}. Write ONE original exam-style question worth ${marks} marks on "${topic}", in the style and command words of my exam board's current papers. Show the question and the number of marks only, then wait for my answer.
+
+When I reply with my answer, mark it strictly as a real examiner would: give the mark out of ${marks}, the level (if it is a levels-based question), what earned credit, and exactly what to add to get more marks. Then show the full mark scheme.`; }
+async function genCards(c, t, n){
+  const prompt = cardsPrompt(c, t.name, n);
+  if (getKey() && SAMPLE) { toast('Writing cards…'); try { const txt = await SAMPLE(prompt, { modelTier:'default' }); const k = addCards(t.id, parseCards(txt)); toast(k ? `Added ${plural(k,'card')}` : 'No new cards found'); render(); return; } catch(e){ toast('Could not make cards just now'); return; } }
+  handoff(prompt); PASTE_FOR = t.id; render();
+  toast('Claude opened. Copy its cards, then come back and paste them here.');
+}
+let PASTE_FOR = null;
+function pasteBoxHTML(tid){ return `<section class="card stack" id="pasteBox"><h3>Paste cards</h3><p class="small muted">Paste Claude's reply, or your own cards: one per line as <span class="mono">term :: answer</span>. A Quizlet export (term, tab, definition) works too.</p><textarea id="pasteTxt" style="min-height:160px" placeholder="Photosynthesis :: The process plants use to make glucose from carbon dioxide and water using light energy."></textarea><div class="row"><button class="btn primary sm" id="pasteGo">Add cards</button><button class="btn sm" id="pasteClip">Paste from clipboard</button><button class="btn ghost sm" id="pasteClose">Close</button></div></section>`; }
+function bindPaste(m, tid){
+  on(m,'#pasteClip','click',async ()=>{ try { m.querySelector('#pasteTxt').value = await navigator.clipboard.readText(); } catch(e){ toast('Press and hold in the box, then Paste'); } });
+  on(m,'#pasteGo','click',()=>{ const pairs = parseCards(m.querySelector('#pasteTxt').value); if (!pairs.length) { toast('No cards found. Use term :: answer on each line'); return; } const k = addCards(tid, pairs); PASTE_FOR = null; toast(`Added ${plural(k,'card')}`); render(); });
+  on(m,'#pasteClose','click',()=>{ PASTE_FOR = null; render(); });
+}
+// course editor (add or edit a subject)
+let COURSE_EDIT = null;
+function courseFormHTML(c){
+  c = c || {}; const g = c.grades || ['B','A'];
+  return `<section class="card pad-lg stack" id="courseForm"><h2>${c.id ? 'Edit subject' : 'Add a subject'}</h2>
+    <label class="stack" style="gap:4px"><span class="small muted">Subject</span><input type="text" id="cName" list="subjList" value="${esc(c.name||'')}" placeholder="e.g. Politics"><datalist id="subjList">${COMMON_SUBJ.map(x=>`<option value="${esc(x)}">`).join('')}</datalist></label>
+    <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Exam board</span><select id="cBoard">${BOARDS.map(b=>`<option ${c.board===b?'selected':''}>${b}</option>`).join('')}</select></label>
+      <label class="stack" style="gap:4px"><span class="small muted">Spec code (optional)</span><input type="text" id="cCode" value="${esc(c.code||'')}" placeholder="e.g. H472"></label></div>
+    <label class="stack" style="gap:4px"><span class="small muted">Your options or optional papers (optional)</span><input type="text" id="cOpts" value="${esc(c.options||'')}" placeholder="e.g. Russia 1855-1964, The Tudors, coursework on the Cold War"></label>
+    <div class="row" style="gap:8px"><span class="small muted">Predicted → target</span>${[0,1].map(i=>`<select id="cG${i}">${['A*','A','B','C','D','E','U'].map(x=>`<option ${g[i]===x?'selected':''}>${x}</option>`).join('')}</select>`).join('<span class="muted">→</span>')}</div>
+    <div class="stack" style="gap:6px"><span class="small muted">Exam dates (optional, add the ones you know)</span>${[0,1,2].map(i=>{ const e = (c.exams||[])[i] || {}; return `<div class="row" style="gap:8px;flex-wrap:nowrap"><input type="text" data-elabel="${i}" value="${esc(e.label||'')}" placeholder="Paper ${i+1}" style="max-width:140px"><input type="date" data-edate="${i}" value="${esc(e.d||'')}"></div>`; }).join('')}</div>
+    <div class="row"><button class="btn primary" id="cSave">${c.id ? 'Save' : 'Add subject'}</button><button class="btn ghost" id="cCancel">Cancel</button>${c.id ? '<button class="btn ghost sm" id="cDel" style="color:var(--bad)">Remove subject</button>' : ''}</div>
+  </section>`;
+}
+function readCourseForm(m, base){
+  const name = m.querySelector('#cName').value.trim(); if (!name) { toast('Type the subject name'); return null; }
+  const c = Object.assign({ id: rid('c'), created: Date.now(), topics: [] }, base || {});
+  c.name = name; c.board = m.querySelector('#cBoard').value; c.code = m.querySelector('#cCode').value.trim(); c.options = m.querySelector('#cOpts').value.trim();
+  if (c.code) c.board = c.board + ' ' + c.code.replace(new RegExp('^' + c.board + '\\s*'), ''), c.board = c.board.trim();
+  c.grades = [m.querySelector('#cG0').value, m.querySelector('#cG1').value];
+  c.exams = [0,1,2].map(i => ({ label: m.querySelector(`[data-elabel="${i}"]`).value.trim() || `Paper ${i+1}`, d: m.querySelector(`[data-edate="${i}"]`).value })).filter(e => e.d);
+  return c;
+}
+
 // ---------- mocks ----------
 const MOCK_DEFAULT_TOPICS = ['p-id','p-app','p-att','p-rm','m-diff','m-kin','m-exp','m-proof', ...TOPICS.filter(t=>t.s==='econ').map(t=>t.id)];
 const MOCK_NOTE = { econ:'Paper 3 mock: synoptic, every theme' };
@@ -329,15 +432,101 @@ const NAV = [['home','Home'],['sets','Sets'],['review','Review'],['exam','Exam Q
 let CARDS = [], CARD = {}, BYTOPIC = {}, EXAMQ = [];
 // ---------- state ----------
 const LS_KEY = 'aaalab.v1';
-const blank = () => ({ v:1, ts:0, cards:{}, star:{}, exam:{}, drills:{}, match:{}, days:{}, done:{}, settings:{ name:'Pedro', goal:60, mock:{ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }, grades:{psych:['C','A'],maths:['C','A'],econ:['B','A']}, front:'term' } });
+const blank = () => ({ v:1, ts:0, cards:{}, star:{}, exam:{}, drills:{}, match:{}, days:{}, done:{}, custom:{ courses:{}, sets:{} }, settings:{ name:'', subjects:['psych','maths','econ'], onboarded:false, goal:60, mock:{ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }, grades:{psych:['C','A'],maths:['C','A'],econ:['B','A']}, front:'term' } });
 let S = blank();
-function loadLocal(){ try { const raw = localStorage.getItem(LS_KEY); if(raw){ const o = JSON.parse(raw); S = Object.assign(blank(), o); S.settings = Object.assign(blank().settings, o.settings||{}); } } catch(e){} }
+function loadLocal(){ try { const raw = localStorage.getItem(LS_KEY); if(raw){ const o = JSON.parse(raw); S = Object.assign(blank(), o); S.settings = Object.assign(blank().settings, o.settings||{}); if (!o.settings || o.settings.onboarded === undefined) { S.settings.onboarded = true; if (!S.settings.name) S.settings.name = 'Pedro'; } } } catch(e){} }
+const ALL_SUBJ = ['psych','maths','econ'];
+function mySubj(){ return [...(S.settings.subjects || ALL_SUBJ).filter(x => ALL_SUBJ.includes(x)), ...customCourses().map(c => c.id)]; }
+const isCustom = (sub) => !!(SUBJ[sub] && SUBJ[sub].custom);
+function myTopics(){ const a = mySubj(); return TOPICS.filter(t => a.includes(t.s)); }
 let saveTimer = null;
 function save(){ S.ts = Date.now(); try { localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch(e){} clearTimeout(saveTimer); saveTimer = setTimeout(pushRemote, 3500); }
 function today(){ const k = dayNum(); return (S.days[k] ||= {c:0, l:0, x:0, d:0, m:0}); }
 
 // ---------- sync ----------
 const SYNC = { ref:null, gh:false, state:'local', busy:false, pending:false };
+// ---------- accounts (Firebase: Google or email sign-in, progress in Firestore users/{uid}) ----------
+const FIREBASE_CONFIG = null; // paste the config object from Firebase project settings here
+const FB_V = '13.2.0';
+let FB = null; const ACCOUNT = { user:null, ready:false, err:'' };
+async function fbLoad(){
+  if (!FIREBASE_CONFIG) return null; if (FB) return FB;
+  const base = `https://www.gstatic.com/firebasejs/${FB_V}/`;
+  const [a, au, fs] = await Promise.all([import(base + 'firebase-app.js'), import(base + 'firebase-auth.js'), import(base + 'firebase-firestore.js')]);
+  const app = a.initializeApp(FIREBASE_CONFIG);
+  FB = { au, fs, auth: au.getAuth(app), db: fs.getFirestore(app) };
+  return FB;
+}
+async function initAccounts(){
+  try { await fbLoad(); } catch(e){ ACCOUNT.ready = true; ACCOUNT.err = 'Sign-in could not load. Check your connection.'; return false; }
+  if (!FB) return false;
+  try { await FB.au.getRedirectResult(FB.auth); } catch(e){ ACCOUNT.err = authMsg(e); }
+  FB.au.onAuthStateChanged(FB.auth, user => {
+    const was = ACCOUNT.user && ACCOUNT.user.uid; ACCOUNT.user = user; ACCOUNT.ready = true;
+    if (user && user.uid !== was) startAccountSync(user);
+    if (!user) stopAccountSync();
+    render();
+  });
+  return true;
+}
+function authMsg(e){ const c = (e && e.code) || ''; return ({ 'auth/invalid-credential':'Wrong email or password.', 'auth/wrong-password':'Wrong email or password.', 'auth/user-not-found':'No account with that email. Press Create account.', 'auth/email-already-in-use':'That email already has an account. Press Sign in.', 'auth/weak-password':'Use a password of at least 6 characters.', 'auth/invalid-email':'That email address is not valid.', 'auth/popup-closed-by-user':'Sign-in window closed before finishing.', 'auth/network-request-failed':'No internet connection.', 'auth/operation-not-allowed':'This sign-in method is switched off for this app.', 'auth/unauthorized-domain':'This website is not allowed to sign in yet.', 'auth/too-many-requests':'Too many tries. Wait a few minutes.' })[c] || 'Sign-in failed. Try again.'; }
+async function signInGoogle(){
+  ACCOUNT.err = ''; const p = new FB.au.GoogleAuthProvider(); p.setCustomParameters({ prompt:'select_account' });
+  try { await FB.au.signInWithPopup(FB.auth, p); }
+  catch(e){ if (e && (e.code === 'auth/popup-blocked' || e.code === 'auth/operation-not-supported-in-this-environment')) { await FB.au.signInWithRedirect(FB.auth, p); } else { ACCOUNT.err = authMsg(e); render(); } }
+}
+async function signInEmail(email, pass, create){
+  ACCOUNT.err = '';
+  try { create ? await FB.au.createUserWithEmailAndPassword(FB.auth, email, pass) : await FB.au.signInWithEmailAndPassword(FB.auth, email, pass); }
+  catch(e){ ACCOUNT.err = authMsg(e); render(); }
+}
+async function resetPassword(email){ try { await FB.au.sendPasswordResetEmail(FB.auth, email); toast('Password reset email sent'); } catch(e){ ACCOUNT.err = authMsg(e); render(); } }
+function startAccountSync(user){
+  stopAccountSync(true); SYNC.gh = false;
+  const ref = FB.fs.doc(FB.db, 'users', user.uid); SYNC.fbRef = ref; setSync('warn','Connecting…');
+  SYNC.unsub = FB.fs.onSnapshot(ref, snap => {
+    if (snap.metadata && snap.metadata.hasPendingWrites) return;
+    if (snap.exists()) {
+      let r = null; try { r = JSON.parse(snap.data().p); } catch(e){}
+      if (r && r.cards) {
+        const before = JSON.stringify(S); const remoteOnboarded = !!(r.settings && r.settings.onboarded);
+        S = mergeState(S, r); if (remoteOnboarded) S.settings.onboarded = true;
+        const after = JSON.stringify(S);
+        if (after !== before) { try { localStorage.setItem(LS_KEY, after); } catch(e){} if (!STUDY) render(); }
+        if (after !== JSON.stringify(r) && S.settings.onboarded) pushRemote();
+      }
+    } else if (S.settings.onboarded) pushRemote();
+    setSync('ok','Synced');
+  }, () => setSync('warn','Sync retrying'));
+}
+function stopAccountSync(keep){ if (SYNC.unsub) { try { SYNC.unsub(); } catch(e){} } SYNC.unsub = null; SYNC.fbRef = null; if (!keep) setSync('local','Saved on this device'); }
+async function signOutAccount(){
+  try { if (SYNC.fbRef) await FB.fs.setDoc(SYNC.fbRef, { v:1, ts:S.ts, p: JSON.stringify(S) }); } catch(e){}
+  stopAccountSync(); await FB.au.signOut(FB.auth);
+  S = blank(); try { localStorage.removeItem(LS_KEY); } catch(e){}
+  STUDY = null; toast('Signed out. Your progress is saved in your account.'); go('home');
+}
+function accountHTML(where){
+  if (!FIREBASE_CONFIG) return '';
+  if (!ACCOUNT.ready) return `<p class="small muted">Loading sign-in…</p>`;
+  if (ACCOUNT.user) return `<p class="small">Signed in as <b>${esc(ACCOUNT.user.email || ACCOUNT.user.displayName || 'you')}</b>. Your progress saves to your account and appears on any device where you sign in.</p><div class="row"><button class="btn sm" id="acOut">Sign out</button></div>`;
+  return `<p class="small muted">${where==='welcome'?'Already use AAA Lab? Sign in to load your progress. New here? Sign in too, so your progress is saved to your account.':'Sign in so your progress is saved to your account and appears on all your devices.'}</p>
+    <button class="btn primary" id="acGoogle" style="align-self:flex-start">Continue with Google</button>
+    <details${ACCOUNT.err && ACCOUNT.emailTried ? ' open' : ''}><summary class="small" style="cursor:pointer">Use email and password instead</summary>
+      <div class="stack" style="gap:8px;margin-top:8px"><input type="email" id="acEmail" placeholder="Email" autocomplete="email" value="${esc(ACCOUNT.email||'')}"><input type="password" id="acPass" placeholder="Password (6+ characters)" autocomplete="current-password">
+      <div class="row"><button class="btn sm primary" id="acIn">Sign in</button><button class="btn sm" id="acNew">Create account</button><button class="btn sm ghost" id="acReset">Forgot password</button></div></div></details>
+    ${ACCOUNT.err ? `<p class="small" style="color:var(--bad)">${esc(ACCOUNT.err)}</p>` : ''}`;
+}
+function bindAccount(m){
+  on(m,'#acGoogle','click',()=>signInGoogle());
+  const em = () => { const e = (m.querySelector('#acEmail')||{}).value || ''; ACCOUNT.email = e.trim(); ACCOUNT.emailTried = true; return ACCOUNT.email; };
+  const pw = () => (m.querySelector('#acPass')||{}).value || '';
+  on(m,'#acIn','click',()=>{ const e = em(); if (!e) { ACCOUNT.err = 'Enter your email.'; render(); return; } signInEmail(e, pw(), false); });
+  on(m,'#acNew','click',()=>{ const e = em(); if (!e) { ACCOUNT.err = 'Enter your email.'; render(); return; } signInEmail(e, pw(), true); });
+  on(m,'#acReset','click',()=>{ const e = em(); if (!e) { ACCOUNT.err = 'Enter your email first.'; render(); return; } resetPassword(e); });
+  on(m,'#acOut','click',()=>signOutAccount());
+}
+
 // ---------- sync through a private GitHub gist (used outside Claude) ----------
 // The token (gist scope only) is stored only in this browser. Progress lives in one secret gist on Pedro's GitHub account.
 const GH_KEY = 'aaalab.ghsync', GIST_FILE = 'aaa-lab-progress.json';
@@ -364,6 +553,7 @@ async function ghPull(){
 async function ghMergeRemote(){ const remote = await ghPull(); if (remote) { const before = JSON.stringify(S); S = mergeState(S, remote); if (JSON.stringify(S) !== before) { try { localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch(e){} if (!STUDY) render(); } } }
 async function ghPush(){ if (SYNC.overwrite) SYNC.overwrite = false; else await ghMergeRemote(); const g = ghGet(); await gh('/gists/' + g.gist, { method:'PATCH', body: JSON.stringify({ files:{ [GIST_FILE]: { content: JSON.stringify(S) } } }) }); }
 async function initGhSync(){
+  if (SYNC.fbRef) return;
   setSync('warn','Connecting…');
   try { const g = ghGet(); if (!g.gist) { g.gist = await ghFindGist(); ghSet(g); } SYNC.gh = true; await ghMergeRemote(); setSync('ok','Synced'); pushRemote(); }
   catch(e){ if (e.status === 401) { SYNC.gh = false; setSync('warn','Sync key not accepted'); } else { SYNC.gh = !!(ghGet()||{}).gist; setSync('local', navigator.onLine ? 'Sync retrying' : 'Offline, saved here'); } }
@@ -379,12 +569,14 @@ function mergeState(a, b){ // merge b into a
   for (const [t, v] of Object.entries(b.drills||{})) { const cur = out.drills[t]; if(!cur || (v.at||0) > (cur.at||0)) out.drills[t] = v; }
   for (const [t, v] of Object.entries(b.match||{})) { out.match[t] = out.match[t] ? Math.min(out.match[t], v) : v; }
   for (const [d, v] of Object.entries(b.done||{})) { out.done[d] = Array.from(new Set([...(out.done[d]||[]), ...v])); }
+  out.custom = out.custom || { courses:{}, sets:{} }; out.custom.courses ||= {}; out.custom.sets ||= {};
+  for (const kind of ['courses','sets']) for (const [k, v] of Object.entries((b.custom||{})[kind]||{})) { const cur = out.custom[kind][k]; if (!cur || (v.at||0) > (cur.at||0)) out.custom[kind][k] = v; }
   if ((b.ts||0) > (a.ts||0)) { out.settings = Object.assign(out.settings, b.settings||{}); out.star = b.star||{}; }
   out.ts = Math.max(a.ts||0, b.ts||0);
   return out;
 }
 async function initSync(){
-  if (!window.claude || typeof window.claude.use !== 'function') { if (ghGet()) return initGhSync(); setSync('local','Saved on this device'); return; }
+  if (!window.claude || typeof window.claude.use !== 'function') { setSync('local','Saved on this device'); if (FIREBASE_CONFIG) { initAccounts().then(() => { if (!ACCOUNT.user && ghGet()) initGhSync(); render(); }); return; } if (ghGet()) return initGhSync(); return; }
   setSync('warn','Connecting…');
   const timer = setTimeout(()=>{ if(SYNC.state==='warn') setSync('local','Saved on this device'); }, 10000);
   try {
@@ -404,11 +596,11 @@ async function initSync(){
   } catch(e) { clearTimeout(timer); setSync('local','Saved on this device'); }
 }
 async function pushRemote(){
-  if (!SYNC.ref && !SYNC.gh) return;
+  if (!SYNC.ref && !SYNC.gh && !SYNC.fbRef) return;
   if (SYNC.busy) { SYNC.pending = true; return; }
   SYNC.busy = true;
-  try { if (SYNC.gh) await ghPush(); else await SYNC.ref.set({ v:1, ts:S.ts, p: JSON.stringify(S) }); setSync('ok','Synced'); }
-  catch(e){ if (SYNC.gh) { if (e.status === 401) { SYNC.gh = false; setSync('warn','Sync key not accepted'); } else setSync('warn','Sync retrying'); } else if (e && (e.code==='invalid_argument'||e.code==='revoked'||e.code==='not_granted')) { SYNC.ref = null; setSync('local','Saved on this device'); } else setSync('warn','Sync retrying'); }
+  try { if (SYNC.fbRef) await FB.fs.setDoc(SYNC.fbRef, { v:1, ts:S.ts, p: JSON.stringify(S) }); else if (SYNC.gh) await ghPush(); else await SYNC.ref.set({ v:1, ts:S.ts, p: JSON.stringify(S) }); setSync('ok','Synced'); }
+  catch(e){ if (SYNC.fbRef) { setSync('warn','Sync retrying'); } else if (SYNC.gh) { if (e.status === 401) { SYNC.gh = false; setSync('warn','Sync key not accepted'); } else setSync('warn','Sync retrying'); } else if (e && (e.code==='invalid_argument'||e.code==='revoked'||e.code==='not_granted')) { SYNC.ref = null; setSync('local','Saved on this device'); } else setSync('warn','Sync retrying'); }
   SYNC.busy = false;
   if (SYNC.pending) { SYNC.pending = false; setTimeout(pushRemote, 1500); }
 }
@@ -514,25 +706,29 @@ function phase(){
   const d = dayNum(), p2 = dayNum(dateOf('2027-02-15')), p3 = dayNum(dateOf('2027-04-12')), first = dayNum(dateOf(EXAMS[0].d)), last = dayNum(dateOf('2027-06-16'));
   if (d < p2) return 1; if (d < p3) return 2; if (d <= last) return 3; return 4;
 }
-function nextExam(){ return EXAMS.find(e => daysTo(e.d) >= 0); }
+function nextExam(){ return EXAMS.find(e => mySubj().includes(e.s) && daysTo(e.d) >= 0); }
 function dailyTasks(){
   const d = dayNum(), tasks = [];
   const due = CARDS.filter(c=>isDue(c[0])).length;
   if (due) tasks.push({ key:'review', s:null, icon:'review', title:`Review ${Math.min(due, 80)} due cards`, sub:'Spaced repetition keeps what you have learned', go:()=>startReview() });
   const mockPool = mockOn() ? TOPICS.filter(t=>mockTopics().includes(t.id)) : null;
-  const ranked = TOPICS.slice().sort((a,b)=>weakness(b)-weakness(a)).sort((a,b)=> mockPool ? mockPool.includes(b) - mockPool.includes(a) : 0);
+  const subs = mySubj(); if (!subs.length) return tasks;
+  const ranked = myTopics().sort((a,b)=>weakness(b)-weakness(a)).sort((a,b)=> mockPool ? mockPool.includes(b) - mockPool.includes(a) : 0);
   if (mockPool) tasks.push({ key:'mock-review', s:null, icon:'flash', title:`${mockCfg().title}: 40-card focus review`, sub:`Your weakest and due cards from the mock topics · ${plural(daysTo(mockCfg().date),'day')} to go`, go:()=>startMockReview() });
   const ph = phase();
   // rotate subjects: psych and maths get more days
-  const rota = ['psych','maths','econ','psych','maths','psych','maths'];
-  const s1 = rota[d % 7], s2 = rota[(d + 3) % 7] === s1 ? (s1==='maths'?'psych':'maths') : rota[(d + 3) % 7];
+  const rota = [...['psych','maths','econ','psych','maths','psych','maths'].filter(x=>subs.includes(x)), ...subs.filter(isCustom)];
+  const empty = myTopics().find(t => t.custom && !(BYTOPIC[t.id]||[]).length);
+  if (empty) tasks.push({ key:'make-'+empty.id, s:empty.s, icon:'spark', title:`Make cards: ${empty.name}`, sub:`${SUBJ[empty.s].name} · Claude writes them, you paste them in`, go:()=>openTopic(empty.id) });
+  const s1 = rota[d % rota.length], s2r = rota[(d + 3) % rota.length], s2 = s2r !== s1 ? s2r : (subs.find(x=>x!==s1) || s1);
   [s1, s2].forEach((s, i) => {
     const t = ranked.filter(t=>t.s===s && (BYTOPIC[t.id]||[]).length)[i===0?0:(s1===s2?1:0)];
+    if (!t) return;
     if (t) tasks.push({ key:'learn-'+t.id, s, icon:'learn', title:`Learn: ${t.name}`, sub:`${SUBJ[s].short} · ${mockPool && mockPool.includes(t) ? 'mock topic, one of your weakest' : 'one of your weakest topics right now'}`, go:()=>startMode('learn', setFromTopic(t.id), 'learn-'+t.id) });
   });
-  const mt = ranked.filter(t=>t.s==='maths' && GEN[t.id] && GEN[t.id].length)[0];
+  const mt = subs.includes('maths') ? ranked.filter(t=>t.s==='maths' && GEN[t.id] && GEN[t.id].length)[0] : null;
   if (mt) tasks.push({ key:'drill-'+mt.id, s:'maths', icon:'drills', title:`Maths drill: ${mt.name}`, sub:'10 fresh questions with worked solutions', go:()=>startDrill(mt.id, 'drill-'+mt.id) });
-  const xs = ph >= 2 ? ['psych','econ','maths'][d % 3] : ['psych','econ'][d % 2];
+  const xsl = (ph >= 2 ? ['psych','econ','maths'] : ['psych','econ']).filter(x=>subs.includes(x)), xs = xsl.length ? xsl[d % xsl.length] : subs[0];
   const xq = (mockPool && mockExamQs(xs).length ? mockExamQs(xs) : EXAMQ.filter(q=>q.s===xs)).slice().sort((a,b)=>(bestExam(a.id)??-1)-(bestExam(b.id)??-1) || weakness(TOPIC[b.t])-weakness(TOPIC[a.t]))[0];
   if (xq) tasks.push({ key:'exam-'+xq.id, s:xs, icon:'exam', title:`Exam question: ${xq.marks}-marker`, sub:`${SUBJ[xs].short} · ${TOPIC[xq.t].name}`, go:()=>openExam(xq.id, 'exam-'+xq.id) });
   return tasks;
@@ -544,19 +740,22 @@ const isDone = (key) => (S.done[dayNum()]||[]).includes(key);
 let VIEW = 'home', STUDY = null;
 function go(v){ if (location.hash !== '#'+v) location.hash = v; else { VIEW = v; render(); } }
 window.addEventListener('hashchange', () => { const h = location.hash.slice(1) || 'home'; VIEW = NAV.some(n=>n[0]===h) ? h : 'home'; if (VIEW !== 'study') STUDY = null; render(); window.scrollTo(0,0); });
-function navHTML(){ return NAV.map(([k,l]) => `<a class="nav-a" href="#${k}" ${VIEW===k||(VIEW==='topic'&&k==='sets')?'aria-current="page"':''}>${ic(k)}<span>${l}</span></a>`).join(''); }
+function navItems(){ return NAV.filter(n => n[0] !== 'drills' || mySubj().includes('maths')); }
+function navHTML(){ return navItems().map(([k,l]) => `<a class="nav-a" href="#${k}" ${VIEW===k||(VIEW==='topic'&&k==='sets')?'aria-current="page"':''}>${ic(k)}<span>${l}</span></a>`).join(''); }
 function renderNav(){
   document.getElementById('rail').innerHTML = navHTML() + railFoot();
   document.getElementById('tabbar').innerHTML = NAV.filter(n=>n[0]!=='drills').map(([k,l]) => `<a class="nav-a" href="#${k}" ${VIEW===k||(VIEW==='topic'&&k==='sets')?'aria-current="page"':''}>${ic(k)}<span>${l==='Exam Qs'?'Exam':l}</span></a>`).join('');
   const ne = nextExam(); const cc = document.getElementById('countChip');
-  cc.textContent = ne ? `${daysTo(ne.d)} days to ${SUBJ[ne.s].short} ${ne.p}` : 'Exams finished';
+  cc.textContent = ne ? `${daysTo(ne.d)} days to ${SUBJ[ne.s].short} ${ne.p}` : '';  cc.hidden = !ne;
 }
 function railFoot(){ const t = today(); const g = S.settings.goal; return `<div class="rail-foot"><div class="eyebrow">Today</div><div class="mono" style="font-size:1.4rem;font-weight:700">${t.c}<span class="faint" style="font-size:.9rem">/${g}</span></div><div class="tiny muted">cards studied</div><div class="bar" style="margin-top:8px"><i style="width:${Math.min(100, t.c/g*100)}%"></i></div></div>`; }
 function render(){
+  if (EXAMQ.length) applyCustom();
   renderNav();
   const m = document.getElementById('main');
   if (!CARDS.length) return;
   if (STUDY) { STUDY.render(m); return; }
+  if (!S.settings.onboarded) { vWelcome(m); return; }
   ({ home:vHome, sets:vSets, topic:vTopic, review:vReview, exam:vExam, drills:vDrills, progress:vProgress }[VIEW] || vHome)(m);
 }
 function toast(msg){ const t = document.createElement('div'); t.className='toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(()=>t.remove(), 2200); }
@@ -570,15 +769,15 @@ function vHome(m){
   const streak = (()=>{ let n=0, d=dayNum(); if(!(S.days[d]?.c)) d--; while(S.days[d] && S.days[d].c>0){ n++; d--; } return n; })();
   const phaseTxt = {1:'Phase 1 · Learn every topic',2:'Phase 2 · Practise exam questions',3:'Phase 3 · Exam season',4:'Exams finished'}[ph];
   m.innerHTML = `<div class="stack">
-    <div class="row between"><div><div class="eyebrow">${phaseTxt}</div><h1>${greeting()}, ${esc(S.settings.name)}</h1></div>
-      <div class="row">${['psych','maths','econ'].map(s=>`<span class="pill subj s-${s}">${SUBJ[s].short} ${S.settings.grades[s][0]} → ${S.settings.grades[s][1]}</span>`).join('')}</div></div>
+    <div class="row between"><div><div class="eyebrow">${phaseTxt}</div><h1>${greeting()}${S.settings.name?', '+esc(S.settings.name):''}</h1></div>
+      <div class="row">${mySubj().map(s=>`<span class="pill subj s-${s}">${SUBJ[s].short} ${S.settings.grades[s][0]} → ${S.settings.grades[s][1]}</span>`).join('')}</div></div>
     ${mockOn() ? mockBanner() : ''}
     <div class="hero">
       <section class="card pad-lg stack" style="gap:14px">
         ${ne ? `<div class="row between" style="align-items:flex-end"><div><div class="eyebrow">Next exam</div><div class="count-big mono">${daysTo(ne.d)}<span style="font-size:1.1rem;font-family:var(--f-body);font-weight:600;letter-spacing:0" class="muted"> days</span></div></div>
-          <div style="text-align:right" class="s-${ne.s}"><span class="pill subj">${SUBJ[ne.s].name} ${ne.p}</span><div class="small muted" style="margin-top:4px">${fmtDate(ne.d,{weekday:'long',day:'numeric',month:'long'})} · ${ne.t}</div></div></div>` : '<h2>All exams done. Results day: Thursday 12 August 2027.</h2>'}
-        <div class="timeline" aria-label="All exam dates">${EXAMS.map(e=>{const n=daysTo(e.d);return `<div class="tl s-${e.s} ${n<0?'past':''} ${e===ne?'next':''}" title="${esc(SUBJ[e.s].name+' '+e.p+': '+e.title)}"><div class="d">${fmtDate(e.d,{day:'numeric',month:'short'})}</div><div class="n">${SUBJ[e.s].short} ${e.p}</div><div class="tiny muted">${e.t} · ${n<0?'done':n+'d'}</div></div>`}).join('')}</div>
-        <p class="tiny faint">Final timetables: AQA and Pearson Edexcel, summer 2027. Contingency day Wed 23 June. Results Thu 12 August.</p>
+          <div style="text-align:right" class="s-${ne.s}"><span class="pill subj">${SUBJ[ne.s].name} ${ne.p}</span><div class="small muted" style="margin-top:4px">${fmtDate(ne.d,{weekday:'long',day:'numeric',month:'long'})} · ${ne.t}</div></div></div>` : EXAMS.some(e=>mySubj().includes(e.s)) ? '<h2>All exams done. Results day: Thursday 12 August 2027.</h2>' : `<div class="stack" style="gap:6px"><div class="eyebrow">Exams</div><h2>Add your exam dates</h2><p class="small muted">Add them to each subject in <a href="#sets">Sets</a> (Edit subject) to get a countdown here.</p></div>`}
+        <div class="timeline" aria-label="All exam dates">${EXAMS.filter(e=>mySubj().includes(e.s)).map(e=>{const n=daysTo(e.d);return `<div class="tl s-${e.s} ${n<0?'past':''} ${e===ne?'next':''}" title="${esc(SUBJ[e.s].name+' '+e.p+': '+e.title)}"><div class="d">${fmtDate(e.d,{day:'numeric',month:'short'})}</div><div class="n">${SUBJ[e.s].short} ${e.p}</div><div class="tiny muted">${e.t} · ${n<0?'done':n+'d'}</div></div>`}).join('')}</div>
+        ${mySubj().some(x=>ALL_SUBJ.includes(x)) ? `<p class="tiny faint">Final timetables: AQA and Pearson Edexcel, summer 2027. Contingency day Wed 23 June. Results Thu 12 August.</p>` : ''}
       </section>
       <section class="card pad-lg row" style="gap:18px;align-items:center;flex-wrap:nowrap">
         <div class="ring" style="--p:${Math.min(100, t.c/goal*100)}"><div><div class="mono" style="font-weight:700;font-size:1.2rem">${t.c}</div><div class="tiny muted">of ${goal}</div></div></div>
@@ -590,7 +789,7 @@ function vHome(m){
     <section class="card pad-lg"><div class="row between"><h2>Today's plan</h2><span class="tiny muted">${tasks.filter(x=>isDone(x.key)).length}/${tasks.length} done</span></div>
       <div style="margin-top:6px">${tasks.map((x,i)=>`<div class="task ${isDone(x.key)?'done':''} ${x.s?'s-'+x.s:''}"><div class="ic">${ic(x.icon)}</div><div class="tx"><b>${esc(x.title)}</b><span class="small muted">${esc(x.sub)}</span></div><button class="btn sm" data-task="${i}">${isDone(x.key)?'Again':'Start'}</button></div>`).join('')}</div>
     </section>
-    <div class="grid g3">${['psych','maths','econ'].map(s=>{const st=subjStats(s);const weak=TOPICS.filter(t=>t.s===s).sort((a,b)=>weakness(b)-weakness(a)).slice(0,2);return `<section class="card subj-card s-${s} stack" style="gap:10px">
+    <div class="grid g3">${mySubj().map(s=>{const st=subjStats(s);const weak=TOPICS.filter(t=>t.s===s).sort((a,b)=>weakness(b)-weakness(a)).slice(0,2);return `<section class="card subj-card s-${s} stack" style="gap:10px">
       <div class="row between"><div><div class="eyebrow">${SUBJ[s].board}</div><h3>${SUBJ[s].name}</h3></div><div class="grade">${S.settings.grades[s][0]}<span class="arrow">→</span><span style="color:var(--sc)">${S.settings.grades[s][1]}</span></div></div>
       <div><div class="row between small"><span class="muted">Readiness</span><b class="mono">${st.ready}%</b></div><div class="bar" style="margin-top:4px"><i style="width:${st.ready}%"></i></div></div>
       <div class="small muted">Cards seen ${st.seen}/${st.n}${st.due?` · <b style="color:var(--sc)">${st.due} due</b>`:''}</div>
@@ -609,7 +808,7 @@ function vHome(m){
 
 function mockBanner(){
   const c = mockCfg(), n = daysTo(c.date);
-  const subj = ['psych','maths','econ'].filter(s=>mockTopics(s).length);
+  const subj = mySubj().filter(s=>mockTopics(s).length);
   const all = mockCards(); const ready = all.length ? Math.round(all.reduce((a,id)=>a+cardMastery(id),0)/all.length*100) : 0;
   return `<section class="card pad-lg stack" style="gap:14px;border:2px solid var(--accent)">
     <div class="row between" style="align-items:flex-end"><div><div class="eyebrow" style="color:var(--accent)">Focus mode</div><h2>${esc(c.title)}</h2><div class="small muted">From ${fmtDate(c.date,{weekday:'long',day:'numeric',month:'long'})} · ${ready}% of mock cards mastered</div></div>
@@ -626,13 +825,15 @@ function mockBanner(){
 // ---------- views: sets ----------
 let SETS_FILTER = 'psych', CUR_TOPIC = null;
 function vSets(m){
-  const s = SETS_FILTER;
+  if (COURSE_EDIT) { m.innerHTML = `<div class="stack" style="max-width:680px">${courseFormHTML(COURSE_EDIT === 'new' ? null : courseOf(COURSE_EDIT))}</div>`; bindCourseForm(m); return; }
+  if (!mySubj().includes(SETS_FILTER)) SETS_FILTER = mySubj()[0]; const s = SETS_FILTER;
+  if (isCustom(s)) return vCustomSets(m, s);
   const groups = {};
   TOPICS.filter(t=>t.s===s).forEach(t=>{ const p = t.papers[0]; (groups[p] ||= []).push(t); });
   const stars = Object.keys(S.star).filter(id=>S.star[id] && CARD[id]);
   m.innerHTML = `<div class="stack">
     <div class="row between"><div><div class="eyebrow">Study sets</div><h1>Sets</h1></div>
-      <div class="seg" role="group" aria-label="Subject">${['psych','maths','econ'].map(k=>`<button aria-pressed="${k===s}" data-s="${k}">${SUBJ[k].short}</button>`).join('')}</div></div>
+      ${subjSeg(s)}</div>
     <div class="row">${(s==='maths'?['P1','P3']:['P1','P2','P3']).map(p=>{ const label = s==='maths'&&p==='P1'?'Pure (P1 & P2)':p==='P3'&&s==='econ'?'Paper 3 (all themes)':s==='maths'&&p==='P3'?'Paper 3 (Stats & Mech)':'Paper '+p.slice(1); return `<button class="btn sm s-${s}" data-paper="${p}">${ic('learn')} Study ${label}</button>`; }).join('')}
       ${stars.length?`<button class="btn sm" id="starSet">${ic('star')} Starred (${stars.length})</button>`:''}</div>
     ${Object.entries(groups).map(([p, ts])=>`<section class="stack" style="gap:8px"><div class="paper-h"><h3>${esc(PAPER_NAMES[s][p]||p)}</h3><span class="tiny muted">${SUBJ[s].board}</span></div>
@@ -641,40 +842,85 @@ function vSets(m){
         <div style="text-align:right">${st.acc==null?'<span class="pill neutral">New</span>':`<span class="pill ${st.acc>=.8?'good':st.acc>=.6?'warn':'bad'}">${Math.round(st.acc*100)}%</span>`}</div></button>`}).join('')}
     </section>`).join('')}
   </div>`;
-  on(m,'[data-s]','click',e=>{ SETS_FILTER = e.currentTarget.dataset.s; render(); });
+  bindSeg(m);
   on(m,'[data-topic]','click',e=>openTopic(e.currentTarget.dataset.topic));
   on(m,'[data-paper]','click',e=>{ const p = e.currentTarget.dataset.paper; const ts = TOPICS.filter(t=>t.s===s && (p==='P3' && s==='econ' ? true : t.papers.includes(p) || (s==='maths'&&p==='P1'&&t.papers.includes('P2')))); const set = { title: `${SUBJ[s].short} ${p==='P1'&&s==='maths'?'Pure':'Paper '+p.slice(1)}`, s, ids: ts.flatMap(t=>BYTOPIC[t.id]||[]) }; openSet(set); });
   on(m,'#starSet','click',()=>openSet({ title:'Starred cards', s:null, ids: stars }));
+}
+function subjSeg(s){ return `<div class="row" style="gap:8px"><div class="seg" role="group" aria-label="Subject" style="flex-wrap:wrap">${mySubj().map(k=>`<button aria-pressed="${k===s}" data-s="${k}">${esc(SUBJ[k].short)}</button>`).join('')}</div><button class="btn sm ghost" id="addCourse">+ Subject</button></div>`; }
+function bindSeg(m){ on(m,'[data-s]','click',e=>{ SETS_FILTER = e.currentTarget.dataset.s; render(); }); on(m,'#addCourse','click',()=>{ COURSE_EDIT = 'new'; render(); window.scrollTo(0,0); }); }
+function bindCourseForm(m, after){
+  const base = COURSE_EDIT && COURSE_EDIT !== 'new' ? courseOf(COURSE_EDIT) : null;
+  on(m,'#cSave','click',()=>{ const c = readCourseForm(m, base); if (!c) return; S.settings.grades[c.id] = c.grades.slice(); saveCourse(c); COURSE_EDIT = null; SETS_FILTER = c.id; if (after) after(c); else { VIEW = 'sets'; render(); } toast(base ? 'Saved' : `${c.name} added`); });
+  on(m,'#cCancel','click',()=>{ COURSE_EDIT = null; render(); });
+  on(m,'#cDel','click',()=>{ if (!m.querySelector('#cDelSure')) { m.querySelector('#cDel').insertAdjacentHTML('afterend','<button class="btn sm" id="cDelSure" style="color:var(--bad)">Yes, remove it and its cards</button>'); on(m,'#cDelSure','click',()=>{ base.deleted = true; saveCourse(base); COURSE_EDIT = null; SETS_FILTER = mySubj()[0]; render(); toast('Subject removed'); }); } });
+}
+let TOPIC_PASTE = false;
+function vCustomSets(m, s){
+  const c = courseOf(s); const ts = TOPICS.filter(t=>t.s===s); const all = ts.flatMap(t=>BYTOPIC[t.id]||[]);
+  m.innerHTML = `<div class="stack s-${s}">
+    <div class="row between"><div><div class="eyebrow">Study sets</div><h1>Sets</h1></div>${subjSeg(s)}</div>
+    <section class="card pad-lg stack" style="gap:10px"><div class="row between"><div><span class="pill subj">${esc(SUBJ[s].board)}</span><h2 style="margin-top:6px">${esc(c.name)}</h2></div><button class="btn sm ghost" id="editCourse">Edit subject</button></div>
+      <div class="row">${all.length?`<button class="btn sm primary" id="studyAll">${ic('learn')} Study all ${plural(all.length,'card')}</button>`:''}<button class="btn sm" id="practice">${ic('exam')} Practice question</button></div></section>
+    ${ts.length ? '' : `<section class="card pad-lg stack"><h3>Add your topics</h3><p class="small muted">Ask Claude for the topic list for your exact spec and options, then paste it below. Or type your topics yourself, one per line.</p><button class="btn sm" id="askTopics" style="align-self:flex-start">${ic('spark')} Get my topic list from Claude</button></section>`}
+    <section class="stack" style="gap:8px"><div class="paper-h"><h3>Topics</h3><button class="btn sm ghost" id="addTopics">+ Add topics</button></div>
+      ${TOPIC_PASTE || !ts.length ? `<div class="card stack"><textarea id="topicTxt" style="min-height:120px" placeholder="One topic per line, e.g.&#10;The UK constitution&#10;Parliament&#10;The Prime Minister and executive"></textarea><div class="row"><button class="btn sm primary" id="topicGo">Add topics</button>${ts.length?'<button class="btn sm ghost" id="topicClose">Close</button>':''}</div></div>` : ''}
+      ${ts.map(t=>{const st=topicStats(t.id);return `<div class="topic-row s-${s}" style="grid-template-columns:minmax(0,1fr) auto"><button data-topic="${t.id}" style="all:unset;cursor:pointer;min-width:0"><div class="nm">${esc(t.name)}</div><div class="tiny muted">${st.n?plural(st.n,'card'):'No cards yet'}${st.due?` · <b style="color:var(--sc)">${st.due} due</b>`:''}${st.n?' · '+Math.round(st.mastery*100)+'% mastered':''}</div></button>
+        ${st.n ? `<div class="tb" style="min-width:90px"><div class="bar"><i style="width:${Math.round(st.mastery*100)}%"></i></div></div>` : `<button class="btn sm" data-make="${t.id}">${ic('spark')} Make cards</button>`}</div>`}).join('')}
+    </section></div>`;
+  bindSeg(m);
+  on(m,'#editCourse','click',()=>{ COURSE_EDIT = s; render(); window.scrollTo(0,0); });
+  on(m,'#studyAll','click',()=>openSet({ title: c.name, s, ids: all }));
+  on(m,'#practice','click',()=>{ EXAM_FILTER = s; go('exam'); });
+  on(m,'#askTopics','click',()=>{ handoff(topicsPrompt(c)); TOPIC_PASTE = true; render(); toast('Claude opened. Copy the list, then paste it here.'); });
+  on(m,'#addTopics','click',()=>{ TOPIC_PASTE = true; render(); });
+  on(m,'#topicClose','click',()=>{ TOPIC_PASTE = false; render(); });
+  on(m,'#topicGo','click',()=>{ const names = m.querySelector('#topicTxt').value.split(/\r?\n/).map(x=>x.replace(/^[-*•\d.)\s]+/,'').replace(/\*\*/g,'').trim()).filter(x=>x && x.length < 120); if (!names.length) { toast('Type at least one topic'); return; } const have = new Set((c.topics||[]).map(t=>t.name.toLowerCase())); c.topics = [...(c.topics||[]), ...names.filter(x=>!have.has(x.toLowerCase())).map(x=>({ id: rid('t'), name: x }))]; saveCourse(c); TOPIC_PASTE = false; render(); toast(`Added ${plural(names.length,'topic')}`); });
+  on(m,'[data-topic]','click',e=>openTopic(e.currentTarget.dataset.topic));
+  on(m,'[data-make]','click',e=>{ openTopic(e.currentTarget.dataset.make); const t = TOPIC[e.currentTarget.dataset.make]; genCards(c, t, 20); });
 }
 function setFromTopic(tid){ const t = TOPIC[tid]; return { title: t.name, s: t.s, ids: BYTOPIC[tid] || [], topic: tid }; }
 function openTopic(tid){ CUR_TOPIC = setFromTopic(tid); SETS_FILTER = TOPIC[tid].s; VIEW = 'topic'; STUDY = null; if (location.hash !== '#sets') history.replaceState(null,'','#sets'); render(); window.scrollTo(0,0); }
 function openSet(set){ CUR_TOPIC = set; VIEW = 'topic'; STUDY = null; render(); window.scrollTo(0,0); }
 let TERM_Q = '';
+let TOPIC_EDIT = false;
 function vTopic(m){
+  if (CUR_TOPIC && CUR_TOPIC.topic) { if (!TOPIC[CUR_TOPIC.topic]) CUR_TOPIC = null; else CUR_TOPIC = setFromTopic(CUR_TOPIC.topic); }
   const set = CUR_TOPIC; if (!set) { VIEW='sets'; return vSets(m); }
   const s = set.s; const t = set.topic ? TOPIC[set.topic] : null;
   const st = t ? topicStats(t.id) : null;
   const exN = t ? EXAMQ.filter(q=>q.t===t.id).length : 0;
+  const cc = t && t.custom ? courseOf(t.s) : null;
   const hasDrill = t && GEN[t.id] && GEN[t.id].length;
   const ids = set.ids;
   const due = ids.filter(isDue).length;
   m.innerHTML = `<div class="stack ${s?'s-'+s:''}">
     <div class="row"><button class="btn ghost sm" id="back">${ic('back')} Sets</button></div>
-    <div class="row between" style="align-items:flex-end"><div style="min-width:0">${s?`<span class="pill subj">${SUBJ[s].name}${t?' · Spec '+esc(t.spec):''}</span>`:''}<h1 style="margin-top:8px">${esc(set.title)}</h1>
+    <div class="row between" style="align-items:flex-end"><div style="min-width:0">${s?`<span class="pill subj">${SUBJ[s].name}${t&&t.spec?' · Spec '+esc(t.spec):''}</span>`:''}<h1 style="margin-top:8px">${esc(set.title)}</h1>
       <p class="muted small" style="margin-top:4px">${plural(ids.length,'card')}${due?` · ${due} due`:''}${st?` · ${Math.round(st.mastery*100)}% mastered`:''}</p></div></div>
-    <div class="modes">
+    ${cc ? `<div class="row"><button class="btn sm ${ids.length?'':'primary'}" id="mk">${ic('spark')} ${ids.length?'Make more cards':'Make cards with Claude'}</button><button class="btn sm" id="pst">Paste cards</button><button class="btn sm ghost" id="prq">${ic('exam')} Practice question</button>${ids.length?`<button class="btn sm ghost" id="edc">${TOPIC_EDIT?'Done editing':'Edit cards'}</button>`:''}</div>` : ''}
+    ${cc && PASTE_FOR === t.id ? pasteBoxHTML(t.id) : ''}
+    ${!ids.length ? `<div class="empty">No cards yet. Press <b>Make cards with Claude</b>: Claude writes them for your exact course, then you paste them here.</div>` : `<div class="modes">
       ${[['flash','Flashcards','Flip, then rate how well you knew it'],['learn','Learn','Adaptive rounds: choose, then recall'],['write','Write','Type the answer from memory'],['match','Match','Race to pair terms and answers'],['test','Test','A mixed practice test, scored']].map(([k,n,d])=>`<button class="mode" data-mode="${k}">${ic(k)}<b>${n}</b><span>${d}</span></button>`).join('')}
       ${hasDrill?`<button class="mode" data-drill="1">${ic('drills')}<b>Drill</b><span>Endless generated maths questions</span></button>`:''}
       ${exN?`<button class="mode" data-exam="1">${ic('exam')}<b>Exam Qs</b><span>${plural(exN,'question')} with mark schemes</span></button>`:''}
-    </div>
+    </div>`}
     <section class="stack" style="gap:10px"><div class="row between"><h3>Terms in this set</h3><input type="text" id="termSearch" placeholder="Search this set" style="max-width:240px" value="${esc(TERM_Q)}"></div>
       <div class="term-list" id="termList"></div></section>
   </div>`;
   const drawTerms = () => { const q = TERM_Q.toLowerCase(); const list = ids.map(id=>CARD[id]).filter(c=>!q || (c[2]+' '+c[3]).toLowerCase().includes(q));
-    m.querySelector('#termList').innerHTML = list.length ? list.map(c=>{const mm=cardMastery(c[0]);return `<div class="term"><div class="q">${esc(c[2])}<div class="tiny muted" style="margin-top:4px;font-weight:500">${mm===0?'Not studied':mm>=1?'Mastered':mm>=.6?'Familiar':'Learning'}</div></div><div class="a">${esc(c[3])}</div><button class="star" aria-label="Star this card" aria-pressed="${!!S.star[c[0]]}" data-star="${c[0]}">${ic('star','fill="'+(S.star[c[0]]?'currentColor':'none')+'"')}</button></div>`}).join('') : '<div class="empty">No cards match.</div>';
-    on(m,'[data-star]','click',e=>{ const id=e.currentTarget.dataset.star; S.star[id] = !S.star[id]; if(!S.star[id]) delete S.star[id]; save(); drawTerms(); }); };
+    m.querySelector('#termList').innerHTML = list.length ? list.map(c=>{const mm=cardMastery(c[0]);return `<div class="term"><div class="q">${esc(c[2])}<div class="tiny muted" style="margin-top:4px;font-weight:500">${mm===0?'Not studied':mm>=1?'Mastered':mm>=.6?'Familiar':'Learning'}</div></div><div class="a">${esc(c[3])}</div>${cc && TOPIC_EDIT ? `<button class="btn sm ghost" data-del="${c[0]}" style="color:var(--bad)" aria-label="Delete card">${ic('x')}</button>` : `<button class="star" aria-label="Star this card" aria-pressed="${!!S.star[c[0]]}" data-star="${c[0]}">${ic('star','fill="'+(S.star[c[0]]?'currentColor':'none')+'"')}</button>`}</div>`}).join('') : '<div class="empty">No cards match.</div>';
+    on(m,'[data-star]','click',e=>{ const id=e.currentTarget.dataset.star; S.star[id] = !S.star[id]; if(!S.star[id]) delete S.star[id]; save(); drawTerms(); });
+    on(m,'[data-del]','click',e=>{ const id = e.currentTarget.dataset.del; saveCards(t.id, (S.custom.sets[t.id].cards||[]).filter(x=>x[0]!==id)); CUR_TOPIC = setFromTopic(t.id); render(); }); };
   drawTerms();
   on(m,'#termSearch','input',e=>{ TERM_Q = e.target.value; drawTerms(); });
+  if (cc) {
+    on(m,'#mk','click',()=>genCards(cc, t, ids.length ? 15 : 20));
+    on(m,'#pst','click',()=>{ PASTE_FOR = t.id; render(); setTimeout(()=>m.querySelector('#pasteTxt')?.focus(), 50); });
+    on(m,'#prq','click',()=>handoff(practicePrompt(cc, t.name, 8)));
+    on(m,'#edc','click',()=>{ TOPIC_EDIT = !TOPIC_EDIT; render(); });
+    bindPaste(m, t.id);
+  }
   on(m,'#back','click',()=>{ VIEW='sets'; TERM_Q=''; render(); });
   on(m,'[data-mode]','click',e=>startMode(e.currentTarget.dataset.mode, set));
   on(m,'[data-drill]','click',()=>startDrill(t.id));
@@ -871,8 +1117,8 @@ function modeTest(set, taskKey){
 // ---------- review view ----------
 function vReview(m){
   const due = CARDS.filter(c=>isDue(c[0]));
-  const bySubj = ['psych','maths','econ'].map(s=>[s, due.filter(c=>TOPIC[c[1]].s===s).length]);
-  const newPool = TOPICS.slice().sort((a,b)=>weakness(b)-weakness(a)).flatMap(t=>(BYTOPIC[t.id]||[]).filter(id=>!cs(id))).slice(0, 20);
+  const bySubj = mySubj().map(s=>[s, due.filter(c=>TOPIC[c[1]].s===s).length]);
+  const newPool = myTopics().sort((a,b)=>weakness(b)-weakness(a)).flatMap(t=>(BYTOPIC[t.id]||[]).filter(id=>!cs(id))).slice(0, 20);
   const weakCards = CARDS.filter(c=>{ const x = cs(c[0]); return x && x[6] > 0; }).sort((a,b)=>(cs(b[0])[6]-cs(b[0])[5]*.3)-(cs(a[0])[6]-cs(a[0])[5]*.3)).slice(0, 25).map(c=>c[0]);
   m.innerHTML = `<div class="stack"><div><div class="eyebrow">Spaced repetition</div><h1>Review</h1><p class="muted" style="margin-top:6px;max-width:62ch">Cards come back just before you would forget them. Rate each one honestly and the schedule adapts. Ten minutes a day here does more than an hour of rereading notes.</p></div>
     <section class="card pad-lg stack"><div class="row between"><div><div class="mono" style="font-size:2.4rem;font-weight:700;line-height:1">${due.length}</div><div class="muted small">cards due now</div></div><button class="btn primary" id="all" ${due.length?'':'disabled'}>${ic('review')} Review all due</button></div>
@@ -894,10 +1140,12 @@ function vReview(m){
 // ---------- exam questions ----------
 let EXAM_FILTER = 'psych', EXAM_TOPIC = null, EXAM_MOCK = true;
 function vExam(m){
+  if (!mySubj().includes(EXAM_FILTER)) EXAM_FILTER = mySubj()[0];
+  if (isCustom(EXAM_FILTER)) return vCustomExam(m, EXAM_FILTER);
   const useMock = EXAM_MOCK && mockOn() && !EXAM_TOPIC && mockExamQs(EXAM_FILTER).length;
   const list = useMock ? mockExamQs(EXAM_FILTER) : EXAMQ.filter(q=>q.s===EXAM_FILTER && (!EXAM_TOPIC || q.t===EXAM_TOPIC));
   m.innerHTML = `<div class="stack"><div class="row between"><div><div class="eyebrow">Exam-style practice</div><h1>Exam questions</h1></div>
-      <div class="seg" role="group" aria-label="Subject">${['psych','maths','econ'].map(k=>`<button aria-pressed="${k===EXAM_FILTER}" data-s="${k}">${SUBJ[k].short}</button>`).join('')}</div></div>
+      <div class="seg" role="group" aria-label="Subject" style="flex-wrap:wrap">${mySubj().map(k=>`<button aria-pressed="${k===EXAM_FILTER}" data-s="${k}">${esc(SUBJ[k].short)}</button>`).join('')}</div></div>
     <p class="muted" style="max-width:66ch">Original questions written in the style of the ${SUBJ[EXAM_FILTER].board} papers. Answer under timed conditions, then mark against the mark-scheme points${SAMPLE?' yourself or with Claude as your examiner':''}.</p>
     ${mockOn() && !EXAM_TOPIC ? `<div class="row"><button class="btn sm ${useMock?'primary':''}" id="mockOnly">${useMock?'Showing '+esc(mockCfg().title)+' topics':'Show only '+esc(mockCfg().title)+' topics'}</button>${useMock?'<button class="btn ghost sm" id="mockAll">Show everything</button>':''}</div>`:''}
     ${EXAM_TOPIC?`<div class="row"><span class="pill subj s-${EXAM_FILTER}">${esc(TOPIC[EXAM_TOPIC].name)}</span><button class="btn ghost sm" id="clearT">Show all topics</button></div>`:''}
@@ -908,6 +1156,18 @@ function vExam(m){
   on(m,'#mockOnly','click',()=>{ EXAM_MOCK = true; render(); });
   on(m,'#mockAll','click',()=>{ EXAM_MOCK = false; render(); });
   on(m,'[data-q]','click',e=>openExam(e.currentTarget.dataset.q));
+}
+function vCustomExam(m, s){
+  const c = courseOf(s); const ts = TOPICS.filter(t=>t.s===s);
+  m.innerHTML = `<div class="stack s-${s}"><div class="row between"><div><div class="eyebrow">Exam-style practice</div><h1>Exam questions</h1></div>
+      <div class="seg" role="group" aria-label="Subject" style="flex-wrap:wrap">${mySubj().map(k=>`<button aria-pressed="${k===s}" data-s="${k}">${esc(SUBJ[k].short)}</button>`).join('')}</div></div>
+    <section class="card pad-lg stack"><h2>${esc(c.name)} practice question</h2><p class="small muted">Claude writes an original question in the style of ${esc(c.board||'your board')}, waits for your answer, then marks it with a full mark scheme. It's free on any Claude account.</p>
+      ${ts.length ? `<div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Topic</span><select id="pqT">${ts.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join('')}</select></label>
+      <label class="stack" style="gap:4px"><span class="small muted">Marks</span><select id="pqM">${[4,6,8,10,12,15,16,20,25,30].map(x=>`<option ${x===8?'selected':''}>${x}</option>`).join('')}</select></label></div>
+      <button class="btn primary" id="pqGo" style="align-self:flex-start">${ic('exam')} Get a question</button>` : `<p class="small">Add your topics first in <a href="#sets">Sets</a>.</p>`}
+    </section></div>`;
+  on(m,'[data-s]','click',e=>{ EXAM_FILTER = e.currentTarget.dataset.s; EXAM_TOPIC = null; render(); });
+  on(m,'#pqGo','click',()=>{ const t = TOPIC[m.querySelector('#pqT').value]; handoff(practicePrompt(c, t.name, +m.querySelector('#pqM').value)); });
 }
 function minsFor(q){ return q.s==='maths' ? Math.round(q.marks * 1.2) : q.s==='psych' ? Math.round(q.marks * 1.25) : Math.round(q.marks * 1.2); }
 function openExam(qid, taskKey){ const q = EXAMQ.find(x=>x.id===qid); STUDY = modeExam(q, taskKey); window.scrollTo(0,0); render(); }
@@ -1016,9 +1276,53 @@ function modeDrill(tid, taskKey){
   return o;
 }
 
+// ---------- welcome / setup ----------
+const WELCOME = { subjects: null };
+function vWelcome(m){
+  const W = WELCOME; if (!W.subjects) W.subjects = new Set();
+  const g = S.settings.grades;
+  m.innerHTML = `<div class="stack" style="max-width:640px;margin:0 auto">
+    <div><div class="eyebrow">Welcome</div><h1>Set up AAA Lab</h1><p class="muted" style="margin-top:6px">Flashcards with spaced repetition, exam-style questions with mark schemes, and maths drills for A-level. It takes a minute to set up.</p></div>
+    ${FIREBASE_CONFIG && !(window.claude && window.claude.use) ? `<section class="card pad-lg stack">${ACCOUNT.user ? `<p class="small">Signed in as <b>${esc(ACCOUNT.user.email || ACCOUNT.user.displayName || 'you')}</b>. Finish setting up below.</p>` : accountHTML('welcome')}</section>` : ''}
+    <section class="card pad-lg stack">
+      <label class="stack" style="gap:4px"><span class="small muted">Your first name</span><input type="text" id="wName" value="${esc(W.name ?? S.settings.name ?? '')}" autocomplete="given-name"></label>
+      <div class="stack" style="gap:6px"><span class="small muted">Which of these courses do you take?</span>
+        ${ALL_SUBJ.map(x=>`<label class="row s-${x}" style="gap:10px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" data-wsub="${x}" ${W.subjects.has(x)?'checked':''} style="margin-top:4px"><span><b>${SUBJ[x].name}</b> <span class="small muted">${SUBJ[x].board}</span></span></label>`).join('')}
+        <p class="tiny muted">These three come with ready-made cards, exam questions and drills.</p></div>
+      <div class="stack" style="gap:6px"><span class="small muted">Any other subjects? Add each one with its exam board and options. Claude can write the cards for you.</span>
+        ${(W.extra||[]).map((c,i)=>`<div class="row between small"><span><b>${esc(c.name)}</b> <span class="muted">${esc([c.board,c.options].filter(Boolean).join(' · '))}</span></span><button class="btn sm ghost" data-wdel="${i}">Remove</button></div>`).join('')}
+        ${W.adding ? courseFormHTML(null) : `<button class="btn sm" id="wAdd" style="align-self:flex-start">+ Add a subject</button>`}</div>
+      ${[...W.subjects].length ? `<div class="stack" style="gap:6px"><span class="small muted">Predicted grade → target grade</span>${[...W.subjects].map(x=>`<div class="row s-${x}" style="gap:8px;flex-wrap:nowrap"><span class="small" style="min-width:110px">${SUBJ[x].name}</span>${[0,1].map(i=>`<select data-wgrade="${x}" data-i="${i}">${['A*','A','B','C','D','E','U'].map(gr=>`<option ${g[x][i]===gr?'selected':''}>${gr}</option>`).join('')}</select>`).join('<span class="muted">→</span>')}</div>`).join('')}</div>` : ''}
+      <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Cards to study a day</span><input type="number" id="wGoal" min="10" max="400" value="${S.settings.goal}"></label>
+        <label class="stack" style="gap:4px"><span class="small muted">Next mocks start (optional)</span><input type="date" id="wMock" value="${esc(W.mock||'')}"></label></div>
+      <button class="btn primary" id="wGo" style="align-self:flex-start" ${[...W.subjects].length || (W.extra||[]).length ?'':'disabled'}>Start revising</button>
+      ${[...W.subjects].length || (W.extra||[]).length ? '' : '<span class="tiny muted">Pick or add at least one subject to start.</span>'}
+    </section></div>`;
+  bindAccount(m);
+  on(m,'#wName','input',e=>{ W.name = e.target.value; });
+  on(m,'#wAdd','click',()=>{ W.adding = true; render(); });
+  on(m,'[data-wdel]','click',e=>{ W.extra.splice(+e.currentTarget.dataset.wdel, 1); render(); });
+  on(m,'#cCancel','click',()=>{ W.adding = false; render(); });
+  on(m,'#cSave','click',()=>{ const c = readCourseForm(m, null); if (!c) return; (W.extra ||= []).push(c); W.adding = false; render(); });
+  on(m,'#wMock','change',e=>{ W.mock = e.target.value; });
+  on(m,'[data-wsub]','change',e=>{ const x = e.target.dataset.wsub; e.target.checked ? W.subjects.add(x) : W.subjects.delete(x); render(); });
+  on(m,'[data-wgrade]','change',e=>{ g[e.target.dataset.wgrade][+e.target.dataset.i] = e.target.value; });
+  on(m,'#wGoal','change',e=>{ S.settings.goal = Math.max(10, Math.min(400, +e.target.value || 60)); });
+  on(m,'#wGo','click',()=>{
+    S.settings.name = (W.name ?? S.settings.name ?? '').trim();
+    S.settings.subjects = ALL_SUBJ.filter(x=>W.subjects.has(x));
+    (W.extra||[]).forEach((c,i)=>{ c.created = Date.now() + i; S.settings.grades[c.id] = c.grades.slice(); c.at = Date.now(); S.custom.courses[c.id] = c; });
+    if ((W.extra||[]).length && !W.subjects.size) SETS_FILTER = W.extra[0].id;
+    S.settings.mock = { title:'Mocks', date: W.mock || '', topics: W.mock ? myTopics().map(t=>t.id) : [] };
+    S.settings.onboarded = true; save(); go('home'); window.scrollTo(0,0);
+    if (W.mock) toast('Pick your mock topics in Progress, Mocks focus');
+    else if ((W.extra||[]).length) toast('Next: add topics for your subjects in Sets');
+  });
+}
+
 // ---------- progress ----------
 function vProgress(m){
-  const all = TOPICS.map(t=>({ t, st: topicStats(t.id), w: weakness(t) }));
+  const all = myTopics().map(t=>({ t, st: topicStats(t.id), w: weakness(t) }));
   const weakest = all.slice().sort((a,b)=>b.w-a.w).slice(0, 8);
   const d0 = dayNum(); const weeks = 12; const startD = d0 - (weeks*7 - 1) - ((new Date().getDay()+6)%7 - 6 + 6) % 7;
   const cells = []; for (let d = d0 - weeks*7 + 1; d <= d0; d++) { const v = S.days[d]?.c || 0; cells.push(`<i data-l="${v===0?0:v<15?1:v<40?2:v<80?3:4}" title="${v} cards"></i>`); }
@@ -1030,7 +1334,7 @@ function vProgress(m){
     [3,'12 Apr → 16 Jun','Exam season','Follow the paper order: Econ P1 (10 May) first. In the week before each paper, focus on that paper\'s topics and its exam questions. Keep daily review going throughout.'],
   ];
   m.innerHTML = `<div class="stack"><div><div class="eyebrow">How you are doing</div><h1>Progress</h1></div>
-    <div class="grid g3">${['psych','maths','econ'].map(s=>{ const st = subjStats(s); return `<section class="card subj-card s-${s} stack" style="gap:8px"><div class="row between"><h3>${SUBJ[s].name}</h3><span class="mono" style="font-weight:700;font-size:1.3rem">${st.ready}%</span></div><div class="bar"><i style="width:${st.ready}%"></i></div>
+    <div class="grid g3">${mySubj().map(s=>{ const st = subjStats(s); return `<section class="card subj-card s-${s} stack" style="gap:8px"><div class="row between"><h3>${SUBJ[s].name}</h3><span class="mono" style="font-weight:700;font-size:1.3rem">${st.ready}%</span></div><div class="bar"><i style="width:${st.ready}%"></i></div>
       <div class="small muted">Mastery ${Math.round(st.mastery*100)}% · Accuracy ${st.acc==null?'–':Math.round(st.acc*100)+'%'} · Exam Qs ${st.exPct==null?'–':Math.round(st.exPct*100)+'%'} (${st.exN})</div></section>`; }).join('')}</div>
     <p class="tiny muted">Readiness blends card mastery (55%), answer accuracy (20%) and exam-question marks (25%). It is a guide to effort, not a grade prediction.</p>
     <section class="card pad-lg stack"><div class="row between"><h2>Weakest topics</h2><span class="tiny muted">Ranked by mastery, accuracy, exam marks and how soon the paper is</span></div>
@@ -1043,17 +1347,19 @@ function vProgress(m){
     <section class="card pad-lg stack" id="mockBox"><div class="row between"><h2>Mocks focus</h2><span class="tiny muted">${mockOn()?plural(daysTo(mockCfg().date),'day')+' to go':'Not active'}</span></div>
       <p class="small muted">Pick the date and the topics in your next mocks. Until that date, Home, Today's plan, exam questions and drills focus on these topics. Clear the date to turn focus mode off.</p>
       <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Name</span><input type="text" id="mockTitle" value="${esc(mockCfg().title)}"></label><label class="stack" style="gap:4px"><span class="small muted">First mock date</span><input type="date" id="mockDate" value="${esc(mockCfg().date||'')}"></label></div>
-      <div class="grid g3">${['psych','maths','econ'].map(s=>`<div class="stack s-${s}" style="gap:4px"><b class="small">${SUBJ[s].name}</b>${TOPICS.filter(t=>t.s===s).map(t=>`<label class="row small" style="gap:8px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" data-mtopic="${t.id}" ${mockCfg().topics.includes(t.id)?'checked':''} style="margin-top:3px"><span>${esc(t.name)}</span></label>`).join('')}</div>`).join('')}</div>
+      <div class="grid g3">${mySubj().map(s=>`<div class="stack s-${s}" style="gap:4px"><b class="small">${SUBJ[s].name}</b>${TOPICS.filter(t=>t.s===s).map(t=>`<label class="row small" style="gap:8px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" data-mtopic="${t.id}" ${mockCfg().topics.includes(t.id)?'checked':''} style="margin-top:3px"><span>${esc(t.name)}</span></label>`).join('')}</div>`).join('')}</div>
     </section>
     <section class="card pad-lg stack"><h2>Settings</h2>
       <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Name</span><input type="text" id="setName" value="${esc(S.settings.name)}"></label>
       <label class="stack" style="gap:4px"><span class="small muted">Daily card goal</span><input type="number" id="setGoal" min="10" max="400" value="${S.settings.goal}"></label></div>
-      <div class="grid g3">${['psych','maths','econ'].map(s=>`<div class="stack" style="gap:4px"><span class="small muted">${SUBJ[s].name}: predicted → target</span><div class="row" style="flex-wrap:nowrap">${[0,1].map(i=>`<select data-grade="${s}" data-i="${i}">${['A*','A','B','C','D','E','U'].map(g=>`<option ${S.settings.grades[s][i]===g?'selected':''}>${g}</option>`).join('')}</select>`).join('<span class="muted">→</span>')}</div></div>`).join('')}</div>
+      <div class="stack" style="gap:6px"><span class="small muted">Built-in courses (add any other subject in Sets, with + Subject)</span><div class="row">${ALL_SUBJ.map(x=>`<label class="row small s-${x}" style="gap:6px"><input type="checkbox" data-mysub="${x}" ${mySubj().includes(x)?'checked':''}> ${SUBJ[x].name} <span class="muted">${SUBJ[x].board}</span></label>`).join('')}</div></div>
+      <div class="grid g3">${mySubj().map(s=>`<div class="stack" style="gap:4px"><span class="small muted">${SUBJ[s].name}: predicted → target</span><div class="row" style="flex-wrap:nowrap">${[0,1].map(i=>`<select data-grade="${s}" data-i="${i}">${['A*','A','B','C','D','E','U'].map(g=>`<option ${S.settings.grades[s][i]===g?'selected':''}>${g}</option>`).join('')}</select>`).join('<span class="muted">→</span>')}</div></div>`).join('')}</div>
       <div class="hr"></div>
       ${SAMPLE && SAMPLE.offline ? `<div class="stack" style="gap:8px"><h3>Explain and Claude marking</h3><p class="small muted">Without a key, these buttons open Claude with the card, or your answer and the mark scheme, ready to send. That uses your Claude plan, so it is free. To get the answer inside this app instead, paste an Anthropic API key from console.anthropic.com. It is saved only on this device, never uploaded anywhere else, and each use is charged to your API account (about 1p per explanation and 5p per marked answer).</p>
         <div class="row"><input type="password" id="apiKey" placeholder="${getKey()?'Key saved':'sk-ant-...'}" autocomplete="off" style="flex:1;min-width:200px"><button class="btn sm" id="saveKey">Save key</button>${getKey()?'<button class="btn sm ghost" id="clearKey">Remove key</button>':''}</div>
         <span class="tiny muted">${getKey()?'Key saved. Answers appear in the app.':'No key saved. Buttons open Claude.'}</span></div><div class="hr"></div>` : ''}
-${!(window.claude && window.claude.use) ? `<div class="stack" style="gap:8px"><h3>Sync across your devices</h3>${ghGet() ? `<p class="small muted">${SYNC.gh ? 'On. Your progress is saved to a private gist on your GitHub account and loads on any device where you have connected the same account.' : 'Your sync key was not accepted or GitHub could not be reached. If the key expired, make a new one and connect again.'}</p>
+${FIREBASE_CONFIG && !(window.claude && window.claude.use) ? `<div class="stack" style="gap:8px"><h3>Your account</h3>${accountHTML('settings')}</div><div class="hr"></div>` : ''}
+      ${!(window.claude && window.claude.use) && (!FIREBASE_CONFIG || (!ACCOUNT.user && ghGet())) ? `<div class="stack" style="gap:8px"><h3>Sync across your devices</h3>${ghGet() ? `<p class="small muted">${SYNC.gh ? 'On. Your progress is saved to a private gist on your GitHub account and loads on any device where you have connected the same account.' : 'Your sync key was not accepted or GitHub could not be reached. If the key expired, make a new one and connect again.'}</p>
         <div class="row"><button class="btn sm" id="ghNow">Sync now</button><button class="btn sm ghost" id="ghOff">Turn off on this device</button></div>`
       : `<p class="small muted">Free, using your GitHub account. Do this once on each device:</p>
         <ol class="small" style="margin:0;padding-left:20px;line-height:1.6"><li>Open <a href="https://github.com/settings/tokens/new?scopes=gist&description=AAA%20Lab%20sync" target="_blank" rel="noopener">this GitHub page</a> (sign in if asked).</li><li>Set <b>Expiration</b> to <b>No expiration</b>. Leave only <b>gist</b> ticked.</li><li>Press <b>Generate token</b>, copy the code starting <span class="mono">ghp_</span> and paste it below.</li></ol>
@@ -1064,10 +1370,11 @@ ${!(window.claude && window.claude.use) ? `<div class="stack" style="gap:8px"><h
         <div id="impBox" hidden class="stack" style="gap:8px"><textarea id="impTxt" placeholder="Paste a backup code here"></textarea><button class="btn sm primary" id="doImp" style="align-self:flex-start">Restore</button></div>
         <div id="resetBox" hidden class="feedback no row between"><span class="small">This deletes all card progress and exam marks on every device. It cannot be undone.</span><button class="btn sm" id="doReset">Yes, reset everything</button></div></div>
     </section>
-    <section class="card stack"><h3>About the content</h3><p class="small muted">Cards follow the current specifications: AQA A-level Psychology 7182 (updated for first A-level exams in 2027, including the new Clinical Psychology and Mental Health topic; your options Relationships, Schizophrenia and Forensic Psychology), Pearson Edexcel A-level Mathematics 9MA0 (Issue 4, large data set: Met Office weather 1987 and 2015), and Pearson Edexcel A-level Economics A 9EC0 (Issue 2). Exam questions are original practice questions in the style of each board, not past-paper questions. Check anything surprising against your class notes and the official specification.</p></section>
+    <section class="card stack"><h3>About the content</h3><p class="small muted">Cards follow the current specifications: AQA A-level Psychology 7182 (updated for first A-level exams in 2027, including the new Clinical Psychology and Mental Health topic; options Relationships, Schizophrenia and Forensic Psychology), Pearson Edexcel A-level Mathematics 9MA0 (Issue 4, large data set: Met Office weather 1987 and 2015), and Pearson Edexcel A-level Economics A 9EC0 (Issue 2). Exam questions are original practice questions in the style of each board, not past-paper questions. Check anything surprising against your class notes and the official specification.</p></section>
   </div>`;
   on(m,'[data-learn]','click',e=>startMode('learn', setFromTopic(e.currentTarget.dataset.learn)));
-  on(m,'#setName','change',e=>{ S.settings.name = e.target.value.trim() || 'Pedro'; save(); });
+  on(m,'[data-mysub]','change',e=>{ const a = new Set(mySubj()); e.target.checked ? a.add(e.target.dataset.mysub) : a.delete(e.target.dataset.mysub); if (!a.size) { e.target.checked = true; toast('Keep at least one course'); return; } S.settings.subjects = ALL_SUBJ.filter(x=>a.has(x)); save(); render(); });
+  on(m,'#setName','change',e=>{ S.settings.name = e.target.value.trim(); save(); });
   const mockSave = () => { S.settings.mock = Object.assign({}, mockCfg(), S.settings.mock || {}); save(); renderNav(); };
   on(m,'#mockTitle','change',e=>{ mockSave(); S.settings.mock.title = e.target.value.trim() || 'Mocks'; save(); });
   on(m,'#mockDate','change',e=>{ mockSave(); S.settings.mock.date = e.target.value || ''; save(); render(); toast(e.target.value ? 'Mock date saved' : 'Focus mode off'); });
@@ -1079,6 +1386,7 @@ ${!(window.claude && window.claude.use) ? `<div class="stack" style="gap:8px"><h
   on(m,'#doImp','click',()=>{ try { const o = JSON.parse(decodeURIComponent(escape(atob(m.querySelector('#impTxt').value.trim())))); if (!o || !o.cards) throw 0; S = mergeState(S, o); save(); toast('Progress restored'); render(); } catch(e){ toast('That code is not valid. Copy it again in full.'); } });
   on(m,'#saveKey','click',()=>{ const v = m.querySelector('#apiKey').value.trim(); if (!/^sk-ant-/.test(v)) { toast('That does not look like an Anthropic API key'); return; } setKey(v); toast('Key saved on this device'); render(); });
   on(m,'#clearKey','click',()=>{ setKey(''); toast('Key removed'); render(); });
+  bindAccount(m);
   on(m,'#ghOn','click',async ()=>{ const v = m.querySelector('#ghTok').value.trim(); if (!/^(ghp_|github_pat_|gho_)/.test(v)) { toast('That does not look like a GitHub token'); return; } ghSet({ token:v, gist:null }); toast('Connecting…'); await initGhSync(); if (SYNC.gh) { toast('Sync is on'); } else { ghSet(null); toast('GitHub did not accept that token. Check it and try again.'); } render(); });
   on(m,'#ghNow','click',async ()=>{ if (!SYNC.gh) await initGhSync(); else { setSync('warn','Syncing…'); try { await ghPush(); setSync('ok','Synced'); toast('Synced'); } catch(e){ setSync('warn','Sync retrying'); toast('Could not reach GitHub just now'); } } render(); });
   on(m,'#ghOff','click',()=>{ ghSet(null); SYNC.gh = false; setSync('local','Saved on this device'); toast('Sync turned off on this device'); render(); });
@@ -1096,6 +1404,7 @@ async function boot(){
     const res = await fetch('content.json'); const data = await res.json();
     CARDS = data.cards; EXAMQ = data.exam;
     CARDS.forEach(c => { CARD[c[0]] = c; (BYTOPIC[c[1]] ||= []).push(c[0]); });
+    CUSTOM_SIG = null;
   } catch(e) { document.getElementById('main').innerHTML = '<div class="empty">The revision content could not load. Check your connection and reload the page.</div>'; return; }
   render();
   initSync(); initSample();
