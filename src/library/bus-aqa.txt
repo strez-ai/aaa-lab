@@ -1,0 +1,160 @@
+@name Business
+@aliases Business Studies|AQA Business
+@board AQA
+@code 7132
+# what-is | 3.1 | What is business?
+Why businesses exist :: To provide goods or services that meet customer needs, generating profit or achieving social or other objectives.
+Mission statement :: A qualitative statement of a business's purpose and values, intended to guide decisions and motivate stakeholders.
+Corporate objectives :: Medium- to long-term goals such as profit, growth, survival, market share, cash flow, social and ethical objectives. Best set SMART.
+Profit :: Total revenue minus total costs. Revenue = price × quantity; total costs = fixed + variable costs.
+Legal structures :: Sole trader and partnership (unlimited liability), private limited company (Ltd) and public limited company (plc), both with limited liability.
+Not-for-profit organisations :: Charities and social enterprises aim to meet social or environmental needs, reinvesting surpluses.
+Shareholders and share prices :: Shareholders own companies and earn dividends and capital growth. Share prices change due to expected profits, economic conditions and confidence.
+External environment :: Competition, market conditions, incomes, interest rates, demographics and environmental issues affect costs and demand.
+Effect of interest rate rises :: Higher costs of borrowing, lower consumer spending on credit-financed goods, and a stronger pound affecting exports.
+Limited liability :: Owners can only lose the money they invested, not personal assets. Encourages investment but brings more regulation and disclosure.
+Social enterprise :: A business with social objectives whose profits are reinvested in its social purpose rather than paid to owners.
+Fixed and variable costs :: Fixed costs don't change with output (rent, salaries); variable costs change directly with output (raw materials, packaging).
+Exchange rates :: A stronger pound makes exports dearer and imports cheaper (SPICED: strong pound, imports cheap, exports dear).
+Inflation and business :: Rising prices raise costs, may reduce real incomes and demand, and make planning harder.
+Business cycle :: Boom, downturn, recession and recovery affect demand for income-elastic products most.
+# managers | 3.2 | Managers, leadership and decision making
+Role of managers :: Setting objectives, analysing, leading, making decisions and reviewing performance.
+Leadership styles :: Autocratic, democratic, paternalistic and laissez-faire. Tannenbaum Schmidt continuum: from manager-centred to team-centred.
+Blake Mouton grid :: Leadership based on concern for people and concern for production (task). Team leadership (9,9) is ideal.
+Scientific decision making :: Set objectives, gather data, analyse, select a strategy, implement, review. Reduces risk but slow and expensive.
+Decision trees :: Show options, probabilities and financial outcomes. Expected value = Σ(probability × outcome) - cost. Limitations: probabilities are estimates and ignore qualitative factors.
+Influences on decisions :: Mission, ethics, external environment, resource constraints and the manager's intuition.
+Stakeholders :: Individuals or groups affected by a business: employees, customers, suppliers, shareholders, local community, government.
+Stakeholder mapping :: Mendelow's grid: power vs interest. Key players need to be managed closely; others kept satisfied, informed or monitored.
+Opportunity cost in decisions :: The next best alternative given up when making a choice, e.g. investing in marketing instead of new machinery.
+Risk and uncertainty :: Risk can be estimated using probabilities; uncertainty cannot. Decisions often involve both.
+Ethical decision making :: Considering what is morally right, e.g. fair pay to suppliers. May raise costs but improve reputation and motivation.
+Managing stakeholder conflict :: Shareholders may want profit while employees want pay rises; managers prioritise based on objectives, power and interest.
+# marketing-obj | 3.3.1-3.3.2 | Marketing objectives and market research
+Marketing objectives :: e.g. sales volume and value, market size, market and sales growth, market share and brand loyalty.
+Market share :: Sales of a business ÷ total market sales × 100.
+Market growth :: (Change in market size ÷ original size) × 100.
+Primary and secondary research :: Primary: new data collected for a purpose (surveys, focus groups). Secondary: existing data (government statistics, reports). Primary is specific but expensive.
+Quantitative and qualitative data :: Quantitative: numerical data that can be analysed statistically. Qualitative: opinions and reasons.
+Sampling :: Random, quota and stratified sampling; larger samples give more confidence but cost more.
+Correlation and confidence intervals :: Correlation shows relationships between variables but not causation. Confidence intervals show the range in which results are likely to fall.
+Price elasticity of demand :: % change in quantity demanded ÷ % change in price. If inelastic, raising price increases revenue.
+Income elasticity of demand :: % change in quantity demanded ÷ % change in income. Luxuries above 1; necessities 0-1; inferior goods negative.
+Market mapping :: Positions products on two axes (e.g. price and quality) to find gaps in the market.
+Moving averages :: Smooth out fluctuations in data to show the underlying trend; used in sales forecasting.
+Extrapolation :: Extending past trends into the future; assumes conditions stay the same, so it is unreliable in changing markets.
+Value of technology in market research :: Big data, loyalty cards and social media analytics give detailed, fast information about customers.
+Influences on marketing objectives :: Corporate objectives, finance, competitors, market conditions and the stage of the product life cycle.
+# marketing-mix | 3.3.3-3.3.5 | Segmentation, targeting and the marketing mix
+Segmentation :: Dividing a market into groups with similar characteristics: demographic, geographic, income and behaviour.
+Targeting and positioning :: Choosing segments to focus on (niche vs mass) and how the product is perceived compared to competitors.
+The 7Ps :: Product, price, promotion, place, people, process and physical environment.
+Product life cycle :: Development, introduction, growth, maturity, decline. Extension strategies include new markets, new features and repackaging.
+Boston Matrix :: Classifies products by market share and market growth: stars, cash cows, question marks and dogs.
+Pricing strategies :: Price skimming, penetration pricing, cost-plus, competitive pricing, price discrimination and dynamic pricing.
+Promotion :: Advertising, sales promotion, PR, social media and sponsorship. Choice depends on budget, target market and product.
+Distribution channels :: Direct, one intermediary or multiple intermediaries; growth of e-commerce and multi-channel retailing.
+Consistency of the marketing mix :: The 7Ps must fit together and match the positioning and target market.
+Product portfolio :: The range of products a business sells; a balanced portfolio spreads risk and funds new products with cash cows.
+Branding :: Creates a distinctive identity that adds value, builds loyalty and allows higher prices.
+Influences on price :: Costs, competition, PED, stage of the life cycle and brand strength.
+Digital marketing :: Social media, search engine optimisation, influencers and targeted online ads; measurable and often cheaper but crowded.
+People, process and physical environment :: Service elements of the mix: trained staff, efficient systems and the look of premises create customer experience.
+# operations | 3.4 | Operational decisions
+Operational objectives :: Cost, quality, speed of response, flexibility, dependability and environmental objectives.
+Capacity utilisation :: Actual output ÷ maximum possible output × 100. High utilisation spreads fixed costs but leaves no room for extra orders.
+Labour productivity :: Output per worker per period. Improved by training, better equipment and motivation.
+Unit costs :: Total costs ÷ units of output.
+Lean production :: Minimising waste: just-in-time stock, kaizen (continuous improvement) and cell production.
+Economies and diseconomies of scale :: Economies: lower unit costs from bulk buying, technical, financial and managerial benefits. Diseconomies: coordination, communication and motivation problems.
+Quality management :: Quality control inspects output; quality assurance builds quality into every stage; TQM involves everyone.
+Inventory management :: Buffer stock, lead time, re-order level and maximum stock levels. Just-in-time reduces holding costs but increases risk of disruption.
+Supplier management :: Choosing suppliers by price, quality, reliability and flexibility; outsourcing non-core activities.
+Batch, flow and job production :: Job: one-off products. Batch: groups of identical products. Flow: continuous mass production.
+Automation and technology :: Robots and CAD/CAM improve productivity and consistency but are costly and may reduce flexibility.
+Matching supply to demand :: Use temporary staff, overtime, outsourcing, stock and producing to order to cope with demand changes.
+Benefits of improved quality :: Less waste, fewer returns, higher prices, better reputation and customer loyalty.
+Efficiency and capacity issues :: Under-utilisation raises unit costs; over-utilisation can cause stress, missed maintenance and poor quality.
+# finance | 3.5 | Financial decisions
+Financial objectives :: Revenue, cost, profit and cash-flow targets, investment levels and capital structure.
+Gross profit and operating profit :: Gross profit = revenue - cost of sales. Operating profit = gross profit - operating expenses. Profit for the year = operating profit - net finance costs - tax.
+Profit margins :: Gross, operating or net profit ÷ revenue × 100.
+Cash flow forecast :: Predicts inflows and outflows. Net cash flow = inflows - outflows. Helps identify shortfalls and plan finance.
+Budgets :: Income, expenditure and profit budgets. Variance analysis compares actual with budget: favourable or adverse.
+Break-even :: Break-even output = fixed costs ÷ contribution per unit. Contribution = selling price - variable cost per unit. Margin of safety = actual output - break-even output.
+Sources of finance :: Internal: retained profit, sale of assets. External: loans, overdrafts, share capital, venture capital, crowdfunding, trade credit.
+Improving cash flow :: Factoring, sale and leaseback, reducing stock, chasing debtors and negotiating longer credit from suppliers.
+Improving profits :: Raise prices, reduce costs or increase sales volume, considering the effect on demand and quality.
+Cash vs profit :: A profitable business can run out of cash if customers pay late or it holds too much stock. Cash pays bills; profit is a measure of performance.
+Contribution :: Total contribution = total revenue - total variable costs; it contributes to fixed costs then profit.
+Break-even chart :: Shows fixed costs, total costs and revenue; where total revenue meets total costs is break-even.
+Limitations of break-even :: Assumes all output is sold at one price and costs are linear; doesn't fit multi-product businesses well.
+Difficulties of budgeting :: Hard to forecast accurately, especially for new businesses; budgets can be inflexible and demotivating if imposed.
+Choosing finance :: Consider cost, amount needed, purpose, control and the business's legal structure and gearing.
+# hr | 3.6 | Human resource decisions
+HR objectives :: Employee engagement, talent development, training, diversity, matching workforce skills and labour costs.
+Labour turnover :: Number of staff leaving ÷ average number of staff × 100.
+Labour retention and absenteeism :: Retention measures staff staying; absenteeism shows days lost and may indicate low motivation.
+Organisational design :: Hierarchy, span of control, delegation, centralisation vs decentralisation. Wider spans with delayering can cut costs but increase workload.
+Workforce planning :: Analysing current workforce and future needs, then recruiting, training or redeploying staff.
+Taylor's scientific management :: Workers are motivated by money; work should be broken into simple tasks with piece-rate pay.
+Maslow's hierarchy :: Physiological, safety, love and belonging, esteem, self-actualisation needs.
+Herzberg's two-factor theory :: Hygiene factors (pay, conditions) prevent dissatisfaction; motivators (achievement, recognition, responsibility) increase satisfaction. Job enrichment uses motivators.
+Financial and non-financial motivation :: Piecework, commission, bonuses, profit-sharing and performance-related pay vs delegation, empowerment, team working and flexible working.
+Employer-employee relations :: Communication, trade unions, collective bargaining, works councils and ACAS; poor relations can lead to industrial action.
+Recruitment and selection :: Internal recruitment is cheaper and motivates staff; external brings new ideas. Selection uses interviews, tests and assessment centres.
+Training :: On-the-job training is cheaper and practical; off-the-job allows specialist learning but costs more.
+Flexible workforce :: Part-time, temporary, zero-hours contracts, home working and multi-skilling help match labour to demand.
+Hackman and Oldham :: Job characteristics model: skill variety, task identity, task significance, autonomy and feedback increase motivation.
+Trade unions :: Represent workers in collective bargaining over pay and conditions; can improve communication but may cause disputes.
+# strategic-position | 3.7 | Analysing the strategic position
+Ratio analysis: ROCE :: Return on capital employed = operating profit ÷ (total equity + non-current liabilities) × 100. Shows how efficiently capital generates profit.
+Current ratio :: Current assets ÷ current liabilities. 1.5-2 is often seen as healthy liquidity.
+Gearing :: Non-current liabilities ÷ (total equity + non-current liabilities) × 100. Above 50% is highly geared and risky if interest rates rise.
+Efficiency ratios :: Payables days = payables ÷ cost of sales × 365. Receivables days = receivables ÷ revenue × 365. Inventory turnover = cost of sales ÷ average inventories.
+SWOT analysis :: Internal strengths and weaknesses; external opportunities and threats. Used to develop strategy.
+PESTLE :: Political, economic, social, technological, legal and environmental external factors.
+Porter's five forces :: Rivalry, threat of new entrants, buyer power, supplier power and threat of substitutes, which determine industry attractiveness.
+Core competencies :: Prahalad and Hamel: unique capabilities that give access to many markets, contribute to customer benefits and are hard to copy.
+Investment appraisal :: Payback period, average rate of return (ARR) and net present value (NPV) using discount factors. Consider risk and qualitative factors.
+Globalisation and emerging economies :: Growth of trade and emerging markets like India and China create opportunities and competition.
+Limitations of ratio analysis :: Based on past data, may be manipulated, doesn't include qualitative factors, and needs comparison with competitors or past years.
+Net present value :: Discounts future cash flows to today's value to allow for the time value of money; a positive NPV means the investment is worthwhile.
+Payback period :: Time taken for an investment's net cash inflows to cover its initial cost. Simple but ignores cash flows after payback.
+Average rate of return :: Average annual profit ÷ initial investment × 100; considers all cash flows but ignores timing.
+Value of SWOT :: Helps match strengths to opportunities, but can be a static snapshot and subjective.
+# strategic-direction | 3.8 | Choosing strategic direction
+Ansoff's matrix :: Market penetration, market development, product development and diversification, with increasing risk.
+Strategic positioning :: Porter's generic strategies: cost leadership, differentiation or focus.
+Bowman's strategic clock :: Combinations of price and perceived added value: low price, hybrid, differentiation, and failure strategies.
+Competitive advantage :: A business's ability to outperform rivals through lower costs or greater added value. Must be sustainable to last.
+Risks of diversification :: Highest risk in Ansoff's matrix because both products and markets are new, but it spreads risk across markets.
+Value of Porter's strategies :: Firms stuck in the middle with neither low costs nor differentiation may lose competitive advantage.
+# strategic-methods | 3.9 | Strategic methods
+Organic vs external growth :: Organic growth uses internal resources (slower, less risky). External growth through mergers and takeovers is faster but riskier.
+Types of integration :: Horizontal (same stage), vertical forwards or backwards (different stage of production), conglomerate (unrelated).
+Retrenchment :: Cutting back the scale of operations, e.g. closing branches or making staff redundant.
+Greiner's model of growth :: Growth through creativity, direction, delegation, coordination and collaboration, each ending in a crisis.
+Innovation :: Product and process innovation. Protection through patents and copyright. Kaizen and R&D drive innovation.
+Going international :: Reasons: market growth, lower costs, spreading risk. Methods: exporting, licensing, joint ventures, direct investment. Multinationals may standardise or adapt (glocalisation).
+Digital technology :: E-commerce, big data, ERP and digital marketing change how businesses operate and compete.
+Mergers vs takeovers :: A merger is an agreed joining of two firms; a takeover is when one firm buys a controlling stake in another.
+Problems of growth :: Overtrading, diseconomies of scale, culture clashes in mergers and loss of focus.
+Franchising :: A franchisee pays fees to use a brand and business model. Lower risk for the franchisee; fast growth for the franchisor.
+Ethical and environmental strategy :: Sustainability and CSR can reduce costs, attract customers and investors, but may raise short-term costs.
+Bartlett and Ghoshal :: Multinational strategies: international, multi-domestic, global and transnational, based on pressure for cost reduction and local responsiveness.
+# change | 3.10 | Managing strategic change
+Causes of change :: Changes in the external environment, internal changes such as new leadership, growth and poor performance.
+Lewin's force field analysis :: Driving forces and restraining forces; change happens when driving forces outweigh restraining forces.
+Kotter and Schlesinger :: Reasons for resistance (self-interest, misunderstanding, low tolerance, different assessments) and ways to overcome it (education, participation, facilitation, negotiation, manipulation, coercion).
+Organisational culture :: The values, attitudes and beliefs within an organisation. Handy: power, role, task and person cultures. Hofstede: national cultures.
+Implementing strategy :: Leadership, communication, organisational structure, network analysis and critical path analysis help implement plans.
+Critical path analysis :: Identifies the shortest time to complete a project and the critical activities with no float. Earliest start and latest finish times guide resources.
+Strategic drift :: When a business's strategy gradually loses touch with its changing environment.
+Contingency planning :: Planning for unexpected crises such as IT failure, natural disasters or loss of key staff.
+Large-scale vs incremental change :: Incremental change happens gradually; disruptive change requires major transformation.
+Flexible organisations :: Restructuring, delayering, flexible employment and knowledge management help businesses adapt quickly.
+Factors in successful change :: Clear vision, strong leadership, communication, employee involvement and adequate resources.
+Reasons strategies fail :: Poor planning, lack of resources, resistance to change, poor leadership and external shocks.
+Corporate culture change :: Strong cultures can resist change; leaders change culture through recruitment, rewards and communication.
