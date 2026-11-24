@@ -1,0 +1,285 @@
+@name Biology
+@aliases Biology A|AQA Biology
+@board AQA
+@code 7402
+# molecules | 3.1.1-3.1.3 | Carbohydrates and lipids
+Monomer and polymer :: Monomers are small units that join to form larger molecules called polymers. Examples of monomers: monosaccharides, amino acids and nucleotides.
+Condensation and hydrolysis reactions :: A condensation reaction joins two molecules with a chemical bond and removes a molecule of water. A hydrolysis reaction breaks a chemical bond between two molecules using a molecule of water.
+Common monosaccharides :: Glucose, galactose and fructose. Glucose has two isomers, α-glucose and β-glucose, which differ in the position of the OH group on carbon 1.
+Disaccharides and their monomers :: Maltose = glucose + glucose. Sucrose = glucose + fructose. Lactose = glucose + galactose. Each is formed by a condensation reaction that makes a glycosidic bond.
+Glycogen and starch :: Both are polymers of α-glucose. Starch (amylose and amylopectin) is the plant store; glycogen is the animal store and is more highly branched, so it can be hydrolysed quickly to release glucose.
+Why starch and glycogen are good stores :: Insoluble, so they don't affect water potential; large, so they can't leave the cell; compact; branching gives many ends for rapid hydrolysis by enzymes.
+Cellulose :: A polymer of β-glucose. Alternate monomers are inverted, giving long straight chains held together by many hydrogen bonds to form microfibrils, which give plant cell walls strength.
+Test for reducing sugars :: Add Benedict's reagent and heat in a water bath. A positive result goes from blue to green, yellow, orange or brick-red precipitate.
+Test for non-reducing sugars :: After a negative Benedict's test, boil the sample with dilute hydrochloric acid, neutralise with sodium hydrogencarbonate, then repeat the Benedict's test. A coloured precipitate shows a non-reducing sugar such as sucrose.
+Test for starch :: Add iodine/potassium iodide solution. A colour change from orange-brown to blue-black shows starch is present.
+Triglycerides :: One glycerol and three fatty acids joined by ester bonds formed in condensation reactions. Saturated fatty acids have no C=C double bonds; unsaturated ones have at least one.
+Properties of triglycerides :: High ratio of C-H bonds so they release lots of energy; low mass for energy stored; insoluble so don't affect water potential; release metabolic water when oxidised.
+Phospholipids :: One fatty acid of a triglyceride is replaced by a phosphate-containing group. The phosphate head is hydrophilic and the fatty acid tails are hydrophobic, so they form a bilayer in membranes.
+Emulsion test for lipids :: Mix the sample with ethanol, then add water and shake. A milky-white emulsion shows lipid is present.
+# proteins | 3.1.4 | Proteins and enzymes
+Amino acid structure :: A central carbon attached to an amine group (NH2), a carboxyl group (COOH), a hydrogen atom and a variable R group. There are 20 amino acids common to all organisms.
+Peptide bond :: Formed by a condensation reaction between the amine group of one amino acid and the carboxyl group of another. Many amino acids join to form a polypeptide.
+Primary structure :: The sequence of amino acids in a polypeptide chain. It determines how the protein folds and so its final shape and function.
+Secondary structure :: Hydrogen bonds between the C=O and N-H groups of the backbone fold the chain into an α-helix or β-pleated sheet.
+Tertiary structure :: Further folding into a specific 3D shape held by hydrogen bonds, ionic bonds and disulfide bridges between R groups.
+Quaternary structure :: More than one polypeptide chain joined together, sometimes with a prosthetic group (e.g. haemoglobin has four chains and haem groups).
+Biuret test for proteins :: Add biuret reagent (sodium hydroxide and copper(II) sulfate). A colour change from blue to purple shows protein is present.
+How enzymes work :: Enzymes are biological catalysts that lower the activation energy of reactions. The substrate binds to the active site to form an enzyme-substrate complex.
+Induced fit model :: The active site is not exactly complementary at first; it changes shape slightly as the substrate binds, putting strain on bonds and lowering activation energy.
+Effect of temperature on enzymes :: Rate rises with temperature as kinetic energy increases collisions. Above the optimum, hydrogen and ionic bonds break, the active site changes shape and the enzyme is denatured.
+Effect of pH on enzymes :: Changes in pH alter the charges on R groups in the active site, breaking ionic and hydrogen bonds, so the active site changes shape and fewer enzyme-substrate complexes form.
+Competitive inhibition :: The inhibitor has a similar shape to the substrate and binds to the active site. Increasing substrate concentration reduces its effect.
+Non-competitive inhibition :: The inhibitor binds to a site other than the active site (allosteric site), changing the shape of the active site. Increasing substrate concentration does not reduce its effect.
+Effect of substrate concentration :: Rate increases as more enzyme-substrate complexes form, until all active sites are occupied and the rate levels off; enzyme concentration then becomes the limiting factor.
+# nucleic | 3.1.5-3.1.8 | Nucleic acids, ATP, water and ions
+Nucleotide structure :: A pentose sugar, a phosphate group and a nitrogen-containing organic base. In DNA the sugar is deoxyribose; in RNA it is ribose.
+DNA bases and pairing :: Adenine pairs with thymine (two hydrogen bonds) and cytosine pairs with guanine (three hydrogen bonds). In RNA, uracil replaces thymine.
+Phosphodiester bond :: Formed by a condensation reaction between the phosphate group of one nucleotide and the sugar of another, forming the sugar-phosphate backbone.
+DNA structure :: Two antiparallel polynucleotide strands held together by hydrogen bonds between complementary bases, twisted into a double helix.
+How DNA's structure suits its function :: Stable sugar-phosphate backbone; hydrogen bonds allow strands to separate for replication; complementary base pairing allows accurate copying; very long, so stores lots of information.
+Semi-conservative replication :: DNA helicase breaks hydrogen bonds to unwind the strands. Free nucleotides pair with exposed complementary bases. DNA polymerase joins adjacent nucleotides with phosphodiester bonds. Each new molecule has one original and one new strand.
+Meselson and Stahl :: Grew bacteria in heavy nitrogen (15N) then light nitrogen (14N). After one generation all DNA had intermediate density, supporting semi-conservative replication.
+ATP structure :: A nucleotide derivative of adenine with ribose and three phosphate groups.
+How ATP releases energy :: ATP hydrolase hydrolyses ATP to ADP and inorganic phosphate, releasing a small, manageable amount of energy. The phosphate can phosphorylate other compounds, making them more reactive.
+ATP synthesis :: ATP synthase joins ADP and Pi in a condensation reaction during photosynthesis and respiration.
+Properties of water :: Metabolite in condensation and hydrolysis; important solvent; high specific heat capacity buffers temperature changes; large latent heat of vaporisation gives cooling by evaporation; cohesion supports water columns and surface tension.
+Roles of inorganic ions :: Hydrogen ions affect pH; iron ions are part of haemoglobin; sodium ions are used in co-transport of glucose and amino acids; phosphate ions are part of DNA, RNA and ATP.
+# cells | 3.2.1 | Cell structure
+Eukaryotic cell organelles :: Cell-surface membrane, nucleus, mitochondria, Golgi apparatus and vesicles, lysosomes, ribosomes, rough and smooth endoplasmic reticulum. Plant cells also have a cellulose cell wall, chloroplasts and a vacuole.
+Nucleus :: Contains chromosomes (DNA with histones) and a nucleolus that makes ribosomes. The nuclear envelope has pores that let mRNA leave.
+Mitochondria :: Site of aerobic respiration, producing ATP. Double membrane with the inner membrane folded into cristae; the matrix contains enzymes.
+Chloroplasts :: Site of photosynthesis. Contain thylakoids stacked into grana (light-dependent reaction) surrounded by the stroma (light-independent reaction).
+Rough ER and Golgi apparatus :: Rough ER has ribosomes and synthesises and transports proteins. The Golgi apparatus modifies and packages proteins and lipids into vesicles and makes lysosomes.
+Lysosomes :: Vesicles containing hydrolytic enzymes (lysozymes) that digest pathogens and break down old organelles.
+Prokaryotic cells :: No nucleus or membrane-bound organelles; circular DNA not associated with histones; smaller 70S ribosomes; murein cell wall. May have plasmids, a capsule and flagella.
+Viruses :: Acellular and non-living. Genetic material and enzymes such as reverse transcriptase inside a capsid, with attachment proteins. Some have a lipid envelope.
+Magnification formula :: Magnification = size of image ÷ size of real object. Remember 1 mm = 1000 µm.
+Resolution :: The minimum distance apart two objects can be and still be seen as separate. Electron microscopes have higher resolution because electrons have a shorter wavelength than light.
+TEM vs SEM :: Transmission EM gives 2D images with very high resolution of internal structures; specimens must be very thin. Scanning EM gives 3D surface images at lower resolution. Both need a vacuum, so specimens are dead.
+Cell fractionation :: Homogenise cells in cold, isotonic, buffered solution, filter, then ultracentrifuge at increasing speeds. Nuclei sediment first, then mitochondria, then lysosomes/ER, then ribosomes.
+Why the solution is cold, isotonic and buffered :: Cold reduces enzyme activity that would digest organelles; isotonic prevents osmosis damaging organelles; buffered prevents pH changes denaturing proteins.
+# division | 3.2.2 | Cell division
+The cell cycle :: Interphase (DNA replication and organelle synthesis), mitosis (nuclear division) and cytokinesis (division of the cytoplasm).
+Prophase :: Chromosomes condense and become visible; the nuclear envelope breaks down; spindle fibres form from centrioles.
+Metaphase :: Chromosomes line up along the equator of the cell, attached to spindle fibres by their centromeres.
+Anaphase :: Centromeres divide and spindle fibres shorten, pulling sister chromatids to opposite poles.
+Telophase :: Chromatids reach the poles and become chromosomes again; nuclear envelopes reform, producing two genetically identical nuclei.
+Mitotic index :: Number of cells with visible chromosomes ÷ total number of cells observed. Shows the proportion of cells dividing.
+Root tip squash practical :: Stain with toluidine blue or acetic orcein, warm with hydrochloric acid to separate cells, squash gently and view under a light microscope.
+Cancer and the cell cycle :: Cancer results from uncontrolled cell division forming a tumour. Many treatments target the cell cycle, for example by stopping DNA replication or spindle formation.
+Binary fission :: How prokaryotes divide: replication of the circular DNA and plasmids, then division of the cytoplasm to produce two daughter cells.
+Viral replication :: Viruses do not divide. They inject nucleic acid into a host cell, and the host's machinery replicates the virus particles.
+# membranes | 3.2.3 | Transport across membranes
+Fluid mosaic model :: Phospholipid bilayer with proteins, glycoproteins, glycolipids and cholesterol. Fluid because phospholipids move; mosaic because proteins are scattered through it.
+Cholesterol in membranes :: Binds to phospholipid tails, restricting their movement, which makes the membrane less fluid and more rigid.
+Simple diffusion :: Net movement of molecules from high to low concentration, passive. Small, non-polar molecules such as oxygen and carbon dioxide diffuse across the bilayer.
+Facilitated diffusion :: Passive movement of larger or charged molecules down a concentration gradient through channel proteins or carrier proteins.
+Osmosis :: Net movement of water from an area of higher water potential to lower water potential across a partially permeable membrane. Pure water has a water potential of 0 kPa.
+Active transport :: Movement against a concentration gradient using carrier proteins and energy from the hydrolysis of ATP.
+Co-transport in the ileum :: Sodium ions are actively pumped out of epithelial cells into the blood. Sodium then diffuses into the cell from the lumen with glucose via a co-transporter protein; glucose then moves into the blood by facilitated diffusion.
+Factors affecting rate of transport :: Surface area, concentration gradient, thickness of exchange surface, and number of channel or carrier proteins.
+Adaptations for rapid transport :: Microvilli increase surface area; many mitochondria supply ATP for active transport; many carrier proteins.
+Effect of temperature on membrane permeability (beetroot) :: Higher temperature increases phospholipid movement and denatures proteins, so the membrane becomes more permeable and more pigment leaks out.
+# immune | 3.2.4 | The immune system
+Antigen :: A molecule (usually a protein) on the surface of a cell that generates an immune response. Lets the immune system identify pathogens, abnormal body cells, toxins and cells from other organisms.
+Phagocytosis :: A phagocyte engulfs a pathogen into a phagosome. A lysosome fuses with it and hydrolytic enzymes destroy the pathogen. The phagocyte then presents the antigens.
+T cells (cell-mediated response) :: Helper T cells with complementary receptors bind to antigens on antigen-presenting cells. They stimulate cytotoxic T cells (which kill infected cells using perforin), B cells and phagocytes.
+B cells (humoral response) :: A B cell with a complementary antibody binds the antigen, takes it in and presents it. Helper T cells activate it, and it divides by mitosis (clonal selection) into plasma cells and memory cells.
+Antibody structure :: Four polypeptide chains (two heavy, two light) with variable regions forming two antigen-binding sites, and a constant region.
+How antibodies work :: They bind to complementary antigens forming antigen-antibody complexes, causing agglutination so phagocytes can engulf many pathogens at once.
+Primary vs secondary response :: Primary response is slow with few antibodies, so symptoms appear. Memory cells make the secondary response faster and stronger, so the pathogen is destroyed before symptoms.
+Active vs passive immunity :: Active: the body makes its own antibodies after exposure or vaccination, and is long-term. Passive: antibodies are given (e.g. via placenta or breast milk); it is immediate but short-term with no memory cells.
+Vaccination and herd immunity :: Vaccines contain antigens that trigger memory cell production. Herd immunity: if enough people are vaccinated, the pathogen can't spread easily, protecting unvaccinated people.
+Antigenic variability :: When pathogens change their antigens (e.g. influenza), memory cells no longer recognise them, so new vaccines are needed.
+HIV structure and replication :: HIV has RNA, reverse transcriptase and attachment proteins in a capsid with a lipid envelope. It infects helper T cells, and reverse transcriptase makes DNA from its RNA, which joins the host DNA.
+How HIV causes AIDS :: HIV kills helper T cells, so the immune system can't stimulate B cells or cytotoxic T cells, leaving the person vulnerable to opportunistic infections.
+Why antibiotics don't work on viruses :: Antibiotics target bacterial structures such as murein cell walls and 70S ribosomes. Viruses have no cell wall and use host cell ribosomes.
+Monoclonal antibodies and ELISA :: Monoclonal antibodies come from a single clone of plasma cells. They're used for targeted drug delivery, pregnancy tests and the ELISA test, which uses an enzyme-linked antibody to detect an antigen by a colour change.
+# exchange | 3.3.1-3.3.2 | Gas exchange
+Surface area to volume ratio :: Larger organisms have a smaller SA:V ratio, so they need specialised exchange surfaces and mass transport systems. Small organisms can rely on diffusion across their surface.
+Fick's law :: Rate of diffusion is proportional to surface area × concentration difference ÷ thickness of the exchange surface.
+Gas exchange in insects :: Air enters through spiracles into tracheae and tracheoles, which reach every cell. Ventilation by abdominal pumping; water in tracheole ends is drawn out during exercise, increasing surface area.
+Limiting water loss in insects :: Waterproof waxy cuticle, small surface area to volume ratio, and spiracles that can close.
+Gas exchange in fish :: Gills have filaments covered in lamellae for a large surface area. Countercurrent flow keeps a concentration gradient along the whole length of the lamellae.
+Countercurrent flow :: Blood and water flow in opposite directions, so the water always has a higher oxygen concentration than the blood it meets, and diffusion happens across the whole lamella.
+Gas exchange in dicotyledonous plants :: Gases diffuse through stomata into air spaces of the spongy mesophyll. Guard cells close stomata to reduce water loss.
+Xerophytes :: Plants adapted to dry conditions: thick waxy cuticle, sunken stomata, hairs, rolled leaves and fewer stomata, all trapping moist air and reducing water potential gradient.
+Human lung structure :: Trachea, bronchi, bronchioles and alveoli. Alveoli have a thin epithelium (one cell thick) and a large surface area, surrounded by capillaries.
+Inspiration :: External intercostal muscles contract and internal relax, so the ribcage moves up and out; the diaphragm contracts and flattens; thoracic volume increases, pressure decreases and air moves in.
+Expiration :: Mostly passive: external intercostals and diaphragm relax, volume decreases, pressure increases and air is forced out. Forced expiration uses the internal intercostal muscles.
+Pulmonary ventilation :: Tidal volume × ventilation rate (breaths per minute).
+Lung disease data :: Correlation between risk factors (e.g. smoking, pollution) and disease does not prove causation. Fibrosis, asthma and emphysema reduce gas exchange or ventilation.
+# digestion | 3.3.3 | Digestion and absorption
+Digestion of starch :: Amylase (from salivary glands and pancreas) hydrolyses starch into maltose. Maltase, a membrane-bound disaccharidase in the ileum, hydrolyses maltose into glucose.
+Disaccharidases :: Membrane-bound enzymes on the ileum epithelium: maltase, sucrase and lactase hydrolyse disaccharides into monosaccharides.
+Digestion of lipids :: Bile salts emulsify lipids into small droplets, increasing surface area. Lipase (from the pancreas) hydrolyses the ester bonds to give monoglycerides and fatty acids.
+Micelles :: Bile salts with monoglycerides and fatty acids form micelles, which carry them to the epithelium where they diffuse in. Triglycerides re-form and are packaged into chylomicrons that enter lacteals.
+Protein digestion :: Endopeptidases hydrolyse peptide bonds within the polypeptide; exopeptidases hydrolyse bonds at the ends; membrane-bound dipeptidases hydrolyse dipeptides into amino acids.
+Absorption of amino acids and glucose :: Both are absorbed by co-transport with sodium ions in the ileum.
+# transport-animals | 3.3.4.1 | Mass transport in animals
+Haemoglobin :: A protein with quaternary structure: four polypeptide chains each with a haem group containing iron, so each molecule carries four oxygen molecules.
+Oxygen dissociation curve :: S-shaped. Binding of the first oxygen changes the shape of haemoglobin, making it easier for others to bind (cooperative binding). High affinity at high partial pressure in the lungs; unloads at low partial pressure in tissues.
+Bohr effect :: Higher carbon dioxide concentration lowers the affinity of haemoglobin for oxygen, shifting the curve to the right, so more oxygen is unloaded to respiring tissues.
+Haemoglobin adaptations in different animals :: Animals in low-oxygen environments have haemoglobin with higher affinity (curve shifted left). Small, active animals have lower affinity (curve shifted right) to unload more oxygen.
+Mammalian double circulation :: Blood passes through the heart twice per circuit: pulmonary circulation to the lungs and systemic circulation to the body. Keeps pressure high for efficient delivery.
+Blood vessels to know :: Coronary arteries supply the heart; pulmonary artery and vein; aorta and vena cava; renal arteries and veins.
+Cardiac cycle :: Atrial systole (atria contract, AV valves open), ventricular systole (ventricles contract, AV valves close, semilunar valves open), then diastole (heart relaxes and fills).
+Valves :: Open when pressure behind them is higher and close when pressure in front is higher, preventing backflow. AV valves are between atria and ventricles; semilunar valves are in the aorta and pulmonary artery.
+Cardiac output :: Stroke volume × heart rate.
+Arteries, arterioles, capillaries and veins :: Arteries: thick muscular and elastic walls for high pressure. Arterioles: muscle constricts to control flow. Capillaries: one cell thick for exchange. Veins: wide lumen, thin walls and valves.
+Tissue fluid formation :: At the arteriole end, high hydrostatic pressure forces fluid out of capillaries. At the venule end, lower water potential in the capillary (due to plasma proteins) draws water back by osmosis. Excess drains into the lymph.
+Cardiovascular disease risk factors :: Smoking, high blood pressure, high blood cholesterol, obesity, lack of exercise and genetics. Atheroma formation can lead to aneurysm and myocardial infarction.
+# transport-plants | 3.3.4.2 | Mass transport in plants
+Cohesion-tension theory :: Water evaporates from leaves (transpiration), creating tension that pulls water up the xylem. Hydrogen bonds make water molecules cohesive, forming a continuous column; adhesion to xylem walls helps.
+Evidence for cohesion-tension :: Tree trunk diameter is smaller during the day when tension is highest; if xylem is broken, air is drawn in and water no longer leaks out.
+Potometer :: Measures water uptake, used to estimate transpiration rate. Cut shoot under water, ensure airtight seal, and time the movement of an air bubble.
+Factors affecting transpiration :: Light intensity (more stomata open), temperature, humidity and wind speed.
+Translocation :: Movement of assimilates such as sucrose in the phloem from sources (e.g. leaves) to sinks (e.g. roots, growing tissues), using energy.
+Mass flow hypothesis :: Sucrose is actively loaded into sieve tubes at the source, lowering water potential so water enters by osmosis, raising pressure. At the sink sucrose is removed, so water leaves, and the pressure gradient pushes sap from source to sink.
+Evidence for mass flow :: Ringing experiments (bulge above the ring), tracer experiments with radioactive carbon, and aphid mouthparts showing sap under pressure.
+# dna-genes | 3.4.1-3.4.2 | DNA, genes and protein synthesis
+Gene :: A base sequence of DNA that codes for the amino acid sequence of a polypeptide or a functional RNA.
+Locus :: The fixed position of a gene on a particular DNA molecule.
+Genetic code features :: Triplet code (three bases per amino acid), degenerate (more than one triplet per amino acid), universal (same in all organisms) and non-overlapping.
+Introns and exons :: Exons are coding sequences; introns are non-coding sequences within genes in eukaryotes. Non-coding multiple repeats also occur between genes.
+DNA in prokaryotes vs eukaryotes :: Eukaryotic DNA is linear and associated with histones to form chromosomes. Prokaryotic DNA is short, circular and not associated with histones. Mitochondria and chloroplasts have DNA like prokaryotes.
+Genome and proteome :: The genome is the complete set of genes in a cell. The proteome is the full range of proteins a cell can produce.
+Structure of mRNA and tRNA :: mRNA is a single linear strand carrying codons. tRNA is folded into a clover-leaf shape held by hydrogen bonds, with an anticodon and an amino acid binding site.
+Transcription :: DNA helicase breaks hydrogen bonds; free RNA nucleotides pair with the template strand; RNA polymerase joins them to make pre-mRNA. In eukaryotes, splicing removes introns to form mRNA.
+Translation :: mRNA attaches to a ribosome. tRNA anticodons pair with mRNA codons, bringing specific amino acids. Peptide bonds form between amino acids using ATP, until a stop codon is reached.
+# variation | 3.4.3 | Mutation and meiosis
+Gene mutation :: A change in the base sequence of DNA, such as a substitution or deletion. A deletion causes a frameshift. Due to the degenerate code, not all substitutions change the amino acid.
+Mutagenic agents :: Factors that increase the rate of mutation, such as ionising radiation, UV light and some chemicals.
+Chromosome mutations :: Non-disjunction (chromosomes fail to separate in meiosis) changes the number of chromosomes, for example polyploidy or Down's syndrome.
+Meiosis overview :: Two divisions produce four genetically different haploid cells. Meiosis I separates homologous chromosomes; meiosis II separates chromatids.
+Crossing over :: Homologous chromosomes pair up and chromatids twist around each other, exchanging sections of DNA at chiasmata, creating new combinations of alleles.
+Independent segregation :: Homologous pairs line up randomly in meiosis I, so each gamete gets a random mix of maternal and paternal chromosomes.
+Number of combinations :: Independent segregation gives 2ⁿ possible combinations, where n is the number of homologous pairs. Random fertilisation increases variation further.
+Mitosis vs meiosis :: Mitosis: one division, two genetically identical diploid cells. Meiosis: two divisions, four genetically varied haploid cells.
+# selection | 3.4.4 | Genetic diversity and adaptation
+Genetic diversity :: The number of different alleles of genes in a population. It allows natural selection to occur.
+Natural selection :: Random mutation creates new alleles. If an allele gives a selective advantage, those individuals are more likely to survive and reproduce, passing it on, so its frequency increases over generations.
+Directional selection :: Individuals with an extreme phenotype are favoured, e.g. antibiotic resistance in bacteria.
+Stabilising selection :: Individuals with phenotypes near the mean are favoured, reducing variation, e.g. human birth weight.
+Types of adaptation :: Anatomical (body structure), physiological (body processes) and behavioural.
+Investigating antimicrobial resistance :: Use aseptic technique to spread bacteria on agar, add antibiotic discs and measure clear zones of inhibition; bigger zones show more effective antibiotics.
+# taxonomy | 3.4.5-3.4.7 | Species, taxonomy and biodiversity
+Species :: A group of organisms that can interbreed to produce fertile offspring.
+Courtship behaviour :: Allows recognition of members of the same species and of a mate capable of breeding; species-specific behaviour.
+Taxonomic hierarchy :: Domain, kingdom, phylum, class, order, family, genus, species. Groups are nested with no overlap.
+Binomial naming :: The genus and species name, e.g. Homo sapiens. Genus has a capital letter; both are written in italics or underlined.
+Three domains :: Archaea, Bacteria and Eukarya.
+Biodiversity :: Species richness is the number of different species in a community. The index of diversity also considers how many individuals of each species there are.
+Index of diversity :: d = N(N-1) ÷ Σn(n-1), where N is total number of organisms and n is the number of each species. Higher values mean greater diversity.
+Farming and biodiversity :: Removing hedgerows, monoculture, pesticides and draining wetlands reduce biodiversity. Conservation schemes balance food production with biodiversity.
+Comparing genetic diversity :: Compare observable characteristics, base sequences of DNA or mRNA, or amino acid sequences of proteins. More similar sequences show closer relationships.
+Random sampling and mean :: Use random sampling, large sample sizes and calculate means and standard deviations to compare variation reliably.
+# photosynthesis | 3.5.1 | Photosynthesis
+Light-dependent reaction location :: Thylakoid membranes of chloroplasts.
+Photoionisation :: Light energy excites electrons in chlorophyll, which are lost and pass along an electron transfer chain.
+Photolysis :: Light splits water into protons, electrons and oxygen: 2H2O → 4H⁺ + 4e⁻ + O2. Electrons replace those lost from chlorophyll.
+Chemiosmosis in chloroplasts :: Energy from electrons pumps protons into the thylakoid space. Protons diffuse back through ATP synthase, producing ATP. NADP is reduced to reduced NADP.
+Light-independent reaction (Calvin cycle) :: In the stroma: CO2 combines with ribulose bisphosphate (RuBP), catalysed by rubisco, forming two glycerate 3-phosphate (GP). GP is reduced to triose phosphate (TP) using reduced NADP and ATP.
+Regenerating RuBP :: Five out of every six TP molecules are used to regenerate RuBP using ATP. The rest make glucose and other organic substances.
+Limiting factors of photosynthesis :: Light intensity, carbon dioxide concentration and temperature. Growers manipulate these in glasshouses to maximise yield while staying profitable.
+Chromatography of pigments :: Separate photosynthetic pigments on paper or TLC and calculate Rf values = distance moved by spot ÷ distance moved by solvent.
+Investigating dehydrogenase activity :: In isolated chloroplasts, DCPIP (a redox indicator) goes from blue to colourless as it is reduced, showing the rate of the light-dependent reaction.
+# respiration | 3.5.2 | Respiration
+Glycolysis :: In the cytoplasm: glucose is phosphorylated to triose phosphate, which is oxidised to pyruvate. Net gain of 2 ATP and 2 reduced NAD per glucose.
+Anaerobic respiration :: Pyruvate is converted to lactate (animals) or ethanol and CO2 (plants and yeast). This regenerates NAD so glycolysis can continue.
+Link reaction :: In the mitochondrial matrix, pyruvate is oxidised to acetate (losing CO2 and producing reduced NAD); acetate combines with coenzyme A to form acetylcoenzyme A.
+Krebs cycle :: Acetylcoenzyme A (2C) combines with a 4C molecule to form a 6C molecule. Through oxidation reactions it regenerates the 4C molecule, producing reduced NAD, reduced FAD, ATP and CO2.
+Oxidative phosphorylation :: Electrons from reduced NAD and FAD pass along the electron transfer chain on the cristae, releasing energy to pump protons into the intermembrane space. Protons flow back through ATP synthase, making ATP.
+Role of oxygen :: The final electron acceptor; combines with electrons and protons to form water.
+Other respiratory substrates :: Lipids and proteins can be respired. Glycerol and fatty acids, or amino acids, enter the Krebs cycle.
+Respirometer :: Measures oxygen uptake. Soda lime absorbs CO2, so movement of the coloured liquid shows oxygen consumed.
+# energy-eco | 3.5.3-3.5.4 | Energy and nutrient cycles
+Biomass :: The mass of carbon or dry mass of tissue per given area, measured using calorimetry to find chemical energy stored.
+Gross and net primary production :: GPP is chemical energy stored in plant biomass. NPP = GPP - R, where R is energy lost in respiration.
+Net production of consumers :: N = I - (F + R), where I is chemical energy in ingested food, F is energy lost in faeces and urine, and R is respiratory losses.
+Increasing farming efficiency :: Simplifying food webs (pesticides) and reducing respiratory losses (keeping animals warm and still) increase productivity.
+Role of saprobionts :: Decompose dead matter by extracellular digestion, releasing nutrients back into the soil.
+Nitrogen cycle stages :: Nitrogen fixation (Rhizobium), ammonification (saprobionts), nitrification (ammonium to nitrites to nitrates by nitrifying bacteria), and denitrification (nitrates to N2 by anaerobic bacteria).
+Phosphorus cycle :: Phosphate ions from rocks are released by weathering, taken up by plants, passed along food chains, released by decomposers and returned to sediments.
+Mycorrhizae :: Fungal associations with plant roots that increase the surface area for water and mineral uptake.
+Fertilisers and eutrophication :: Natural or artificial fertilisers replace nutrients. Leaching causes eutrophication: algal bloom, light blocked, plants die, decomposers use up oxygen, and fish die.
+# stimuli | 3.6.1 | Responding to stimuli
+Taxis :: A directional movement towards or away from a stimulus, e.g. woodlice moving away from light.
+Kinesis :: A non-directional response where the rate of movement or turning changes in response to unfavourable conditions such as humidity.
+Tropisms and IAA :: In shoots, IAA moves to the shaded side and causes cell elongation, so shoots bend towards light. In roots, IAA moves to the lower side and inhibits elongation, so roots bend down (gravitropism).
+Reflex arc :: Receptor, sensory neurone, relay neurone, motor neurone, effector. Fast and involuntary, protecting the body from harm.
+Pacinian corpuscle :: A pressure receptor. Pressure deforms the lamellae, opening stretch-mediated sodium channels; sodium ions flow in, creating a generator potential.
+Rods and cones :: Rods are very sensitive (many share one neurone - summation) but give low visual acuity. Cones give colour vision and high acuity, as each has its own neurone, but need bright light.
+Control of heart rate :: The SAN sends waves of excitation across the atria; the AVN passes them down the bundle of His and Purkyne tissue. The medulla oblongata alters heart rate via sympathetic (faster) and parasympathetic (slower) nerves.
+Chemoreceptors and baroreceptors :: Found in the aorta and carotid arteries. They detect changes in blood pH (CO2) and blood pressure and send impulses to the medulla.
+# nerves | 3.6.2 | Nerve impulses and synapses
+Resting potential :: About -70 mV. Sodium-potassium pumps move 3 Na⁺ out for every 2 K⁺ in, and the membrane is more permeable to K⁺, which diffuses out.
+Action potential :: Depolarisation: stimulus opens Na⁺ channels, Na⁺ floods in. Repolarisation: Na⁺ channels close, K⁺ channels open, K⁺ diffuses out. Hyperpolarisation then the resting potential is restored.
+All-or-nothing principle :: If the threshold is reached an action potential always fires with the same size; a bigger stimulus gives more frequent impulses, not bigger ones.
+Refractory period :: Time when ion channels are recovering and a new action potential can't fire. It makes impulses discrete, one-directional and limits frequency.
+Factors affecting conduction speed :: Myelination (saltatory conduction between nodes of Ranvier), axon diameter (wider is faster) and temperature.
+Synaptic transmission (cholinergic) :: An action potential opens Ca²⁺ channels in the presynaptic knob; vesicles release acetylcholine by exocytosis; it diffuses across and binds to receptors, opening Na⁺ channels in the postsynaptic membrane.
+Acetylcholinesterase :: Hydrolyses acetylcholine in the synaptic cleft, so the response stops and acetylcholine can be recycled.
+Summation :: Spatial: several presynaptic neurones together release enough neurotransmitter. Temporal: one neurone fires rapidly so neurotransmitter builds up to reach threshold.
+Inhibitory synapses :: Neurotransmitters open Cl⁻ channels and K⁺ channels, causing hyperpolarisation, so an action potential is less likely.
+Neuromuscular junction :: Synapse between a motor neurone and a muscle. Always excitatory; only links to muscle; many receptors.
+# muscles | 3.6.3 | Skeletal muscle
+Myofibril structure :: Made of sarcomeres containing thick myosin and thin actin filaments. The A band contains myosin; the I band contains only actin; the H zone only myosin.
+Sliding filament theory :: Ca²⁺ ions released from the sarcoplasmic reticulum bind tropomyosin, moving it so myosin heads bind actin to form cross-bridges. The heads pivot (power stroke), pulling actin past, and ATP detaches them.
+Role of ATP in contraction :: ATP hydrolysis provides energy to move and re-cock myosin heads, and to actively transport calcium ions back into the sarcoplasmic reticulum.
+Phosphocreatine :: Stored in muscle; provides phosphate to regenerate ATP from ADP quickly during short, intense exercise.
+Slow-twitch vs fast-twitch fibres :: Slow-twitch: contract slowly, many mitochondria and myoglobin, for endurance via aerobic respiration. Fast-twitch: contract rapidly, more glycogen and phosphocreatine, for short powerful bursts.
+# homeostasis | 3.6.4 | Homeostasis
+Homeostasis :: Maintaining a stable internal environment within limits, which keeps enzymes working optimally and water potential stable.
+Negative feedback :: A change from the norm triggers a response that restores it. Separate mechanisms for increases and decreases give greater control.
+Insulin action :: Released by β cells in the islets of Langerhans when blood glucose is high. It binds receptors, causes more glucose channels in membranes, and activates enzymes that convert glucose to glycogen (glycogenesis).
+Glucagon action :: Released by α cells when blood glucose is low. Activates glycogenolysis and gluconeogenesis in the liver.
+Second messenger model :: Adrenaline and glucagon bind receptors, activating adenylate cyclase, which converts ATP to cyclic AMP. cAMP activates protein kinase, which triggers glycogenolysis.
+Type I vs type II diabetes :: Type I: the body can't produce insulin (autoimmune); treated with insulin injections. Type II: cells don't respond properly to insulin; linked to obesity; treated with diet, exercise and drugs.
+Measuring glucose concentration :: Use a calibration curve made from known concentrations of glucose with a colorimeter, or test strips.
+Nephron structure and function :: Ultrafiltration in the glomerulus and Bowman's capsule; selective reabsorption in the proximal convoluted tubule; loop of Henle creates a water potential gradient in the medulla; water reabsorbed in the collecting duct.
+Loop of Henle :: The ascending limb actively transports Na⁺ out into the medulla and is impermeable to water. This lowers water potential in the medulla, so water leaves the descending limb and collecting duct by osmosis.
+ADH :: When blood water potential falls, osmoreceptors in the hypothalamus detect it, and the posterior pituitary releases ADH. ADH makes the collecting duct more permeable to water (more aquaporins), so more water is reabsorbed.
+# inheritance | 3.7.1 | Inheritance
+Genotype and phenotype :: Genotype is the genetic makeup; phenotype is the expression of that genetic makeup and its interaction with the environment.
+Dominant, recessive and codominant :: Dominant alleles are always expressed; recessive only when homozygous; codominant alleles are both expressed in the phenotype.
+Monohybrid and dihybrid crosses :: Monohybrid: one gene. Dihybrid: two genes. A typical heterozygous dihybrid cross gives a 9:3:3:1 ratio.
+Sex linkage :: Genes on the X chromosome. Males have only one X, so a single recessive allele is expressed (e.g. haemophilia, colour blindness).
+Autosomal linkage :: Two genes on the same autosome are inherited together unless crossing over separates them, so fewer recombinant offspring appear than expected.
+Multiple alleles :: Genes with more than two alleles, e.g. ABO blood groups, where Iᴬ and Iᴮ are codominant and Iᴼ is recessive.
+Epistasis :: When the allele of one gene affects or masks the expression of another gene, changing expected ratios.
+Chi-squared test :: χ² = Σ(O - E)² ÷ E. Compare to the critical value at p = 0.05 with the right degrees of freedom. If below the critical value, the difference is due to chance.
+# populations | 3.7.2-3.7.3 | Populations and evolution
+Hardy-Weinberg principle :: p + q = 1 and p² + 2pq + q² = 1. Predicts allele frequencies don't change if: large population, no mutation, no migration, random mating and no selection.
+Causes of variation :: Mutation, meiosis (crossing over and independent segregation), random fertilisation and the environment.
+Allopatric speciation :: Populations are geographically isolated; different selection pressures and mutations change allele frequencies until they can no longer interbreed.
+Sympatric speciation :: Speciation within the same area due to reproductive isolation, e.g. changes in behaviour, mating season or genitalia.
+Genetic drift :: Random changes in allele frequency, which have the greatest effect in small populations.
+# ecosystems | 3.7.4 | Populations in ecosystems
+Population, community and ecosystem :: A population is all organisms of one species in an area. A community is all populations in an area. An ecosystem includes the community and the non-living (abiotic) parts.
+Niche :: The role of a species within its habitat, including biotic and abiotic interactions. Two species can't occupy the same niche indefinitely.
+Carrying capacity :: The maximum population size an environment can support, limited by abiotic factors and biotic factors such as competition and predation.
+Quadrats and transects :: Random quadrats estimate abundance of non-motile organisms; belt or line transects show how species change across a gradient.
+Mark-release-recapture :: Population = (number in first sample × number in second sample) ÷ number marked in second sample. Assumes no migration, births or deaths, and marking doesn't affect survival.
+Succession :: Pioneer species colonise; they change abiotic conditions, making it suitable for other species, increasing biodiversity until a climax community forms.
+Conservation :: Managing succession (e.g. grazing or burning) to conserve habitats, balancing conservation with human needs.
+# gene-expression | 3.8.1-3.8.2 | Mutations and gene expression
+Types of gene mutation :: Addition, deletion, substitution, inversion, duplication and translocation of bases. Addition and deletion cause frameshifts.
+Stem cells :: Totipotent (can become any cell, early embryo), pluripotent (embryonic stem cells), multipotent (adult stem cells) and unipotent. iPS cells are made from adult cells using transcription factors.
+Transcription factors :: Proteins that move from the cytoplasm into the nucleus and bind to the promoter region of target genes, stimulating or inhibiting transcription.
+Oestrogen and transcription :: Oestrogen diffuses into the cell and binds a receptor on a transcription factor, changing its shape so it can bind DNA and start transcription.
+Epigenetics :: Heritable changes in gene function without changes to the base sequence. Increased methylation of DNA and decreased acetylation of histones inhibit transcription.
+RNA interference (RNAi) :: Small interfering RNA binds to complementary mRNA, which is then broken down, preventing translation.
+Tumours :: Benign tumours grow slowly and don't spread; malignant tumours grow rapidly and spread (metastasise).
+Oncogenes and tumour suppressor genes :: Mutated proto-oncogenes become oncogenes that are permanently activated. Mutated tumour suppressor genes can no longer slow cell division. Hypermethylation of tumour suppressors and hypomethylation of oncogenes contribute.
+Oestrogen and breast cancer :: High oestrogen levels can activate the transcription of genes that promote cell division, contributing to some breast cancers.
+# gene-tech | 3.8.3-3.8.4 | Genome projects and gene technology
+Genome projects :: Sequencing whole genomes. In simple organisms, proteome can be predicted; in complex organisms, non-coding DNA and regulatory genes make this harder.
+Producing DNA fragments :: Reverse transcriptase makes cDNA from mRNA; restriction endonucleases cut DNA at recognition sites, producing sticky ends; or genes can be made with a gene machine.
+In vivo cloning :: Insert the gene into a vector (plasmid) using the same restriction enzyme and DNA ligase, transform host cells, and identify them using marker genes.
+PCR (in vitro cloning) :: Heat to 95 °C to separate strands, cool to about 55 °C so primers anneal, heat to 72 °C so DNA polymerase extends. Each cycle doubles the DNA.
+Uses of recombinant DNA technology :: Making medicines (e.g. insulin), GM crops (e.g. pest resistance) and gene therapy. Raises ethical, financial and social issues.
+DNA probes :: Short, labelled single-stranded DNA that binds to complementary sequences, used to screen for alleles linked to disease.
+Genetic counselling and personalised medicine :: Screening results help people understand risks; drugs and doses can be tailored to a person's genotype.
+Genetic fingerprinting :: Uses variable number tandem repeats (VNTRs). DNA is cut, separated by gel electrophoresis and compared. Used in forensics, paternity tests and breeding programmes.

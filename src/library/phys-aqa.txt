@@ -1,0 +1,191 @@
+@name Physics
+@aliases Physics A|AQA Physics
+@board AQA
+@code 7408
+# measurements | 3.1 | Measurements and their errors
+SI base units :: Mass (kg), length (m), time (s), amount of substance (mol), temperature (K), electric current (A).
+SI prefixes :: Tera 10¹², giga 10⁹, mega 10⁶, kilo 10³, centi 10⁻², milli 10⁻³, micro 10⁻⁶, nano 10⁻⁹, pico 10⁻¹², femto 10⁻¹⁵.
+Random vs systematic errors :: Random errors scatter readings around the true value and are reduced by repeats and averaging. Systematic errors shift all readings by the same amount (e.g. zero error) and aren't reduced by repeating.
+Precision, repeatability, reproducibility, resolution, accuracy :: Precise: little spread. Repeatable: same results by the same person and method. Reproducible: same results with different person or method. Resolution: smallest change detectable. Accurate: close to the true value.
+Combining uncertainties :: Adding or subtracting: add absolute uncertainties. Multiplying or dividing: add percentage uncertainties. Raising to a power: multiply the percentage uncertainty by the power.
+Uncertainty from a graph :: Draw error bars, then lines of best and worst fit. Uncertainty in gradient = |best gradient - worst gradient|.
+Homogeneity of units :: Every term in a valid physics equation must have the same base units, which can be used to check equations.
+Estimation :: Orders of magnitude are used to estimate physical quantities, e.g. the mass of a person is about 10² kg.
+Absolute, fractional and percentage uncertainty :: Absolute is the ± value; fractional is absolute ÷ measured value; percentage is fractional × 100.
+# particles | 3.2.1 | Particles
+Specific charge :: Charge ÷ mass, in C kg⁻¹.
+Nucleon and proton number :: Nucleon number A is protons plus neutrons; proton number Z is protons. Isotopes have the same Z but different numbers of neutrons.
+Strong nuclear force :: Holds nucleons together. Attractive up to about 3 fm, repulsive below about 0.5 fm, and acts between nucleons only.
+Alpha decay :: The nucleus emits an alpha particle (2 protons + 2 neutrons): A decreases by 4 and Z by 2.
+Beta-minus decay :: A neutron becomes a proton, emitting an electron and an electron antineutrino: n → p + e⁻ + ν̄e. The antineutrino was proposed to conserve energy.
+Antiparticles :: Same mass and rest energy but opposite charge. Pair production: a photon creates a particle-antiparticle pair. Annihilation: they meet and produce two photons.
+Photon energy :: E = hf = hc/λ, where h = 6.63 × 10⁻³⁴ J s.
+Four fundamental interactions :: Gravity, electromagnetic, weak nuclear and strong nuclear. Exchange particles: virtual photon (EM), W⁺ and W⁻ bosons (weak), pion (strong between nucleons).
+Hadrons, baryons and mesons :: Hadrons feel the strong force. Baryons (protons, neutrons) have three quarks; mesons (pions, kaons) have a quark and antiquark. The proton is the only stable baryon.
+Leptons :: Electron, muon and neutrinos, which don't feel the strong force. Lepton number is conserved separately for electron and muon leptons.
+Quarks :: Up (+2/3), down (-1/3), strange (-1/3). Proton = uud, neutron = udd. Strangeness is conserved in strong interactions but can change by 1 in weak interactions.
+Conservation laws :: Charge, baryon number and lepton number are always conserved in particle interactions.
+Neutrinos :: Almost massless, uncharged leptons that rarely interact. Their existence was hypothesised to account for conservation of energy in beta decay.
+Beta-plus decay :: A proton becomes a neutron, emitting a positron and an electron neutrino: p → n + e⁺ + νe.
+Electron capture :: A proton-rich nucleus captures an inner electron: p + e⁻ → n + νe, mediated by a W⁺ boson.
+Kaon decay :: Kaons are mesons containing a strange quark; they decay into pions via the weak interaction.
+Discovery of particles from cosmic rays :: Strange particles such as kaons were found in cosmic ray interactions; they are produced in pairs by the strong interaction but decay by the weak interaction.
+Rest energy :: Particles' rest energies are usually quoted in MeV; the proton is about 938 MeV.
+# quantum | 3.2.2 | Electromagnetic radiation and quantum phenomena
+Photoelectric effect :: Electrons are emitted from a metal surface when light above a threshold frequency shines on it. Explained by photons: one photon gives its energy to one electron.
+Photoelectric equation :: hf = φ + Ek(max), where φ is the work function (minimum energy to free an electron).
+Why intensity doesn't affect maximum KE :: Greater intensity means more photons per second, so more electrons are emitted, but each photon has the same energy so max KE is unchanged.
+Electron volt :: 1 eV = 1.60 × 10⁻¹⁹ J, the energy gained by an electron accelerated through 1 V.
+Excitation and ionisation :: Electrons absorb exact amounts of energy to move to higher energy levels (excitation) or leave the atom (ionisation).
+Fluorescent tubes :: Mercury atoms are excited by collisions with electrons and emit UV photons; the phosphor coating absorbs UV and emits visible light.
+Line spectra :: Each line corresponds to a photon emitted as an electron moves between discrete energy levels: hf = E1 - E2. Evidence for discrete energy levels.
+Wave-particle duality :: Diffraction of electrons shows particles have wave properties. de Broglie wavelength λ = h/mv.
+Threshold frequency :: The minimum frequency of light needed to emit photoelectrons: f0 = φ/h.
+Stopping potential :: The potential needed to stop the fastest photoelectrons: eVs = Ek(max).
+Ground state :: The lowest energy level of an atom; energy levels are negative because energy must be supplied to free an electron.
+Electron diffraction and momentum :: Faster electrons have greater momentum so a shorter de Broglie wavelength, giving smaller diffraction rings.
+# waves | 3.3.1 | Progressive and stationary waves
+Wave equation :: c = fλ. Frequency f = 1/T.
+Transverse and longitudinal waves :: Transverse: oscillations perpendicular to energy transfer (EM waves). Longitudinal: oscillations parallel (sound), with compressions and rarefactions.
+Polarisation :: Only transverse waves can be polarised (oscillations in one plane). Uses: polaroid sunglasses and aligning aerials.
+Phase difference :: Measured in degrees or radians. Points one wavelength apart are in phase.
+Stationary waves :: Formed by superposition of two waves of the same frequency travelling in opposite directions. Nodes have zero amplitude; antinodes maximum. No net energy transfer.
+First harmonic on a string :: f = (1/2L)√(T/μ), where T is tension and μ is mass per unit length.
+Amplitude and wavelength :: Amplitude is maximum displacement from equilibrium; wavelength is the distance between adjacent points in phase.
+Electromagnetic spectrum :: Radio, microwave, infrared, visible, ultraviolet, X-rays and gamma rays. All travel at 3.00 × 10⁸ m s⁻¹ in a vacuum.
+Stationary waves with microwaves and sound :: A reflected microwave or sound wave superposes with the incident wave; nodes are λ/2 apart, so measuring node spacing gives λ.
+Required practical: string stationary waves :: Vary length, tension or mass per unit length and find the first harmonic frequency using a vibration generator and signal generator.
+# optics | 3.3.2 | Refraction, diffraction and interference
+Interference and coherence :: Coherent sources have the same frequency and a constant phase difference. Path difference of nλ gives constructive interference; (n + ½)λ gives destructive.
+Young's double slit :: Fringe spacing w = λD/s. Laser light is coherent and monochromatic; safety: never look directly into the beam.
+Single-slit diffraction :: Wide central maximum, twice the width of the others. Narrower slit or longer wavelength gives a wider central maximum.
+Diffraction grating :: d sin θ = nλ, where d is slit spacing. Used in spectroscopy.
+Refractive index :: n = c/cs. Snell's law: n1 sin θ1 = n2 sin θ2.
+Total internal reflection :: Happens when light goes from a higher to lower refractive index and the angle of incidence exceeds the critical angle: sin θc = n2/n1.
+Optical fibres :: Core with a cladding of lower refractive index. Material dispersion and modal dispersion cause pulse broadening; cladding protects and reduces signal loss.
+Path difference and phase :: Path difference of λ corresponds to a phase difference of 2π radians.
+White light fringes :: White light gives a central white fringe with coloured fringes on either side, as each wavelength has a different fringe spacing.
+Diffraction grating maximum order :: Maximum n is the largest whole number less than d/λ, because sin θ can't exceed 1.
+# mechanics | 3.4.1 | Force, energy and momentum
+Scalars and vectors :: Scalars have magnitude only (speed, mass, energy). Vectors have magnitude and direction (velocity, force, displacement).
+Equilibrium :: Resultant force and resultant moment are both zero. Forces form a closed triangle.
+Moments :: Moment = force × perpendicular distance from the pivot. Principle of moments: sum of clockwise moments = sum of anticlockwise moments in equilibrium.
+Couple :: A pair of equal and opposite forces whose lines of action don't coincide. Moment = one force × perpendicular distance between them.
+SUVAT equations :: v = u + at; s = (u + v)t/2; s = ut + ½at²; v² = u² + 2as. Only valid for constant acceleration.
+Projectile motion :: Treat horizontal (constant velocity) and vertical (acceleration g) independently. Air resistance reduces range and maximum height.
+Terminal speed :: Reached when drag equals weight, so resultant force and acceleration are zero.
+Newton's laws :: 1: an object stays at rest or constant velocity unless a resultant force acts. 2: F = ma (or F = Δ(mv)/Δt). 3: if A exerts a force on B, B exerts an equal and opposite force of the same type on A.
+Momentum and impulse :: p = mv. Impulse = FΔt = change in momentum = area under a force-time graph.
+Elastic and inelastic collisions :: Momentum is always conserved. Kinetic energy is conserved only in elastic collisions.
+Work, energy and power :: W = Fs cos θ. P = W/t = Fv. Efficiency = useful output ÷ input.
+Resolving forces :: A force F at angle θ has components F cos θ and F sin θ. On a slope, weight resolves into mg sin θ down the slope and mg cos θ perpendicular.
+Centre of mass :: The point at which the whole weight of an object appears to act. For a uniform object it is at the geometric centre.
+Displacement-time and velocity-time graphs :: Gradient of displacement-time is velocity; gradient of velocity-time is acceleration; area under velocity-time is displacement.
+Measuring g :: Drop an object through light gates or use a falling ball with an electromagnet and timer, then plot 2s against t² (gradient = g).
+Conservation of energy :: Gravitational potential energy ΔEp = mgΔh; kinetic energy Ek = ½mv². Energy can't be created or destroyed.
+Momentum conservation :: In a closed system, total momentum before equals total momentum after a collision or explosion.
+Safety features :: Crumple zones, seat belts and airbags increase the time of impact, reducing the force for the same change in momentum.
+# materials | 3.4.2 | Materials
+Density :: ρ = m/V.
+Hooke's law :: F = kΔL up to the limit of proportionality. Elastic strain energy = ½FΔL = area under the force-extension graph.
+Stress and strain :: Tensile stress = F/A. Tensile strain = ΔL/L.
+Young modulus :: E = stress ÷ strain = FL/(AΔL). Found from the gradient of the linear part of a stress-strain graph.
+Elastic and plastic deformation :: Elastic: material returns to original shape when the load is removed. Plastic: permanent deformation beyond the elastic limit.
+Breaking stress and brittle materials :: Breaking stress is the maximum stress before breaking. Brittle materials (glass) fracture without plastic deformation.
+Spring constants in series and parallel :: Series: 1/k = 1/k1 + 1/k2. Parallel: k = k1 + k2.
+Required practical: Young modulus :: Use a long wire with a vernier scale and reference wire, measure diameter with a micrometer in several places, and plot stress against strain.
+Hysteresis in rubber :: Loading and unloading curves differ; the area between them is energy lost as heat.
+# electricity | 3.5.1 | Current electricity
+Current and charge :: I = ΔQ/Δt. Charge in coulombs; current in amps.
+Potential difference :: V = W/Q, the work done per unit charge.
+Resistance and resistivity :: R = V/I. Resistivity ρ = RA/L. Ohm's law: for an ohmic conductor at constant temperature, I is proportional to V.
+I-V characteristics :: Ohmic conductor: straight line through origin. Filament lamp: curve, resistance increases with temperature. Diode: conducts only in forward bias above a threshold voltage.
+Thermistors and LDRs :: NTC thermistor resistance decreases as temperature increases. LDR resistance decreases as light intensity increases.
+Superconductivity :: Below the critical temperature, resistivity becomes zero. Uses: very strong magnetic fields and power cables with no energy loss.
+Series and parallel circuits :: Series: same current, R = R1 + R2. Parallel: same voltage, 1/R = 1/R1 + 1/R2.
+Power :: P = IV = I²R = V²/R. Energy E = IVt.
+Kirchhoff's laws :: Current: total current into a junction equals total out (conservation of charge). Voltage: sum of emfs = sum of pds around a loop (conservation of energy).
+Potential divider :: Vout = Vin × R2/(R1 + R2). Used with thermistors or LDRs as sensors.
+EMF and internal resistance :: ε = I(R + r) = V + Ir. Terminal pd falls as current increases; gradient of V-I graph is -r and the intercept is ε.
+Electron flow vs conventional current :: Conventional current flows from positive to negative; electrons flow the other way.
+Ammeters and voltmeters :: Ideal ammeters have zero resistance (placed in series); ideal voltmeters have infinite resistance (placed in parallel).
+Required practical: resistivity :: Measure resistance of different lengths of wire, plot R against L, and resistivity = gradient × cross-sectional area.
+Effect of temperature on metal resistance :: Increasing temperature makes ions vibrate more, so electrons collide more often, increasing resistance.
+# circular | 3.6.1.1 | Circular motion (A-level)
+Angular speed :: ω = v/r = 2πf. Measured in rad s⁻¹.
+Centripetal acceleration and force :: a = v²/r = ω²r, directed towards the centre. F = mv²/r = mω²r.
+Why an object in uniform circular motion accelerates :: Its direction, and so its velocity, is constantly changing, even though its speed is constant.
+Radian :: The angle subtended by an arc length equal to the radius; 2π radians = 360°.
+Vertical circles :: At the top of a vertical loop, mg + reaction = mv²/r; the minimum speed to stay on track is when reaction = 0, so v = √(gr).
+# shm | 3.6.1.2-3.6.1.4 | Simple harmonic motion (A-level)
+Condition for SHM :: Acceleration is proportional to displacement and directed towards the equilibrium position: a = -ω²x.
+SHM equations :: x = A cos ωt; v = ±ω√(A² - x²); max speed = ωA; max acceleration = ω²A.
+Mass-spring and pendulum :: Mass-spring: T = 2π√(m/k). Simple pendulum (small angles): T = 2π√(l/g).
+Energy in SHM :: Total energy is constant and shared between kinetic and potential; KE is maximum at equilibrium and zero at maximum displacement.
+Free and forced vibrations :: Free: oscillates at its natural frequency. Forced: driven by an external periodic force.
+Resonance :: When the driving frequency equals the natural frequency, amplitude is maximum. More damping lowers and broadens the resonance peak.
+Damping :: Light damping: amplitude decreases gradually. Critical damping: returns to equilibrium fastest without oscillating (car suspension). Heavy damping: returns slowly without oscillating.
+# thermal | 3.6.2 | Thermal physics (A-level)
+Specific heat capacity :: Energy needed to raise 1 kg of a substance by 1 K: Q = mcΔθ.
+Specific latent heat :: Energy needed to change the state of 1 kg without changing temperature: Q = mL.
+Internal energy :: The sum of the randomly distributed kinetic and potential energies of all particles in a system.
+Gas laws :: Boyle's law: pV constant at constant T. Charles's law: V/T constant at constant p. Pressure law: p/T constant at constant V. Temperature must be in kelvin.
+Ideal gas equation :: pV = nRT = NkT, where k = R/NA is the Boltzmann constant.
+Kinetic theory assumptions :: Large number of molecules in random motion; negligible volume of molecules; elastic collisions; negligible time in collisions; no forces between molecules except during collisions.
+Kinetic theory equation :: pV = ⅓Nm(c_rms)². Mean kinetic energy of a molecule = ½m(c_rms)² = (3/2)kT.
+Absolute zero :: 0 K (-273 °C), the temperature at which particles have minimum internal energy.
+Brownian motion :: Random motion of smoke particles caused by collisions with fast-moving air molecules, evidence for the kinetic model.
+Required practical: Boyle's law :: Trap air in a syringe or tube, vary pressure, measure volume and plot p against 1/V for a straight line.
+Work done by a gas :: At constant pressure, W = pΔV.
+# gravity | 3.7.2 | Gravitational fields (A-level)
+Newton's law of gravitation :: F = Gm1m2/r², where G = 6.67 × 10⁻¹¹ N m² kg⁻².
+Gravitational field strength :: g = F/m. For a radial field, g = GM/r².
+Gravitational potential :: V = -GM/r. The work done per unit mass to move from infinity to that point; zero at infinity, always negative.
+Escape velocity :: v = √(2GM/r).
+Orbits :: For a circular orbit, gravity provides centripetal force: T² ∝ r³ (Kepler's third law). Geostationary satellites orbit above the equator with a 24-hour period.
+Gravitational field lines :: Radial around a point mass; approximately uniform near the Earth's surface.
+Potential gradient :: g = -ΔV/Δr. Equipotential surfaces have no work done moving along them.
+Energy of an orbiting satellite :: Total energy = KE + PE, which is negative for a bound orbit. Moving to a higher orbit requires work.
+# efields | 3.7.3 | Electric fields (A-level)
+Coulomb's law :: F = Q1Q2/(4πε0r²). Like charges repel.
+Electric field strength :: E = F/Q. Radial field E = Q/(4πε0r²). Uniform field between parallel plates: E = V/d.
+Electric potential :: V = Q/(4πε0r). Work done per unit charge bringing a positive charge from infinity.
+Charged particle in a uniform field :: Follows a parabolic path, like a projectile.
+Comparing gravitational and electric fields :: Both obey inverse-square laws. Gravitational forces are always attractive; electric forces can attract or repel.
+# capacitors | 3.7.4 | Capacitance (A-level)
+Capacitance :: C = Q/V, measured in farads.
+Parallel plate capacitor :: C = Aε0εr/d. A dielectric increases capacitance because polar molecules align with the field.
+Energy stored :: E = ½QV = ½CV² = ½Q²/C = area under a Q-V graph.
+Charging and discharging :: Discharge: Q = Q0e^(-t/RC). Charging: Q = Q0(1 - e^(-t/RC)).
+Time constant :: RC is the time for charge to fall to 37% of the initial value during discharge. Time to halve: T½ = 0.69RC.
+Required practical: capacitor discharge :: Measure pd across a discharging capacitor at intervals, plot ln V against t; gradient = -1/RC.
+# magnetic | 3.7.5 | Magnetic fields (A-level)
+Force on a current-carrying wire :: F = BIl, with Fleming's left-hand rule giving the direction.
+Force on a moving charge :: F = BQv. Causes circular motion; used in cyclotrons.
+Magnetic flux and flux linkage :: Φ = BA. Flux linkage = NΦ = BAN cos θ.
+Faraday's and Lenz's laws :: Induced emf = rate of change of flux linkage: ε = NΔΦ/Δt. The induced current opposes the change that caused it.
+Alternating current :: Vrms = V0/√2; Irms = I0/√2. Oscilloscopes measure peak voltage and period.
+Transformers :: Ns/Np = Vs/Vp. Efficiency = IsVs/IpVp. Losses from eddy currents (laminated core), resistance of coils and hysteresis.
+National grid :: Electricity is transmitted at high voltage and low current to reduce I²R power losses.
+AC generator :: A coil rotating in a magnetic field produces an emf ε = BANω sin ωt.
+Eddy currents :: Currents induced in a conductor moving in a magnetic field, which oppose motion and waste energy as heat.
+# nuclear | 3.8 | Nuclear physics (A-level)
+Rutherford scattering :: Most alpha particles passed straight through gold foil; some were deflected by large angles, showing a small, dense, positive nucleus.
+Properties of alpha, beta and gamma :: Alpha: highly ionising, stopped by paper. Beta: moderately ionising, stopped by a few mm of aluminium. Gamma: weakly ionising, reduced by thick lead.
+Inverse square law for gamma :: I = k/x². Handle sources with tongs and store in lead-lined boxes to reduce exposure.
+Background radiation :: Comes from radon gas, rocks, cosmic rays, medical sources and nuclear industry. Subtract it from count rates.
+Radioactive decay :: Random and spontaneous. Activity A = λN. N = N0e^(-λt). Half-life T½ = ln 2/λ.
+Nuclear radius :: R = R0A^(1/3), so nuclear density is constant. Electron diffraction can measure it.
+Mass defect and binding energy :: The mass of a nucleus is less than the total mass of its nucleons; the difference is converted to binding energy, E = mc². 1 u = 931.5 MeV.
+Fission and fusion :: Fission splits a heavy nucleus; fusion joins light nuclei. Both release energy because binding energy per nucleon increases. Iron-56 has the highest binding energy per nucleon.
+Thermal nuclear reactor :: Fuel rods, moderator (slows neutrons for fission by elastic collisions), control rods (absorb neutrons), coolant. Waste must be stored long-term.
+Nuclear instability :: Stable nuclei lie on the N-Z curve. Neutron-rich nuclei undergo β⁻ decay; proton-rich nuclei undergo β⁺ decay or electron capture; large nuclei undergo alpha decay.
+Gamma emission :: Nuclei in an excited state emit gamma photons. Technetium-99m is a medical tracer because it emits gamma only and has a 6-hour half-life.
+Critical mass :: The minimum mass of fuel needed for a chain reaction to be sustained.
+# option-astro | 3.9 | Option: Astrophysics
+Telescopes :: Refracting telescopes use lenses (angular magnification = fo/fe); reflecting telescopes (Cassegrain) use mirrors, avoiding chromatic aberration.
+Resolving power :: Minimum resolvable angle θ ≈ λ/D, so larger diameter telescopes resolve more detail. CCDs have high quantum efficiency.
+Apparent and absolute magnitude :: Apparent magnitude m is brightness seen from Earth; absolute magnitude M is brightness at 10 parsecs. m - M = 5 log(d/10).
+Black-body radiation :: Wien's law: λmaxT = 2.9 × 10⁻³ m K. Stefan's law: P = σAT⁴.
+Hertzsprung-Russell diagram :: Plots absolute magnitude against temperature, showing the main sequence, red giants, white dwarfs and the life cycle of stars.
+Doppler shift and Hubble's law :: z = Δf/f = v/c. Hubble's law v = Hd, evidence for an expanding universe and the Big Bang. Age of the universe ≈ 1/H.

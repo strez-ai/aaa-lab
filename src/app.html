@@ -295,10 +295,34 @@ const PALETTE = ['#2563eb','#db2777','#059669','#d97706','#7c3aed','#0891b2','#d
 let BASE_EXAMS = null;
 let CUSTOM_SIG = null;
 const rid = (p) => p + Date.now().toString(36).slice(-5) + Math.random().toString(36).slice(2, 7);
+// Ready-made subject packs (library/<id>.json): topics and cards for subjects beyond the three built-in ones.
+let LIB = [], PACKS = {}, PACK_LOADING = {};
+const normName = (x) => String(x || '').toLowerCase().replace(/^a[ -]?level\s+/, '').replace(/[^a-z0-9]+/g, ' ').trim();
+function findPack(c){ const n = normName(c && c.name), b = boardBase(c); return n ? LIB.find(p => p.board === b && p.names.some(x => normName(x) === n)) || null : null; }
+function packInfo(id){ return LIB.find(p => p.id === id) || null; }
+const isMathsName = (x) => /^(maths?|mathematics)$/.test(normName(x));
+function linkPacks(){
+  customCourses().forEach(c => { const p = findPack(c);
+    if (c.pack && (!p || p.id !== c.pack)) { if (p) c.pack = p.id; else delete c.pack; saveCourse(c); }
+    else if (!c.pack && p && !c.packOff && !(c.topics || []).length) { c.pack = p.id; saveCourse(c); } });
+}
+async function loadPacks(){
+  const need = [...new Set(customCourses().map(c => c.pack).filter(id => id && !PACKS[id] && !PACK_LOADING[id] && packInfo(id)))];
+  for (const id of need) { PACK_LOADING[id] = true;
+    try { const r = await fetch('library/' + id + '.json'); if (!r.ok) throw new Error(r.status); const d = await r.json(); d.byTopic = {}; d.cards.forEach(c => (d.byTopic[c[1]] ||= []).push(c)); PACKS[id] = d; CUSTOM_SIG = null; if (!STUDY) render(); }
+    catch(e) { PACK_LOADING[id] = 'failed'; if (!STUDY) render(); } finally { if (PACK_LOADING[id] === true) PACK_LOADING[id] = false; } }
+}
+function packHintHTML(c){ const p = findPack(c);
+  if (p) return `<div class="feedback ok small"><b>Ready-made:</b> ${p.t} topics and ${p.n} flashcards for ${esc(p.name)} (${esc(p.board)}${p.code ? ' ' + esc(p.code) : ''}) load straight away. No Claude needed.</div>`;
+  if (isMathsName(c && c.name)) return `<div class="feedback small">Maths is already built in, with cards, exam questions and drills. The content is the same for every exam board, so tick <b>Maths</b> instead of adding it here.</div>`;
+  return ''; }
+function bindPackHint(m){ const draw = () => { const el = m.querySelector('#packHint'); if (el) el.innerHTML = packHintHTML({ name: m.querySelector('#cName').value, board: m.querySelector('#cBoard').value }); };
+  on(m,'#cName','input',draw); on(m,'#cBoard','change',draw); draw(); }
 function customCourses(){ return Object.values((S.custom||{}).courses||{}).filter(c=>c && !c.deleted).sort((a,b)=>(a.created||0)-(b.created||0)); }
 function courseOf(sub){ return (S.custom && S.custom.courses || {})[sub]; }
 function applyCustom(){
-  const sig = JSON.stringify([S.custom || {}, examYear()]); if (sig === CUSTOM_SIG) return; CUSTOM_SIG = sig;
+  if (LIB.length) linkPacks();
+  const sig = JSON.stringify([S.custom || {}, examYear(), Object.keys(PACKS)]); if (sig === CUSTOM_SIG) return; CUSTOM_SIG = sig;
   for (let i = TOPICS.length - 1; i >= 0; i--) if (TOPICS[i].custom) { delete TOPIC[TOPICS[i].id]; delete BYTOPIC[TOPICS[i].id]; TOPICS.splice(i, 1); }
   for (let i = CARDS.length - 1; i >= 0; i--) if (CARDS[i].custom) { delete CARD[CARDS[i][0]]; CARDS.splice(i, 1); }
   for (const k of Object.keys(SUBJ)) if (SUBJ[k].custom) delete SUBJ[k];
@@ -313,6 +337,13 @@ function applyCustom(){
     if (!S.settings.grades[key]) S.settings.grades[key] = (c.grades || ['B','A']).slice();
     css += `.s-${key}{--sc:${col};--ss:color-mix(in srgb, ${col} 14%, var(--surface))}`;
     const papers = ['P1', ...(c.exams || []).map(e => e.label || 'Exam')];
+    const pk = c.pack && PACKS[c.pack];
+    if (pk) pk.topics.forEach(pt => {
+      const T = { id: pt.id, s: key, name: pt.name, spec: pt.spec, papers, custom: true, pack: true }; TOPICS.push(T); TOPIC[pt.id] = T; BYTOPIC[pt.id] = [];
+      (pk.byTopic[pt.id] || []).forEach(c0 => { const card = c0.slice(); card.custom = true; card.pack = true; CARDS.push(card); CARD[card[0]] = card; BYTOPIC[pt.id].push(card[0]); });
+      const set = (S.custom.sets || {})[pt.id];
+      ((set && set.cards) || []).forEach(([id, q, a]) => { const card = [id, pt.id, q, a]; card.custom = true; CARDS.push(card); CARD[id] = card; BYTOPIC[pt.id].push(id); });
+    });
     (c.topics || []).forEach(t => {
       const T = { id: t.id, s: key, name: t.name, spec: '', papers, custom: true }; TOPICS.push(T); TOPIC[t.id] = T; BYTOPIC[t.id] = [];
       const set = (S.custom.sets || {})[t.id];
@@ -321,6 +352,7 @@ function applyCustom(){
     (c.exams || []).forEach(e => { if (e.d) EXAMS.push({ s: key, p: e.label || 'Exam', title: e.label || 'Exam', d: e.d, t: '' }); });
   });
   EXAMS.sort((a, b) => a.d.localeCompare(b.d));
+  if (LIB.length) loadPacks();
   let st = document.getElementById('customCss'); if (!st) { st = document.createElement('style'); st.id = 'customCss'; document.head.appendChild(st); } st.textContent = css;
 }
 function saveCourse(c){ c.at = Date.now(); S.custom.courses[c.id] = c; save(); }
@@ -415,6 +447,7 @@ function courseFormHTML(c){
     <label class="stack" style="gap:4px"><span class="small muted">Subject</span><input type="text" id="cName" list="subjList" value="${esc(c.name||'')}" placeholder="e.g. Politics"><datalist id="subjList">${COMMON_SUBJ.map(x=>`<option value="${esc(x)}">`).join('')}</datalist></label>
     <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Exam board</span><select id="cBoard">${BOARDS.map(b=>`<option ${boardBase(c)===b?'selected':''}>${b}</option>`).join('')}</select></label>
       <label class="stack" style="gap:4px"><span class="small muted">Spec code (optional)</span><input type="text" id="cCode" value="${esc(c.code||'')}" placeholder="e.g. H472"></label></div>
+    <div id="packHint"></div>
     <label class="stack" style="gap:4px"><span class="small muted">Your options or optional papers (optional)</span><input type="text" id="cOpts" value="${esc(c.options||'')}" placeholder="e.g. Russia 1855-1964, The Tudors, coursework on the Cold War"></label>
     <div class="row" style="gap:8px"><span class="small muted">Predicted → target</span>${[0,1].map(i=>`<select id="cG${i}">${['A*','A','B','C','D','E','U'].map(x=>`<option ${g[i]===x?'selected':''}>${x}</option>`).join('')}</select>`).join('<span class="muted">→</span>')}</div>
     <div class="stack" style="gap:6px"><span class="small muted">Exam dates (optional, add the ones you know)</span>${[0,1,2].map(i=>{ const e = (c.exams||[])[i] || {}; return `<div class="row" style="gap:8px;flex-wrap:nowrap"><input type="text" data-elabel="${i}" value="${esc(e.label||'')}" placeholder="Paper ${i+1}" style="max-width:140px"><input type="date" data-edate="${i}" value="${esc(e.d||'')}"></div>`; }).join('')}</div>
@@ -796,7 +829,7 @@ function dailyTasks(){
   // rotate subjects: psych and maths get more days
   // rotate subjects; ones with a bigger gap between predicted and target grade come up more often
   const rota = subs.flatMap(x => Array(Math.max(1, Math.min(3, gradeGap(x)))).fill(x));
-  customCourses().filter(c => !(c.topics||[]).length).forEach(c => tasks.push({ key:'setup-'+c.id, s:c.id, icon:'spark', title:`Set up ${c.name}: add your topics`, sub:'Get the topic list from Claude, or type your own', go:()=>{ SETS_FILTER = c.id; go('sets'); } }));
+  customCourses().filter(c => !(c.topics||[]).length && !c.pack).forEach(c => tasks.push({ key:'setup-'+c.id, s:c.id, icon:'spark', title:`Set up ${c.name}: add your topics`, sub:'Get the topic list from Claude, or type your own', go:()=>{ SETS_FILTER = c.id; go('sets'); } }));
   const empty = myTopics().find(t => (t.custom || t.stub) && !(BYTOPIC[t.id]||[]).length);
   if (empty) tasks.push({ key:'make-'+empty.id, s:empty.s, icon:'spark', title:`Make cards: ${empty.name}`, sub:`${SUBJ[empty.s].name} · Claude writes them, you paste them in`, go:()=>openTopic(empty.id) });
   const s1 = rota[d % rota.length], s2r = rota[(d + 3) % rota.length], s2 = s2r !== s1 ? s2r : (subs.find(x=>x!==s1) || s1);
@@ -940,6 +973,7 @@ function subjSeg(s){ return `<div class="row" style="gap:8px"><div class="seg" r
 function bindSeg(m){ on(m,'[data-s]','click',e=>{ SETS_FILTER = e.currentTarget.dataset.s; render(); }); on(m,'#addCourse','click',()=>{ COURSE_EDIT = 'new'; render(); window.scrollTo(0,0); }); }
 function bindCourseForm(m, after){
   const base = COURSE_EDIT && COURSE_EDIT !== 'new' ? courseOf(COURSE_EDIT) : null;
+  bindPackHint(m);
   on(m,'#cSave','click',()=>{ const c = readCourseForm(m, base); if (!c) return; S.settings.grades[c.id] = c.grades.slice(); saveCourse(c); COURSE_EDIT = null; SETS_FILTER = c.id; if (after) after(c); else { VIEW = 'sets'; render(); } toast(base ? 'Saved' : `${c.name} added`); });
   on(m,'#cCancel','click',()=>{ COURSE_EDIT = null; render(); });
   on(m,'#cDel','click',()=>{ if (!m.querySelector('#cDelSure')) { m.querySelector('#cDel').insertAdjacentHTML('afterend','<button class="btn sm" id="cDelSure" style="color:var(--bad)">Yes, remove it and its cards</button>'); on(m,'#cDelSure','click',()=>{ base.deleted = true; saveCourse(base); COURSE_EDIT = null; SETS_FILTER = mySubj()[0]; render(); toast('Subject removed'); }); } });
@@ -947,19 +981,23 @@ function bindCourseForm(m, after){
 let TOPIC_PASTE = false;
 function vCustomSets(m, s){
   const c = courseOf(s); const ts = TOPICS.filter(t=>t.s===s); const all = ts.flatMap(t=>BYTOPIC[t.id]||[]);
+  const pi = c.pack && packInfo(c.pack), waiting = pi && !PACKS[c.pack], offer = !c.pack && findPack(c);
   m.innerHTML = `<div class="stack s-${s}">
     <div class="row between"><div><div class="eyebrow">Study sets</div><h1>Sets</h1></div>${subjSeg(s)}</div>
     <section class="card pad-lg stack" style="gap:10px"><div class="row between"><div><span class="pill subj">${esc(SUBJ[s].board)}</span><h2 style="margin-top:6px">${esc(c.name)}</h2></div><button class="btn sm ghost" id="editCourse">Edit subject</button></div>
+      ${pi ? `<p class="small muted">${PACKS[c.pack] ? `Ready-made: ${plural(pi.t,'topic')} and ${plural(pi.n,'flashcard')} for the ${esc(pi.board)} spec. You can still add your own cards to any topic.` : PACK_LOADING[c.pack] === 'failed' ? 'The ready-made cards could not load. Check your connection and reload.' : 'Loading the ready-made cards…'}</p>` : ''}
+      ${offer ? `<div class="feedback ok small stack" style="gap:8px"><span><b>Ready-made cards are available:</b> ${offer.t} topics and ${offer.n} flashcards for ${esc(offer.name)} (${esc(offer.board)}). They're added next to your own topics.</span><button class="btn sm primary" id="usePack" style="align-self:flex-start">Add the ready-made cards</button></div>` : ''}
       <div class="row">${all.length?`<button class="btn sm primary" id="studyAll">${ic('learn')} Study all ${plural(all.length,'card')}</button>`:''}<button class="btn sm" id="practice">${ic('exam')} Practice question</button></div></section>
-    ${ts.length ? `<section class="card stack" style="gap:8px"><h3>${all.length ? 'Add cards to every topic' : 'Make cards for every topic at once'}</h3><p class="small muted">One request to Claude covers all ${plural(ts.length,'topic')}. Copy its whole reply and paste it here: the cards go into the right topics.</p><div class="row"><button class="btn sm ${all.length?'':'primary'}" id="mkAll">${ic('spark')} Ask Claude for all topics</button><button class="btn sm" id="pstAll">Paste reply</button></div>${PASTE_FOR === 'all:'+s ? pasteBoxHTML('all:'+s) : ''}</section>` : ''}
-    ${ts.length ? '' : `<section class="card pad-lg stack"><h3>Add your topics</h3><p class="small muted">Ask Claude for the topic list for your exact spec and options, then paste it below. Or type your topics yourself, one per line.</p><button class="btn sm" id="askTopics" style="align-self:flex-start">${ic('spark')} Get my topic list from Claude</button></section>`}
+    ${ts.length && !c.pack ? `<section class="card stack" style="gap:8px"><h3>${all.length ? 'Add cards to every topic' : 'Make cards for every topic at once'}</h3><p class="small muted">One request to Claude covers all ${plural(ts.length,'topic')}. Copy its whole reply and paste it here: the cards go into the right topics.</p><div class="row"><button class="btn sm ${all.length?'':'primary'}" id="mkAll">${ic('spark')} Ask Claude for all topics</button><button class="btn sm" id="pstAll">Paste reply</button></div>${PASTE_FOR === 'all:'+s ? pasteBoxHTML('all:'+s) : ''}</section>` : ''}
+    ${ts.length || waiting ? '' : `<section class="card pad-lg stack"><h3>Add your topics</h3><p class="small muted">Ask Claude for the topic list for your exact spec and options, then paste it below. Or type your topics yourself, one per line.</p><button class="btn sm" id="askTopics" style="align-self:flex-start">${ic('spark')} Get my topic list from Claude</button></section>`}
     <section class="stack" style="gap:8px"><div class="paper-h"><h3>Topics</h3><button class="btn sm ghost" id="addTopics">+ Add topics</button></div>
-      ${TOPIC_PASTE || !ts.length ? `<div class="card stack"><textarea id="topicTxt" style="min-height:120px" placeholder="One topic per line, e.g.&#10;The UK constitution&#10;Parliament&#10;The Prime Minister and executive"></textarea><div class="row"><button class="btn sm primary" id="topicGo">Add topics</button>${ts.length?'<button class="btn sm ghost" id="topicClose">Close</button>':''}</div></div>` : ''}
+      ${TOPIC_PASTE || (!ts.length && !waiting) ? `<div class="card stack"><textarea id="topicTxt" style="min-height:120px" placeholder="One topic per line, e.g.&#10;The UK constitution&#10;Parliament&#10;The Prime Minister and executive"></textarea><div class="row"><button class="btn sm primary" id="topicGo">Add topics</button>${ts.length?'<button class="btn sm ghost" id="topicClose">Close</button>':''}</div></div>` : ''}
       ${ts.map(t=>{const st=topicStats(t.id);return `<div class="topic-row s-${s}" style="grid-template-columns:minmax(0,1fr) auto"><button data-topic="${t.id}" style="all:unset;cursor:pointer;min-width:0"><div class="nm">${confDot(t.id)}${esc(t.name)}</div><div class="tiny muted">${st.n?plural(st.n,'card'):'No cards yet'}${st.due?` · <b style="color:var(--sc)">${st.due} due</b>`:''}${st.n?' · '+Math.round(st.mastery*100)+'% mastered':''}</div></button>
         ${st.n ? `<div class="tb" style="min-width:90px"><div class="bar"><i style="width:${Math.round(st.mastery*100)}%"></i></div></div>` : `<button class="btn sm" data-make="${t.id}">${ic('spark')} Make cards</button>`}</div>`}).join('')}
     </section></div>`;
   bindSeg(m);
   on(m,'#editCourse','click',()=>{ COURSE_EDIT = s; render(); window.scrollTo(0,0); });
+  on(m,'#usePack','click',()=>{ c.pack = offer.id; saveCourse(c); render(); toast(`Adding ${offer.n} ready-made cards`); });
   on(m,'#studyAll','click',()=>openSet({ title: c.name, s, ids: all }));
   on(m,'#practice','click',()=>{ EXAM_FILTER = s; go('exam'); });
   on(m,'#askTopics','click',()=>{ handoff(topicsPrompt(c)); TOPIC_PASTE = true; render(); toast('Claude opened. Copy the list, then paste it here.'); });
@@ -1004,7 +1042,7 @@ function vTopic(m){
       <div class="term-list" id="termList"></div></section>
   </div>`;
   const drawTerms = () => { const q = TERM_Q.toLowerCase(); const list = ids.map(id=>CARD[id]).filter(c=>!q || (c[2]+' '+c[3]).toLowerCase().includes(q));
-    m.querySelector('#termList').innerHTML = list.length ? list.map(c=>{const mm=cardMastery(c[0]);return `<div class="term"><div class="q">${esc(c[2])}<div class="tiny muted" style="margin-top:4px;font-weight:500">${mm===0?'Not studied':mm>=1?'Mastered':mm>=.6?'Familiar':'Learning'}</div></div><div class="a">${esc(c[3])}</div>${cc && TOPIC_EDIT ? `<button class="btn sm ghost" data-del="${c[0]}" style="color:var(--bad)" aria-label="Delete card">${ic('x')}</button>` : `<button class="star" aria-label="Star this card" aria-pressed="${!!S.star[c[0]]}" data-star="${c[0]}">${ic('star','fill="'+(S.star[c[0]]?'currentColor':'none')+'"')}</button>`}</div>`}).join('') : '<div class="empty">No cards match.</div>';
+    m.querySelector('#termList').innerHTML = list.length ? list.map(c=>{const mm=cardMastery(c[0]);return `<div class="term"><div class="q">${esc(c[2])}<div class="tiny muted" style="margin-top:4px;font-weight:500">${mm===0?'Not studied':mm>=1?'Mastered':mm>=.6?'Familiar':'Learning'}</div></div><div class="a">${esc(c[3])}</div>${cc && TOPIC_EDIT && !c.pack ? `<button class="btn sm ghost" data-del="${c[0]}" style="color:var(--bad)" aria-label="Delete card">${ic('x')}</button>` : `<button class="star" aria-label="Star this card" aria-pressed="${!!S.star[c[0]]}" data-star="${c[0]}">${ic('star','fill="'+(S.star[c[0]]?'currentColor':'none')+'"')}</button>`}</div>`}).join('') : '<div class="empty">No cards match.</div>';
     on(m,'[data-star]','click',e=>{ const id=e.currentTarget.dataset.star; S.star[id] = !S.star[id]; if(!S.star[id]) delete S.star[id]; save(); drawTerms(); });
     on(m,'[data-del]','click',e=>{ const id = e.currentTarget.dataset.del; saveCards(t.id, (S.custom.sets[t.id].cards||[]).filter(x=>x[0]!==id)); CUR_TOPIC = setFromTopic(t.id); render(); }); };
   drawTerms();
@@ -1484,8 +1522,9 @@ function vWelcome(m){
         ${ALL_SUBJ.map(x=>`<label class="row s-${x}" style="gap:10px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" data-wsub="${x}" ${W.subjects.has(x)?'checked':''} style="margin-top:4px"><span><b>${SUBJ[x].name}</b> <span class="small muted">${SUBJ[x].board}</span></span></label>`).join('')}
         <p class="tiny muted">These three come with ready-made cards, exam questions and drills.</p></div>
       ${W.subjects.has('psych') ? psychOptsHTML() : ''}
-      <div class="stack" style="gap:6px"><span class="small muted">Any other subjects? Add each one with its exam board and options. Claude can write the cards for you.</span>
-        ${(W.extra||[]).map((c,i)=>`<div class="row between small"><span><b>${esc(c.name)}</b> <span class="muted">${esc([c.board,c.options].filter(Boolean).join(' · '))}</span></span><button class="btn sm ghost" data-wdel="${i}">Remove</button></div>`).join('')}
+      <div class="stack" style="gap:6px"><span class="small muted">Any other subjects? Add each one with its exam board and options.</span>
+        ${LIB.length ? `<div class="stack" style="gap:6px"><span class="tiny muted">Ready-made, tap to add:</span><div class="row" style="gap:6px">${LIB.filter(p=>!(W.extra||[]).some(c=>c.pack===p.id)).map(p=>`<button type="button" class="btn sm" data-wlib="${p.id}">+ ${esc(p.name)} <span class="muted" style="font-weight:500">${esc(p.board)}</span></button>`).join('')}</div><span class="tiny muted">For any other subject, Claude can write the cards for you.</span></div>` : ''}
+        ${(W.extra||[]).map((c,i)=>`<div class="row between small"><span><b>${esc(c.name)}</b> <span class="muted">${esc([boardLabel(c),c.options].filter(Boolean).join(' · '))}</span>${findPack(c) ? ' <span class="pill" style="font-size:.7rem">Ready-made</span>' : ''}</span><button class="btn sm ghost" data-wdel="${i}">Remove</button></div>`).join('')}
         ${W.adding ? courseFormHTML(null) : `<button class="btn sm" id="wAdd" style="align-self:flex-start">+ Add a subject</button>`}</div>
       ${[...W.subjects].length ? `<div class="stack" style="gap:6px"><span class="small muted">Predicted grade → target grade</span>${[...W.subjects].map(x=>`<div class="row s-${x}" style="gap:8px;flex-wrap:nowrap"><span class="small" style="min-width:110px">${SUBJ[x].name}</span>${[0,1].map(i=>`<select data-wgrade="${x}" data-i="${i}">${['A*','A','B','C','D','E','U'].map(gr=>`<option ${g[x][i]===gr?'selected':''}>${gr}</option>`).join('')}</select>`).join('<span class="muted">→</span>')}</div>`).join('')}</div>` : ''}
       <div class="stack" style="gap:6px"><span class="small muted">How many cards a day? You can change this later.</span><div class="seg" role="group" aria-label="Daily cards">${[[15,'Light · 15'],[30,'Steady · 30'],[60,'Serious · 60'],[100,'Intense · 100']].map(([v,l])=>`<button type="button" data-wgoal="${v}" aria-pressed="${W.goal===v}">${l}</button>`).join('')}</div><span class="tiny muted">About ${Math.max(5, Math.round(W.goal/3))} minutes a day.</span></div>
@@ -1496,6 +1535,8 @@ function vWelcome(m){
   bindAccount(m);
   on(m,'#wName','input',e=>{ W.name = e.target.value; });
   on(m,'#wAdd','click',()=>{ W.adding = true; render(); });
+  on(m,'[data-wlib]','click',e=>{ const p = packInfo(e.currentTarget.dataset.wlib); if (!p) return; (W.extra ||= []).push({ id: rid('c'), created: Date.now(), topics: [], name: p.name, board: p.board, code: p.code, options: '', grades: ['B','A'], exams: [], pack: p.id }); render(); });
+  if (W.adding) bindPackHint(m);
   on(m,'[data-wdel]','click',e=>{ W.extra.splice(+e.currentTarget.dataset.wdel, 1); render(); });
   on(m,'#cCancel','click',()=>{ W.adding = false; render(); });
   on(m,'#cSave','click',()=>{ const c = readCourseForm(m, null); if (!c) return; (W.extra ||= []).push(c); W.adding = false; render(); });
@@ -1610,7 +1651,7 @@ async function boot(){
   renderNav();
   try {
     const res = await fetch('content.json'); const data = await res.json();
-    CARDS = data.cards; EXAMQ = data.exam;
+    CARDS = data.cards; EXAMQ = data.exam; LIB = data.lib || [];
     CARDS.forEach(c => { CARD[c[0]] = c; (BYTOPIC[c[1]] ||= []).push(c[0]); });
     CUSTOM_SIG = null;
   } catch(e) { document.getElementById('main').innerHTML = '<div class="empty">The revision content could not load. Check your connection and reload the page.</div>'; return; }
