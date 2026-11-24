@@ -1,0 +1,114 @@
+@name Further Maths
+@aliases Further Mathematics|Further Maths A|Further Maths B (MEI)
+@board Pearson Edexcel|AQA|OCR
+@code 9FM0
+# complex | CP1 | Complex numbers
+Imaginary unit :: i = √-1, so i² = -1. A complex number is z = a + bi, with real part a and imaginary part b.
+Complex conjugate :: z* = a - bi. z z* = a² + b², which is real. Used to divide complex numbers.
+Roots of real polynomials :: Complex roots of polynomials with real coefficients occur in conjugate pairs.
+Argand diagram :: Plots z = a + bi as the point (a, b).
+Modulus and argument :: |z| = √(a² + b²); arg z is the angle with the positive real axis, -π < arg z ≤ π.
+Modulus-argument form :: z = r(cos θ + i sin θ). Multiply: multiply moduli, add arguments. Divide: divide moduli, subtract arguments.
+Loci in the Argand diagram :: |z - a| = r is a circle centre a; |z - a| = |z - b| is a perpendicular bisector; arg(z - a) = θ is a half-line.
+Exponential form :: z = re^(iθ), using Euler's relation e^(iθ) = cos θ + i sin θ.
+De Moivre's theorem :: (r(cos θ + i sin θ))ⁿ = rⁿ(cos nθ + i sin nθ). Used to derive multiple angle identities.
+nth roots of a complex number :: z = r^(1/n) e^(i(θ + 2kπ)/n) for k = 0, 1, ..., n-1. The roots lie evenly on a circle.
+nth roots of unity :: Solutions of zⁿ = 1: e^(2kπi/n). They sum to zero and form a regular polygon.
+Adding complex numbers :: Add real parts and imaginary parts separately: (a + bi) + (c + di) = (a + c) + (b + d)i.
+Solving quadratics with complex roots :: Use the quadratic formula; if the discriminant is negative, roots are -b/2a ± (√(4ac - b²)/2a)i.
+Equal complex numbers :: Two complex numbers are equal only if their real parts and imaginary parts are equal.
+Square roots of a complex number :: Let √(a + bi) = x + iy, square, then equate real and imaginary parts.
+Regions in the Argand diagram :: Inequalities such as |z - a| < r or α < arg(z - a) < β define regions to shade.
+Sum of geometric series in complex form :: Use zⁿ + z⁻ⁿ = 2 cos nθ and zⁿ - z⁻ⁿ = 2i sin nθ to express powers of trig functions.
+# matrices | CP1 | Matrices
+Matrix multiplication :: Multiply rows by columns. Not commutative: AB ≠ BA in general.
+Determinant of a 2×2 matrix :: det(a b; c d) = ad - bc. A singular matrix has determinant zero and no inverse.
+Inverse of a 2×2 matrix :: (1/(ad - bc)) × (d -b; -c a).
+Inverse of a product :: (AB)⁻¹ = B⁻¹A⁻¹.
+Linear transformations :: Matrices represent reflections, rotations, enlargements and stretches. The determinant is the area (or volume) scale factor.
+Rotation matrix :: Anticlockwise rotation by θ about the origin: (cos θ -sin θ; sin θ cos θ).
+Invariant points and lines :: Invariant points map to themselves; invariant lines map each point to a point on the same line.
+3×3 determinants and systems :: Find det using cofactor expansion. A zero determinant means the planes meet in a line (sheaf), have no common point (prism or parallel), or are consistent in infinitely many points.
+Identity and zero matrices :: I leaves matrices unchanged; AA⁻¹ = A⁻¹A = I.
+Successive transformations :: Applying A then B is represented by BA.
+Inverse of a 3×3 matrix :: Find the matrix of cofactors, transpose it (adjugate), and divide by the determinant.
+Enlargement and stretch matrices :: Enlargement scale factor k: (k 0; 0 k). Stretch parallel to x-axis: (k 0; 0 1).
+Reflection matrices :: In the x-axis: (1 0; 0 -1); in y = x: (0 1; 1 0).
+# series | CP1 | Series and method of differences
+Standard sums :: Σr = n(n+1)/2; Σr² = n(n+1)(2n+1)/6; Σr³ = n²(n+1)²/4.
+Method of differences :: Write each term as f(r) - f(r+1) so that most terms cancel when summed.
+Maclaurin series :: f(x) = f(0) + f'(0)x + f''(0)x²/2! + ... + f⁽ʳ⁾(0)xʳ/r! + ...
+Standard Maclaurin series :: eˣ = 1 + x + x²/2! + ...; sin x = x - x³/3! + ...; cos x = 1 - x²/2! + ...; ln(1+x) = x - x²/2 + x³/3 - ... for -1 < x ≤ 1.
+Sums from r = k to n :: Σ from k to n = Σ from 1 to n - Σ from 1 to k-1.
+Series expansions of compound functions :: Substitute into standard series or multiply series, e.g. eˣ sin x.
+Using series for limits and approximations :: Maclaurin series approximate functions near x = 0 and can evaluate limits.
+# roots | CP1 | Roots of polynomials
+Roots of a quadratic :: For ax² + bx + c = 0: α + β = -b/a and αβ = c/a.
+Roots of a cubic :: For ax³ + bx² + cx + d = 0: Σα = -b/a, Σαβ = c/a, αβγ = -d/a.
+Roots of a quartic :: Σα = -b/a, Σαβ = c/a, Σαβγ = -d/a, αβγδ = e/a.
+Transforming roots :: To find an equation with roots 2α, substitute x = w/2; for α + 1 substitute x = w - 1.
+Useful identity :: α² + β² + γ² = (Σα)² - 2Σαβ.
+Sum of squares of roots for quartics :: Σα² = (Σα)² - 2Σαβ.
+Sum of reciprocals :: 1/α + 1/β + 1/γ = Σαβ ÷ αβγ.
+# induction | CP1 | Proof by induction
+Proof by induction steps :: Basis: show true for n = 1. Assumption: assume true for n = k. Inductive step: show true for n = k + 1. Conclusion: true for all positive integers n.
+Induction for divisibility :: Show f(k + 1) - f(k) (or f(k+1) - mf(k)) is divisible by the given number.
+Induction for matrices and series :: Prove matrix powers or sums of series formulae by multiplying or adding the next term.
+Proof by induction for sums :: Add the (k + 1)th term to the assumed sum and simplify to the formula with n = k + 1.
+Induction with recurrence relations :: Prove closed forms of sequences defined by recurrence.
+# vectors | CP1 | Vectors
+Vector equation of a line :: r = a + λb, where a is a point and b is a direction vector.
+Equation of a plane :: r.n = a.n (scalar product form), or ax + by + cz = d in Cartesian form, where n = (a, b, c) is normal to the plane.
+Scalar product :: a.b = |a||b|cos θ; zero when vectors are perpendicular.
+Angle between a line and a plane :: sin θ = |b.n| ÷ (|b||n|).
+Distance from a point to a plane :: |ax₁ + by₁ + cz₁ - d| ÷ √(a² + b² + c²).
+Intersection of lines :: Equate components; if consistent, lines intersect; if not and not parallel, they are skew.
+Vector product :: a × b is perpendicular to both a and b, with magnitude |a||b| sin θ. Used to find normals to planes.
+Shortest distance between skew lines :: |(b - a).(d₁ × d₂)| ÷ |d₁ × d₂|.
+Angle between two planes :: The angle between their normal vectors: cos θ = |n₁.n₂| ÷ (|n₁||n₂|).
+Line of intersection of planes :: Its direction is n₁ × n₂; find a point satisfying both plane equations.
+Reflection in a plane :: Find the foot of the perpendicular from the point, then go the same distance again.
+# volumes | CP1 | Volumes of revolution
+Volume about the x-axis :: V = π∫y² dx.
+Volume about the y-axis :: V = π∫x² dy.
+Parametric volumes :: V = π∫y² (dx/dt) dt.
+Modelling with volumes :: Volumes of revolution model objects such as bowls or vases.
+Volume between two curves :: Subtract the smaller volume from the larger, or use π∫(y₁² - y₂²) dx.
+Volume using integration by parts or substitution :: Volumes may need standard integration techniques, including trig identities.
+# polar | CP2 | Polar coordinates
+Polar coordinates :: (r, θ) with x = r cos θ, y = r sin θ, r² = x² + y².
+Area in polar coordinates :: A = ½∫r² dθ.
+Tangents to polar curves :: Parallel to the initial line: dy/dθ = 0. Perpendicular: dx/dθ = 0.
+Common polar curves :: Circles (r = a), cardioids (r = a(1 + cos θ)), spirals (r = aθ) and rose curves.
+Converting polar to Cartesian :: Use x = r cos θ, y = r sin θ and r² = x² + y².
+Sketching r = a + b cos θ :: If a ≥ 2b the curve is convex; if b ≤ a < 2b it has a dimple; a = b gives a cardioid.
+Area between polar curves :: Find intersection points, then subtract the areas found using ½∫r² dθ.
+# hyperbolic | CP2 | Hyperbolic functions
+Definitions :: sinh x = (eˣ - e⁻ˣ)/2; cosh x = (eˣ + e⁻ˣ)/2; tanh x = sinh x ÷ cosh x.
+Hyperbolic identity :: cosh² x - sinh² x = 1. Osborn's rule converts trig identities by changing the sign of any product of two sines.
+Inverse hyperbolic functions :: arsinh x = ln(x + √(x² + 1)); arcosh x = ln(x + √(x² - 1)) for x ≥ 1; artanh x = ½ ln((1 + x)/(1 - x)).
+Derivatives :: d/dx sinh x = cosh x; d/dx cosh x = sinh x; d/dx tanh x = sech² x.
+Integration with hyperbolic substitutions :: ∫1/√(x² + a²) dx = arsinh(x/a) + c; ∫1/√(x² - a²) dx = arcosh(x/a) + c.
+Graphs of hyperbolic functions :: sinh x is odd and passes through the origin; cosh x is even with minimum 1 at x = 0; tanh x has asymptotes y = ±1.
+Solving hyperbolic equations :: Use exponential definitions or identities and solve as quadratics in eˣ.
+Integration of sinh and cosh :: ∫sinh x dx = cosh x + c; ∫cosh x dx = sinh x + c.
+# calculus | CP2 | Further calculus
+Improper integrals :: Integrals with infinite limits or undefined integrands; evaluate as limits.
+Mean value of a function :: (1/(b - a)) ∫f(x) dx from a to b.
+Integration using partial fractions :: Includes quadratic factors in the denominator, leading to arctan or ln terms.
+Inverse trig derivatives :: d/dx arcsin x = 1/√(1 - x²); d/dx arctan x = 1/(1 + x²).
+Reduction formulae :: Express an integral Iₙ in terms of Iₙ₋₁ or Iₙ₋₂ using integration by parts.
+Integrals of the form 1/(a² + x²) :: ∫1/(a² + x²) dx = (1/a) arctan(x/a) + c.
+Integrals of the form 1/√(a² - x²) :: ∫1/√(a² - x²) dx = arcsin(x/a) + c.
+Arc length (Further Pure options) :: s = ∫√(1 + (dy/dx)²) dx.
+# de | CP2 | Differential equations
+First-order linear equations :: dy/dx + P(x)y = Q(x); multiply by the integrating factor e^(∫P dx).
+Second-order homogeneous equations :: ay'' + by' + cy = 0. Auxiliary equation am² + bm + c = 0: real distinct roots give Ae^(αx) + Be^(βx); repeated give (A + Bx)e^(αx); complex give e^(px)(A cos qx + B sin qx).
+Particular integrals :: For non-homogeneous equations, general solution = complementary function + particular integral, with the PI chosen to match the form of f(x).
+Simple harmonic motion :: ẍ = -ω²x, with solution x = A cos ωt + B sin ωt.
+Damped oscillations :: ẍ + kẋ + ω²x = 0: overdamping, critical damping or underdamping depending on the auxiliary equation's roots.
+Coupled first-order systems :: Pairs of linked differential equations, e.g. predator-prey models, solved by eliminating one variable.
+Boundary conditions :: Use given values to find constants in the general solution to get a particular solution.
+Forced oscillations :: Adding a forcing term leads to a particular integral; resonance occurs when the forcing frequency matches the natural frequency.
+Modelling with differential equations :: Population growth, Newton's law of cooling, mixing problems and electric circuits.
+Choosing a particular integral :: f(x) = k: try λ. f(x) = ax + b: try λx + μ. f(x) = ke^(px): try λe^(px). f(x) = sin or cos: try λ cos px + μ sin px. Multiply by x if it matches the complementary function.

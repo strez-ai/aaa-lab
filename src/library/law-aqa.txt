@@ -1,0 +1,120 @@
+@name Law
+@aliases AQA Law
+@board AQA
+@code 7162
+# nature | 3.1.1 | Rules and the nature of law
+Law vs rules :: Laws are rules enforced by the state with sanctions; rules include moral, religious and social norms.
+Law and morality :: Law and morality overlap (e.g. murder) but differ. Hart-Devlin debate on whether law should enforce morality.
+Law and justice :: Justice theories: Aristotle (distributive and corrective), utilitarianism (Bentham, Mill) and Marxist views.
+Law and society :: Law balances competing interests (Pound) and maintains social control.
+Fault and balancing of interests :: Liability usually depends on fault, but strict liability offences don't need it.
+Sources of law :: Statute law (Acts of Parliament), delegated legislation, common law (judicial precedent) and retained EU law.
+Criminal vs civil law :: Criminal law: the state prosecutes; burden of proof on the prosecution beyond reasonable doubt. Civil law: disputes between individuals; balance of probabilities.
+Natural law vs positivism :: Natural law: law should follow moral principles. Positivism: law is valid if made correctly, regardless of morality.
+Rule of law :: Dicey: no punishment except for a breach of law; equality before the law; rights protected by courts.
+# making | 3.1.2 | Law making
+Parliamentary law making :: Green and White Papers, readings, committee stage, report stage, royal assent. Parliament is sovereign.
+Parliamentary sovereignty :: Dicey: Parliament can make or unmake any law and no Parliament can bind its successors.
+Delegated legislation :: Statutory instruments, by-laws and Orders in Council made under an enabling Act. Controlled by affirmative and negative resolutions and judicial review.
+Statutory interpretation rules :: Literal rule (plain meaning, e.g. Whiteley v Chappell), golden rule (avoid absurdity, Adler v George), mischief rule (Smith v Hughes), purposive approach.
+Aids to interpretation :: Intrinsic (the Act itself) and extrinsic (Hansard after Pepper v Hart, dictionaries, Law Commission reports).
+Judicial precedent :: Stare decisis: lower courts follow higher courts' ratio decidendi. Obiter dicta are persuasive.
+Avoiding precedent :: Overruling, distinguishing, reversing, and the Practice Statement 1966 allowing the Supreme Court to depart from its own decisions.
+Law reform :: Law Commission proposals, judicial changes and pressure groups.
+Advantages of delegated legislation :: Saves parliamentary time, uses expertise and local knowledge, and can be made quickly.
+Disadvantages of delegated legislation :: Lack of democratic involvement, too much made to be properly scrutinised, and sub-delegation.
+Hierarchy of courts :: Supreme Court, Court of Appeal, High Court, then lower courts. Each follows courts above it.
+Literal rule advantages and disadvantages :: Respects parliamentary sovereignty and is predictable, but can give absurd results.
+Mischief rule :: Heydon's case: judges look for the mischief the Act was passed to remedy and interpret accordingly.
+Purposive approach :: Judges look for Parliament's purpose, used more since EU membership; criticised for judicial law-making.
+Original precedent and persuasive precedent :: Original precedent: a new point of law. Persuasive precedent: decisions from lower courts, other jurisdictions or obiter dicta.
+# legal-system | 3.1.3 | The legal system
+Civil courts :: County Court and High Court; small claims, fast track and multi-track; appeals to the Court of Appeal.
+Alternative dispute resolution :: Negotiation, mediation, conciliation and arbitration; cheaper and quicker than court.
+Criminal courts :: Magistrates' Court (summary offences), Crown Court (indictable offences) with juries. Appeals to the Court of Appeal.
+Lay people :: Magistrates (unpaid, local) and juries (randomly selected). Advantages: public participation. Disadvantages: inconsistency, lack of legal knowledge.
+Legal professions :: Solicitors and barristers; training routes and regulation by the SRA and BSB.
+Judiciary :: Superior and inferior judges; independence protected by security of tenure and the Constitutional Reform Act 2005.
+Access to justice :: Legal aid (LASPO 2012 cut civil legal aid), conditional fee agreements and advice agencies.
+Magistrates' qualifications :: Aged 18-65, good character, sit at least 13 days a year, and assisted by a legal adviser.
+Jury selection :: Aged 18-75, on the electoral register, randomly selected; some people are disqualified.
+Advantages and disadvantages of juries :: Public confidence and jury equity vs lack of reasons, possible bias and media influence.
+Sentencing aims :: Punishment, reduction of crime (deterrence), reform and rehabilitation, protection of the public and reparation.
+Types of sentence :: Custodial, community orders, fines and discharges.
+Tribunals :: Specialist bodies resolving disputes, e.g. employment tribunals; cheaper and quicker than courts.
+# crime-general | 3.2.1 | Criminal law: general elements
+Actus reus :: The guilty act: a voluntary act, omission (where there is a duty, e.g. Pittwood, Stone and Dobinson) or state of affairs.
+Causation :: Factual causation: 'but for' test (White). Legal causation: operating and substantial cause (Smith), thin skull rule (Blaue) and no novus actus interveniens.
+Mens rea :: Intention (direct and oblique - Woollin: virtual certainty) or recklessness (Cunningham subjective test).
+Strict liability :: Offences needing no mens rea for part of the actus reus, e.g. Harrow LBC v Shah; often regulatory.
+Transferred malice and coincidence :: Mens rea transfers to a different victim (Latimer). Actus reus and mens rea must coincide (Fagan, Thabo Meli).
+Omissions :: No general duty to act, but duties exist by contract (Pittwood), relationship (Gibbins and Proctor), voluntary assumption (Stone and Dobinson), statute and creating a danger (Miller).
+Novus actus interveniens :: A new intervening act breaks the chain of causation, e.g. third-party actions (Pagett), medical treatment that is 'palpably wrong' (Jordan), or the victim's unreasonable act (Roberts).
+Direct intention :: The defendant's aim or purpose is to bring about the consequence (Mohan).
+# fatal | 3.2.2 | Fatal offences
+Murder :: The unlawful killing of a human being under the Queen's (King's) peace with malice aforethought: intention to kill or cause GBH (Vickers).
+Loss of control :: Partial defence (Coroners and Justice Act 2009): loss of self-control, a qualifying trigger (fear of serious violence or circumstances of an extremely grave character) and a person of the defendant's sex and age would act similarly.
+Diminished responsibility :: Partial defence: abnormality of mental functioning from a recognised medical condition that substantially impaired the defendant's ability and explains the killing.
+Unlawful act manslaughter :: An unlawful and dangerous act that causes death (Church: dangerous to a reasonable person). Mens rea of the unlawful act needed.
+Gross negligence manslaughter :: Adomako test: duty of care, breach, causing death, and negligence so gross it is criminal.
+Oblique intention :: Woollin: the jury may find intention if death or serious injury was a virtual certainty and the defendant appreciated that.
+Murder sentence :: Mandatory life sentence, with a minimum term set by the judge.
+Reform of homicide :: Law Commission proposed a three-tier structure of first-degree murder, second-degree murder and manslaughter.
+Dangerous act test :: Church: would a sober and reasonable person realise the act carries a risk of some physical harm?
+# nonfatal | 3.2.3 | Non-fatal offences
+Assault :: Causing the victim to apprehend immediate unlawful force (Ireland, Constanza). Mens rea: intention or recklessness.
+Battery :: Application of unlawful force (Collins v Wilcock). Can be indirect (Haystead).
+Section 47 ABH :: Assault or battery causing actual bodily harm (Miller: any hurt or injury; Chan-Fook: psychiatric injury). Mens rea of assault or battery only (Savage).
+Section 20 GBH or wounding :: Unlawful wounding (breaking the skin, Eisenhower) or inflicting grievous bodily harm (really serious harm, Smith). Mens rea: foresight of some harm (Mowatt).
+Section 18 GBH with intent :: Wounding or causing GBH with intent to cause GBH or resist arrest. Maximum life sentence.
+Reform of non-fatal offences :: The 1861 Act is outdated and inconsistent; the Law Commission proposed a new Act in 2015.
+Offences Against the Person Act 1861 :: Covers s47 ABH, s20 GBH and s18 GBH with intent; assault and battery are under s39 Criminal Justice Act 1988.
+Psychiatric harm :: Recognised psychiatric injury can be ABH or GBH (Chan-Fook, Burstow).
+Wounding :: Requires both layers of skin to be broken (JCC v Eisenhower).
+# property | 3.2.4 | Property offences
+Theft :: Dishonest appropriation of property belonging to another with intention to permanently deprive (Theft Act 1968 s1).
+Dishonesty :: Ivey v Genting test (2017): what was the defendant's genuine belief, and was it dishonest by the standards of ordinary decent people?
+Robbery :: Theft with force or threat of force immediately before or at the time, in order to steal (s8).
+Appropriation :: Assuming the rights of the owner (s3), even with consent (Gomez).
+Belonging to another :: Property in the possession or control of another, or someone with a proprietary interest (s5).
+Intention to permanently deprive :: Treating the property as one's own to dispose of regardless of the owner's rights (s6), e.g. borrowing until value is lost (Lloyd).
+# defences | 3.2.5 | Defences
+Insanity :: M'Naghten Rules: defect of reason from a disease of the mind, so the defendant didn't know the nature of the act or that it was wrong. Special verdict.
+Automatism :: Insane automatism (internal cause) vs non-insane automatism (external cause, e.g. a blow to the head). Self-induced automatism may not be a defence.
+Intoxication :: Voluntary intoxication is a defence only to specific intent crimes (Majewski). Involuntary intoxication can be a defence if no mens rea (Kingston).
+Self-defence :: Force must be necessary and reasonable in the circumstances as the defendant believed them to be. Householder cases allow force that isn't grossly disproportionate.
+Duress :: By threats or circumstances: threat of death or serious injury, sober person of reasonable firmness would act the same (Graham). Not a defence to murder (Howe).
+Consent :: A defence to assault and battery; not usually to ABH or above (Brown), with exceptions such as sports and surgery.
+Attempts :: Criminal Attempts Act 1981: an act more than merely preparatory with intent to commit the offence.
+Necessity :: Duress of circumstances: Re A (conjoined twins) allowed necessity in exceptional circumstances.
+Mistake :: An honest mistaken belief can negate mens rea or support self-defence, unless caused by voluntary intoxication.
+Prior fault in duress :: Duress is unavailable if the defendant voluntarily joined a criminal gang knowing they might be threatened (Hasan).
+# tort | 3.3 | Tort law
+Negligence: duty of care :: Caparo test: foreseeability of damage, proximity and fair, just and reasonable to impose a duty. Donoghue v Stevenson neighbour principle.
+Negligence: breach :: The defendant falls below the standard of a reasonable person. Factors: special characteristics, risk, precautions and social benefit (Bolton v Stone, Bolam).
+Negligence: damage :: Factual causation ('but for', Barnett) and remoteness (reasonable foreseeability, The Wagon Mound).
+Occupiers' liability :: 1957 Act to lawful visitors: common duty of care. 1984 Act to trespassers: duty if the occupier knows of the danger and a trespasser may come near it.
+Private nuisance :: Unreasonable interference with a person's use or enjoyment of land. Factors: locality, duration, sensitivity and malice.
+Rylands v Fletcher :: Strict liability for escape of something likely to cause damage brought onto land for non-natural use.
+Vicarious liability :: An employer is liable for torts committed by employees in the course of employment (Mohamud v Morrison).
+Defences in tort :: Contributory negligence (reduces damages), consent (volenti non fit injuria).
+Remedies in tort :: Compensatory damages and injunctions. Damages aim to put the claimant in the position as if the tort hadn't occurred.
+Res ipsa loquitur :: 'The thing speaks for itself': breach is inferred when the accident would not normally happen without negligence.
+Psychiatric injury in negligence :: Primary victims (in danger) and secondary victims (Alcock criteria: close tie of love and affection, proximity in time and space, saw it with their own senses).
+Pure economic loss :: Generally not recoverable, except negligent misstatement (Hedley Byrne).
+Occupiers and children :: Occupiers must expect children to be less careful (Glasgow Corporation v Taylor).
+Defences to nuisance :: Statutory authority and prescription (20 years); coming to the nuisance is not a defence.
+Mitigation of loss :: Claimants must take reasonable steps to reduce their losses.
+# contract | 3.4 | Option: contract law
+Offer and invitation to treat :: An offer is a definite promise to be bound. Adverts and goods on display are usually invitations to treat (Fisher v Bell, Partridge v Crittenden).
+Acceptance :: Must mirror the offer. Postal rule: acceptance is effective when posted (Adams v Lindsell).
+Consideration :: Something of value given in exchange; must be sufficient but needn't be adequate; past consideration is not valid.
+Intention to create legal relations :: Presumed in commercial agreements; not in domestic ones unless shown otherwise (Balfour v Balfour).
+Terms :: Express and implied terms. Conditions, warranties and innominate terms. Consumer Rights Act 2015 implies terms of quality and fitness.
+Misrepresentation :: A false statement of fact inducing a contract. Can be fraudulent, negligent or innocent.
+Discharge :: By performance, frustration or breach. Remedies include damages, rescission and specific performance.
+Revocation of an offer :: An offer can be revoked before acceptance, communicated by the offeror or a reliable third party (Dickinson v Dodds).
+Unilateral contracts :: Accepted by performing the act requested (Carlill v Carbolic Smoke Ball Co).
+Privity of contract :: Only parties to a contract can enforce it, but the Contracts (Rights of Third Parties) Act 1999 allows exceptions.
+Exclusion clauses :: Must be incorporated and are controlled by the Consumer Rights Act 2015 and Unfair Contract Terms Act 1977.
+Frustration :: A contract becomes impossible, illegal or radically different through no fault of either party (Taylor v Caldwell).

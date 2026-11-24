@@ -1,0 +1,145 @@
+@name Politics
+@aliases Government and Politics|Edexcel Politics
+@board Pearson Edexcel
+@code 9PL0
+# democracy | 1.1 | Democracy and participation
+Direct vs representative democracy :: Direct democracy: citizens make decisions themselves (e.g. referendums). Representative democracy: citizens elect representatives to make decisions.
+Features of UK representative democracy :: Free and fair elections, a range of parties, pressure groups, free media, rights and accountability of government.
+Legitimacy :: The right to rule, gained through elections, consent and lawful processes.
+Participation crisis :: Concerns about low turnout (e.g. 59% in 2001, 60% in 2024), falling party membership and low trust in politicians.
+Franchise and suffrage :: Key extensions: 1832 Reform Act, 1918 (some women over 30), 1928 equal franchise, 1969 voting age lowered to 18. Votes at 16 are used in Scottish and Welsh elections.
+Pressure groups :: Insider groups (e.g. BMA) work closely with government; outsider groups (e.g. Extinction Rebellion) use direct action. Sectional groups represent members; cause groups promote causes.
+Pressure group methods :: Lobbying, legal challenges, media campaigns, demonstrations and direct action. Success depends on resources, public support and access to government.
+Think tanks, lobbyists and corporations :: Think tanks (e.g. IEA, Fabian Society) develop policy ideas; lobbyists are paid to influence decision-makers.
+Rights in the UK :: Protected by the Human Rights Act 1998, the Equality Act 2010 and common law. Debates about individual vs collective rights.
+Arguments for referendums :: Direct expression of the people's will, legitimacy for major constitutional change, and political education.
+Arguments against referendums :: Complex issues are oversimplified, can undermine Parliament, and may produce tyranny of the majority.
+Pluralism and elitism :: Pluralists see power spread across many groups; elitists say a small elite dominates decisions.
+Expansion of rights :: Human Rights Act 1998 incorporated the ECHR into UK law; judges can issue declarations of incompatibility.
+# parties | 1.2 | Political parties
+Functions of parties :: Representation, policy-making, recruiting candidates, organising government and encouraging participation.
+Party funding :: Membership fees, donations (e.g. trade unions for Labour, businesses for Conservatives) and state funding (Short money for opposition). Debate over state funding vs donation caps.
+Conservative Party ideas :: One Nation, Thatcherism (New Right: free markets, privatisation, reduced union power) and modern conservatism.
+Labour Party ideas :: Old Labour (nationalisation, welfare state, Clause IV) and New Labour (Third Way: market economy with social justice).
+Liberal Democrats :: Classical and modern liberal ideas: constitutional reform, civil liberties, pro-European, electoral reform.
+Emerging and minor parties :: e.g. SNP, Green Party and Reform UK; their influence on major parties' policies.
+Party systems :: Two-party, multi-party and dominant-party systems. The UK has a two-party system at Westminster but multi-party systems in devolved bodies.
+Factions within parties :: e.g. Conservative One Nation vs Brexiteers; Labour Corbynites vs Blairites.
+Manifestos and mandates :: Parties publish manifestos; winning a majority gives a mandate to carry out their policies.
+# electoral | 1.3 | Electoral systems
+First past the post :: Single-member constituencies; candidate with most votes wins. Strong, stable governments and constituency link; but disproportional, wasted votes and safe seats.
+Additional member system :: Used in Scotland and Wales: constituency MPs via FPTP plus regional list MSPs to make results more proportional.
+Single transferable vote :: Used in Northern Ireland: multi-member constituencies; voters rank candidates; highly proportional and voter choice, but complex.
+Supplementary vote :: Formerly used for mayors: voters choose first and second preferences; top two candidates go to a second count.
+Referendums :: Examples: 2011 AV referendum, 2014 Scottish independence, 2016 EU membership. They give legitimacy but may undermine parliamentary sovereignty.
+Electoral reform debate :: Supporters of PR argue for fairness and representation; supporters of FPTP argue for strong government and accountability.
+Impact of electoral systems on government :: FPTP usually gives single-party majorities; PR systems produce coalitions (e.g. Scotland 2007 minority SNP government).
+Disproportionality :: e.g. 2024: Labour won about 63% of seats with about 34% of the vote; Reform UK got about 14% of votes but 5 seats.
+# voting | 1.4 | Voting behaviour and the media
+Class and voting :: Partisan and class dealignment since the 1970s; class is a weaker predictor of voting.
+Other factors in voting :: Age (older people vote Conservative), education, ethnicity, region, gender and issue voting.
+Valence and rational choice :: Voters judge parties on competence and leadership (valence) and on policies that serve their interests.
+Case study elections :: 1979 (Thatcher wins after Winter of Discontent), 1997 (Blair landslide), 2019 (Johnson's 'Get Brexit Done'), plus one recent election.
+Role of the media :: Newspapers, TV, social media and opinion polls shape agendas, though their direct influence on votes is debated.
+Turnout differences :: Older people and wealthier people are more likely to vote than the young and poorer people.
+Tactical voting :: Voting for a party that is not your first choice to stop another party winning.
+Opinion polls :: Influence campaigns and voter behaviour (bandwagon effect), but have sometimes been inaccurate (e.g. 2015).
+# liberalism | 1.5 | Core ideas: liberalism
+Core liberal ideas :: Individualism, freedom, rationalism, equality and liberal democracy.
+Classical liberalism :: Negative freedom and a minimal state (Locke, Wollstonecraft, Mill's harm principle).
+Modern liberalism :: Positive freedom requires state intervention such as welfare and education (T.H. Green, Rawls, Friedan).
+Key liberal thinkers :: John Locke (social contract, natural rights), Mary Wollstonecraft (women's rights), John Stuart Mill (harm principle), John Rawls (veil of ignorance), Betty Friedan.
+Social contract :: Locke: government is based on the consent of the governed and must protect natural rights of life, liberty and property.
+Liberal views on the economy :: Classical liberals support laissez-faire; modern liberals support Keynesian management to protect individual freedom.
+# conservatism | 1.5 | Core ideas: conservatism
+Core conservative ideas :: Pragmatism, tradition, human imperfection, organic society, paternalism and libertarianism.
+One Nation conservatism :: Disraeli: the wealthy have obligations to the poor; noblesse oblige; social reform to prevent revolution.
+New Right :: Neoliberalism (free markets, minimal state - Nozick, Hayek) combined with neo-conservatism (strong state, traditional values).
+Key conservative thinkers :: Hobbes (strong state for order), Burke (change to conserve, tradition), Oakeshott (pragmatism), Rand (objectivism), Nozick (minimal state).
+Conservative view of human nature :: Humans are imperfect: morally, psychologically and intellectually, so need order and tradition.
+Organic society :: Society is like a living organism, with parts that are interdependent, so change should be gradual.
+# socialism | 1.5 | Core ideas: socialism
+Core socialist ideas :: Collectivism, common humanity, equality, social class and workers' control.
+Revolutionary socialism :: Marx and Engels: capitalism must be overthrown by the proletariat to create a classless communist society.
+Social democracy :: Reform of capitalism through a mixed economy, welfare state and progressive taxation (Crosland).
+Third Way :: Giddens: accept the market but promote equality of opportunity and social inclusion.
+Key socialist thinkers :: Marx and Engels, Beatrice Webb (gradualism), Rosa Luxemburg (revolution), Anthony Crosland, Anthony Giddens.
+Common ownership :: Collective ownership of key industries to ensure resources serve the whole community.
+Equality of outcome :: Socialists generally favour reducing inequalities in wealth and power, not just equality of opportunity.
+# constitution | 2.1 | The constitution
+UK constitution features :: Uncodified, unentrenched and unitary, based on parliamentary sovereignty and the rule of law.
+Sources of the UK constitution :: Statute law, common law, conventions, authoritative works (e.g. Dicey, Bagehot) and treaties.
+Constitutional reform since 1997 :: Devolution, House of Lords Act 1999, Human Rights Act 1998, Constitutional Reform Act 2005 (Supreme Court) and Fixed-term Parliaments Act 2011 (repealed 2022).
+Devolution :: Powers transferred to the Scottish Parliament, Senedd and Northern Ireland Assembly. Scotland has the widest powers including some taxation.
+Debates on further reform :: Should the UK codify its constitution? Should the House of Lords be elected? Should England have devolution?
+Parliamentary sovereignty debate :: Membership of the EU, devolution, the Human Rights Act and referendums have challenged sovereignty in practice.
+Strengths and weaknesses of the UK constitution :: Flexible and allows quick change, but power can be concentrated in the executive and rights are less protected.
+# parliament | 2.2 | Parliament
+House of Commons :: Elected MPs; controls legislation and finance; holds government to account through PMQs and select committees.
+House of Lords :: Appointed life peers, 92 hereditary peers and bishops. Revises legislation and delays bills; expertise but no democratic legitimacy.
+Legislative process :: First reading, second reading, committee stage, report stage, third reading, then the other House and royal assent.
+Parliament Acts 1911 and 1949 :: Limit the Lords' power to delay bills to one year; money bills can't be delayed.
+Salisbury Convention :: The Lords will not block government bills that were in the governing party's manifesto.
+Scrutiny of the executive :: Question Time, PMQs, select committees, debates and the opposition.
+Backbenchers :: Influence through rebellions, private members' bills and committees.
+Select committees :: Scrutinise government departments; chairs elected since the Wright reforms (2010).
+Opposition :: The official opposition scrutinises the government, has opposition days and offers an alternative government.
+# executive | 2.3 | Prime Minister and executive
+Structure of the executive :: Prime Minister, Cabinet, ministers and government departments.
+Prime ministerial powers :: Patronage, leadership of the party, control of the Cabinet agenda and royal prerogative powers.
+Collective ministerial responsibility :: Ministers must publicly support Cabinet decisions or resign (e.g. Robin Cook, 2003 Iraq War).
+Individual ministerial responsibility :: Ministers are responsible for their departments and personal conduct (e.g. Amber Rudd resigned in 2018 over Windrush).
+PM vs Cabinet power :: Debate between prime ministerial, presidential and Cabinet government models; depends on the size of the majority and the PM's style.
+Cabinet :: The senior decision-making body; members are chosen by the PM. Cabinet committees do much of the detailed work.
+Limits on PM power :: Size of majority, party unity, public opinion, the media and events (e.g. Johnson's resignation in 2022).
+# relations | 2.4 | Relations between the branches
+Supreme Court :: Created by the Constitutional Reform Act 2005; final court of appeal; judicial independence and neutrality. Can't strike down Acts of Parliament.
+Judicial review :: The Supreme Court can find government actions unlawful, e.g. Miller II (2019 prorogation ruled unlawful).
+Parliament and executive balance :: Executive dominance through majority government and whips, but Parliament can check it through votes and committees.
+The UK and the EU :: Brexit returned sovereignty from the EU to Parliament; debates about where sovereignty lies (Parliament, people, executive).
+Judicial neutrality :: Judges should be impartial and not politically biased.
+Declarations of incompatibility :: Courts can declare an Act incompatible with the HRA, but Parliament decides whether to change it.
+# feminism | 2.5 | Non-core idea: feminism
+Core feminist ideas :: Sex and gender, patriarchy, the personal is political, equality feminism and difference feminism, intersectionality.
+Liberal feminism :: Equal rights through legal and political reform (Friedan).
+Radical feminism :: Patriarchy is the root of oppression and exists in private life; the personal is political (Millett, Firestone).
+Socialist feminism :: Women's oppression is linked to capitalism (Rowbotham).
+Postmodern feminism and intersectionality :: Women's experiences differ by race, class and sexuality (bell hooks).
+Equality vs difference feminism :: Equality feminists seek the same treatment as men; difference feminists celebrate women's distinct qualities.
+Key feminist thinkers :: Charlotte Perkins Gilman, Simone de Beauvoir ('one is not born, but rather becomes, a woman'), Kate Millett, Sheila Rowbotham and bell hooks.
+# usa-const | 3.1 | USA: the constitution and federalism
+US Constitution features :: Codified, entrenched and federal; separation of powers and checks and balances.
+Amending the Constitution :: Two-thirds of both houses of Congress and three-quarters of the states; only 27 amendments.
+Federalism :: Power shared between federal government and states; the Tenth Amendment reserves powers to the states.
+Checks and balances :: e.g. Presidential veto, congressional override, Senate confirmation of appointments, judicial review.
+Separation of powers in the US :: Legislative (Congress), executive (President) and judicial (Supreme Court) branches are separate in personnel.
+Bill of Rights :: The first ten amendments protecting rights such as free speech (First Amendment) and the right to bear arms (Second).
+# usa-congress | 3.2 | USA: Congress
+Structure of Congress :: Bicameral: House of Representatives (435 members, 2-year terms) and Senate (100 senators, 6-year terms).
+Powers of Congress :: Legislation, power of the purse, oversight, impeachment, Senate confirmation and treaty ratification.
+Legislative process :: Introduction, committee stage, floor debate, conference committee, presidential signature or veto. Filibuster in the Senate needs 60 votes for cloture.
+Representation in Congress :: Incumbency advantage, party loyalty and partisanship, constituency interests and lobbyists.
+Oversight :: Congress investigates the executive through committees and hearings, e.g. impeachment of Trump (2019, 2021).
+Congressional power over war :: Congress declares war, but presidents often deploy forces without a declaration; the War Powers Act 1973 tried to limit this.
+# usa-president | 3.3 | USA: the presidency
+Formal presidential powers :: Commander-in-chief, veto, appointments, treaties, pardons and chief executive.
+Informal powers :: Power to persuade (Neustadt), executive orders, electoral mandate, the bully pulpit and the EXOP.
+Imperial vs imperilled presidency :: Debate over whether presidents have too much power (Schlesinger) or too little to govern effectively.
+Limits on the president :: Congress, the Supreme Court, the Constitution, federalism, media and public opinion.
+Executive orders :: Directives with the force of law that bypass Congress but can be overturned by courts or future presidents.
+Presidential relations with Congress :: Divided government makes it harder to pass legislation; gridlock is common.
+# usa-court | 3.4 | USA: the Supreme Court and civil rights
+Judicial review in the US :: Established by Marbury v Madison (1803); the Supreme Court can strike down unconstitutional laws.
+Judicial philosophies :: Judicial activism vs restraint; living constitution vs originalism.
+Appointments to the Supreme Court :: Nominated by the president and confirmed by the Senate; politicised process (e.g. Kavanaugh, Barrett).
+Key civil rights cases :: Brown v Board (1954), Roe v Wade (1973) overturned by Dobbs (2022), Obergefell (2015).
+Civil rights and affirmative action :: Debates about racial equality, voting rights, immigration and affirmative action (ended in university admissions by SFFA v Harvard, 2023).
+Supreme Court and politics :: Justices are appointed for life, so a president's nominations shape policy for decades.
+# usa-democracy | 3.5 | USA: democracy and participation
+Electoral process :: Primaries and caucuses, national conventions, the Electoral College (270 votes needed) and campaign finance.
+Electoral College debate :: Supporters say it protects small states and federalism; critics say it can override the popular vote (e.g. 2000, 2016).
+US parties :: Democrats (liberal) and Republicans (conservative), with internal factions; increasing polarisation.
+Interest groups in the US :: Lobbying, PACs and Super PACs; e.g. NRA and AARP influence policy.
+Comparative theories :: Rational, cultural and structural approaches compare the US and UK political systems.
+Campaign finance :: Citizens United (2010) allowed unlimited independent spending by corporations and unions, leading to Super PACs.
+Invisible primary :: The period before primaries when candidates raise money and gain endorsements.
