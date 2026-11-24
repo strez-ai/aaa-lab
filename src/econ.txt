@@ -1,0 +1,264 @@
+# e-1.1
+Economics as a social science :: Economics studies human behaviour, so it cannot run fully controlled experiments like the natural sciences. Economists build models based on simplifying assumptions, such as ceteris paribus (all other things being equal).
+Positive vs normative statements :: Positive statements are objective and can be tested against evidence ('unemployment rose to 5%'). Normative statements are value judgements that cannot be tested ('the government should cut taxes'); often contain words like 'should' or 'ought'.
+The economic problem :: Scarcity: there are finite resources but infinite wants, so choices must be made about what to produce, how to produce it and for whom.
+Opportunity cost :: The value of the next best alternative forgone when a choice is made.
+Renewable vs non-renewable resources :: Renewable resources can be replenished (e.g. fish stocks, solar energy). Non-renewable resources are finite and run out with use (e.g. oil, coal).
+Factors of production :: Land (natural resources; reward: rent), labour (human effort; wages), capital (man-made goods used in production; interest) and enterprise (organising the other factors and taking risks; profit).
+Production possibility frontier (PPF) :: Shows the maximum combinations of two goods an economy can produce with its resources fully and efficiently used. Points inside are inefficient (unemployment); points outside are currently unattainable. Movement along it shows opportunity cost.
+Shifts of the PPF :: An outward shift shows economic growth (more or better resources, e.g. technology, investment, education). An inward shift shows a loss of productive capacity (e.g. war, natural disaster).
+Capital vs consumer goods on the PPF :: Producing more capital goods now means fewer consumer goods today, but shifts the PPF outwards in the future, allowing more consumption later.
+Specialisation and division of labour :: Specialisation: concentrating on a narrow range of tasks or products. Division of labour (Adam Smith, pin factory): splitting production into separate tasks, raising productivity. Downsides: boredom, loss of craft skills, over-reliance.
+Functions of money :: Medium of exchange, measure of value (unit of account), store of value and method of deferred payment.
+Free market economy :: Resources allocated by the price mechanism through supply and demand, with little government intervention (Adam Smith's invisible hand; Hayek). Advantages: efficiency, choice, incentives. Disadvantages: inequality, market failure.
+Command economy :: The state allocates resources and decides what to produce (Karl Marx). Advantages: can reduce inequality and provide public goods. Disadvantages: inefficiency, lack of incentives and choice, information problems.
+Mixed economy :: Resources allocated by both the market and the government. Most economies today, including the UK, are mixed.
+Rational decision making :: Consumers aim to maximise utility (satisfaction); firms aim to maximise profit. Assumes perfect information and consistent preferences.
+# e-1.2
+Demand :: The quantity of a good or service consumers are willing and able to buy at each price over a period of time. The demand curve slopes downwards.
+Movement along vs shift of the demand curve :: A change in price causes a movement along the curve (extension or contraction). A change in any other factor shifts the curve.
+Factors shifting demand :: Real income, prices of substitutes and complements, tastes and preferences, advertising, population, interest rates and credit availability (PIRATES is one mnemonic).
+Diminishing marginal utility :: Each extra unit consumed gives less extra satisfaction than the one before. This helps explain why the demand curve slopes downwards.
+Price elasticity of demand (PED) :: The responsiveness of quantity demanded to a change in price. PED = % change in quantity demanded ÷ % change in price. Usually negative.
+Interpreting PED values :: |PED| > 1: price elastic. |PED| < 1: price inelastic. |PED| = 1: unitary elastic. PED = 0: perfectly inelastic. PED = ∞: perfectly elastic.
+Determinants of PED :: Number and closeness of substitutes, proportion of income spent on the good, necessity vs luxury, whether it is habit-forming (addictive), time period, and how broadly the market is defined.
+PED and total revenue :: If demand is price inelastic, raising price raises total revenue. If demand is price elastic, cutting price raises total revenue. At unitary elasticity revenue is maximised.
+Income elasticity of demand (YED) :: Responsiveness of quantity demanded to a change in income. YED = % change in quantity demanded ÷ % change in income. Normal goods: YED > 0 (luxuries > 1, necessities 0-1). Inferior goods: YED < 0.
+Cross elasticity of demand (XED) :: Responsiveness of demand for good A to a change in the price of good B. XED = % change in QD of A ÷ % change in price of B. Substitutes: positive. Complements: negative. Unrelated: zero.
+Supply :: The quantity of a good or service producers are willing and able to sell at each price over a period of time. The supply curve slopes upwards because higher prices make production more profitable.
+Factors shifting supply :: Costs of production (wages, raw materials), productivity, technology, indirect taxes, subsidies, number of firms, weather, and expectations.
+Price elasticity of supply (PES) :: Responsiveness of quantity supplied to a change in price. PES = % change in quantity supplied ÷ % change in price. Determinants: spare capacity, stocks, time period, ease of switching factors, and how long production takes.
+Equilibrium price :: The price where quantity demanded equals quantity supplied, so the market clears. Excess supply pushes price down; excess demand pushes price up.
+Consumer and producer surplus :: Consumer surplus: the difference between what consumers are willing to pay and what they actually pay (area above price, below demand). Producer surplus: the difference between the price received and the minimum price producers would accept (area below price, above supply).
+Indirect taxes :: Taxes on spending. Specific (unit) tax: a fixed amount per unit, a parallel shift of supply. Ad valorem tax: a percentage of price, a pivoting shift. The incidence falls more on consumers when demand is price inelastic.
+Subsidies :: A payment from the government to producers to lower costs and increase supply. Supply shifts right, price falls and output rises. Consumers benefit more when demand is price inelastic.
+Alternative views of consumer behaviour :: Behavioural economics argues consumers are not always rational: they are influenced by other people's behaviour, habitual behaviour and weak computational skills.
+Bounded rationality and bounded self-control :: Bounded rationality: people make decisions with limited information and time, so they aim for satisfactory rather than optimal choices. Bounded self-control: people lack the self-discipline to always act in their own interest (e.g. overeating).
+Biases in decision making :: Rules of thumb (heuristics), anchoring (relying too heavily on the first piece of information), availability bias (judging likelihood by how easily examples come to mind) and social norms.
+Altruism and perceptions of fairness :: People sometimes act in others' interests at a cost to themselves, and care about fairness (e.g. rejecting unfair offers in the ultimatum game).
+Choice architecture and nudges :: Designing how choices are presented to influence behaviour without restricting choice. Examples: default choices (opt-out pension schemes, organ donation), restricted choice, mandated choice. A nudge is a small change that steers people towards better decisions.
+Functions of the price mechanism :: Rationing (higher prices limit demand when goods are scarce), incentive (higher prices encourage firms to supply more) and signalling (prices tell buyers and sellers about market conditions).
+Price mechanism in different markets :: Local markets (e.g. housing), national markets and global markets (e.g. oil, commodities) all use the price mechanism to allocate resources.
+# e-1.3
+Market failure :: When the free market leads to an inefficient allocation of resources, so social welfare is not maximised. Types: externalities, under-provision of public goods and information gaps.
+Externalities :: Costs or benefits to third parties that are not reflected in the market price. Negative externalities are external costs (e.g. pollution); positive externalities are external benefits (e.g. vaccinations).
+Private, external and social costs :: Social cost = private cost + external cost. Private costs are paid by the producer or consumer directly.
+Negative production externality diagram :: Marginal social cost (MSC) lies above marginal private cost (MPC). The market produces where MPC = MPB, which is more than the social optimum where MSC = MSB. The welfare loss triangle lies between MSC and MPC from the optimum to market output.
+Positive consumption externality diagram :: Marginal social benefit (MSB) lies above marginal private benefit (MPB). The free market under-consumes (e.g. education, vaccines). The welfare gain lost (welfare loss) is between MSB and MPB.
+Public goods :: Goods that are non-rival (one person's use doesn't reduce availability for others) and non-excludable (people cannot be stopped from using them), e.g. street lighting, national defence.
+Free rider problem :: Because public goods are non-excludable, people can benefit without paying, so private firms cannot make a profit and the market fails to provide them (missing market).
+Private goods vs quasi-public goods :: Private goods are rival and excludable. Quasi-public goods have some public good characteristics, e.g. roads (partly excludable via tolls, rival when congested).
+Information gaps :: When buyers or sellers lack full information, or one side has more information than the other (asymmetric information), leading to inefficient decisions. Examples: second-hand cars, insurance, pensions.
+Symmetric vs asymmetric information :: Symmetric: both sides have the same information. Asymmetric: one party knows more than the other, e.g. a seller knows more about a used car's faults than the buyer.
+# e-1.4
+Indirect taxation to correct market failure :: A tax equal to the marginal external cost shifts supply left, internalising the externality so output falls to the social optimum. Problems: hard to measure external cost, regressive, may encourage illegal markets, demand may be inelastic.
+Subsidies to correct market failure :: A subsidy to goods with positive externalities shifts supply right, increasing output towards the social optimum. Problems: opportunity cost to government, hard to value the benefit, firms may become inefficient and dependent.
+Maximum price :: A legal limit above which price cannot rise, set below equilibrium (e.g. rent controls). Helps consumers but causes excess demand (shortage), possible black markets and lower quality.
+Minimum price :: A legal limit below which price cannot fall, set above equilibrium (e.g. minimum unit pricing for alcohol in Scotland). Discourages consumption of demerit goods but can create excess supply and hit poorer consumers.
+Trade pollution permits :: The government sets a cap on pollution and issues permits that firms can trade (e.g. EU Emissions Trading System). Firms that cut pollution cheaply sell spare permits. Problems: setting the right cap, monitoring, over-allocation can make permits too cheap.
+State provision of public goods :: The government provides goods the market fails to provide, funded through taxation. Problems: opportunity cost, may be inefficient, difficult to know the right quantity.
+Provision of information :: Government campaigns or required labelling to close information gaps (e.g. calorie labels, anti-smoking campaigns). Problems: cost, people may ignore information.
+Regulation :: Laws and rules to control behaviour, e.g. bans, limits on pollution, minimum standards. Problems: needs enforcement and monitoring, may raise firms' costs.
+Government failure :: When government intervention leads to a less efficient allocation of resources than before, i.e. a net welfare loss.
+Causes of government failure :: Distortion of price signals, unintended consequences, excessive administrative costs, information gaps (government doesn't know true external costs), and regulatory capture.
+# e-2.1
+Economic growth :: The increase in real GDP over time. Measured by the percentage change in real GDP.
+Real vs nominal GDP :: Nominal GDP is measured in current prices. Real GDP is adjusted for inflation, so it shows changes in actual output.
+GDP per capita :: Total GDP divided by population. A better indicator of average living standards than total GDP.
+GNI and GNP :: Gross national income: GDP plus net income from abroad (e.g. profits and wages earned by residents overseas, minus those paid to foreigners).
+Purchasing power parity (PPP) :: An exchange rate adjustment so that the same basket of goods costs the same in each country. Used to compare GDP between countries more accurately.
+Limitations of GDP for comparing living standards :: Ignores inequality, the hidden (informal) economy, unpaid work, quality of goods, leisure time, environmental damage and non-material aspects of wellbeing.
+National happiness and wellbeing :: Measures such as the ONS wellbeing survey. Happiness also depends on things like health, relationships and job security. Income beyond a certain level adds little to happiness (Easterlin paradox).
+Inflation :: A sustained increase in the average price level over time, which reduces the purchasing power of money.
+Deflation and disinflation :: Deflation: a sustained fall in the average price level (negative inflation). Disinflation: a fall in the rate of inflation (prices still rising, but more slowly).
+Consumer Prices Index (CPI) :: The UK's main measure of inflation, used for the 2% inflation target. Based on a weighted basket of around 700 goods and services, from household surveys. Uses a geometric mean.
+CPI vs RPI :: RPI includes housing costs like mortgage interest payments and council tax; CPI does not. RPI is usually higher.
+Limitations of CPI :: Doesn't reflect all households (e.g. pensioners spend differently), the basket changes only once a year, quality improvements are hard to capture, and it excludes most housing costs.
+Causes of inflation :: Demand-pull inflation (AD rising faster than AS), cost-push inflation (rising costs of production shift SRAS left) and growth of the money supply.
+Effects of inflation :: Consumers: reduced real incomes, especially on fixed incomes. Firms: menu costs, shoe leather costs, uncertainty reduces investment. Government: higher tax revenue (fiscal drag) but higher benefit costs. Workers: may demand higher wages (wage-price spiral). Exports may become less competitive.
+Unemployment definition :: People of working age who are actively seeking work but cannot find a job.
+Measures of unemployment :: Claimant count: those claiming unemployment-related benefits. Labour Force Survey (ILO measure): people without a job who have looked for work in the past four weeks and can start within two weeks. ILO is usually higher.
+Underemployment :: People who are working fewer hours than they would like, or in jobs below their skill level.
+Inactivity :: People of working age who are not in work and not seeking work (e.g. students, carers, long-term sick, early retired).
+Types of unemployment :: Structural (decline of industries, mismatch of skills), frictional (between jobs), seasonal (demand varies by season) and cyclical/demand-deficient (lack of aggregate demand in a recession). Real wage inflexibility can also cause unemployment.
+Effects of unemployment :: Consumers: lower incomes. Firms: lower demand, but easier hiring. Workers: loss of skills, health problems. Government: lower tax revenue, higher benefit spending. Society: crime, social problems. Economy: below potential output (inside the PPF).
+Migration and unemployment :: Migration increases the labour supply. Migrants may fill skill shortages and boost demand, but can affect wages in some low-skilled sectors.
+Balance of payments: current account :: Records trade in goods and services, primary income (investment income, compensation of employees) and secondary income (transfers, e.g. foreign aid, remittances).
+Current account deficit :: When the value of imports of goods and services (plus net income flows) is greater than exports. The UK has a persistent current account deficit, mainly due to a trade in goods deficit.
+Interconnectedness of economies :: Through international trade and financial flows, a recession in one country reduces demand for other countries' exports, spreading shocks globally.
+# e-2.2
+Aggregate demand (AD) :: The total planned spending on goods and services in an economy at a given price level. AD = C + I + G + (X − M).
+Why AD slopes downwards :: A higher price level reduces real wealth (less spending), makes exports less competitive, and may lead to higher interest rates, all reducing the quantity of real output demanded.
+Consumption (C) :: Spending by households on goods and services; about 60% of UK AD. Influenced by interest rates, consumer confidence, wealth effects, income and taxes.
+Marginal propensity to consume and save :: MPC: the proportion of each extra pound of income spent. MPS: the proportion saved. MPC + MPS = 1 (in a closed economy without tax).
+Investment (I) :: Spending by firms on capital goods (machinery, buildings). Influenced by interest rates, business confidence (animal spirits), the accelerator, technology, availability of credit and government policy.
+Government spending (G) :: Spending by the government on goods and services (e.g. NHS, education). Influenced by the trade cycle and fiscal policy. Transfer payments (benefits) are not counted in G.
+Net exports (X − M) :: Exports minus imports. Influenced by real income (at home and abroad), exchange rates, the state of the world economy and non-price factors such as quality.
+Factors causing a shift in AD :: Any change in C, I, G or net exports not caused by the price level, e.g. a change in interest rates, confidence, the exchange rate or government spending.
+# e-2.3
+Aggregate supply (AS) :: The total output that firms in an economy are willing and able to produce at a given price level.
+Short-run aggregate supply (SRAS) :: Slopes upwards. It shifts due to changes in costs of production, such as raw material prices, wages, exchange rates (cost of imports) and taxes on business.
+Long-run aggregate supply (LRAS): classical view :: Vertical at the full employment (productive potential) level of output. In the long run, output depends on the quantity and quality of factors of production, not the price level.
+LRAS: Keynesian view :: Horizontal at low levels of output (spare capacity, so output can rise without inflation), upward sloping as bottlenecks appear, then vertical at full capacity.
+Factors shifting LRAS :: Technology, productivity, education and skills, demographic changes and migration, government regulation, competition policy, infrastructure and investment.
+# e-2.4
+Circular flow of income :: Income flows from firms to households (as wages, rent, interest, profit) and back to firms as spending. National income = national output = national expenditure.
+Injections and withdrawals :: Injections: investment (I), government spending (G) and exports (X). Withdrawals (leakages): savings (S), taxation (T) and imports (M). When injections exceed withdrawals, national income rises.
+Equilibrium national income :: Where AD = AS. A rise in AD with spare capacity raises output; near full capacity it mainly raises the price level.
+The multiplier :: An initial change in injections leads to a larger final change in national income. Multiplier = 1/(1 − MPC) = 1/MPW, where MPW = MPS + MPT + MPM.
+Size of the multiplier :: The higher the withdrawals (savings, tax rates, imports), the smaller the multiplier. The UK multiplier is relatively small because of high imports.
+# e-2.5
+Actual vs potential growth :: Actual growth: an increase in real GDP (movement towards or along the PPF, or rightward shift of AD). Potential growth: an increase in the productive capacity of the economy (outward shift of the PPF or rightward shift of LRAS).
+Output gaps :: The difference between actual and potential output. Positive output gap: actual output is above potential (inflationary pressure). Negative output gap: actual output is below potential (spare capacity, unemployment). Hard to measure accurately.
+The trade (business) cycle :: Fluctuations in real GDP around the long-run trend: boom, slowdown, recession, recovery. A recession is two consecutive quarters of negative economic growth.
+Demand and supply shocks :: Unexpected events that shift AD (e.g. a financial crisis, collapse in confidence) or AS (e.g. an oil price rise, a pandemic). Shocks can cause recessions or inflation.
+Benefits of economic growth :: Higher living standards, more jobs, higher tax revenue (for public services), business confidence and investment.
+Costs of economic growth :: Inflation if growth is too fast, environmental damage and resource depletion, rising inequality, and current account deficits as imports rise.
+# e-2.6
+Macroeconomic objectives :: Economic growth, low unemployment, low and stable inflation (UK target 2% CPI), a balanced current account, balanced government budget, protecting the environment and greater income equality.
+Conflicts between objectives :: Growth vs inflation (rising AD raises prices), growth vs current account (imports rise with income), growth vs environment, unemployment vs inflation (short-run Phillips curve).
+Phillips curve :: Short run: an inverse relationship between unemployment and inflation. Long run (Friedman): vertical at the natural rate of unemployment, so there is no long-run trade-off.
+Demand-side policies :: Policies that change aggregate demand: monetary policy and fiscal policy.
+Monetary policy :: Use of interest rates, the money supply and the exchange rate to influence AD. In the UK the Bank of England's Monetary Policy Committee (MPC) sets Bank Rate to meet the 2% CPI target.
+Transmission mechanism of interest rates :: A higher Bank Rate raises borrowing costs and rewards saving, cuts consumption and investment, may strengthen the pound (reducing net exports), lowers asset prices, so AD falls and inflation falls.
+Quantitative easing (QE) :: The central bank creates money electronically to buy assets such as government bonds. This lowers long-term interest rates and raises asset prices, encouraging spending. Used after 2008 and during COVID-19.
+Fiscal policy :: Use of government spending and taxation to influence AD and the economy. Expansionary: more spending or lower taxes. Contractionary: less spending or higher taxes.
+Direct vs indirect taxes :: Direct taxes are on income and wealth (e.g. income tax, corporation tax). Indirect taxes are on spending (e.g. VAT, excise duties).
+Budget deficit vs national debt :: Budget (fiscal) deficit: when government spending exceeds tax revenue in one year. National debt: the total accumulated stock of government borrowing.
+Supply-side policies :: Policies that aim to increase LRAS. Market-based: lower income and corporation taxes, deregulation, privatisation, reducing union power, reducing benefits. Interventionist: spending on education and training, infrastructure, subsidies for R&D.
+Supply-side policies: evaluation :: They can increase growth without inflation, but they take a long time to work, can be costly, and market-based policies may increase inequality.
+Historical example: Great Depression :: In the 1930s, falling demand led to mass unemployment. Keynes argued governments should increase spending to boost AD.
+Historical example: Global financial crisis (2008) :: A banking crisis led to a sharp recession. Responses: Bank Rate cut to 0.5%, quantitative easing, bank bailouts and later austerity in the UK.
+# e-3.1
+Why firms grow :: Economies of scale, increased market power (ability to set prices), greater market share, profit maximisation, and survival through diversification.
+Organic growth :: A firm grows internally by increasing output, investing in new capacity or opening new outlets. Slower but lower risk.
+Horizontal integration :: Merger with or takeover of a firm at the same stage of production in the same industry (e.g. two supermarkets). Gives economies of scale and market power.
+Vertical integration :: Merger with a firm at a different stage of production in the same industry. Backward: towards suppliers. Forward: towards customers. Gives control of supply chain.
+Conglomerate integration :: Merger of firms in unrelated industries. Spreads risk (diversification) but may cause diseconomies of scale and a lack of expertise.
+Constraints on business growth :: Size of the market, access to finance, owner objectives (some prefer to stay small), and regulation (competition authorities can block mergers).
+Demergers :: When a firm splits into two or more separate firms. Reasons: lack of synergy, diseconomies of scale, focus on core business. Effects: may reduce costs or increase efficiency; job losses possible.
+Public vs private sector :: Public sector organisations are owned and controlled by the government (e.g. NHS). Private sector firms are owned by individuals or shareholders and usually aim for profit.
+Profit and not-for-profit organisations :: Profit organisations aim to make profit for owners. Not-for-profit organisations (e.g. charities, social enterprises) use any surplus to pursue their social aims.
+# e-3.2
+Profit maximisation :: Occurs where marginal cost equals marginal revenue (MC = MR). Producing one more unit would add more to cost than revenue.
+Revenue maximisation :: Occurs where marginal revenue equals zero (MR = 0). Managers may pursue it if their pay is linked to sales.
+Sales maximisation :: Selling as many units as possible without making a loss: output where average cost equals average revenue (AC = AR).
+Satisficing :: Making enough profit to keep shareholders happy while pursuing other aims. Occurs when ownership and control are separated (principal-agent problem).
+Divorce of ownership and control (principal-agent problem) :: Shareholders (principals) own the firm but managers (agents) control it. Managers may pursue their own goals, such as revenue or growth, instead of profit maximisation.
+# e-3.3
+Total, average and marginal revenue :: Total revenue (TR) = price × quantity. Average revenue (AR) = TR ÷ quantity, which equals price. Marginal revenue (MR) = the change in TR from selling one more unit.
+Fixed and variable costs :: Fixed costs don't change with output in the short run (e.g. rent). Variable costs change with output (e.g. raw materials). Total cost = fixed cost + variable cost.
+Average and marginal cost :: Average cost (AC) = total cost ÷ output. Marginal cost (MC) = change in total cost from producing one more unit. MC cuts AC at its lowest point.
+Short-run cost curves and the law of diminishing returns :: In the short run at least one factor is fixed. As more variable factors are added, eventually the marginal product of each extra unit falls, so marginal and average costs rise. This gives U-shaped short-run cost curves.
+Long-run average cost curve :: In the long run all factors are variable. LRAC is U-shaped because of economies of scale (falling costs) then diseconomies of scale (rising costs). The lowest point is the minimum efficient scale.
+Economies of scale :: Falling long-run average costs as output increases. Internal: technical, purchasing (bulk buying), managerial, financial, marketing, risk-bearing. External: industry growth benefits all firms (e.g. skilled labour pool, local suppliers).
+Diseconomies of scale :: Rising long-run average costs as a firm grows too large, due to communication problems, coordination difficulties and low worker motivation (alienation).
+Normal, supernormal and losses :: Normal profit: TR = TC, the minimum profit needed to keep the firm in the industry (opportunity cost included). Supernormal profit: TR > TC. Loss: TR < TC.
+Short-run and long-run shutdown points :: Short run: a firm should continue producing as long as price (AR) ≥ average variable cost. Long run: it must cover average total cost (AR ≥ AC), or it will leave the industry.
+# e-3.4
+Allocative efficiency :: When resources are allocated to produce the goods consumers want most: price = marginal cost (P = MC).
+Productive efficiency :: When output is produced at the lowest possible average cost: the minimum point of the AC curve (MC = AC).
+Dynamic efficiency :: Improvements in efficiency over time through investment and innovation in new products and processes. Requires supernormal profit to fund it.
+X-inefficiency :: When a firm is producing above its lowest possible average cost curve because of a lack of competitive pressure, e.g. wasteful management.
+Perfect competition: characteristics :: Many buyers and sellers, identical (homogeneous) products, perfect information, no barriers to entry or exit, firms are price takers.
+Perfect competition: outcomes :: Firms may make supernormal profit in the short run, but new firms enter, so in the long run only normal profit is made. Allocatively and productively efficient in the long run, but little dynamic efficiency.
+Monopolistic competition :: Many firms, slightly differentiated products, low barriers to entry, some price-making power (e.g. restaurants, hairdressers). Supernormal profits in the short run are competed away to normal profit in the long run. Not allocatively or productively efficient.
+Oligopoly: characteristics :: A few large firms dominate the market, with high barriers to entry, differentiated products and interdependence (each firm must consider rivals' reactions). Measured by the concentration ratio.
+Concentration ratio :: The combined market share of the largest n firms in an industry. E.g. a 4-firm concentration ratio of 75% means the top four firms have 75% of market share.
+Collusion :: When firms cooperate rather than compete. Overt (formal) collusion: an agreement to fix prices or output (a cartel, illegal in the UK). Tacit collusion: firms cooperate without a formal agreement (e.g. price leadership).
+Game theory and the prisoner's dilemma :: Explains interdependence in oligopoly. Each firm chooses the best strategy given its rival's options. In the prisoner's dilemma, both firms competing (e.g. cutting price) is the dominant strategy, even though both would earn more by colluding.
+Price and non-price competition in oligopoly :: Price competition: price wars, predatory pricing, limit pricing. Non-price competition: advertising, branding, loyalty cards, product quality. Oligopolies often prefer non-price competition because prices tend to be sticky.
+Kinked demand curve :: Explains price stability in oligopoly. If a firm raises its price, rivals don't follow, so demand is elastic. If it cuts price, rivals follow, so demand is inelastic. This creates a kink and a gap in the MR curve, so prices stay stable even when costs change.
+Monopoly :: A single firm dominates the market (pure monopoly: 100%; legal definition in the UK: over 25% market share). High barriers to entry, price maker, supernormal profit in the long run.
+Monopoly: costs and benefits :: Costs: higher prices and lower output, allocative and productive inefficiency, less choice, possible X-inefficiency. Benefits: economies of scale, dynamic efficiency from supernormal profits (research and development), may be a natural monopoly.
+Price discrimination :: Charging different prices to different consumers for the same good, for reasons not related to costs. Conditions: market power, ability to separate markets, different PED in each market, and no reselling (arbitrage). Example: off-peak train fares.
+Natural monopoly :: When one firm can supply the whole market at a lower average cost than two or more firms, because of very high fixed costs and large economies of scale (e.g. water supply, rail networks).
+Monopsony :: A single (or dominant) buyer in a market, e.g. the NHS buying drugs. It can push down the prices it pays suppliers or the wages of workers, and may lead to lower quality or lower employment.
+Contestable markets :: Markets with low or no barriers to entry and exit and low sunk costs. The threat of new entrants keeps incumbents' prices and profits low, even if there are few firms.
+Barriers to entry :: Economies of scale, brand loyalty, legal barriers (patents, licences), high start-up costs, sunk costs, control of supply, predatory and limit pricing.
+# e-3.5
+Demand for labour :: Derived demand: labour is demanded for the goods and services it produces. Depends on the wage rate, the demand for the final product, productivity of labour, and the price of substitutes such as capital.
+Marginal revenue product (MRP) :: The extra revenue earned from employing one more worker: MRP = marginal product × marginal revenue. The MRP curve is the firm's demand curve for labour.
+Supply of labour :: The number of hours workers are willing and able to work at each wage rate. Influenced by wages, population, migration, barriers to entry (qualifications), working conditions, and attitudes to work.
+Wage determination in competitive labour markets :: The equilibrium wage is set where the demand for labour equals the supply of labour.
+Elasticity of demand for labour :: Elastic when labour can easily be substituted with capital, when wages are a large share of costs, and when the demand for the final product is elastic.
+Labour market failures :: Geographical immobility (difficulty moving location, e.g. high house prices) and occupational immobility (difficulty moving between jobs, e.g. lack of skills). Also monopsony employers and discrimination.
+National minimum wage :: A legal minimum hourly wage, set above the equilibrium wage in some markets. Benefits: higher incomes, less poverty, may increase productivity and motivation. Costs: possible unemployment, higher business costs and prices.
+Maximum wage :: A cap on pay, mainly debated for high earners or public sector pay. Could reduce inequality but may reduce incentives and cause talented workers to move elsewhere.
+Public sector pay :: Wages set by the government, often below private sector pay for some roles. Can lead to recruitment and retention problems, e.g. in nursing and teaching.
+# e-3.6
+Competition policy :: Government intervention to promote competition and protect consumers, carried out in the UK by the Competition and Markets Authority (CMA), which can investigate and block mergers and fine firms for collusion.
+Regulation of monopolies: price controls :: RPI − X: a regulator caps price rises at inflation minus an efficiency factor X, which forces firms to become more efficient. RPI + K is used in the water industry to fund investment.
+Profit regulation :: Limits on the rate of return a firm can earn. Problem: firms have little incentive to cut costs, which may cause X-inefficiency.
+Quality standards and performance targets :: Regulators set minimum standards of service and targets (e.g. punctuality for trains), with fines for failure. Prevents firms cutting costs by cutting quality.
+Privatisation :: Transferring ownership of a firm from the public sector to the private sector (e.g. British Telecom 1984). Benefits: profit incentive improves efficiency, government raises revenue. Costs: private monopolies, focus on profit over public need.
+Nationalisation :: Transferring ownership of a firm from the private sector to the public sector (e.g. some train operators). Benefits: control over strategic industries, can consider social costs. Costs: lack of profit incentive, possible inefficiency, cost to taxpayers.
+Deregulation :: Removing rules and barriers to entry so more firms can compete. Increases competition but may reduce standards and safety.
+Contracting out (competitive tendering) :: The government pays private firms to provide services (e.g. hospital cleaning). Can reduce costs, but quality may fall.
+Promoting small businesses :: The government may support small businesses to increase competition, e.g. with grants, loans and tax relief.
+Regulatory capture :: When regulators begin to act in the interests of the firms they regulate rather than consumers, often because they rely on firms for information or staff move between them.
+Limits to government intervention :: Regulatory capture, asymmetric information (firms know more about their costs than regulators) and high administrative costs.
+# e-4.1
+Globalisation :: The increasing integration and interdependence of economies through trade, capital flows, migration and the spread of technology and ideas.
+Causes of globalisation :: Improvements in transport and communication, trade liberalisation (e.g. WTO), the growth of multinational corporations (MNCs), and the opening of economies such as China.
+Costs and benefits of globalisation :: Benefits: cheaper goods, more choice, economies of scale, faster growth, technology transfer. Costs: deindustrialisation in some regions, inequality, environmental damage, exploitation of labour, greater exposure to global shocks.
+Absolute vs comparative advantage :: Absolute advantage: a country can produce more of a good than another with the same resources. Comparative advantage: a country can produce a good at a lower opportunity cost than another. Ricardo: both countries gain from specialising according to comparative advantage and trading.
+Limitations of comparative advantage :: Assumes no transport costs, perfect mobility of factors within a country, constant costs, and no trade barriers; it ignores job losses and risks of over-specialisation.
+Pattern of trade :: Determined by comparative advantage, the impact of emerging economies (e.g. China), trading blocs and bilateral trade agreements, and changes in exchange rates.
+Terms of trade :: An index showing the rate at which exports exchange for imports. Terms of trade = (index of export prices ÷ index of import prices) × 100. An improvement means more imports can be bought for a given quantity of exports.
+Trading blocs :: Groups of countries that reduce trade barriers between themselves. Free trade area (no tariffs between members, e.g. USMCA), customs union (free trade plus a common external tariff), common market (also free movement of labour and capital), monetary union (shared currency, e.g. Eurozone).
+Trade creation and trade diversion :: Trade creation: lower-cost producers within a bloc replace higher-cost domestic production. Trade diversion: trade moves from lower-cost producers outside the bloc to higher-cost producers inside it because of the common external tariff.
+Role of the World Trade Organization (WTO) :: Promotes free trade by negotiating reductions in trade barriers and settling trade disputes between member countries.
+Restrictions on free trade :: Tariffs (taxes on imports), quotas (limits on the quantity of imports), subsidies to domestic producers, non-tariff barriers (e.g. regulations, standards, paperwork).
+Reasons for protectionism :: Protect infant industries, protect jobs, prevent dumping, protect strategic industries (e.g. defence), improve the current account, raise government revenue.
+Impact of tariffs (diagram) :: A tariff raises the domestic price, reducing domestic consumption, increasing domestic production, reducing imports and raising government revenue. There is a deadweight welfare loss.
+Balance of payments components :: Current account, capital account (e.g. transfers of non-financial assets) and financial account (foreign direct investment, portfolio investment, changes in reserves). Overall the balance of payments must balance.
+Causes of current account deficits :: Low productivity and competitiveness, a strong exchange rate, high consumer spending on imports, and deindustrialisation.
+Policies to reduce a current account imbalance :: Expenditure-switching policies (e.g. devaluation, tariffs) make imports more expensive or exports cheaper. Expenditure-reducing policies (e.g. contractionary fiscal or monetary policy) reduce spending on imports. Supply-side policies improve competitiveness in the long run.
+Exchange rate systems :: Floating: the exchange rate is set by market forces (supply and demand for the currency). Fixed: the government or central bank pegs the currency to another. Managed: a mix, where the central bank intervenes at times.
+Revaluation vs appreciation :: Revaluation/devaluation: changes in a fixed exchange rate decided by the government. Appreciation/depreciation: changes in a floating exchange rate due to market forces.
+Effects of a currency depreciation :: Exports become cheaper and imports more expensive, which can improve the current account and boost AD, but raises inflation (imported inflation) and costs for firms using imported materials. SPICED: strong pound, imports cheaper, exports dearer.
+Marshall-Lerner condition :: A depreciation will only improve the current account if the sum of the price elasticities of demand for exports and imports is greater than 1.
+J-curve effect :: After a depreciation the current account may worsen at first, because demand for exports and imports is inelastic in the short run, before improving as demand becomes more elastic.
+International competitiveness :: The ability of a country to sell goods and services abroad. Measured by relative unit labour costs and relative export prices. Factors: exchange rates, productivity, wage costs, regulation, inflation, infrastructure.
+# e-4.2
+Absolute vs relative poverty :: Absolute poverty: when people lack the income to afford basic needs such as food, shelter and clothing (the World Bank international poverty line is $3.00 a day at 2021 prices, raised from $2.15 in 2025). Relative poverty: when people are poor relative to others in their society; in the UK, household income below 60% of the median.
+Causes of poverty :: Unemployment, low wages, ill health, age, lack of education and skills, and family circumstances.
+Income vs wealth inequality :: Income is a flow (e.g. wages, benefits per year). Wealth is a stock of assets (e.g. property, savings, shares). Wealth is usually much more unequally distributed than income.
+Lorenz curve :: A graph showing the cumulative share of income held by the cumulative share of the population. The further the curve from the 45° line of perfect equality, the more unequal the distribution.
+Gini coefficient :: A measure of inequality based on the Lorenz curve: the area between the line of equality and the Lorenz curve divided by the total area under the line of equality. 0 = perfect equality, 1 = perfect inequality.
+Causes of inequality :: Differences in skills and education, inheritance of wealth, tax and benefit systems, trade union membership, globalisation and technological change.
+Inequality and economic development :: The Kuznets curve suggests inequality rises in the early stages of development and then falls as countries become richer.
+# e-4.3
+Measures of development :: The Human Development Index (HDI) combines life expectancy, education (mean and expected years of schooling) and GNI per capita at PPP. Each is scored 0 to 1.
+Limitations of HDI :: Ignores inequality, environmental sustainability, freedom, and the quality of education and healthcare.
+Factors influencing growth and development :: Primary product dependency, volatility of commodity prices, savings gap (Harrod-Domar model), foreign currency gap, capital flight, demographic factors, debt, access to credit and banking, infrastructure, education and skills, absence of property rights.
+Harrod-Domar model :: Growth depends on saving and the productivity of investment. Many developing countries have low incomes so low savings, creating a savings gap that limits investment and growth.
+Market-orientated strategies for development :: Trade liberalisation, promotion of foreign direct investment (FDI), removal of government subsidies, floating exchange rates, microfinance schemes and privatisation.
+Interventionist strategies for development :: Development of human capital (education, health), protectionism (infant industries), managed exchange rates, infrastructure development, promoting joint ventures with global companies, and buffer stock schemes.
+Other development strategies :: Industrialisation (Lewis model: moving labour from agriculture to industry), the development of tourism, primary industries, fairtrade schemes, aid and debt relief.
+Role of international institutions :: The World Bank provides long-term loans for development projects. The International Monetary Fund (IMF) provides short-term loans to countries with balance of payments problems. NGOs support grassroots development.
+Lewis dual-sector model :: Surplus labour in a low-productivity agricultural sector moves to a higher-productivity industrial sector, where profits are reinvested, raising growth.
+# e-4.4
+Role of financial markets :: Facilitating saving, lending to businesses and individuals, facilitating the exchange of goods and services, providing forward markets in currencies and commodities, and providing a market for equities.
+Market failure in the financial sector :: Asymmetric information, externalities (the collapse of a bank affects the whole economy), moral hazard (banks take excessive risks expecting a bailout), speculation and market bubbles, and market rigging (e.g. LIBOR scandal).
+Moral hazard :: When an individual or firm takes more risks because they don't bear the full consequences, e.g. banks expecting to be bailed out if they fail.
+Role of central banks :: Implementing monetary policy, acting as banker to the government, acting as banker to the banks (lender of last resort), and regulating the banking industry.
+Lender of last resort :: The central bank lends to banks that cannot borrow elsewhere, to prevent a bank run and protect the financial system.
+Commercial vs investment banks :: Commercial (retail) banks take deposits and lend to households and firms. Investment banks trade in financial markets and help companies raise capital.
+Bank balance sheet: liquidity vs profitability :: Banks balance liquidity (holding cash and assets that can easily be turned into cash) against profitability (lending at higher interest rates). Riskier lending is more profitable but less liquid.
+Bank regulation in the UK :: The Prudential Regulation Authority (PRA) supervises banks' safety; the Financial Conduct Authority (FCA) protects consumers; the Financial Policy Committee (FPC) monitors risks to the whole financial system.
+# e-4.5
+Public expenditure :: Government spending, made up of capital expenditure (e.g. building schools, roads), current expenditure (e.g. salaries, day-to-day running costs) and transfer payments (e.g. pensions, benefits).
+Reasons for changes in public expenditure as a share of GDP :: An ageing population, recessions (more benefits and less GDP), political priorities, and the impact of crises (e.g. 2008, COVID-19).
+Significance of public expenditure :: It affects productivity and growth (e.g. infrastructure), living standards and equality, crowding out of private investment, and the level of taxation.
+Crowding out :: When increased government spending or borrowing reduces private sector spending, for example because government borrowing pushes up interest rates.
+Progressive, proportional and regressive taxes :: Progressive: a higher percentage of income is paid in tax as income rises (e.g. UK income tax). Proportional: the same percentage for all incomes. Regressive: a lower percentage of income is paid as income rises (e.g. VAT in effect).
+Laffer curve :: Suggests that as tax rates rise, tax revenue rises up to a point, then falls, because very high tax rates reduce incentives to work and encourage tax avoidance.
+Effects of changes in tax rates :: On incentives to work, tax revenues (Laffer curve), income distribution, real output and employment, the price level, the trade balance and foreign direct investment flows.
+Automatic vs discretionary fiscal policy :: Automatic stabilisers: tax revenue and benefit spending change automatically with the trade cycle (e.g. in a recession tax revenue falls and benefit spending rises). Discretionary policy: deliberate changes to government spending or tax rates.
+Cyclical vs structural deficits :: Cyclical deficit: caused by the trade cycle (rises in recessions, falls in booms). Structural deficit: the part that remains even when the economy is at full capacity; it needs policy action to remove.
+Factors influencing the size of fiscal deficits :: The trade cycle, interest payments on existing debt, unexpected events (e.g. wars, pandemics) and government policy choices.
+Significance of the size of national debt :: High debt raises interest payments (opportunity cost), may lead to a downgrade of the country's credit rating, may pass the burden to future generations, and can cause crowding out.
+Macroeconomic policies in a global context :: Policies to reduce fiscal deficits and national debt, reduce poverty and inequality, change interest rates and the money supply, control global companies' pricing (transfer pricing), and respond to external shocks.
+Problems facing policymakers :: Inaccurate information, risks and uncertainty, and the inability to control external shocks (e.g. global recessions, oil price changes).

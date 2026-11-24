@@ -1,0 +1,194 @@
+# m-proof
+Proof by deduction :: Start from known facts or definitions and use logical steps to reach the statement, for all cases. E.g. show n² − n is even by writing n² − n = n(n − 1), a product of consecutive integers.
+Proof by exhaustion :: Split the statement into a finite number of cases and prove each one. E.g. to show n² + n is even, check n even and n odd separately.
+Disproof by counter-example :: Find one example where the statement is false. One counter-example is enough to disprove a statement.
+Proof by contradiction :: Assume the statement is false, then show this leads to a contradiction, so the original statement must be true.
+Prove √2 is irrational (outline) :: Assume √2 = a/b in lowest terms. Then a² = 2b², so a² is even, so a is even: a = 2k. Then 4k² = 2b², so b² = 2k², so b is even. Both even contradicts lowest terms, so √2 is irrational.
+Prove there are infinitely many primes (outline) :: Assume there is a finite list of all primes p₁, …, pₙ. Let N = p₁p₂…pₙ + 1. N leaves remainder 1 when divided by each prime, so N is either prime or has a prime factor not on the list. Contradiction.
+Writing even and odd numbers :: Even: 2n. Odd: 2n + 1 (n an integer). Consecutive integers: n, n + 1.
+Rational number :: A number that can be written as a/b where a and b are integers and b ≠ 0.
+# m-alg
+Laws of indices :: aᵐ × aⁿ = aᵐ⁺ⁿ, aᵐ ÷ aⁿ = aᵐ⁻ⁿ, (aᵐ)ⁿ = aᵐⁿ, a⁰ = 1, a⁻ⁿ = 1/aⁿ, a^(m/n) = (ⁿ√a)ᵐ.
+Rationalise 1/(a + √b) :: Multiply top and bottom by (a − √b): 1/(a + √b) = (a − √b)/(a² − b).
+Discriminant :: For ax² + bx + c: b² − 4ac > 0 two distinct real roots; = 0 one repeated root; < 0 no real roots.
+Completing the square :: x² + bx + c = (x + b/2)² − (b/2)² + c. For ax² + bx + c, factor out a first. The turning point of y = a(x + p)² + q is (−p, q).
+Quadratic formula :: x = (−b ± √(b² − 4ac)) / 2a.
+Solving a quadratic inequality :: Find the critical values (roots), sketch the graph, then read off where the curve is above (> 0) or below (< 0) the x-axis. Give answers in set notation if asked, e.g. {x : x < −2} ∪ {x : x > 3}.
+Factor theorem :: If f(a) = 0 then (x − a) is a factor of f(x). More generally, if f(b/a) = 0 then (ax − b) is a factor.
+Algebraic division :: Divide a polynomial by (x ± p) using long division or by comparing coefficients. f(x) = (x − p)·q(x) + remainder.
+Partial fractions: distinct linear factors :: (px + q)/((x − a)(x − b)) = A/(x − a) + B/(x − b). Find A and B by substituting x = a and x = b, or comparing coefficients.
+Partial fractions: repeated factor :: (px² + qx + r)/((x − a)(x − b)²) = A/(x − a) + B/(x − b) + C/(x − b)².
+Improper fraction before partial fractions :: If the degree of the numerator ≥ degree of the denominator, divide first to get a polynomial plus a proper fraction.
+Modulus function |f(x)| :: Reflect any part of y = f(x) below the x-axis in the x-axis. For y = f(|x|), reflect the part for x ≥ 0 in the y-axis.
+Solving |ax + b| = cx + d :: Solve ax + b = cx + d and −(ax + b) = cx + d, then check each solution in the original equation (some may be invalid).
+Function, domain and range :: A function maps each input to exactly one output. Domain: the set of allowed inputs. Range: the set of outputs. A function is one-to-one or many-to-one.
+Composite function fg(x) :: Apply g first, then f: fg(x) = f(g(x)).
+Inverse function f⁻¹(x) :: Only exists for one-to-one functions. Swap x and y and rearrange. The domain of f⁻¹ is the range of f, and vice versa. y = f⁻¹(x) is the reflection of y = f(x) in y = x.
+Transformations y = f(x + a) and y = f(x) + a :: f(x + a): translation by (−a, 0), i.e. a units left. f(x) + a: translation by (0, a), i.e. a units up.
+Transformations y = af(x) and y = f(ax) :: af(x): vertical stretch, scale factor a. f(ax): horizontal stretch, scale factor 1/a.
+Transformations y = −f(x) and y = f(−x) :: −f(x): reflection in the x-axis. f(−x): reflection in the y-axis.
+Direct and inverse proportion :: y ∝ x means y = kx. y ∝ 1/x means y = k/x. Graphs of y = k/x and y = k/x² have asymptotes at both axes.
+# m-coord
+Gradient between two points :: m = (y₂ − y₁)/(x₂ − x₁).
+Equation of a straight line :: y − y₁ = m(x − x₁), or y = mx + c. Often asked in the form ax + by + c = 0 with integers a, b, c.
+Parallel and perpendicular lines :: Parallel lines have equal gradients. Perpendicular lines: m₁ × m₂ = −1.
+Midpoint and distance :: Midpoint = ((x₁ + x₂)/2, (y₁ + y₂)/2). Distance = √((x₂ − x₁)² + (y₂ − y₁)²).
+Equation of a circle :: (x − a)² + (y − b)² = r², centre (a, b), radius r. Complete the square on x and y to find the centre and radius from the expanded form.
+Circle facts :: The angle in a semicircle is a right angle; the perpendicular from the centre to a chord bisects the chord; a tangent is perpendicular to the radius at the point of contact.
+Line meets circle :: Substitute the line into the circle to get a quadratic. Discriminant > 0: two intersections; = 0: tangent; < 0: no intersection.
+Parametric equations :: x and y are both given in terms of a parameter t. Convert to Cartesian by eliminating t (rearrange one equation or use a trig identity such as sin²t + cos²t = 1).
+# m-seq
+Binomial expansion (positive integer n) :: (a + b)ⁿ = aⁿ + ⁿC₁aⁿ⁻¹b + ⁿC₂aⁿ⁻²b² + … + bⁿ, where ⁿCᵣ = n!/(r!(n − r)!).
+Binomial expansion (any rational n) :: (1 + x)ⁿ = 1 + nx + n(n − 1)x²/2! + n(n − 1)(n − 2)x³/3! + …, valid for |x| < 1.
+Validity of (a + bx)ⁿ expansion :: Write as aⁿ(1 + (b/a)x)ⁿ. Valid for |bx/a| < 1, i.e. |x| < |a/b|.
+Arithmetic sequence :: nth term uₙ = a + (n − 1)d. Sum Sₙ = n/2 (2a + (n − 1)d) = n/2 (a + l).
+Geometric sequence :: nth term uₙ = arⁿ⁻¹. Sum Sₙ = a(1 − rⁿ)/(1 − r) for r ≠ 1.
+Sum to infinity (geometric) :: S∞ = a/(1 − r), only if the series converges: |r| < 1.
+Sigma notation :: Σ (r = 1 to n) of f(r) means the sum f(1) + f(2) + … + f(n). Σ (r = 1 to n) of 1 = n.
+Recurrence relation :: Defines each term from the previous one, e.g. uₙ₊₁ = 2uₙ + 3, u₁ = 4.
+Increasing, decreasing and periodic sequences :: Increasing: uₙ₊₁ > uₙ for all n. Decreasing: uₙ₊₁ < uₙ. Periodic: the terms repeat in a cycle; the order is the number of terms in the cycle.
+# m-trig
+Radians and degrees :: π radians = 180°. To convert degrees to radians, multiply by π/180.
+Arc length and sector area :: Arc length s = rθ. Sector area A = ½r²θ (θ in radians).
+Area of a segment :: Segment area = ½r²(θ − sin θ), θ in radians.
+Small angle approximations :: For small θ in radians: sin θ ≈ θ, tan θ ≈ θ, cos θ ≈ 1 − θ²/2.
+Exact trig values :: sin 30° = ½, cos 30° = √3/2, tan 30° = 1/√3; sin 45° = cos 45° = √2/2, tan 45° = 1; sin 60° = √3/2, cos 60° = ½, tan 60° = √3.
+Sine rule :: a/sin A = b/sin B = c/sin C. Watch for the ambiguous case when finding an angle.
+Cosine rule :: a² = b² + c² − 2bc cos A, or cos A = (b² + c² − a²)/(2bc).
+Area of a triangle (trig) :: Area = ½ab sin C.
+sec, cosec and cot :: sec x = 1/cos x, cosec x = 1/sin x, cot x = 1/tan x = cos x/sin x.
+Pythagorean identities :: sin²x + cos²x = 1; 1 + tan²x = sec²x; 1 + cot²x = cosec²x.
+tan identity :: tan x = sin x / cos x.
+Compound angle formulae :: sin(A ± B) = sin A cos B ± cos A sin B. cos(A ± B) = cos A cos B ∓ sin A sin B. tan(A ± B) = (tan A ± tan B)/(1 ∓ tan A tan B).
+Double angle formulae :: sin 2A = 2 sin A cos A. cos 2A = cos²A − sin²A = 2cos²A − 1 = 1 − 2sin²A. tan 2A = 2 tan A/(1 − tan²A).
+R cos(x ± α) form :: a cos x + b sin x = R cos(x − α), where R = √(a² + b²) and tan α = b/a. Maximum value R, minimum −R.
+Inverse trig ranges :: arcsin x: −π/2 ≤ y ≤ π/2. arccos x: 0 ≤ y ≤ π. arctan x: −π/2 < y < π/2.
+Solving trig equations :: Find the principal value with the inverse function, then use the graph or CAST to find all solutions in the interval. If the equation involves 2x, adjust the interval first (e.g. 0 ≤ 2x ≤ 720°).
+# m-exp
+Exponential function eˣ :: y = eˣ has gradient equal to its value: d/dx (eˣ) = eˣ. It passes through (0, 1) and has asymptote y = 0.
+ln x :: The natural logarithm, the inverse of eˣ. ln(eˣ) = x and e^(ln x) = x. y = ln x passes through (1, 0) with asymptote x = 0.
+Laws of logarithms :: logₐ(xy) = logₐx + logₐy; logₐ(x/y) = logₐx − logₐy; logₐ(xᵏ) = k logₐx; logₐa = 1; logₐ1 = 0.
+Solving aˣ = b :: Take logs: x = log b / log a (any base, often ln).
+Exponential growth and decay :: Modelled by y = Ae^(kt): k > 0 growth, k < 0 decay. A is the initial value (at t = 0). The rate of change dy/dt = ky is proportional to y.
+Linearising y = axⁿ :: log y = log a + n log x. Plot log y against log x: a straight line with gradient n and intercept log a.
+Linearising y = kbˣ :: log y = log k + x log b. Plot log y against x: gradient log b and intercept log k.
+Limitations of exponential models :: Exponential growth cannot continue for ever in reality (e.g. limited resources), and models may only be valid over a limited range of values.
+# m-diff
+Differentiation from first principles :: f'(x) = lim (h → 0) of [f(x + h) − f(x)] / h.
+Differentiate xⁿ :: d/dx (xⁿ) = nxⁿ⁻¹.
+Standard derivatives :: d/dx eᵏˣ = keᵏˣ; d/dx ln x = 1/x; d/dx sin kx = k cos kx; d/dx cos kx = −k sin kx; d/dx tan kx = k sec²kx; d/dx aˣ = aˣ ln a.
+Chain rule :: dy/dx = dy/du × du/dx. E.g. d/dx (3x + 1)⁵ = 15(3x + 1)⁴.
+Product rule :: If y = uv, dy/dx = u dv/dx + v du/dx.
+Quotient rule :: If y = u/v, dy/dx = (v du/dx − u dv/dx)/v².
+Stationary points :: Solve dy/dx = 0. If d²y/dx² > 0: minimum. If d²y/dx² < 0: maximum. If = 0, check the gradient either side.
+Increasing and decreasing functions :: Increasing where f'(x) > 0 (or ≥ 0). Decreasing where f'(x) < 0 (or ≤ 0).
+Concave and convex :: Convex where f''(x) > 0 (curves upward, like ∪). Concave where f''(x) < 0 (like ∩).
+Point of inflection :: Where f''(x) changes sign (the curve changes between concave and convex). f''(x) = 0 alone is not enough; check the sign either side.
+Tangents and normals :: Tangent gradient = f'(a) at x = a. Normal gradient = −1/f'(a). Use y − y₁ = m(x − x₁).
+Implicit differentiation :: Differentiate every term with respect to x; a term in y gains a factor dy/dx, e.g. d/dx (y²) = 2y dy/dx. Then rearrange for dy/dx.
+Parametric differentiation :: dy/dx = (dy/dt) ÷ (dx/dt).
+Connected rates of change :: Use the chain rule to link rates, e.g. dV/dt = dV/dr × dr/dt.
+dx/dy relation :: dy/dx = 1 ÷ (dx/dy).
+# m-int
+Integrate xⁿ :: ∫ xⁿ dx = xⁿ⁺¹/(n + 1) + c, for n ≠ −1.
+Standard integrals :: ∫ 1/x dx = ln|x| + c; ∫ eᵏˣ dx = (1/k)eᵏˣ + c; ∫ cos kx dx = (1/k) sin kx + c; ∫ sin kx dx = −(1/k) cos kx + c; ∫ sec²kx dx = (1/k) tan kx + c.
+Reverse chain rule: f'(x)/f(x) :: ∫ f'(x)/f(x) dx = ln|f(x)| + c.
+Reverse chain rule: f'(x)[f(x)]ⁿ :: ∫ f'(x)[f(x)]ⁿ dx = [f(x)]ⁿ⁺¹/(n + 1) + c.
+Integration by substitution :: Choose u = g(x), find du/dx, replace dx, rewrite everything in u, integrate, then substitute back (or change the limits for a definite integral).
+Integration by parts :: ∫ u (dv/dx) dx = uv − ∫ v (du/dx) dx. Choose u to be the part that gets simpler when differentiated (e.g. x, or ln x).
+Definite integral and area :: ∫ₐᵇ f(x) dx gives the signed area between the curve and the x-axis. Area below the x-axis is negative, so integrate separately over each region.
+Area between two curves :: Area = ∫ₐᵇ (upper − lower) dx, where a and b are the x-coordinates of the intersections.
+Trapezium rule :: ∫ₐᵇ y dx ≈ (h/2)[y₀ + 2(y₁ + y₂ + … + yₙ₋₁) + yₙ], h = (b − a)/n. It overestimates for convex curves and underestimates for concave curves.
+Separable differential equations :: For dy/dx = f(x)g(y): separate to ∫ 1/g(y) dy = ∫ f(x) dx, integrate both sides, then use initial conditions to find c.
+Integrating using trig identities :: Use identities to simplify first, e.g. sin²x = ½(1 − cos 2x) and cos²x = ½(1 + cos 2x).
+Integration as the limit of a sum :: ∫ₐᵇ f(x) dx = lim (δx → 0) of Σ f(x) δx.
+# m-num
+Locating roots: change of sign :: If f(x) is continuous on [a, b] and f(a) and f(b) have opposite signs, then f(x) = 0 has a root between a and b.
+When change of sign fails :: If the interval contains an even number of roots, there may be no sign change. If f(x) has an asymptote (discontinuity) in the interval, a sign change may not mean a root.
+Fixed point iteration :: Rearrange f(x) = 0 into x = g(x) and use xₙ₊₁ = g(xₙ). Shown by staircase or cobweb diagrams. It converges if |g'(x)| < 1 near the root.
+Newton-Raphson method :: xₙ₊₁ = xₙ − f(xₙ)/f'(xₙ).
+When Newton-Raphson fails :: If f'(xₙ) = 0 (at or near a stationary point), the tangent is horizontal and the method fails or diverges.
+Numerical methods applied to modelling :: Use iteration or Newton-Raphson to solve equations that cannot be solved algebraically, then interpret the solution in context.
+# m-vec
+Magnitude of a vector :: |ai + bj + ck| = √(a² + b² + c²).
+Unit vector :: A vector of magnitude 1 in the direction of a: â = a/|a|.
+Position vector :: The vector from the origin O to point A, written a or OA. AB = b − a.
+Distance between two points (vectors) :: |AB| = |b − a|.
+Parallel vectors :: Vectors are parallel if one is a scalar multiple of the other: a = λb.
+Direction of a 2D vector :: The angle with the positive x-axis: tan θ = b/a for ai + bj (draw a diagram to place the angle).
+# m-samp
+Simple random sampling :: Every sample of size n has an equal chance of being selected, e.g. using random numbers with a numbered sampling frame. Free of bias, but needs a full list and can be slow for large populations.
+Systematic sampling :: Choose every kth item from an ordered sampling frame, k = population ÷ sample size, starting at a random point between 1 and k. Simple to use, but needs a list and could be biased if there is a pattern in the list.
+Stratified sampling :: Divide the population into groups (strata) and take a random sample from each in proportion to its size. Gives a representative sample, but the strata must be clearly defined.
+Quota sampling :: An interviewer selects people to fill quotas for each group in proportion to the population. No sampling frame needed and quick, but it is non-random and can introduce interviewer bias.
+Opportunity (convenience) sampling :: Taking the sample from people available at the time who fit the criteria. Easy and cheap, but unlikely to be representative.
+Population, sample, census :: Population: the whole set of items of interest. Census: data from every member of the population. Sample: a selection from the population. Sampling unit: an individual item; sampling frame: the list of sampling units.
+Large data set: stations and dates :: Met Office weather data for May to October in 1987 and 2015. Five UK stations: Camborne, Heathrow, Hurn, Leeming, Leuchars. Three overseas: Beijing, Jacksonville, Perth.
+Large data set: key variables :: Daily mean temperature (°C), daily total rainfall (mm, 'tr' means trace, under 0.05 mm), daily total sunshine (hours), daily mean wind speed (knots) and direction, daily maximum gust, daily maximum relative humidity (%), daily mean cloud cover (oktas), daily mean visibility (decametres), daily mean pressure (hPa).
+Large data set: useful facts :: Perth is in the southern hemisphere, so May to October is its autumn and winter. Overseas stations have some missing data (n/a). Cloud cover is in oktas (eighths of the sky), 0 to 8. Wind speed can also be on the Beaufort scale.
+# m-data
+Histogram frequency density :: Frequency density = frequency ÷ class width. The area of each bar is proportional to the frequency.
+Linear interpolation for the median :: Find the class containing the (n/2)th value, then estimate: median = lower boundary + ((n/2 − cumulative frequency before the class) ÷ class frequency) × class width.
+Variance and standard deviation :: Variance σ² = Σx²/n − (Σx/n)² = Sₓₓ/n, where Sₓₓ = Σx² − (Σx)²/n. Standard deviation σ = √variance.
+Outliers :: A common rule: an outlier is less than Q₁ − 1.5 × IQR or more than Q₃ + 1.5 × IQR. Another rule uses values more than 2 or 3 standard deviations from the mean. The question will tell you which.
+Box plots :: Show minimum, Q₁, median, Q₃, maximum and outliers (marked with a cross). Useful for comparing distributions: compare a measure of location and a measure of spread, in context.
+Coding :: If y = (x − a)/b, then ȳ = (x̄ − a)/b and σᵧ = σₓ/b. Adding or subtracting changes the mean but not the spread.
+Cleaning data :: Identifying and removing outliers that are errors, and dealing with missing data, before analysis.
+Correlation and causation :: Correlation describes a linear relationship between two variables; it does not prove one causes the other.
+Regression line y = a + bx :: The line of best fit. b is the change in y for each unit increase in x; a is the value of y when x = 0. Only use it to predict within the range of the data (interpolation), not outside it (extrapolation).
+Explanatory and response variables :: The explanatory (independent) variable goes on the x-axis; the response (dependent) variable goes on the y-axis.
+# m-prob
+Mutually exclusive events :: Events that cannot happen at the same time: P(A ∩ B) = 0, so P(A ∪ B) = P(A) + P(B).
+Independent events :: The outcome of one does not affect the other: P(A ∩ B) = P(A) × P(B). Also P(A|B) = P(A).
+Addition rule :: P(A ∪ B) = P(A) + P(B) − P(A ∩ B).
+Conditional probability :: P(A|B) = P(A ∩ B) ÷ P(B).
+Tree diagrams :: Multiply along branches for 'and'. Add the results of different branches for 'or'. For conditional probability, the second set of branches depends on the first.
+Complement :: P(A') = 1 − P(A).
+Discrete random variable :: A variable that takes countable values, each with a probability. The probabilities sum to 1.
+# m-dist
+Binomial distribution conditions :: X ~ B(n, p) if: a fixed number of trials n, each with two outcomes (success/failure), a constant probability of success p, and trials are independent.
+Binomial probability formula :: P(X = r) = ⁿCᵣ pʳ (1 − p)ⁿ⁻ʳ.
+Using cumulative binomial :: P(X ≤ r) from tables or calculator. P(X ≥ r) = 1 − P(X ≤ r − 1). P(X < r) = P(X ≤ r − 1).
+Normal distribution properties :: X ~ N(μ, σ²) is symmetrical and bell-shaped about the mean μ. Mean = median = mode. Points of inflection at μ ± σ. About 68% within 1σ, 95% within 2σ, 99.7% within 3σ.
+Standardising :: Z = (X − μ)/σ, where Z ~ N(0, 1).
+Finding μ or σ :: Use the inverse normal to find z for a known probability, then solve (x − μ)/σ = z. Two conditions give simultaneous equations.
+Normal approximation to binomial :: B(n, p) ≈ N(np, np(1 − p)) when n is large and p is close to 0.5. Apply a continuity correction, e.g. P(X ≤ 10) ≈ P(Y < 10.5).
+Choosing a model :: Binomial for counting successes in a fixed number of independent trials; normal for continuous data that is symmetrical around a mean.
+# m-hyp
+Hypothesis test language :: H₀ (null hypothesis): the parameter has the assumed value. H₁ (alternative): it has increased, decreased (one-tailed) or changed (two-tailed). Significance level: the probability of rejecting H₀ when it is true.
+Critical region :: The range of values of the test statistic that would lead you to reject H₀. The critical value is the first value in it.
+Actual significance level :: The probability of the test statistic falling in the critical region if H₀ is true, e.g. P(X ≤ 2) when the critical region is X ≤ 2.
+Two-tailed tests :: Split the significance level in half, putting half in each tail (e.g. 2.5% each side for a 5% test).
+Binomial hypothesis test steps :: 1) State H₀: p = … and H₁. 2) Assume X ~ B(n, p) under H₀. 3) Find P(X ≥ x) or P(X ≤ x) for the observed value (or the critical region). 4) Compare with the significance level. 5) Conclude in context.
+Test for the mean of a normal distribution :: Under H₀: X̄ ~ N(μ, σ²/n). Find P(X̄ ≥ observed) or P(X̄ ≤ observed), or the critical region, and compare with the significance level.
+Correlation hypothesis test (PMCC) :: H₀: ρ = 0, H₁: ρ > 0, ρ < 0 or ρ ≠ 0. Compare the sample PMCC r with the critical value from tables for the sample size and significance level.
+Writing a conclusion :: Use non-definite language in context, e.g. 'There is sufficient evidence at the 5% level to suggest that the probability of… has increased.'
+# m-kin
+SI units :: Mass: kilograms (kg). Length/displacement: metres (m). Time: seconds (s). Speed/velocity: m s⁻¹. Acceleration: m s⁻². Force/weight: newtons (N).
+Scalars and vectors (mechanics) :: Scalars have size only (distance, speed, mass, time). Vectors have size and direction (displacement, velocity, acceleration, force).
+SUVAT equations :: v = u + at; s = ut + ½at²; s = vt − ½at²; v² = u² + 2as; s = ½(u + v)t. Only valid for constant acceleration.
+Velocity-time graphs :: The gradient gives the acceleration. The area under the graph gives the displacement.
+Displacement-time graphs :: The gradient gives the velocity.
+Variable acceleration :: v = ds/dt, a = dv/dt = d²s/dt². s = ∫ v dt, v = ∫ a dt (use initial conditions to find constants).
+Vertical motion under gravity :: Acceleration g = 9.8 m s⁻² downwards (unless told otherwise). Choose a positive direction and keep signs consistent.
+Projectiles :: Treat horizontal and vertical motion separately. Horizontal: constant velocity u cos θ. Vertical: initial velocity u sin θ with acceleration −g. Time of flight comes from the vertical motion.
+Projectile: time of flight, maximum height and range :: For launch from ground level: time of flight = 2u sin θ/g, maximum height = u²sin²θ/(2g), range = u² sin 2θ/g.
+Modelling assumptions (particles) :: Particle: dimensions are negligible, so no rotation. Light: mass is negligible. Inextensible string: same acceleration for connected particles. Smooth: no friction. Air resistance ignored.
+# m-force
+Newton's first law :: An object stays at rest or moves with constant velocity unless acted on by a resultant force.
+Newton's second law :: Resultant force = mass × acceleration: F = ma.
+Newton's third law :: For every action there is an equal and opposite reaction: if A exerts a force on B, B exerts an equal and opposite force on A.
+Weight :: W = mg, acting vertically downwards.
+Friction :: F ≤ μR, where μ is the coefficient of friction and R the normal reaction. Limiting friction (on the point of moving, or moving): F = μR. Friction opposes motion.
+Resolving forces :: Split each force into components, e.g. parallel and perpendicular to a slope: weight components are mg sin θ down the slope and mg cos θ into the slope.
+Equilibrium :: An object in equilibrium has zero resultant force: the components in every direction sum to zero.
+Connected particles :: Write F = ma for each particle separately (the tension appears in each), or for the whole system when they move together. Over a smooth pulley the tension is the same on both sides.
+Forces as vectors :: Resultant force R = F₁ + F₂ + … Then a = R/m (vector form). Magnitude of acceleration = |R|/m.
+# m-mom
+Moment of a force :: Moment = force × perpendicular distance from the pivot to the line of action of the force. Units: N m. State clockwise or anticlockwise.
+Equilibrium of a rigid body :: Resultant force is zero and the sum of moments about any point is zero (clockwise moments = anticlockwise moments).
+Uniform rod :: The weight of a uniform rod acts at its midpoint.
+On the point of tilting :: When a rod or beam is about to tilt about one support, the reaction at the other support is zero.
+Non-uniform rod :: The centre of mass is not at the midpoint; take moments to find its position.
+Taking moments wisely :: Take moments about a point where an unknown force acts, so that force does not appear in the equation.
+Ladder problems :: Resolve forces horizontally and vertically, take moments about the foot of the ladder, and use F ≤ μR for friction at the ground (and wall if rough).
