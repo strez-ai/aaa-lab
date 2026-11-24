@@ -1,0 +1,133 @@
+@name History
+@aliases AQA History
+@board AQA
+@code 7042
+# skills | Papers 1-2 | Exam skills: interpretations and sources
+Interpretation questions (Paper 1 Section A) :: Evaluate how convincing three extracts are in relation to the question, using own knowledge to support and challenge each one. No overall comparison is required.
+Source questions (Paper 2 Section A) :: Evaluate the value of three sources for an enquiry, considering provenance (author, audience, purpose), tone and emphasis, and content with own knowledge.
+Essay technique :: Argue a clear judgement, balance factors, use precise evidence, and link back to the question in every paragraph.
+NEA (component 3) :: A 3,000-4,500 word independent investigation covering a period of about 100 years, using primary sources and historians' interpretations.
+Using extracts well :: Identify each extract's overall argument, then test its claims against precise own knowledge, saying how far it is convincing.
+Provenance in sources :: Consider who wrote it, when, why and for whom; explain how these affect the source's value, not just that they do.
+Judgement in essays :: Reach a substantiated conclusion that weighs factors, explaining why one is more significant than others.
+# tudors1 | 1C Part 1 | The Tudors: Henry VII, 1485-1509
+Henry VII's claim to the throne :: Weak: through his mother, Margaret Beaufort, descended from John of Gaunt's legitimised Beaufort line. Won at Bosworth (1485) against Richard III.
+Securing the throne :: Dated his reign from the day before Bosworth, married Elizabeth of York (1486), and dealt with pretenders: Lambert Simnel (Stoke, 1487) and Perkin Warbeck (executed 1499).
+Henry VII and the nobility :: Used bonds and recognisances, Acts of Attainder and the Council Learned in the Law to control the nobles; limited retaining.
+Henry VII's finances :: Increased income from crown lands, customs duties and feudal dues; left a healthy treasury. Empson and Dudley were unpopular agents.
+Henry VII's foreign policy :: Sought security and recognition: Treaty of Medina del Campo (1489) with Spain, Treaty of Étaples (1492) with France, and the marriage of Margaret to James IV of Scotland (1503).
+Cornish Rebellion 1497 :: Rising against taxation for war with Scotland; defeated at Blackheath.
+Battle of Bosworth 1485 :: Henry Tudor defeated Richard III, helped by the Stanleys' intervention and French-backed troops.
+Henry VII's council :: Relied on loyal advisers such as Morton, Fox, Bray and Lovell; the Great Council met only occasionally.
+Justices of the Peace :: Henry VII increased their duties in local government and law and order, reducing reliance on great nobles.
+The Yorkshire Rebellion 1489 :: Rising against taxation for war in Brittany; the Earl of Northumberland was killed.
+Henry VII and Burgundy :: Margaret of Burgundy backed Simnel and Warbeck; Henry imposed a trade embargo (1493-96) until the Magnus Intercursus (1496).
+Marriage of Arthur and Catherine of Aragon :: 1501, sealing the Spanish alliance; Arthur died in 1502, and Catherine was later betrothed to Prince Henry.
+Henry VII's later years :: After 1502, increasing use of bonds and financial pressure made the regime seem harsher and more insecure.
+# tudors2 | 1C Part 1 | The Tudors: Henry VIII, 1509-1547
+Wolsey's role :: Lord Chancellor and cardinal; dominated government 1515-29; Field of the Cloth of Gold (1520) and Treaty of London (1518); fell after failing to secure the annulment.
+The King's Great Matter :: Henry sought an annulment from Catherine of Aragon, citing Leviticus, as he lacked a male heir and wanted to marry Anne Boleyn.
+Break with Rome :: Act in Restraint of Appeals (1533) and Act of Supremacy (1534) made Henry Supreme Head of the Church of England.
+Thomas Cromwell :: Chief minister 1532-40; organised the break with Rome and the dissolution of the monasteries; Elton argued for a 'Tudor revolution in government'. Executed after the Anne of Cleves marriage.
+Dissolution of the monasteries :: Smaller monasteries closed in 1536 and larger ones by 1540, transferring wealth to the crown.
+Pilgrimage of Grace 1536 :: The largest Tudor rebellion, in the north, led by Robert Aske; motivated by religion, economics and politics. Henry promised concessions, then executed leaders.
+Henry VIII's later foreign policy :: Wars with France and Scotland in the 1540s; capture of Boulogne (1544) at great cost; debasement of the coinage.
+Henry VIII's accession 1509 :: Arrested Empson and Dudley to win popularity, and married Catherine of Aragon.
+Henry VIII's early wars :: War with France (1512-14) brought the Battle of the Spurs and capture of Tournai and Thérouanne; Flodden (1513) defeated the Scots.
+The Amicable Grant 1525 :: Wolsey's non-parliamentary tax for war with France provoked resistance and was abandoned.
+Wolsey and the Church :: Papal legate from 1518; criticised for pluralism, absenteeism and wealth, though he planned some reforms.
+Anne Boleyn :: Married Henry in 1533; mother of Elizabeth; executed in 1536 after factional plotting.
+Jane Seymour and Edward :: Henry married Jane in 1536; she gave birth to Edward in 1537 and died soon after.
+Ten Articles and Six Articles :: Ten Articles (1536) leaned Protestant; the Act of Six Articles (1539) reaffirmed Catholic doctrine.
+Faction at Henry VIII's court :: Rivalry between conservatives (Norfolk, Gardiner) and reformers (Cromwell, Cranmer, the Seymours) shaped policy.
+# tudors3 | 1C Part 2 | The Tudors: Edward, Mary and Elizabeth to 1603
+Mid-Tudor crisis debate :: Historians debate whether 1547-58 was a crisis: rebellions, religious change and economic problems vs continuity of government.
+Edward VI's reign :: Somerset then Northumberland ruled as regents. Protestant reforms: Book of Common Prayer (1549 and 1552). 1549 Western and Kett's rebellions.
+Mary I's reign :: Restored Catholicism, married Philip of Spain (Wyatt's rebellion 1554), burned around 280 Protestants and lost Calais (1558).
+Elizabethan religious settlement 1559 :: Acts of Supremacy and Uniformity created a moderate Protestant church; Elizabeth was Supreme Governor.
+Threats from Catholics :: Northern Rebellion 1569, papal bull of excommunication 1570, Ridolfi, Throckmorton and Babington plots; Mary, Queen of Scots executed 1587.
+Threats from Puritans :: Vestments controversy, prophesyings (Archbishop Grindal), presbyterian movement and the Marprelate tracts.
+Spanish Armada 1588 :: Defeated by English fireships at Gravelines and bad weather; boosted Elizabeth's prestige but war with Spain continued.
+Elizabeth's last decade :: Factional rivalry (Essex vs Cecil), Essex rebellion (1601), war in Ireland, poor harvests, inflation and the Poor Law of 1601.
+Somerset's fall 1549 :: Blamed for rebellions, the costly war with Scotland and inflation; overthrown by Northumberland.
+Kett's Rebellion 1549 :: Norfolk rising over enclosure and economic grievances, camped at Mousehold Heath; crushed by Warwick.
+Western (Prayer Book) Rebellion 1549 :: Devon and Cornwall rising against the new English Prayer Book.
+Lady Jane Grey 1553 :: Northumberland tried to place her on the throne; Mary rallied support and became queen within days.
+Elizabeth and marriage :: Suitors included Philip II, Archduke Charles and Anjou; she never married, protecting her independence.
+William Cecil (Lord Burghley) :: Elizabeth's chief minister and Secretary of State, later Lord Treasurer; a key source of stability.
+Francis Walsingham :: Elizabeth's spymaster; uncovered the Babington Plot that led to Mary, Queen of Scots' execution.
+Elizabeth and Parliament :: Parliaments raised money and passed laws; clashes over marriage, succession, religion and monopolies (1601).
+# russia1 | 1H Part 1 | Russia: Alexander II to Nicholas II, 1855-1917
+Alexander II's reforms :: Emancipation of the serfs (1861), zemstva (local councils, 1864), judicial reform, military reform and relaxed censorship. Assassinated in 1881.
+Alexander III's reaction :: Repression under Pobedonostsev, Russification, land captains (1889) and economic modernisation under Witte.
+Witte's 'Great Spurt' :: Industrialisation in the 1890s: foreign investment, the Trans-Siberian Railway and the gold standard.
+1905 Revolution :: Caused by defeat in the Russo-Japanese War and Bloody Sunday. Nicholas issued the October Manifesto, creating the Duma.
+Stolypin :: Prime Minister 1906-11: repression ('Stolypin's necktie') and agricultural reform (the 'wager on the strong'). Assassinated 1911.
+The Dumas :: Four Dumas 1906-17; Nicholas used the Fundamental Laws to limit their power and dissolved the first two.
+Opposition groups :: Liberals (Kadets, Octobrists), Socialist Revolutionaries, and Social Democrats split into Bolsheviks (Lenin) and Mensheviks (1903).
+February Revolution 1917 :: War failures, food shortages, strikes in Petrograd and army mutiny led to Nicholas II's abdication; the Provisional Government and Petrograd Soviet shared power (dual power).
+Crimean War 1853-56 :: Defeat exposed Russia's backwardness and pushed Alexander II towards reform.
+Problems of emancipation :: Peasants paid redemption payments for 49 years and remained tied to the mir; many received poor land.
+Populism (Narodniks) :: 1870s 'going to the people' failed; the terrorist group People's Will assassinated Alexander II.
+Russification :: Imposing Russian language and Orthodoxy on minorities such as Poles and Finns; pogroms against Jews.
+Bloody Sunday 1905 :: Troops fired on peaceful marchers led by Father Gapon in St Petersburg, destroying faith in the 'Little Father'.
+Rasputin :: A peasant mystic who influenced the royal family through Tsarevich Alexei's haemophilia; murdered in December 1916.
+Russia in the First World War :: Heavy defeats (Tannenberg 1914), Nicholas took personal command (1915), inflation and transport breakdown.
+Lena Goldfields massacre 1912 :: Troops shot striking miners, sparking a wave of strikes before the war.
+# russia2 | 1H Part 1 | Russia: Lenin and the Bolsheviks, 1917-1924
+October Revolution 1917 :: Bolsheviks seized power in Petrograd, led by Lenin and organised by Trotsky through the Military Revolutionary Committee.
+Consolidating power :: Dissolved the Constituent Assembly (January 1918), signed Brest-Litovsk with Germany (March 1918) and set up the Cheka.
+Civil War 1918-21 :: The Reds defeated the Whites thanks to Trotsky's Red Army, central position, unity and the Whites' divisions.
+War Communism and the NEP :: War Communism: grain requisitioning and nationalisation. Kronstadt mutiny (1921) led to the New Economic Policy, allowing private trade.
+Lenin's legacy :: Created a one-party state with terror; his Testament criticised Stalin. Died January 1924.
+Lenin's April Theses :: 'Peace, Land and Bread' and 'All power to the Soviets'; rejected cooperation with the Provisional Government.
+The July Days 1917 :: Failed uprising in Petrograd; Lenin fled to Finland and the Bolsheviks were blamed.
+The Kornilov affair :: Attempted military coup in August 1917; Kerensky armed the Bolsheviks, boosting their support.
+The Red Terror :: From 1918 the Cheka arrested and executed opponents; the Tsar's family was killed at Ekaterinburg (July 1918).
+The 1921 ban on factions :: At the Tenth Party Congress, Lenin banned factions, centralising control in the party.
+Treaty of Brest-Litovsk terms :: Russia lost about a third of its population, much farmland and industry, including Ukraine and the Baltic.
+# russia3 | 1H Part 2 | Russia: Stalin and Khrushchev, 1924-1964
+Stalin's rise to power :: Used his position as General Secretary, the Lenin enrolment, and played off the left (Trotsky, Zinoviev, Kamenev) and right (Bukharin).
+Collectivisation :: Forced merging of farms from 1929; liquidation of the kulaks; famine in Ukraine (1932-33) killed millions.
+Five-Year Plans :: Rapid heavy industrialisation from 1928; Magnitogorsk; Stakhanovite movement; growth in coal, steel and oil but poor consumer goods.
+The Great Terror :: Purges of the party, army and population 1936-38; show trials; the NKVD under Yezhov; millions sent to gulags.
+The Great Patriotic War :: Operation Barbarossa (1941); victory at Stalingrad (1942-43) and Kursk (1943); around 27 million Soviet deaths.
+Khrushchev :: Secret Speech (1956) denounced Stalin; de-Stalinisation; Virgin Lands scheme; Cuban Missile Crisis (1962). Removed in 1964.
+Socialism in One Country :: Stalin's policy of building socialism in the USSR first, against Trotsky's Permanent Revolution.
+Kirov's murder 1934 :: Used as a pretext for the purges; Stalin may have been involved.
+Show trials :: Zinoviev and Kamenev (1936), Pyatakov (1937) and Bukharin (1938) confessed to invented crimes.
+Purge of the Red Army :: Tukhachevsky and many senior officers executed in 1937, weakening the army before the war.
+Cult of personality :: Stalin presented as the father of the nation; propaganda, rewritten history and socialist realism.
+Late Stalinism :: Zhdanovshchina cultural repression, the Leningrad Affair and the Doctors' Plot (1953). Stalin died in March 1953.
+Khrushchev's rise :: Defeated Beria (executed 1953) and the Anti-Party Group (Malenkov, Molotov) in 1957.
+Hungarian Uprising 1956 :: Crushed by Soviet tanks, showing the limits of de-Stalinisation.
+# germany1 | 2O Part 1 | Germany: the Weimar Republic, 1918-1933
+Weimar Constitution :: Proportional representation, a strong president with Article 48 emergency powers, and a Reichstag. Led to coalition governments.
+Treaty of Versailles :: Signed 1919: war guilt (Article 231), reparations (£6.6 billion), loss of territory and army limited to 100,000. Seen as a 'diktat'.
+Threats from left and right :: Spartacist uprising (1919), Kapp Putsch (1920), Munich Putsch (1923) and political assassinations.
+Hyperinflation 1923 :: Caused by war debts, reparations and printing money after the occupation of the Ruhr; savings were wiped out.
+Stresemann's golden years :: Rentenmark, Dawes Plan (1924), Locarno (1925), League of Nations (1926) and Young Plan (1929).
+Impact of the Depression :: Unemployment over 6 million by 1932; collapse of the Müller coalition (1930); presidential government by Brüning, Papen and Schleicher.
+Hitler becomes Chancellor :: Nazis were the largest party in July 1932; backstairs intrigue by Papen and Hindenburg made Hitler Chancellor on 30 January 1933.
+German Revolution 1918 :: Kiel mutiny, abdication of the Kaiser (9 November) and the Ebert-Groener pact with the army.
+Weimar culture :: Bauhaus architecture, expressionist film, cabaret and the 'new woman'; conservatives saw it as decadent.
+Occupation of the Ruhr 1923 :: French and Belgian troops occupied the Ruhr after missed reparation payments; passive resistance followed.
+Hindenburg elected President 1925 :: A conservative war hero, he was distrusted by republicans and later used Article 48 heavily.
+Nazi electoral appeal :: Propaganda, promises to all classes, anti-communism and anger at Versailles and the Depression.
+The 1932 elections :: Nazis won 37% in July 1932 but fell to 33% in November, raising fears they had peaked.
+# germany2 | 2O Part 2 | Germany: Nazi dictatorship, 1933-1945
+Consolidation of power :: Reichstag fire (February 1933), Enabling Act (March 1933), Gleichschaltung, trade unions banned, one-party state (July 1933).
+Night of the Long Knives :: June 1934: Röhm and SA leaders killed; secured the support of the army. Hitler became Führer when Hindenburg died (August 1934).
+Nazi economy :: Schacht's New Plan, Göring's Four-Year Plan (1936) for autarky and rearmament; reduced unemployment through public works and conscription.
+Terror and propaganda :: SS, Gestapo, concentration camps; Goebbels controlled media, rallies and culture.
+Nazi social policy :: Hitler Youth, League of German Maidens, Kinder, Küche, Kirche for women, Strength through Joy; relations with churches (Concordat 1933).
+Persecution of the Jews :: Boycott (1933), Nuremberg Laws (1935), Kristallnacht (1938), ghettos, Wannsee Conference (1942) and the Final Solution.
+Opposition to the Nazis :: Edelweiss Pirates, White Rose, Swing Youth, the churches (Niemöller, Galen) and the July Bomb Plot (1944).
+Wartime Germany :: Total war from 1943 under Speer and Goebbels; rationing, bombing raids, forced labour and collapse in 1945.
+The Concordat 1933 :: Agreement with the Pope: the Catholic Church stayed out of politics in return for religious freedom.
+Hitler Youth :: Membership compulsory from 1936 and enforced in 1939; taught loyalty, fitness and Nazi ideology.
+Education in Nazi Germany :: Teachers had to join the Nazi Teachers' League; the curriculum stressed race, PE and history.
+Nazi policies towards women :: Marriage loans, the Mother's Cross and pressure to leave work, reversed partly in wartime.
+The Volksgemeinschaft :: The idea of a 'people's community' united by race, excluding 'undesirables' such as Jews and Roma.
+Persecution of other groups :: Roma, homosexuals, the disabled (T4 euthanasia programme) and 'asocials' were persecuted.
+Hossbach Memorandum 1937 :: Recorded Hitler's plans for expansion, used to show his aims for war.

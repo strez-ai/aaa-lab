@@ -1,0 +1,151 @@
+@name Religious Studies
+@aliases RS|Religious Studies A|Philosophy and Ethics|OCR Religious Studies
+@board OCR
+@code H573
+# ancient | Philosophy | Ancient philosophical influences
+Plato's analogy of the cave :: Prisoners see only shadows (the world of appearances); the escaped prisoner sees the sun (the Form of the Good). The philosopher should return to educate others.
+Plato's theory of Forms :: Perfect, unchanging Forms exist in a separate realm and are known through reason; the physical world contains imperfect copies.
+Aristotle's four causes :: Material, efficient, formal and final causes. The final cause is the purpose (telos) of something.
+Aristotle's Prime Mover :: An unmoved mover that causes motion by attraction as a final cause; eternal, immaterial and perfect.
+Plato vs Aristotle :: Plato trusted reason over the senses (rationalism); Aristotle trusted empirical observation (empiricism).
+The Form of the Good :: The highest Form, which illuminates all others, as the sun lets us see objects in the cave analogy.
+Criticisms of Plato's Forms :: Aristotle's third man argument; the Forms can't be proved; is there a Form of mud or hair?
+Criticisms of Aristotle's causes :: The final cause may be a human projection; science explains things without purpose (Darwin, Dawkins).
+# soul | Philosophy | Soul, mind and body
+Plato's dualism :: The soul is immortal and belongs to the world of Forms; the body is a prison. Tripartite soul: reason, spirit and appetite.
+Aristotle on the soul :: The soul is the form of the body, not separate from it; it cannot survive death.
+Descartes' substance dualism :: The mind (thinking substance) is distinct from the body (extended substance): 'I think, therefore I am'.
+Materialism :: Gilbert Ryle called dualism a 'category mistake' and 'the ghost in the machine'. Dawkins: humans are 'survival machines' for genes.
+Plato's chariot analogy :: The charioteer (reason) controls two horses: spirit (noble) and appetite (unruly).
+Aristotle's wax and seal :: Like the impression in wax, the soul is inseparable from the body.
+Interactionism problem :: How can a non-physical mind affect a physical body? Descartes suggested the pineal gland.
+Mind-brain identity theory :: Mental states are identical to brain states; criticised by qualia (what it is like to experience).
+# design | Philosophy | Arguments based on observation
+Aquinas' Five Ways :: Includes arguments from motion, causation, contingency and design (the fifth way: the arrow and archer analogy).
+Paley's watchmaker :: The complexity and purpose of a watch imply a designer; similarly, the universe and the eye imply God.
+Hume's criticisms of design :: The analogy is weak; the universe could have come from chance (Epicurean hypothesis); the designer could be many gods or imperfect.
+Cosmological argument :: Everything has a cause, so there must be an uncaused first cause (God). Kalam version: the universe began to exist.
+Darwin and evolution :: Natural selection explains apparent design without a designer.
+Criticisms of the cosmological argument :: Hume: we can't infer causes beyond experience. Russell: the universe is 'just there, and that's all'. Possible infinite regress.
+Teleological vs cosmological :: Teleological arguments start from order and purpose; cosmological arguments start from existence and causation.
+Aquinas' third way :: Contingency: everything that exists depends on something else, so there must be a necessary being.
+Copleston vs Russell (1948) :: Copleston argued from contingency for a necessary being; Russell rejected the need for an explanation of the universe.
+Anthropic principle :: Tennant: the universe is fine-tuned for life, suggesting design.
+# ontological | Philosophy | Arguments based on reason
+Anselm's ontological argument :: God is 'that than which nothing greater can be conceived'; existing in reality is greater than existing only in the mind, so God must exist.
+Gaunilo's island :: Anselm's logic would prove the existence of a perfect island, which is absurd.
+Kant's criticism :: Existence is not a predicate: it adds nothing to the concept of a thing.
+Descartes' ontological argument :: God is a supremely perfect being; existence is a perfection, so God exists, just as a triangle must have three angles.
+A priori vs a posteriori :: Ontological arguments are a priori (reason alone); design and cosmological arguments are a posteriori (experience).
+Anselm's second form :: God's existence is necessary; a being that cannot not exist is greater than one that can.
+Anselm's reply to Gaunilo :: The argument only applies to God, a necessary being, not to contingent things like islands.
+# experience | Philosophy | Religious experience
+Types of religious experience :: Visions, numinous experiences (Otto: mysterium tremendum et fascinans), mystical experiences, conversion and corporate experiences (e.g. the Toronto Blessing).
+William James :: Mystical experiences are ineffable, noetic, transient and passive; judged by their fruits.
+Swinburne's principles :: Principle of credulity (trust experiences unless there's reason not to) and principle of testimony (trust what others report).
+Challenges to religious experience :: Explained by psychology (Freud: wish fulfilment), physiology (temporal lobe) or drugs; experiences are subjective and unverifiable.
+Corporate religious experience :: Shared experiences, e.g. the Toronto Blessing (1994) with laughter and falling; criticised as mass hysteria.
+Conversion :: A change of belief or way of life, e.g. St Paul on the road to Damascus.
+Otto's numinous :: A feeling of awe and wonder before the holy, a 'wholly other' presence.
+Value of religious experience :: May be self-authenticating for the believer, but less convincing as proof for others.
+# evil | Philosophy | The problem of evil
+Logical problem of evil :: Mackie: God is omnipotent and wholly good, yet evil exists; this is inconsistent.
+Evidential problem of evil :: Rowe: the amount of pointless suffering (e.g. a fawn dying in a forest fire) makes God's existence unlikely.
+Augustinian theodicy :: Evil is a privation of good; it came from the free will of angels and humans (the Fall); natural evil is a punishment. Soul-deciding.
+Irenaean theodicy (Hick) :: Humans are created in the image of God and must grow into his likeness through a 'vale of soul-making'; epistemic distance allows free choice.
+Criticisms of theodicies :: Augustine conflicts with evolution and is unjust to later generations; Hick's view struggles with the scale of suffering (e.g. the Holocaust) and universal salvation.
+Natural and moral evil :: Moral evil is caused by human choices; natural evil comes from the natural world (earthquakes, disease).
+The free will defence :: God allows evil because a world with free agents is better than one with robots.
+Epistemic distance :: Hick: God keeps a distance so humans can freely choose to love him.
+Dostoevsky's challenge :: Ivan Karamazov rejects any heaven built on the suffering of innocent children.
+# god-attributes | Philosophy | The nature of God and religious language
+Omnipotence :: God can do anything logically possible (Aquinas) or can do anything at all (Descartes).
+Eternity :: Boethius: God is timeless and sees all of time at once. Swinburne: God is everlasting and moves through time.
+Omniscience and free will :: If God knows our future actions, are we free? Boethius: God sees our actions as an eternal present, so foreknowledge doesn't cause them.
+Apophatic and cataphatic language :: Apophatic: the via negativa describes God by what he is not (Pseudo-Dionysius). Cataphatic: positive statements through analogy and symbol.
+Analogy :: Aquinas: analogy of attribution and proportion allow meaningful talk about God.
+Symbol (Tillich) :: Religious language points to and participates in what it symbolises: God is the 'ground of being'.
+Logical positivism :: Ayer's verification principle: statements are meaningful only if analytic or empirically verifiable; religious statements are meaningless.
+Falsification :: Flew: religious claims die 'the death of a thousand qualifications'. Hare's bliks and Mitchell's partisan respond.
+Wittgenstein's language games :: Meaning comes from use within a form of life; religious language is meaningful to believers.
+Omnibenevolence :: God is perfectly good; questioned by the problem of evil and divine commands in scripture.
+Euthyphro dilemma :: Is something good because God commands it, or does God command it because it is good?
+The stone paradox :: Can God create a stone he cannot lift? A challenge to the coherence of omnipotence.
+Via negativa criticism :: Saying only what God is not may leave nothing meaningful to believe in.
+Hare's blik :: A non-falsifiable way of seeing the world, like the student convinced all dons want to kill him.
+Mitchell's partisan :: Faith in the stranger despite ambiguous evidence; believers allow evidence to count against belief but not decisively.
+# natural-law | Ethics | Natural law
+Aquinas' natural law :: Humans have a God-given telos; reason discovers primary precepts: preserve life, reproduce, educate, live in society, worship God.
+Secondary precepts :: Specific rules derived from the primary precepts, e.g. no abortion follows from preserving life.
+Doctrine of double effect :: An action with a good and a bad effect is permissible if the act is good, the bad effect isn't intended, it is not the means to the good, and there is proportionate reason.
+Criticisms of natural law :: Assumes a single human nature; the naturalistic fallacy; inflexible in complex situations.
+Four tiers of law :: Eternal law, divine law, natural law and human law.
+Real and apparent goods :: Humans may pursue apparent goods by mistake, but reason helps identify real goods.
+Interior and exterior acts :: Aquinas: both the intention and the act must be good.
+Strengths of natural law :: Universal, based on reason, gives clear rules and is accessible to non-religious people.
+# situation | Ethics | Situation ethics
+Fletcher's situation ethics :: The only intrinsic good is agape (selfless love); act in the most loving way in each situation.
+Four working principles :: Pragmatism, relativism, positivism and personalism.
+Six fundamental principles :: Love is the only good; love is the ruling norm; love and justice are the same; love wills the neighbour's good; only the end justifies the means; love decides there and then.
+Criticisms of situation ethics :: Hard to predict consequences; too individualistic; agape is subjective; William Temple supported it, but the Pope condemned it in 1952.
+Fletcher's three approaches :: Legalism (rigid rules), antinomianism (no rules) and situationism (love guides each case).
+Agape in the Bible :: Jesus' command to love your neighbour and the Good Samaritan underpin situation ethics.
+Fletcher's examples :: Mrs Bergmeier, who became pregnant to be released from a prison camp to her family.
+Strengths of situation ethics :: Flexible, person-centred and based on Christian love.
+# kant | Ethics | Kantian ethics
+Duty and the good will :: Kant: the only thing good without qualification is a good will acting from duty.
+Hypothetical and categorical imperatives :: Hypothetical: if you want X, do Y. Categorical: unconditional moral commands.
+Formulations of the categorical imperative :: Universal law (act only on maxims you can will to be universal), persons as ends (never only as means) and the kingdom of ends.
+Postulates :: Freedom, immortality and God are assumed for morality to make sense (the summum bonum).
+Criticisms of Kant :: Conflicts of duties; ignores consequences (the murderer at the door); too rigid; ignores emotions.
+Kant's good will :: The motive, not the consequences, determines moral worth: acting from duty, not merely in accordance with it.
+The shopkeeper example :: A shopkeeper who is honest for profit acts in accordance with duty but not from duty.
+Autonomy :: Kant: moral agents give themselves the moral law through reason, rather than following authority.
+Strengths of Kant :: Universal, respects human dignity and gives clear rules that don't depend on predicting outcomes.
+# util | Ethics | Utilitarianism
+Bentham's act utilitarianism :: The right act produces the greatest happiness for the greatest number; measured with the hedonic calculus (intensity, duration, certainty, propinquity, fecundity, purity, extent).
+Mill's rule utilitarianism :: Higher (intellectual) and lower (bodily) pleasures; follow rules that generally maximise happiness; the harm principle.
+Criticisms of utilitarianism :: Ignores justice and rights (tyranny of the majority); consequences are hard to predict; happiness is hard to measure.
+Principle of utility :: Actions are right if they promote happiness and wrong if they produce the reverse.
+Mill's quote :: 'It is better to be a human being dissatisfied than a pig satisfied.'
+Act vs rule utilitarianism :: Act judges each situation; rule follows rules that generally produce the greatest happiness.
+Strengths of utilitarianism :: Simple, democratic, considers consequences and treats each person's happiness equally.
+# applied | Ethics | Euthanasia and business ethics
+Euthanasia terms :: Voluntary, non-voluntary, active and passive euthanasia. Sanctity of life vs quality of life and autonomy.
+Euthanasia and the theories :: Natural law opposes it (preserving life); situation ethics may support it if loving; Kant: autonomy vs duty to preserve life; utilitarianism weighs suffering.
+Business ethics :: Corporate social responsibility, whistleblowing, good ethics as good business, and globalisation.
+Business ethics and the theories :: Kant: never treat employees or customers only as means. Utilitarianism: maximise wellbeing of stakeholders.
+Sanctity of life :: Life is sacred and God-given (Genesis 1:27); only God may take it.
+Quality of life :: Peter Singer: what matters is the quality of life and the person's interests, not life itself.
+The Netherlands and Switzerland :: Examples of countries where forms of euthanasia or assisted dying are legal.
+Whistleblowing :: Exposing wrongdoing in a company; Kant may support it as a duty to truth, while it may harm stakeholders.
+# metaethics | Ethics | Meta-ethics and conscience
+Naturalism :: Moral terms describe natural facts and can be verified, e.g. utilitarianism.
+Intuitionism :: Moore: 'good' is indefinable but recognised by intuition; the naturalistic fallacy and the open question argument.
+Emotivism :: Ayer: moral statements express emotions ('boo/hurrah' theory) and are neither true nor false.
+Aquinas on conscience :: Synderesis (innate knowledge of good) and conscientia (applying it with reason).
+Freud on conscience :: Conscience is the super-ego, formed from parental and social rules, causing guilt.
+Sexual ethics :: Debates on premarital and extramarital sex and homosexuality, applying natural law, situation ethics, Kant and utilitarianism.
+Cognitivism and non-cognitivism :: Cognitivist theories say moral statements can be true or false; non-cognitivist theories say they cannot.
+Prescriptivism :: Hare: moral statements are prescriptions that should be universalisable.
+Butler on conscience :: Conscience is a God-given faculty of reflection that guides self-love and benevolence.
+Fromm on conscience :: Authoritarian conscience (internalised authority) vs humanistic conscience (our own true self).
+# christian | Christian thought | Developments in Christian thought
+Augustine on human nature :: Before the Fall humans lived in harmony; original sin brought concupiscence. Grace is needed for salvation.
+Death and the afterlife :: Heaven, hell and purgatory; the parable of the sheep and the goats; election debates (limited vs universal salvation).
+Knowledge of God :: Natural knowledge (reason and creation, sensus divinitatis - Calvin) vs revealed knowledge (scripture, Jesus Christ).
+The person of Jesus :: Son of God, teacher of wisdom and liberator; examples include his miracles, the Sermon on the Mount and challenging authorities.
+Christian moral principles :: Theonomous (Bible alone), heteronomous (Bible, church and reason) and autonomous (love) approaches.
+Bonhoeffer :: Christian duty to resist tyranny; costly vs cheap grace; religionless Christianity; involvement in the plot against Hitler.
+Religious pluralism :: Exclusivism, inclusivism (Rahner's anonymous Christians) and pluralism (Hick).
+Gender and theology :: Ruether: God as female; Daly: 'if God is male, then the male is God'.
+Secularism :: Freud and Dawkins saw religion as harmful; debates about faith schools and the role of Christianity in public life.
+Liberation theology :: Arose in Latin America; preferential option for the poor; uses Marxist analysis of structural sin (Gutiérrez, Boff).
+Augustine on sex :: Concupiscence made sexual desire uncontrolled after the Fall.
+Calvin's predestination :: God chooses the elect for salvation in advance (double predestination).
+Purgatory :: A Catholic belief in a state of purification before heaven; rejected by most Protestants.
+Hick's pluralism :: Different religions are paths to the same Real; the Copernican revolution in theology.
+Bonhoeffer's Cost of Discipleship :: Cheap grace is forgiveness without repentance; costly grace requires following Jesus.
+Christian feminism :: Ruether argued that Jesus challenged patriarchy; the Church has been shaped by male power.
+Marx and liberation theology :: Liberation theology uses Marx's analysis of exploitation but rejects his atheism.
+Dawkins on religion :: Religion is a delusion that causes harm; faith schools indoctrinate children.

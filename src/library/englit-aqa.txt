@@ -1,0 +1,103 @@
+@name English Literature
+@aliases English Lit|English Literature A|AQA English Literature
+@board AQA
+@code 7712
+# skills | All papers | Assessment objectives and essay skills
+AO1 :: Articulate informed, personal and creative responses using associated concepts and terminology, with coherent, accurate writing.
+AO2 :: Analyse ways in which meanings are shaped in literary texts (language, form and structure).
+AO3 :: Demonstrate understanding of the significance and influence of the contexts in which texts are written and received.
+AO4 :: Explore connections across literary texts.
+AO5 :: Explore literary texts informed by different interpretations.
+Essay structure :: Respond directly to the question's terms, build a line of argument, embed short quotations, analyse methods and integrate context and alternative readings.
+Unseen poetry (Love through the ages) :: Compare two unseen poems: identify the speaker, form, imagery, tone and structural turns, and link them to ideas about love.
+Using critics (AO5) :: Weigh critical views as alternative readings and test them, rather than just quoting a critic's name.
+Writing about form (AO2) :: Discuss genre, verse vs prose, narrative voice, dramatic structure and how they shape meaning.
+Comparison in the NEA :: The coursework compares two texts in about 2,500 words, one written before 1900.
+# othello | Paper 1 | Othello (Shakespeare)
+Othello plot :: Iago, passed over for promotion, manipulates Othello into believing Desdemona is unfaithful with Cassio. Othello kills Desdemona, learns the truth and kills himself.
+Iago's motives :: Resentment at Cassio's promotion, suspicion that Othello slept with Emilia, and racial hatred; Coleridge called it 'motive-hunting of a motiveless malignity'.
+Othello's tragic flaw :: Jealousy and insecurity as an outsider; his trust in 'honest Iago'. Iago calls jealousy 'the green-eyed monster'.
+Desdemona :: Defies her father to marry Othello; loyal and honest; her passivity in Act 4 (the willow song) is debated by critics.
+Race in Othello :: Othello is a Moor in Venice; Iago and Roderigo use racist language ('an old black ram'). Context: Elizabethan views of race and Venice as a trading city.
+The handkerchief :: Othello's first gift to Desdemona, symbolising fidelity; Emilia gives it to Iago, who plants it on Cassio as 'proof'.
+Emilia :: Iago's wife; her speech on the double standards of men and women (Act 4) and her final defiance in exposing Iago.
+Othello's final speech :: 'one that loved not wisely but too well', reasserting his identity as a soldier before he kills himself.
+Iago's soliloquies :: Reveal his plans to the audience, making them complicit: 'I am not what I am'.
+Othello's speech in Act 1 :: His dignified account to the Senate of wooing Desdemona with stories of adventure.
+Brabantio's warning :: 'She has deceived her father, and may thee', a seed Iago later uses.
+Cassio :: Othello's lieutenant; loses his post after Iago gets him drunk; values his 'reputation'.
+Roderigo :: Desdemona's rejected suitor, exploited by Iago for money and killed by him.
+Setting: Venice and Cyprus :: Venice represents order and civilisation; Cyprus is a military outpost where chaos and passion take over.
+Tragedy conventions :: A tragic hero of status, a flaw (hamartia), a reversal of fortune and catharsis for the audience.
+Othello's language decline :: His eloquent verse breaks into fragmented prose in Act 4, mirroring his loss of control.
+# gatsby | Paper 1 | The Great Gatsby (Fitzgerald)
+Gatsby plot :: Narrated by Nick Carraway; Jay Gatsby throws parties to win back Daisy Buchanan, who is married to Tom. Myrtle is killed by Daisy driving Gatsby's car; George Wilson shoots Gatsby.
+Nick as narrator :: Claims to be 'inclined to reserve all judgments', but is unreliable and increasingly admires Gatsby.
+The green light :: At the end of Daisy's dock; symbolises Gatsby's longing and the American Dream: 'Gatsby believed in the green light'.
+The valley of ashes :: A grey wasteland between West Egg and New York, symbolising moral and social decay, watched over by the eyes of Doctor T.J. Eckleburg.
+Context: the Jazz Age :: 1920s America: prohibition, bootlegging, new money vs old money, consumerism and changing roles of women (flappers).
+Daisy Buchanan :: Her voice is 'full of money'; she chooses the security of Tom's wealth; 'the best thing a girl can be in this world, a beautiful little fool'.
+Ending of Gatsby :: 'So we beat on, boats against the current, borne back ceaselessly into the past', suggesting the impossibility of recapturing the past.
+Love in Gatsby :: Gatsby's idealised love for Daisy is bound up with wealth and status; Tom and Myrtle's affair is physical and possessive.
+Tom Buchanan :: Wealthy, brutal and racist; represents old money's arrogance; breaks Myrtle's nose.
+Myrtle Wilson :: Tom's lover from the valley of ashes, desperate to escape her class.
+Jordan Baker :: A cynical golfer and Daisy's friend; Nick calls her 'incurably dishonest'.
+Gatsby's parties :: Lavish and chaotic, showing Jazz Age excess; guests barely know their host.
+Gatsby's past :: Born James Gatz in North Dakota; reinvented himself with the help of Dan Cody and the bootlegger Meyer Wolfshiem.
+Gatsby's funeral :: Almost no one attends, revealing the emptiness of his social world.
+The eyes of T.J. Eckleburg :: A billboard that George Wilson sees as the eyes of God, suggesting a world without moral judgement.
+Structure of Gatsby :: Nine chapters; Gatsby's past is revealed gradually and non-chronologically; chapter 5 reunion at the centre.
+# wuthering | Paper 1 | Wuthering Heights (Emily Brontë)
+Wuthering Heights plot :: Heathcliff, an orphan, loves Catherine Earnshaw, who marries Edgar Linton. Heathcliff takes revenge on both families; the second generation (Cathy and Hareton) finally finds reconciliation.
+Narrative structure :: Framed narrative: Lockwood records Nelly Dean's account, creating layers of unreliable narration.
+Catherine's declaration :: 'I am Heathcliff', showing her sense that their souls are the same, despite her marrying Edgar for social status.
+Setting :: The wild Heights (passion, nature) contrasted with Thrushcross Grange (civilisation, refinement).
+Context: Gothic and Romantic :: Gothic elements (ghosts, violence, storms) and Romantic ideas of nature and passion; published 1847.
+Heathcliff :: Outsider of uncertain origin; both a Byronic hero and a cruel avenger; his love becomes destructive obsession.
+Isabella Linton :: Marries Heathcliff and is cruelly treated; escapes to the south and gives birth to Linton.
+Catherine's ghost :: Appears to Lockwood at the window: 'Let me in!', opening the novel's supernatural theme.
+Catherine's love for Edgar vs Heathcliff :: Edgar is like 'foliage in the woods'; Heathcliff is like 'the eternal rocks beneath'.
+Hareton Earnshaw :: Degraded by Heathcliff as Hindley degraded him, yet he and Cathy are reconciled through learning to read.
+Hindley :: Catherine's brother; mistreats Heathcliff after their father's death and declines into drink and gambling.
+Ending of Wuthering Heights :: Heathcliff dies longing for Catherine; Lockwood wonders how anyone could imagine 'unquiet slumbers' for the dead.
+# poetry | Paper 1 | AQA poetry anthology: love poetry through the ages
+Range of the anthology :: Pre-1900 love poems including Shakespeare, Donne, Marvell, Byron, Keats, Christina Rossetti, Hardy and Browning, exploring desire, loss and devotion.
+Sonnet 116 (Shakespeare) :: Defines true love as constant: 'Love is not love / Which alters when it alteration finds'; love is 'an ever-fixed mark'.
+To His Coy Mistress (Marvell) :: Carpe diem argument: 'Had we but world enough, and time'; the speaker urges his lover not to delay because of mortality.
+The Flea (Donne) :: A metaphysical conceit where a flea that has bitten both lovers becomes an argument for sexual union.
+Porphyria's Lover (Browning) :: A dramatic monologue in which the speaker strangles his lover to preserve a perfect moment, showing possessive love.
+Comparing poems :: Compare speakers, forms, imagery and attitudes to love, and how context shapes each poem's presentation of love.
+Love's Philosophy (Shelley) :: The speaker argues that nature pairs everything, so his beloved should kiss him.
+La Belle Dame sans Merci (Keats) :: A knight is enchanted and abandoned by a mysterious lady, leaving him 'alone and palely loitering'.
+Remember (Christina Rossetti) :: A sonnet in which the speaker asks to be remembered but finally prefers her lover to 'forget and smile'.
+The Ruined Maid (Hardy) :: A dialogue poem satirising Victorian morality: a 'ruined' woman is better off than her rural friend.
+Whoso List to Hunt (Wyatt) :: A Petrarchan sonnet comparing pursuit of an unattainable woman to a deer hunt; often linked to Anne Boleyn.
+Victorian love poetry context :: Victorian poems often explore duty, social expectation and the double standard for women.
+# streetcar | Paper 2 | A Streetcar Named Desire (Williams)
+Streetcar plot :: Blanche DuBois arrives at her sister Stella's home in New Orleans. Conflict with Stella's husband Stanley ends with Stanley raping Blanche and her being taken to an asylum.
+Blanche :: A faded Southern belle hiding her past behind illusion: 'I don't want realism. I want magic!' She depends on 'the kindness of strangers'.
+Stanley :: Represents the new, industrial America and masculine power; animalistic and dominant; Blanche calls him 'ape-like'.
+Context: the Old South vs the New America :: The decline of the plantation aristocracy (Belle Reve) and the rise of working-class immigrants after WW2.
+Symbolism in Streetcar :: The paper lantern (illusion), bathing (cleansing guilt), the Varsouviana polka (memory of Allan's suicide).
+Stella :: Torn between her sister and her husband; she chooses Stanley and denial: 'I couldn't believe her story and go on living with Stanley'.
+Mitch :: Stanley's friend who courts Blanche; rejects her after learning about her past.
+Allan Grey :: Blanche's young husband who killed himself after she discovered his relationship with a man.
+Light imagery :: Blanche avoids bright light to hide her age and past; Mitch tears off the lantern to see her 'in the light'.
+Scene structure :: Eleven scenes, like episodes, building tension towards the rape in Scene 10.
+Plastic theatre :: Williams used music, lighting and sound effects to show characters' inner states.
+Blanche's arrival :: 'They told me to take a streetcar named Desire, and then transfer to one called Cemeteries'.
+# handmaid | Paper 2 | The Handmaid's Tale (Atwood)
+Handmaid's Tale plot :: In the theocratic Republic of Gilead, Offred is a Handmaid forced to bear children for a Commander. Her story ends ambiguously as she steps into a van.
+Narrative and structure :: First-person, fragmented and retrospective; the Historical Notes reframe the story as an academic artefact from 2195.
+Control of women :: Women are categorised by role (Wives, Handmaids, Marthas, Aunts); they're banned from reading; names reflect ownership (Of-fred).
+Context :: Written in 1985 in response to the rise of the religious right in the US, and influenced by Orwell's 1984.
+'Nolite te bastardes carborundorum' :: Mock Latin for 'don't let the bastards grind you down'; scratched in Offred's cupboard, a symbol of resistance.
+Moira :: Offred's rebellious friend who escapes the Red Centre but ends up at Jezebel's, showing the limits of resistance.
+The Commander :: Fred, a powerful man in Gilead who breaks rules by playing Scrabble with Offred.
+Serena Joy :: The Commander's Wife, a former gospel singer who campaigned for women to stay at home.
+Ofglen and Mayday :: Offred's shopping partner, part of the resistance network Mayday.
+Nick :: The Commander's driver; Offred's lover, who may help her escape at the end.
+The Ceremony :: The monthly ritual of the Commander attempting to impregnate Offred, justified by the biblical story of Rachel and Bilhah.
+Offred's memories :: Flashbacks to her husband Luke, her daughter and her mother keep her pre-Gilead identity alive.
+Language in Gilead :: Biblical names (Rachel and Leah Centre), set greetings ('Blessed be the fruit') and banned words show control.
+Aunt Lydia :: Trains Handmaids at the Red Centre: 'Freedom to and freedom from'.
