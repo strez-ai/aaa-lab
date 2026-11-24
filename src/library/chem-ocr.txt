@@ -1,0 +1,94 @@
+@name Chemistry
+@aliases Chemistry A|OCR Chemistry
+@board OCR
+@code H432
+# atoms | 2.1.1-2.1.3 | Atoms, compounds, moles and equations
++ chem-aqa:atomic
++ chem-aqa:amount
+Ions to know :: Ammonium NH4⁺, hydroxide OH⁻, nitrate NO3⁻, carbonate CO3²⁻, sulfate SO4²⁻ and the formulae of compounds made from them.
+Relative isotopic mass :: The mass of an atom of an isotope compared with one-twelfth of the mass of an atom of carbon-12.
+# acids | 2.1.4 | Acids
+Strong vs weak acids :: Strong acids fully dissociate in water (HCl, HNO3, H2SO4); weak acids partially dissociate (ethanoic acid).
+Reactions of acids :: Acids react with metals (salt + hydrogen), carbonates (salt + water + CO2), metal oxides and alkalis (salt + water).
+Making a standard solution :: Weigh the solid, dissolve in a beaker, transfer with washings to a volumetric flask and make up to the mark.
+# redox | 2.1.5 | Redox
++ chem-aqa:redox
+Metals with acids as redox :: e.g. Mg + 2HCl → MgCl2 + H2: magnesium is oxidised and hydrogen is reduced.
+# bonding | 2.2 | Electrons, bonding and structure
++ chem-aqa:bonding
+Electron shells and orbitals :: Shells hold 2n² electrons. s orbitals hold 2, p sub-shells 6, d sub-shells 10.
+# periodicity | 3.1.1 | Periodicity
++ chem-aqa:period3
+Blocks of the periodic table :: s-block, p-block, d-block and f-block, named after the sub-shell holding the highest-energy electron.
+Melting points across periods 2 and 3 :: Increase to a maximum at the giant covalent element (carbon or silicon), then fall sharply for simple molecular elements.
+# group2 | 3.1.2 | Group 2
++ chem-aqa:group2
+Group 2 as reducing agents :: Group 2 metals lose two electrons when they react, so they are oxidised. Reactivity increases down the group as ionisation energies decrease.
+# halogens | 3.1.3 | The halogens
++ chem-aqa:group7
+# qualitative | 3.1.4 | Qualitative analysis
+Test for carbonates :: Add dilute acid; effervescence of CO2 turns limewater milky.
+Test for ammonium ions :: Warm with NaOH; ammonia gas turns damp red litmus paper blue.
+Order of anion tests :: Carbonate test first, then sulfate (barium ions), then halides (silver nitrate), to avoid false positives.
+# enthalpy | 3.2.1 | Enthalpy
++ chem-aqa:energetics
+Enthalpy change of neutralisation :: The enthalpy change when acid and alkali react to form one mole of water under standard conditions.
+# rates | 3.2.2 | Reaction rates
++ chem-aqa:kinetics
+Catalysts in industry :: Catalysts reduce energy use and costs, and enzymes allow reactions at lower temperatures, making processes more sustainable.
+# equilibrium | 3.2.3 | Chemical equilibrium
++ chem-aqa:equilibria
+# organic | 4.1.1-4.1.2 | Basic organic concepts and alkanes
++ chem-aqa:organic-intro
+Homologous series :: A family of compounds with the same functional group and general formula, differing by CH2.
+Sigma bonds :: Formed by the direct overlap of orbitals between bonding atoms; free rotation is possible around a σ bond.
+Limitations of radical substitution :: Further substitution and termination steps produce a mixture of products.
+# alkenes | 4.1.3 | Alkenes
++ chem-aqa:alkenes
+Pi bonds :: Formed by the sideways overlap of adjacent p orbitals above and below the bonding carbons; they restrict rotation.
+Markownikoff's rule :: When H-X adds to an unsymmetrical alkene, the major product comes from the more stable carbocation.
+Hydrogenation and halogenation :: Alkenes add hydrogen (nickel catalyst, 150 °C) to make alkanes, and halogens to make dihaloalkanes.
+# alcohols | 4.2.1 | Alcohols
++ chem-aqa:alcohols
+Combustion of alcohols :: Alcohols burn completely to give CO2 and water.
+Substitution of alcohols :: Alcohols react with hydrogen halides (e.g. NaBr and H2SO4) to form haloalkanes.
+# haloalkanes | 4.2.2 | Haloalkanes
++ chem-aqa:halo
+Rate of hydrolysis :: Measured by reacting haloalkanes with aqueous silver nitrate in ethanol; iodoalkanes form a precipitate fastest because C-I is weakest.
+Environmental concerns from organohalogens :: CFCs produce chlorine radicals that break down the ozone layer, increasing UV reaching the Earth.
+# synthesis | 4.2.3-4.2.4 | Organic synthesis and analysis
++ chem-aqa:analysis
+Reflux, distillation and purification :: Use a separating funnel to remove impurities, drying agents (anhydrous salts) to remove water, and redistillation to purify a liquid.
+Mass spectrometry fragmentation :: Molecules break into fragments; common peaks include m/z 15 (CH3⁺) and 29 (C2H5⁺).
+# rates-eq | 5.1.1 | How fast? (rates)
++ chem-aqa:rate-eq
+Rate-concentration graphs :: Zero order: horizontal line. First order: straight line through origin. Second order: upward curve.
+# kc-kp | 5.1.2 | How far? (equilibrium constants)
++ chem-aqa:kp
+# acids-bases | 5.1.3 | Acids, bases and buffers
++ chem-aqa:acids
+Buffers in the blood :: The carbonic acid-hydrogencarbonate buffer keeps blood pH between 7.35 and 7.45.
+# lattice | 5.2.1-5.2.2 | Lattice enthalpy and entropy
++ chem-aqa:thermodynamics
+# electrode | 5.2.3 | Redox and electrode potentials
++ chem-aqa:electrode
+Iodine-thiosulfate titrations :: I2 + 2S2O3²⁻ → 2I⁻ + S4O6²⁻. Starch indicator turns blue-black near the end point, then colourless when all iodine reacts.
+# transition | 5.3.1 | Transition elements
++ chem-aqa:transition
+Precipitation reactions :: With NaOH: Cu²⁺ gives a blue precipitate, Fe²⁺ green, Fe³⁺ orange-brown, Mn²⁺ light brown, Cr³⁺ grey-green.
+Cis-trans isomerism in complexes :: Octahedral and square planar complexes can have cis and trans isomers, e.g. cisplatin and transplatin.
+# aromatic | 6.1.1 | Aromatic compounds
++ chem-aqa:aromatic
+Phenol :: A weak acid that reacts with NaOH but not with carbonates. Its ring is activated so it reacts readily with bromine water to give 2,4,6-tribromophenol.
+Directing groups :: 2- and 4-directing groups (OH, NH2) and 3-directing groups (NO2) control where substitution happens on benzene rings.
+Halogenation of benzene :: Needs a halogen carrier such as AlCl3 or FeBr3 to generate an electrophile.
+# carbonyls | 6.1.2-6.1.3 | Carbonyls and carboxylic acids
++ chem-aqa:carbonyl
+2,4-DNP test :: Brady's reagent forms an orange precipitate with aldehydes and ketones; melting point of the purified derivative identifies the compound.
+# nitrogen | 6.2.1-6.2.4 | Nitrogen compounds, polymers and synthesis
++ chem-aqa:amines
++ chem-aqa:optical
+Carbon-carbon bond formation :: Use nitriles (from haloalkanes with CN⁻) or Friedel-Crafts alkylation to extend carbon chains.
+# spectroscopy | 6.3 | Analysis: chromatography and spectroscopy
++ chem-aqa:nmr
+Tests for organic functional groups :: Combine tests for alkenes, haloalkanes, carbonyls, aldehydes, primary and secondary alcohols, phenols and carboxylic acids to identify compounds.
