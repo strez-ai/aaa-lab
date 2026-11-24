@@ -1,0 +1,227 @@
+@name Chemistry
+@aliases AQA Chemistry
+@board AQA
+@code 7405
+# atomic | 3.1.1 | Atomic structure
+Relative charges and masses :: Proton +1, mass 1; neutron 0, mass 1; electron -1, mass about 1/1836.
+Isotopes :: Atoms of the same element with the same number of protons but different numbers of neutrons. Same chemical properties because they have the same electron configuration.
+Time of flight mass spectrometer stages :: Ionisation (electron impact or electrospray), acceleration by an electric field, ion drift through the flight tube, then detection.
+Electron impact vs electrospray ionisation :: Electron impact: high-energy electrons knock an electron off, giving X⁺. Electrospray: the sample dissolved in a solvent gains a proton, giving XH⁺; used for large molecules.
+Relative atomic mass from a mass spectrum :: Ar = Σ(isotope mass × abundance) ÷ total abundance.
+Electron configuration order :: Subshells fill 1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p. Exceptions: chromium is [Ar]3d⁵4s¹ and copper is [Ar]3d¹⁰4s¹.
+First ionisation energy :: The energy needed to remove one mole of electrons from one mole of gaseous atoms to form one mole of gaseous 1+ ions: X(g) → X⁺(g) + e⁻.
+Factors affecting ionisation energy :: Nuclear charge, distance of the electron from the nucleus (atomic radius), and shielding by inner electrons.
+Ionisation energy trend down a group :: Decreases: the outer electron is further from the nucleus and more shielded, so less attraction.
+Ionisation energy trend across period 3 :: Generally increases due to greater nuclear charge with similar shielding. Drop at aluminium (3p electron is higher in energy) and at sulfur (paired electrons in a 3p orbital repel).
+Successive ionisation energies :: Big jumps show an electron being removed from a new shell closer to the nucleus, which reveals the group of the element.
+Shapes of s and p orbitals :: s orbitals are spherical; p orbitals are dumbbell-shaped. Each orbital holds two electrons with opposite spins.
+Ions in electron configurations :: Transition metals lose 4s electrons before 3d electrons when forming ions, e.g. Fe²⁺ is [Ar]3d⁶.
+Mass spectrum of molecules :: The peak with the highest m/z is the molecular ion and gives the Mr.
+# amount | 3.1.2 | Amount of substance
+Mole and Avogadro constant :: One mole contains 6.022 × 10²³ particles. Amount (mol) = mass ÷ Mr.
+Ideal gas equation :: pV = nRT. Units: pressure in Pa, volume in m³, temperature in K, R = 8.31 J K⁻¹ mol⁻¹.
+Concentration calculations :: Concentration (mol dm⁻³) = amount (mol) ÷ volume (dm³). 1 dm³ = 1000 cm³.
+Empirical and molecular formula :: Empirical: simplest whole-number ratio of atoms. Molecular: actual number of atoms, a multiple of the empirical formula found using Mr.
+Percentage yield :: Actual yield ÷ theoretical yield × 100.
+Atom economy :: Mass of desired product ÷ total mass of reactants × 100. High atom economy means less waste and is more sustainable.
+Titration practical :: Rinse burette with the solution, fill, read from the bottom of the meniscus, add dropwise near the end point, and repeat until concordant titres (within 0.10 cm³).
+Molar gas volume :: At room temperature and pressure, one mole of any gas occupies 24 dm³.
+Water of crystallisation :: Heat a hydrated salt to constant mass; the mass lost is water. Use moles to find x in, e.g., CuSO4·xH2O.
+Ionic equations :: Show only the species that react, leaving out spectator ions, e.g. H⁺ + OH⁻ → H2O.
+# bonding | 3.1.3 | Bonding
+Ionic bonding :: Electrostatic attraction between oppositely charged ions in a giant lattice. High melting points; conduct when molten or dissolved.
+Covalent and dative bonds :: A covalent bond is a shared pair of electrons. A dative (coordinate) bond is one where both electrons come from the same atom, e.g. NH4⁺.
+Metallic bonding :: Attraction between positive metal ions and delocalised electrons. Good conductors and malleable as layers slide.
+Giant covalent structures :: Diamond (each C bonded to 4 others, very hard), graphite (layers, delocalised electrons conduct), silicon dioxide. Very high melting points.
+VSEPR shapes :: Electron pairs repel to be as far apart as possible; lone pairs repel more than bonding pairs (each reduces angle by about 2.5°). Linear 180°, trigonal planar 120°, tetrahedral 109.5°, pyramidal 107°, bent 104.5°, trigonal bipyramidal, octahedral 90°.
+Electronegativity :: The power of an atom to attract the pair of electrons in a covalent bond. Increases across a period and up a group; fluorine is the most electronegative.
+Polar bonds and molecules :: A bond is polar if atoms have different electronegativities. A molecule is polar only if the dipoles don't cancel due to symmetry.
+Van der Waals (induced dipole-dipole) forces :: Temporary dipoles induce dipoles in neighbouring molecules. Stronger with more electrons (larger molecules) and larger surface area.
+Permanent dipole-dipole forces :: Attraction between polar molecules with permanent δ+ and δ- regions.
+Hydrogen bonding :: Between a hydrogen atom bonded to N, O or F and a lone pair on an N, O or F of another molecule. Explains water's high boiling point and ice being less dense than water.
+Bond length and strength :: Multiple bonds are shorter and stronger than single bonds.
+Simple molecular substances :: Low melting and boiling points because only weak intermolecular forces must be overcome; don't conduct electricity.
+Predicting structure from properties :: High melting point and conducts when molten: ionic. Conducts as solid: metallic or graphite. Very high melting point, no conduction: giant covalent.
+# energetics | 3.1.4 | Energetics
+Enthalpy change :: Heat energy change measured at constant pressure. Standard conditions: 100 kPa and a stated temperature (usually 298 K).
+Standard enthalpy of combustion :: The enthalpy change when one mole of a substance is completely burned in oxygen, with all reactants and products in their standard states.
+Standard enthalpy of formation :: The enthalpy change when one mole of a compound is formed from its elements in their standard states under standard conditions.
+Calorimetry :: q = mcΔT, then ΔH = -q ÷ moles. Errors include heat loss, incomplete combustion and evaporation.
+Hess's law :: The enthalpy change of a reaction is independent of the route taken, so enthalpy cycles can calculate unknown enthalpy changes.
+Mean bond enthalpy :: Energy needed to break one mole of a covalent bond in gaseous molecules, averaged over different compounds. ΔH = bonds broken - bonds made. Less accurate than formation data.
+Exothermic and endothermic :: Exothermic reactions release heat (ΔH negative); endothermic reactions absorb heat (ΔH positive).
+Enthalpy profile diagrams :: Show reactants, products, activation energy and ΔH. Catalysts lower the activation energy peak.
+# kinetics | 3.1.5 | Kinetics
+Collision theory :: Reactions happen when particles collide with energy greater than or equal to the activation energy and with the correct orientation.
+Maxwell-Boltzmann distribution :: Shows the spread of molecular energies in a gas. The area under the curve equals the total number of molecules; it starts at the origin and never touches the x-axis.
+Effect of temperature :: Increasing temperature shifts the curve right and flattens it, so many more molecules have energy above the activation energy; rate increases a lot.
+Effect of concentration or pressure :: More particles per unit volume give more frequent successful collisions.
+Catalysts :: Increase rate by providing an alternative reaction route with a lower activation energy, without being used up.
+Measuring rate :: Collect gas in a syringe, measure mass loss, or monitor colour change. Rate = change in amount ÷ time.
+Effect of surface area :: Smaller pieces have a larger surface area, so more frequent collisions.
+# equilibria | 3.1.6 | Equilibria
+Dynamic equilibrium :: In a closed system, the forward and reverse reactions occur at the same rate, so concentrations stay constant.
+Le Chatelier's principle :: If a factor affecting an equilibrium changes, the position of equilibrium shifts to oppose the change.
+Effect of temperature on equilibrium :: Increasing temperature shifts equilibrium in the endothermic direction.
+Effect of pressure on equilibrium :: Increasing pressure shifts equilibrium towards the side with fewer gaseous molecules.
+Catalysts and equilibrium :: Speed up forward and reverse reactions equally, so equilibrium is reached faster but its position doesn't change.
+Kc :: For aA + bB ⇌ cC + dD, Kc = [C]ᶜ[D]ᵈ ÷ [A]ᵃ[B]ᵇ. Only temperature changes the value of Kc.
+Industrial compromise :: e.g. Haber process uses moderate temperature (about 450 °C) and high pressure as a compromise between yield, rate and cost.
+Haber process equation :: N2 + 3H2 ⇌ 2NH3, ΔH = -92 kJ mol⁻¹. Iron catalyst, around 200 atm and 450 °C.
+Ethanol and methanol production equilibria :: Both are produced by reversible exothermic reactions, so conditions balance yield, rate and cost.
+# redox | 3.1.7 | Oxidation, reduction and redox
+OIL RIG :: Oxidation is loss of electrons; reduction is gain of electrons.
+Oxidation state rules :: Uncombined elements are 0; oxygen is usually -2 (-1 in peroxides); hydrogen is +1 (-1 in metal hydrides); the sum equals the charge on the species.
+Oxidising and reducing agents :: An oxidising agent accepts electrons and is reduced; a reducing agent donates electrons and is oxidised.
+Balancing half-equations :: Balance atoms, add H2O to balance oxygen, H⁺ to balance hydrogen, then electrons to balance charge. Combine so electrons cancel.
+Oxidation states in names :: Roman numerals show oxidation state, e.g. iron(III) chloride, sulfate(VI).
+Redox in metal extraction :: Metal ores are reduced, e.g. iron oxide reduced by carbon monoxide in a blast furnace.
+# thermodynamics | 3.1.8 | Thermodynamics (A-level)
+Born-Haber cycle :: An enthalpy cycle using atomisation, ionisation energies, electron affinities and formation enthalpy to calculate lattice enthalpy.
+Lattice enthalpy of formation :: The enthalpy change when one mole of a solid ionic compound is formed from its gaseous ions. More negative with smaller, more highly charged ions.
+Perfect ionic model :: Assumes ions are perfect spheres with no covalent character. A difference between theoretical and experimental lattice enthalpy shows covalent character.
+Enthalpy of solution :: The enthalpy change when one mole of an ionic solid dissolves in water to form an infinitely dilute solution. ΔH solution = ΔH lattice dissociation + Σ ΔH hydration of the ions.
+Entropy :: A measure of disorder. Gases have more entropy than liquids, which have more than solids. ΔS = ΣS products - ΣS reactants.
+Gibbs free energy :: ΔG = ΔH - TΔS. A reaction is feasible when ΔG ≤ 0. The temperature at which it becomes feasible: T = ΔH ÷ ΔS.
+# rate-eq | 3.1.9 | Rate equations (A-level)
+Rate equation :: Rate = k[A]ᵐ[B]ⁿ, where m and n are orders found by experiment, not from the balanced equation.
+Orders of reaction :: Zero order: rate unaffected by concentration. First order: rate doubles when concentration doubles. Second order: rate quadruples when concentration doubles.
+Rate constant and temperature :: k increases with temperature. Arrhenius equation: k = Ae^(-Ea/RT); plot ln k against 1/T, gradient = -Ea/R.
+Rate-determining step :: The slowest step in a mechanism. Species in the rate equation appear in or before the rate-determining step.
+Initial rates and clock reactions :: Find the gradient at t = 0 on concentration-time graphs, or use clock reactions where 1/time is proportional to the initial rate.
+Half-life :: For first-order reactions the half-life is constant, independent of concentration.
+# kp | 3.1.10 | Equilibrium constant Kp (A-level)
+Mole fraction :: Moles of a gas ÷ total moles of gas in the mixture.
+Partial pressure :: Mole fraction × total pressure.
+Kp :: Calculated like Kc but using partial pressures of gases. Only temperature affects Kp; changing pressure changes the position but not the value.
+# electrode | 3.1.11 | Electrode potentials and cells (A-level)
+Standard hydrogen electrode :: Hydrogen gas at 100 kPa bubbled over platinum in 1.00 mol dm⁻³ H⁺ at 298 K. Defined as 0.00 V.
+Standard electrode potential :: The emf of a half-cell measured against the standard hydrogen electrode under standard conditions.
+Electrochemical series :: More positive E° means a species is more easily reduced (a stronger oxidising agent). Cell emf = E°(right/positive) - E°(left/negative).
+Conventional cell representation :: Zn | Zn²⁺ || Cu²⁺ | Cu: oxidised species next to the salt bridge, with the most reduced species on the outside.
+Commercial cells :: Non-rechargeable, rechargeable (e.g. lithium-ion) and fuel cells. Hydrogen fuel cells produce only water but hydrogen is flammable and often made using fossil fuels.
+# acids | 3.1.12 | Acids and bases (A-level)
+Brønsted-Lowry acids and bases :: An acid is a proton donor; a base is a proton acceptor.
+pH :: pH = -log[H⁺]. For strong acids [H⁺] = acid concentration (times number of protons).
+Kw :: Ionic product of water: Kw = [H⁺][OH⁻] = 1.00 × 10⁻¹⁴ mol² dm⁻⁶ at 298 K. Used to find pH of strong bases.
+Ka and weak acids :: Ka = [H⁺][A⁻] ÷ [HA]. For weak acids, assume [H⁺] = [A⁻], so [H⁺] = √(Ka × [HA]). pKa = -log Ka.
+pH curves and indicators :: Choose an indicator whose colour change range lies within the vertical part of the pH curve. Phenolphthalein suits weak acid/strong base; methyl orange suits strong acid/weak base.
+Half-neutralisation point :: For a weak acid titrated with strong base, at half the equivalence volume pH = pKa.
+Buffer solution :: Resists changes in pH when small amounts of acid or base are added. Acidic buffer: weak acid and its salt. Basic buffer: ammonia and ammonium chloride.
+How an acidic buffer works :: Added H⁺ reacts with the large reservoir of A⁻ to form HA; added OH⁻ reacts with HA (or H⁺, which HA replaces), so pH barely changes.
+Diluting a strong acid :: Diluting by a factor of 10 raises the pH by 1.
+Neutralisation enthalpy :: Strong acid-strong base neutralisation has a similar ΔH (about -57 kJ mol⁻¹) because the reaction is always H⁺ + OH⁻ → H2O.
+# period3 | 3.2.1 | Periodicity
+Trend in atomic radius across period 3 :: Decreases because nuclear charge increases while shielding stays similar, pulling electrons closer.
+Melting points across period 3 :: Rise from Na to Al (stronger metallic bonding), peak at Si (giant covalent), drop for P4, S8, Cl2 and Ar (simple molecular, depending on van der Waals forces).
+Period 3 elements with oxygen :: Na burns yellow, Mg white, Al, Si, P and S form oxides (P4O10, SO2). Metal oxides are ionic and basic; non-metal oxides are covalent and acidic.
+Period 3 oxides with water :: Na2O gives NaOH (pH 14); MgO gives Mg(OH)2 (pH 9); Al2O3 and SiO2 are insoluble; P4O10 gives H3PO4; SO2 gives H2SO3; SO3 gives H2SO4.
+Amphoteric aluminium oxide :: Reacts with both acids and bases.
+# group2 | 3.2.2 | Group 2, the alkaline earth metals
+Trends down group 2 :: Atomic radius increases, first ionisation energy decreases, reactivity increases and melting point generally decreases.
+Reaction with water :: Mg reacts slowly with water but quickly with steam to form MgO and H2. Ca, Sr and Ba react more vigorously to form hydroxides.
+Solubility trends :: Hydroxides become more soluble down the group; sulfates become less soluble down the group.
+Uses of group 2 compounds :: Mg(OH)2 in indigestion remedies; Ca(OH)2 neutralises acidic soil; BaSO4 as barium meal for X-rays; CaO/CaCO3 remove SO2 from flue gases; Mg extracts titanium.
+Test for sulfate ions :: Add acidified barium chloride solution. A white precipitate of barium sulfate shows sulfate ions.
+Mg with steam :: Mg + H2O(g) → MgO + H2.
+Test for group 2 cations :: Flame tests or adding NaOH: Mg²⁺ gives a white precipitate of Mg(OH)2.
+# group7 | 3.2.3 | Group 7, the halogens
+Trends down group 7 :: Electronegativity decreases; boiling point increases (more van der Waals forces); oxidising ability decreases.
+Displacement reactions :: A more reactive halogen displaces a less reactive halide ion from solution, e.g. Cl2 + 2KBr → 2KCl + Br2.
+Halide ions as reducing agents :: Reducing power increases down the group. With concentrated sulfuric acid, NaCl gives HCl; NaBr also gives SO2 and Br2; NaI also gives S and H2S and I2.
+Silver nitrate test for halides :: Acidify with nitric acid then add silver nitrate. Cl⁻ white, Br⁻ cream, I⁻ yellow precipitates. AgCl dissolves in dilute ammonia; AgBr in concentrated; AgI in neither.
+Chlorine and water :: Cl2 + H2O ⇌ HCl + HClO. Used to kill bacteria in water. Benefits outweigh the risks of toxic chlorine.
+Chlorine with cold dilute NaOH :: Forms sodium chlorate(I), NaClO, used as bleach: Cl2 + 2NaOH → NaCl + NaClO + H2O.
+Disproportionation :: A reaction where the same element is simultaneously oxidised and reduced.
+Halogen colours :: Chlorine is a pale green gas, bromine a red-brown liquid and iodine a grey-black solid that forms a purple vapour.
+# transition | 3.2.4-3.2.5 | Transition metals (A-level)
+Transition metal :: An element that forms at least one stable ion with an incomplete d subshell. Characteristic properties: complex formation, coloured ions, variable oxidation states and catalytic activity.
+Ligands and complexes :: A ligand donates a lone pair to form a coordinate bond with a metal ion. Monodentate (H2O, NH3, Cl⁻), bidentate (ethanedioate, ethane-1,2-diamine) and multidentate (EDTA⁴⁻).
+Shapes of complexes :: Octahedral with small ligands (6 coordinate), tetrahedral with Cl⁻ (4), square planar for cisplatin, linear for Ag⁺ complexes such as Tollens' reagent.
+Chelate effect :: Replacing monodentate ligands with multidentate ones increases the number of particles, so entropy increases and ΔG becomes negative.
+Origin of colour :: Ligands split d orbitals. Electrons absorb visible light to move to higher orbitals (ΔE = hν), and the remaining frequencies are seen. Colour changes with oxidation state, ligand and coordination number.
+Haem and carbon monoxide :: Haem is an iron(II) complex with a multidentate ligand. CO binds more strongly than O2, preventing oxygen transport.
+Heterogeneous catalysts :: In a different phase from reactants; reaction happens on active sites on the surface. e.g. iron in the Haber process, V2O5 in the Contact process. Can be poisoned by impurities.
+Homogeneous catalysts :: Same phase as reactants; work through an intermediate species, e.g. Fe²⁺ catalysing the reaction between I⁻ and S2O8²⁻.
+Autocatalysis :: A product catalyses the reaction, e.g. Mn²⁺ in the reaction between MnO4⁻ and C2O4²⁻.
+Redox titrations with manganate(VII) :: MnO4⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H2O. Self-indicating: end point is the first permanent pale pink.
+Reactions of ions in aqueous solution :: [M(H2O)6]³⁺ ions are more acidic than 2+ ions due to greater charge density. With NaOH or NH3 they form hydroxide precipitates; Al(OH)3 is amphoteric.
+Variable oxidation states with vanadium :: Zinc in acid reduces vanadium(V) (yellow) to (IV) blue, (III) green and (II) violet.
+Tollens' reagent :: [Ag(NH3)2]⁺, a linear complex, used to distinguish aldehydes (silver mirror).
+Cisplatin :: A square planar platinum(II) complex that binds to DNA in cancer cells, preventing replication. Side effects include kidney damage.
+Ligand substitution with chloride :: Adding concentrated HCl to [Cu(H2O)6]²⁺ gives yellow [CuCl4]²⁻; the coordination number changes from 6 to 4 because Cl⁻ is larger.
+# organic-intro | 3.3.1-3.3.2 | Organic basics and alkanes
+Nomenclature :: Longest carbon chain gives the stem (meth-, eth-, prop-, but-...); functional group gives the suffix or prefix; number to give the lowest locants.
+Structural isomers :: Same molecular formula, different structural formula: chain, position or functional group isomers.
+Stereoisomers: E/Z :: Same structural formula, different spatial arrangement due to restricted rotation around C=C. Use Cahn-Ingold-Prelog priorities: Z = higher priority groups on the same side.
+Fractional distillation of crude oil :: Crude oil is heated and vapour rises up a column with a temperature gradient; fractions condense at different heights depending on boiling point.
+Cracking :: Thermal cracking (high temperature and pressure) gives mainly alkenes. Catalytic cracking (zeolite catalyst, slight pressure) gives branched alkanes, cycloalkanes and aromatics for motor fuels.
+Combustion pollution :: Incomplete combustion gives toxic CO and carbon particulates. NOx forms in engines. SO2 causes acid rain, removed by flue gas desulfurisation. Catalytic converters remove CO, NOx and unburnt hydrocarbons.
+Free radical substitution :: Alkanes react with chlorine in UV light: initiation (Cl2 → 2Cl•), propagation (Cl• + CH4 → HCl + •CH3; •CH3 + Cl2 → CH3Cl + Cl•) and termination.
+Ozone depletion :: Chlorine radicals from CFCs catalyse ozone decomposition: Cl• + O3 → ClO• + O2; ClO• + O3 → 2O2 + Cl•. Chemists developed alternative chlorine-free compounds.
+# halo | 3.3.3 | Halogenoalkanes
+Nucleophilic substitution :: A nucleophile (OH⁻, CN⁻, NH3) attacks the δ+ carbon, and the halogen leaves as a halide ion. Rate depends on C-X bond enthalpy: C-I is weakest so fastest.
+Products of nucleophilic substitution :: With aqueous OH⁻: alcohol. With ethanolic CN⁻: nitrile (adds a carbon). With excess ethanolic ammonia: primary amine.
+Elimination :: OH⁻ in ethanol under reflux acts as a base, removing H⁺ and the halide to form an alkene.
+Substitution vs elimination conditions :: Aqueous, warm conditions favour substitution; ethanolic, hot conditions favour elimination. Tertiary halogenoalkanes favour elimination.
+Primary, secondary and tertiary halogenoalkanes :: Classified by the number of carbons attached to the carbon bonded to the halogen.
+Nucleophile :: An electron pair donor that attacks an electron-deficient carbon.
+# alkenes | 3.3.4 | Alkenes
+Structure of alkenes :: The C=C double bond contains a π bond above and below the plane, which is a region of high electron density, so alkenes react with electrophiles.
+Electrophilic addition with HBr :: The π bond attacks H; Br⁻ attacks the carbocation intermediate. Unsymmetrical alkenes give a major product via the more stable carbocation (tertiary > secondary > primary).
+Test for alkenes :: Bromine water goes from orange to colourless.
+Addition with sulfuric acid :: Concentrated H2SO4 adds across C=C to form an alkyl hydrogensulfate, which is hydrolysed by water to an alcohol.
+Addition polymers :: Alkenes join by breaking the double bond. Poly(alkenes) are unreactive and don't biodegrade. Plasticisers make PVC flexible.
+Carbocation stability :: Tertiary carbocations are most stable because alkyl groups push electron density towards the positive carbon (positive inductive effect).
+Disposal of polymers :: Landfill, incineration (releases energy but toxic gases) and recycling. Poly(alkenes) are non-biodegradable.
+# alcohols | 3.3.5 | Alcohols
+Classifying alcohols :: Primary: OH carbon attached to one other carbon. Secondary: two. Tertiary: three.
+Producing ethanol :: Fermentation of glucose by yeast (35 °C, anaerobic): C6H12O6 → 2C2H5OH + 2CO2. Or hydration of ethene with steam and phosphoric acid catalyst at 300 °C, 60-70 atm.
+Biofuel and carbon neutrality :: Ethanol from fermentation is claimed carbon-neutral as CO2 released equals CO2 absorbed by crops, but fuel used in farming and transport adds emissions.
+Oxidation of alcohols :: With acidified potassium dichromate (orange to green). Primary alcohols give aldehydes (distil) then carboxylic acids (reflux). Secondary give ketones. Tertiary don't oxidise.
+Distinguishing aldehydes and ketones :: Tollens' reagent gives a silver mirror with aldehydes; Fehling's solution gives a brick-red precipitate. Ketones give no change.
+Elimination of alcohols :: Heating with concentrated phosphoric or sulfuric acid removes water to form an alkene.
+Primary alcohol to aldehyde :: Use excess alcohol and distil the aldehyde off as it forms, so it isn't oxidised further.
+Reflux :: Heating with a condenser so vapours condense and return to the flask, allowing complete reaction without losing volatile substances.
+# analysis | 3.3.6 | Organic analysis
+Functional group tests :: Alkene: bromine water decolourised. Aldehyde: Tollens' or Fehling's. Alcohol: acidified dichromate orange to green (primary/secondary). Carboxylic acid: effervescence with sodium carbonate.
+High-resolution mass spectrometry :: Gives precise Mr to several decimal places, which can identify the molecular formula.
+Infrared spectroscopy :: Bonds absorb IR at specific wavenumbers. O-H (alcohol) broad 3230-3550 cm⁻¹; O-H (acid) very broad 2500-3000; C=O 1680-1750; fingerprint region below 1500 identifies the molecule.
+Greenhouse effect and IR :: CO2, methane and water vapour absorb infrared radiation emitted from the Earth, contributing to global warming.
+Identifying unknowns :: Combine test-tube tests, mass spectrometry and IR spectra to identify an organic compound.
+# optical | 3.3.7 | Optical isomerism (A-level)
+Chiral centre :: A carbon atom bonded to four different groups.
+Enantiomers :: Non-superimposable mirror images. They rotate plane-polarised light in opposite directions.
+Racemic mixture :: Equal amounts of each enantiomer; no overall rotation of plane-polarised light. Formed when a planar intermediate (e.g. carbonyl or carbocation) is attacked equally from both sides.
+# carbonyl | 3.3.8-3.3.9 | Carbonyls, carboxylic acids and esters (A-level)
+Reduction of carbonyls :: NaBH4 reduces aldehydes to primary alcohols and ketones to secondary alcohols by nucleophilic addition.
+Nucleophilic addition with KCN :: CN⁻ attacks the δ+ carbonyl carbon, then H⁺ adds to form a hydroxynitrile. Can give a racemic mixture. KCN is very toxic.
+Carboxylic acids :: Weak acids that react with carbonates to give CO2. Form esters with alcohols using a concentrated sulfuric acid catalyst.
+Uses of esters :: Solvents, plasticisers, perfumes and food flavourings.
+Hydrolysis of esters :: Acid hydrolysis is reversible, giving acid and alcohol. Alkaline hydrolysis is irreversible, giving the carboxylate salt and alcohol.
+Fats, soap and biodiesel :: Vegetable oils and animal fats are esters of glycerol. Hydrolysis with NaOH gives soap and glycerol. Reaction with methanol gives biodiesel (methyl esters).
+Acylation :: Acyl chlorides and acid anhydrides react by nucleophilic addition-elimination with water (acid), alcohols (esters), ammonia (amides) and amines (N-substituted amides). Aspirin is made using ethanoic anhydride.
+Acid anhydrides vs acyl chlorides :: Anhydrides are used industrially because they're cheaper, less corrosive and react less violently than acyl chlorides.
+# aromatic | 3.3.10 | Aromatic chemistry (A-level)
+Benzene structure :: A planar ring of six carbons with delocalised π electrons above and below the ring; all C-C bonds are the same length.
+Stability of benzene :: Enthalpy of hydrogenation is less exothermic than predicted for three C=C bonds, showing delocalisation makes benzene more stable.
+Electrophilic substitution :: Benzene's delocalised electrons attack an electrophile, forming an intermediate; loss of H⁺ restores the stable ring.
+Nitration of benzene :: Concentrated nitric and sulfuric acids produce NO2⁺. Nitration is used to make explosives and to make amines for dyes.
+Friedel-Crafts acylation :: Acyl chloride with an AlCl3 catalyst forms the electrophile RCO⁺, producing a phenyl ketone.
+# amines | 3.3.11-3.3.12 | Amines, polymers and amino acids (A-level)
+Preparing amines :: Primary aliphatic amines: halogenoalkane with excess ammonia, or reduce a nitrile (LiAlH4 or H2/Ni). Aromatic amines: reduce nitro compounds with tin and HCl.
+Amines as bases :: The lone pair on nitrogen accepts a proton. Base strength: aliphatic amines > ammonia > aromatic amines, because alkyl groups push electron density on to N but the benzene ring withdraws it.
+Quaternary ammonium salts :: Used as cationic surfactants in fabric softeners and hair conditioners.
+Condensation polymers :: Polyesters (diol + dicarboxylic acid) and polyamides (diamine + dicarboxylic acid), e.g. Terylene, nylon-6,6 and Kevlar. Biodegradable by hydrolysis.
+Amino acids :: Exist as zwitterions at the isoelectric point. Can act as acids and bases. Proteins are condensation polymers of amino acids.
+Protein structure and hydrolysis :: Primary sequence, secondary (hydrogen bonds), tertiary (hydrogen bonds, ionic, disulfide). Hydrolysis with 6 mol dm⁻³ HCl breaks peptide links; identify amino acids by chromatography.
+Enzymes and drug action :: Enzyme active sites are stereospecific, so drugs can be designed as inhibitors. Cisplatin binds to DNA bases, preventing replication in cancer cells.
+DNA :: A polymer of nucleotides (phosphate, 2-deoxyribose and base). Complementary bases pair by hydrogen bonds: A-T and C-G.
+# nmr | 3.3.13-3.3.16 | Synthesis, NMR and chromatography (A-level)
+Organic synthesis :: Plan multi-step routes using known reactions. Fewer steps and safer reagents are better.
+¹³C NMR :: Each peak represents a different carbon environment. Chemical shift (δ) depends on the environment; TMS is the reference at 0 ppm.
+¹H NMR :: Number of peaks shows environments; integration gives the relative number of H atoms; splitting follows the n+1 rule from adjacent hydrogens.
+Solvents for NMR :: Deuterated solvents (e.g. CDCl3) or CCl4 are used so the solvent doesn't give a ¹H signal.
+Chromatography :: Separation by relative affinity for the stationary and mobile phases. TLC: Rf = distance by spot ÷ distance by solvent. Column chromatography and gas chromatography (retention time) also used.
+Chemical shift :: Measured in ppm relative to TMS. Electronegative atoms nearby shift peaks to higher values (deshielding).
+Interpreting splitting :: Singlet: no neighbouring H. Doublet: 1 neighbour. Triplet: 2. Quartet: 3.
