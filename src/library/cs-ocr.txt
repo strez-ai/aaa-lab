@@ -1,0 +1,167 @@
+@name Computer Science
+@aliases Computing|OCR Computer Science
+@board OCR
+@code H446
+# processors | 1.1.1 | Processor structure and function
+Components of the CPU :: The ALU (arithmetic and logic operations), control unit (decodes instructions and controls components), registers and buses.
+Registers :: PC holds the address of the next instruction; ACC holds results; MAR holds the address to access; MDR holds data fetched or to be written; CIR holds the current instruction.
+Buses :: Data bus carries data; address bus carries memory addresses (one-way); control bus carries control signals.
+Fetch-decode-execute cycle :: PC copied to MAR; PC incremented; instruction fetched into MDR then copied to CIR; control unit decodes; instruction executed.
+Factors affecting CPU performance :: Clock speed, number of cores and cache size. More cores only help if software can run in parallel.
+Pipelining :: Fetching one instruction while decoding another and executing a third, increasing throughput. Branches can flush the pipeline.
+Von Neumann vs Harvard architecture :: Von Neumann: shared memory and bus for data and instructions. Harvard: separate memory and buses, used in embedded systems. Contemporary CPUs mix both.
+Clock speed :: The number of FDE cycles per second, measured in hertz. Higher clock speed means more instructions per second but more heat.
+Cache :: Small, fast memory close to the CPU storing frequently used data and instructions. Level 1 is smallest and fastest.
+Assembly language and the FDE cycle :: Each assembly instruction has an opcode and an operand, fetched and executed in the cycle.
+# processor-types | 1.1.2 | Types of processor
+CISC vs RISC :: CISC: many complex instructions, fewer lines of assembly, more complex hardware. RISC: small set of simple instructions, each one clock cycle, easier pipelining, lower power.
+GPUs :: Many cores designed for parallel processing of the same instruction on lots of data (SIMD); used for graphics, machine learning and modelling.
+Multicore and parallel systems :: Multiple cores can run tasks simultaneously, but performance gains depend on how much of the program can be parallelised.
+Co-processors :: Extra processors that take on specific tasks, e.g. floating point units or GPUs.
+Benefits of RISC for mobile devices :: Simpler circuits use less power and produce less heat, prolonging battery life.
+# io-storage | 1.1.3 | Input, output and storage
+Magnetic, flash and optical storage :: Magnetic (HDD): large and cheap but moving parts. Flash (SSD): fast, durable, no moving parts. Optical (CD, DVD, Blu-ray): cheap and portable but slow and low capacity.
+RAM and ROM :: RAM is volatile, read-write, stores running programs and data. ROM is non-volatile, read-only, stores the boot program (BIOS).
+Virtual storage :: Storage accessed over a network or cloud, appearing as local storage.
+Choosing devices :: Consider capacity, speed, portability, durability, reliability and cost for a given scenario.
+Uses of different input devices :: Barcode readers, scanners, sensors, microphones and touchscreens chosen for speed, accuracy and context.
+Magnetic vs solid state lifespan :: SSDs have a limited number of write cycles, while HDDs can fail due to mechanical wear.
+# software | 1.2.1-1.2.2 | Systems and applications software
+Operating system functions :: Memory management, interrupt handling, scheduling, file management, user interface and device drivers.
+Paging and segmentation :: Paging splits memory into fixed-size pages; segmentation into variable-sized logical segments. Virtual memory uses secondary storage as extra RAM.
+Interrupts and the ISR :: A signal to the CPU that needs attention. At the end of each FDE cycle the CPU checks for interrupts; if higher priority, it saves registers to a stack and runs the interrupt service routine.
+Scheduling algorithms :: Round robin, first come first served, multi-level feedback queues, shortest job first and shortest remaining time.
+Types of OS :: Distributed, embedded, multi-tasking, multi-user and real-time operating systems.
+BIOS :: Runs when the computer starts, performing POST checks and loading the operating system.
+Virtual machines :: Software that emulates a computer, used to run intermediate code or other operating systems.
+Open source vs closed source :: Open source code can be modified and shared, usually free. Closed source code is protected and supported by the company.
+Translators :: Compilers translate the whole program into machine code at once; interpreters translate and run line by line; assemblers translate assembly language.
+Stages of compilation :: Lexical analysis (tokens), syntax analysis (abstract syntax tree), code generation and optimisation. Linkers and loaders combine libraries.
+Distributed operating system :: Spreads processing across multiple computers so they appear as one system.
+Real-time operating system :: Guarantees processing within a time limit, e.g. in car safety systems or air traffic control.
+Device drivers :: Software that lets the operating system communicate with hardware devices.
+Libraries :: Pre-written, tested code that can be reused, saving time; may need linking during compilation.
+Static vs dynamic linking :: Static linking copies library code into the executable; dynamic linking loads libraries at runtime, saving space.
+# dev | 1.2.3-1.2.4 | Software development and programming languages
+Development methodologies :: Waterfall (linear stages), agile (iterative), extreme programming, spiral model and rapid application development.
+Programming paradigms :: Procedural, object-oriented, declarative (functional and logic). Low-level languages give direct hardware control.
+Little Man Computer :: A simplified model of assembly language with instructions ADD, SUB, STA, LDA, BRA, BRZ, BRP, INP, OUT and HLT.
+Addressing modes :: Immediate (operand is the value), direct (operand is the address), indirect (address of the address) and indexed (address + index register).
+Object-oriented concepts :: Classes, objects, methods, attributes, encapsulation, inheritance and polymorphism.
+Encapsulation :: Attributes are private and accessed only through public methods (getters and setters), protecting data.
+Waterfall model :: Sequential stages: requirements, design, implementation, testing, maintenance. Clear but inflexible to change.
+Agile methodologies :: Small iterations with continuous user feedback; adapts to changing requirements.
+Spiral model :: Iterative with a focus on risk analysis; suited to large, high-risk projects.
+Rapid application development :: Prototypes refined with user feedback; fast but needs user involvement.
+Extreme programming :: Pair programming, frequent releases and test-driven development.
+Inheritance :: A subclass takes on the attributes and methods of a superclass and can add or override them.
+Polymorphism :: Objects of different classes can be treated through the same interface, with methods behaving differently in each class.
+# compression | 1.3.1 | Compression, encryption and hashing
+Lossy vs lossless compression :: Lossy permanently removes data (JPEG, MP3), giving smaller files. Lossless can be reversed perfectly (PNG, ZIP).
+Run length encoding :: Stores consecutive repeated data as a single value and count.
+Dictionary coding :: Replaces frequently occurring patterns with references to a dictionary.
+Symmetric vs asymmetric encryption :: Symmetric uses one shared key for encryption and decryption. Asymmetric uses a public key to encrypt and a private key to decrypt, solving key exchange.
+Hashing :: A one-way function producing a fixed-size value. Used for storing passwords and for hash tables.
+Uses of encryption :: Secures data in transmission (HTTPS) and at rest; asymmetric encryption also allows digital signatures.
+Features of a good hash function :: Fast to calculate, produces few collisions and gives a fixed-length output.
+# databases | 1.3.2 | Databases
+Relational database terms :: Tables (relations), records, fields, primary key, foreign key, secondary key and entity relationship diagrams.
+Normalisation :: 1NF: no repeating groups, atomic data. 2NF: 1NF and no partial dependencies. 3NF: 2NF and no non-key dependencies.
+SQL :: SELECT, FROM, WHERE, ORDER BY, JOIN, INSERT INTO, UPDATE, DELETE and DROP.
+Referential integrity :: Ensures foreign keys always refer to existing records, keeping data consistent.
+Transactions and ACID :: Atomicity, consistency, isolation and durability. Record locking prevents simultaneous updates; redundancy improves reliability.
+Capturing and exchanging data :: Data captured via forms, OCR, OMR and sensors; exchanged using CSV, JSON and XML.
+Flat file vs relational :: Flat files store data in one table, causing redundancy. Relational databases link tables to reduce redundancy and inconsistency.
+Entity relationship diagrams :: Show one-to-one, one-to-many and many-to-many relationships between entities.
+Many-to-many relationships :: Resolved by creating a link table, which has foreign keys to both tables.
+# networks | 1.3.3 | Networks
+Protocols and standards :: Rules for communication so different devices can work together.
+TCP/IP stack :: Application, transport, internet (network) and link layers. Each layer adds headers to data.
+DNS :: Translates domain names into IP addresses using a hierarchy of name servers.
+LAN vs WAN :: LANs cover a small area with owned infrastructure; WANs cover large areas using third-party links.
+Packet vs circuit switching :: Packet switching sends packets by different routes and reassembles them; circuit switching creates a dedicated path for the whole communication.
+Network security :: Firewalls, proxies and encryption protect networks.
+Client-server vs peer-to-peer :: Client-server: central server provides resources, easier to manage and secure. Peer-to-peer: devices share resources equally, cheaper but less secure.
+Network hardware :: Network interface cards, switches, routers, wireless access points and transmission media.
+Packets :: Contain a header (source, destination, sequence number), payload and trailer (checksum).
+MAC and IP addresses :: MAC addresses are unique to network cards and used within a network; IP addresses identify devices across networks.
+Network layers benefits :: Layers make protocols easier to develop and change because each layer only communicates with the layers next to it.
+Wireless networks :: Use radio waves; convenient but less secure and slower than wired. Security uses WPA2 encryption.
+# web | 1.3.4 | Web technologies
+HTML, CSS and JavaScript :: HTML structures content; CSS styles it; JavaScript adds interactivity and runs in the browser.
+Search engine indexing :: Web crawlers visit pages and build an index of keywords.
+PageRank :: Ranks pages by the number and quality of inbound links: PR(A) = (1-d) + d(PR(T1)/C(T1) + ... ).
+Client-side vs server-side processing :: Client-side runs in the browser, reducing server load but can be bypassed. Server-side runs on the server, more secure, used for database access.
+Search engine ranking factors :: Keywords, links (PageRank), page speed and relevance to the user's query.
+Forms and validation :: Forms collect user input; client-side JavaScript can validate data before sending it to the server.
+# data-types | 1.4.1 | Data types and number representation
+Primitive data types :: Integer, real/floating point, character, string and Boolean.
+Binary, hex and denary :: Hexadecimal uses base 16 (0-9, A-F); one hex digit represents 4 bits.
+Sign and magnitude vs two's complement :: Sign and magnitude uses the MSB as a sign bit. Two's complement gives the MSB a negative value, so binary arithmetic works naturally.
+Floating point :: Mantissa × 2^exponent, both in two's complement. Normalised numbers start 01 (positive) or 10 (negative), maximising precision.
+Bitwise manipulation :: Shifts multiply or divide by powers of 2. AND, OR and XOR with masks set, clear or toggle bits.
+Character sets :: ASCII uses 7 bits (128 characters); Unicode uses more bits to represent characters from all languages.
+Converting denary to binary :: Repeatedly divide by 2 or subtract place values.
+Binary addition and subtraction :: Add with carries; subtract by adding the two's complement of the number.
+Fixed point binary :: A binary point is placed at a fixed position; simple but limited range.
+Floating point addition :: Make exponents equal, add mantissas, then normalise the result.
+# data-structures | 1.4.2 | Data structures
+Arrays, records, lists and tuples :: Arrays hold items of the same type with fixed size; records hold related fields; lists are dynamic; tuples are immutable.
+Stacks :: LIFO structure with push, pop and peek; used for function calls and undo.
+Queues :: FIFO structure with enqueue and dequeue. Circular queues reuse space.
+Linked lists :: Nodes containing data and a pointer to the next node; easy insertion and deletion.
+Trees and binary search trees :: Hierarchical structure with a root; in a BST, left children are smaller and right children larger, allowing efficient searching.
+Graphs :: Vertices connected by edges, which can be directed or weighted. Stored as adjacency matrices or lists.
+Hash tables :: Use a hash function to map keys to indexes for fast lookup; collisions are handled by chaining or open addressing.
+Tree traversals :: Pre-order (root, left, right), in-order (left, root, right) and post-order (left, right, root). Depth-first and breadth-first traversal of graphs.
+Stack overflow and underflow :: Overflow: pushing onto a full stack. Underflow: popping from an empty stack.
+Priority queues :: Items are dequeued by priority rather than arrival order.
+Dictionaries :: Store key-value pairs, often implemented with hash tables.
+# boolean | 1.4.3 | Boolean algebra
+Logic gates :: AND, OR, NOT, XOR, NAND and NOR, with truth tables.
+Karnaugh maps :: A grid used to simplify Boolean expressions by grouping 1s in powers of two.
+De Morgan's laws :: NOT(A AND B) = NOT A OR NOT B; NOT(A OR B) = NOT A AND NOT B.
+Boolean identities :: Distribution, association, commutation, double negation and absorption are used to simplify expressions.
+Half and full adders :: A half adder adds two bits using XOR (sum) and AND (carry). A full adder also includes a carry in; full adders chain to add binary numbers.
+D-type flip-flops :: Store one bit, changing state on the rising edge of a clock pulse; used in registers.
+NAND as a universal gate :: Any logic circuit can be built from NAND gates alone.
+Simplifying with Boolean algebra :: A + AB = A (absorption); A.A = A; A + NOT A = 1; A.NOT A = 0.
+# legal | 1.5 | Legal, moral, cultural and ethical issues
+Data Protection Act 2018 :: Personal data must be processed lawfully, fairly and securely, and used only for stated purposes. Individuals have rights to access their data.
+Computer Misuse Act 1990 :: Makes unauthorised access, unauthorised access with intent to commit further crimes, and unauthorised modification of data illegal.
+Copyright Designs and Patents Act 1988 :: Protects intellectual property, making it illegal to copy or distribute software, music or media without permission.
+Regulation of Investigatory Powers Act 2000 :: Allows certain organisations to monitor communications and requires ISPs to provide access in some cases.
+Ethical issues :: Computers in the workforce, automated decision making, AI, environmental effects, censorship, monitoring, privacy and the digital divide.
+Ethics of artificial intelligence :: Bias in training data, accountability for automated decisions, and impact on jobs.
+Environmental impact of computing :: Energy used by data centres, e-waste and mining for materials.
+# thinking | 2.1 | Computational thinking
+Abstraction :: Removing unnecessary details to focus on what matters, so a problem is easier to solve.
+Thinking ahead :: Identifying inputs, outputs, preconditions and reusable components before solving a problem; caching results.
+Thinking procedurally :: Decomposing a problem into sub-procedures and ordering steps.
+Thinking logically :: Identifying decision points and conditions that affect the flow of a program.
+Thinking concurrently :: Identifying parts of a problem that can be tackled at the same time.
+Decomposition :: Breaking a problem into smaller sub-problems that are easier to solve.
+Caching :: Storing results of previous operations so they can be quickly reused; improves performance but uses memory.
+# programming | 2.2 | Problem solving and programming
+Programming constructs :: Sequence, selection (IF, CASE) and iteration (count-controlled FOR, condition-controlled WHILE).
+Recursion :: A function that calls itself with a base case to stop. Can be elegant but uses more memory (stack frames) and risks stack overflow.
+Local vs global variables :: Local variables exist only within a subroutine, reducing errors; global variables are accessible everywhere but harder to manage.
+Parameters by value and reference :: By value passes a copy; by reference passes the memory address, so changes affect the original.
+IDE features :: Editors, syntax highlighting, debugging tools such as breakpoints, stepping and variable watch.
+Computational methods :: Problem recognition, decomposition, divide and conquer, abstraction, backtracking, data mining, heuristics, performance modelling, pipelining and visualisation.
+Functions vs procedures :: Functions return a value; procedures don't.
+Testing strategies :: Normal, boundary, erroneous data. Alpha and beta testing, black-box and white-box testing.
+Trace tables :: Track the values of variables line by line to test and debug algorithms.
+# algorithms | 2.3 | Algorithms
+Big O notation :: Measures how time or space grows with input size: O(1) constant, O(log n) logarithmic, O(n) linear, O(n²) polynomial, O(2ⁿ) exponential.
+Linear vs binary search :: Linear search checks each item, O(n), works on unsorted data. Binary search halves a sorted list each step, O(log n).
+Bubble sort and insertion sort :: Bubble sort repeatedly swaps adjacent items, O(n²). Insertion sort inserts each item into its place in the sorted part, O(n²) but fast on nearly sorted data.
+Merge sort :: Divide and conquer: split lists into single items, then merge in order. O(n log n), but uses extra memory.
+Quick sort :: Choose a pivot, partition items smaller and larger, then recursively sort. Average O(n log n), worst case O(n²).
+Dijkstra's algorithm :: Finds the shortest path from a start node to all others in a weighted graph by repeatedly visiting the nearest unvisited node.
+A* algorithm :: Like Dijkstra's but adds a heuristic estimating the distance to the goal, so it explores fewer nodes.
+Complexity of searching and sorting :: Binary search O(log n); bubble and insertion sort O(n²); merge sort O(n log n).
+Breadth-first search :: Visits all neighbours of a node before moving deeper, using a queue; finds the shortest path in unweighted graphs.
+Depth-first search :: Explores as far as possible along each branch before backtracking, using a stack.
+Space complexity :: The amount of memory an algorithm needs; recursive algorithms often use more because of the call stack.
+Traversing a linked list :: Start at the head pointer and follow each node's pointer until the null pointer.
