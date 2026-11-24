@@ -43,7 +43,7 @@ for fn in sorted(os.listdir(libdir)) if os.path.isdir(libdir) else []:
     empty = [t['name'] for t in topics if not any(c[1] == t['id'] for c in pcards)]
     if empty: sys.exit(f'{fn}: topics with no cards: {empty}')
     open(os.path.join(outdir, pid + '.json'), 'w', encoding='utf8').write(json.dumps({'id': pid, 'topics': topics, 'cards': pcards}, ensure_ascii=False, separators=(',', ':')))
-    lib.append({'id': pid, 'name': meta['name'], 'names': [meta['name']] + [x.strip() for x in meta.get('aliases', '').split('|') if x.strip()], 'board': meta['board'], 'code': meta.get('code', ''), 't': len(topics), 'n': len(pcards)})
+    lib.append({'id': pid, 'name': meta['name'], 'names': [meta['name']] + [x.strip() for x in meta.get('aliases', '').split('|') if x.strip()], 'board': meta['board'].split('|')[0].strip(), 'boards': [x.strip() for x in meta['board'].split('|')], 'code': meta.get('code', ''), 't': len(topics), 'n': len(pcards)})
     print(f'  {pid}: {len(topics)} topics, {len(pcards)} cards')
 exam = json.load(open(src + 'exam.json', encoding='utf8'))
 ids = [q['id'] for q in exam]

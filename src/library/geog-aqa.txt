@@ -1,0 +1,123 @@
+@name Geography
+@aliases AQA Geography
+@board AQA
+@code 7037
+# water | 3.1.1 | Water and carbon cycles: water
+Systems terminology :: Inputs, outputs, stores, flows, boundaries and energy. Open systems exchange energy and matter; closed systems exchange energy only. Dynamic equilibrium and positive and negative feedback.
+Global water stores :: Oceans hold about 97% of water; cryosphere about 2%; groundwater, lakes, soil moisture, atmosphere and biosphere hold the rest.
+Processes driving the water cycle :: Evaporation, condensation (dew point, cloud formation), precipitation (orographic, frontal, convectional), cryospheric processes and interception.
+Drainage basin system :: Inputs: precipitation. Stores: interception, surface, soil water, groundwater, channel. Flows: infiltration, throughfall, stemflow, percolation, throughflow, groundwater flow, overland flow. Outputs: evapotranspiration and runoff.
+Water balance :: P = Q + E ± S (precipitation = runoff + evapotranspiration ± change in storage). Shows water surplus or deficit over a year.
+Storm hydrographs :: Show discharge after a storm: rising limb, peak discharge, lag time and falling limb. Short lag times come from impermeable rocks, steep slopes and urbanisation.
+Human impacts on the water cycle :: Deforestation increases runoff and reduces interception; urbanisation increases impermeable surfaces; farming and groundwater abstraction change stores.
+Interception :: Precipitation caught by vegetation before reaching the ground; higher in summer and in coniferous forests.
+Infiltration and percolation :: Infiltration is water soaking into the soil; percolation is water moving down from soil into rock. Infiltration capacity depends on soil type and saturation.
+Overland flow :: Surface runoff when rainfall exceeds infiltration capacity (Hortonian) or when the ground is saturated.
+Evapotranspiration :: Combined evaporation from surfaces and transpiration from plants. Higher with temperature, wind and low humidity.
+Flood risk factors :: Heavy or prolonged rain, saturated ground, impermeable rock, steep slopes, deforestation and urbanisation.
+Drought :: A long period of below-average precipitation. Meteorological, agricultural and hydrological drought; El Niño influences patterns.
+Case study river catchment :: e.g. the River Exe or Eden: show how precipitation, land use and soils affect hydrographs and flooding.
+Cryosphere and water :: Ice sheets and glaciers store water; melting raises sea levels and changes river regimes.
+# carbon | 3.1.1 | Water and carbon cycles: carbon
+Carbon stores :: Lithosphere (sedimentary rocks, fossil fuels) is the largest; also oceans, atmosphere, biosphere and cryosphere (permafrost).
+Slow carbon cycle :: Carbon moves between rocks, oceans and atmosphere over millions of years: weathering, sedimentation and volcanic outgassing.
+Fast carbon cycle :: Carbon exchange through photosynthesis, respiration, decomposition and combustion over days to centuries.
+Biological and physical carbon pumps :: Phytoplankton take in CO2 and sink when they die (biological pump). Cold, dense water absorbs CO2 and sinks at high latitudes (physical pump).
+Carbon budget :: The balance of carbon exchanged between stores. Burning fossil fuels and deforestation have increased atmospheric CO2 from about 280 ppm before industrialisation to over 420 ppm.
+Links between water and carbon cycles :: Warming increases evaporation; ocean acidity rises as more CO2 dissolves; melting permafrost releases methane, a positive feedback.
+Case study: tropical rainforest :: e.g. Amazon: huge carbon store with a fast cycle. Deforestation reduces interception and transpiration, increases runoff and releases carbon.
+Mitigating carbon emissions :: Carbon capture and storage, afforestation, renewable energy, international agreements such as the Paris Agreement.
+Photosynthesis and respiration :: Photosynthesis moves carbon from the atmosphere into biomass; respiration returns it.
+Decomposition :: Decomposers release carbon to the atmosphere and soil; slower in cold or waterlogged conditions, forming peat.
+Combustion :: Burning biomass and fossil fuels rapidly releases stored carbon into the atmosphere.
+Carbon sequestration :: Capturing and storing carbon in soils, forests, oceans or geological formations.
+Permafrost and carbon :: Permafrost stores huge amounts of carbon; thawing releases CO2 and methane.
+Ocean acidification :: Oceans absorb CO2, forming carbonic acid; lower pH damages coral and shellfish.
+Effects of rising carbon on climate :: Enhanced greenhouse effect, rising temperatures, changing precipitation and more extreme weather.
+Case study: Arctic tundra :: Permafrost holds carbon; oil and gas extraction and warming threaten carbon and water stores. Management includes insulated pipelines and buildings on piles.
+# coasts | 3.1.3 | Coastal systems and landscapes
+Sediment cells :: Stretches of coast in which sediment is largely contained; there are 11 major cells around England and Wales.
+Waves :: Constructive waves (strong swash, low frequency) build beaches. Destructive waves (strong backwash, high frequency) erode.
+Erosion processes :: Hydraulic action, abrasion, attrition, corrosion (solution) and wave quarrying.
+Erosional landforms :: Headlands and bays form on discordant coasts. Caves, arches, stacks and stumps form through erosion of weaknesses. Wave-cut platforms form as cliffs retreat.
+Longshore drift :: Waves approach at an angle, carrying sediment up the beach in the swash; backwash takes it straight down, moving sediment along the coast.
+Depositional landforms :: Beaches, spits (e.g. Spurn Head), bars, tombolos, salt marshes and sand dunes.
+Sand dune succession :: Embryo dunes, fore dunes, yellow dunes, grey dunes, dune slacks and mature dunes, with plant succession (psammosere).
+Sea level change :: Eustatic change: global change in sea volume. Isostatic change: land rises or falls. Emergent landforms: raised beaches. Submergent: rias and fjords.
+Coastal management :: Hard engineering: sea walls, groynes, rock armour. Soft engineering: beach nourishment, managed retreat. Shoreline Management Plans and integrated coastal zone management.
+Case study coast: Holderness :: One of Europe's fastest-eroding coastlines (about 2 m a year) due to soft boulder clay. Groynes at Mappleton protect the village but increase erosion further south.
+Littoral zone :: The coastal zone from the backshore through the foreshore and nearshore to the offshore zone.
+Sources of coastal energy :: Waves, tides and currents. Fetch and wind speed control wave energy.
+Weathering on coasts :: Mechanical (freeze-thaw, salt crystallisation), chemical (carbonation of limestone) and biological weathering.
+Mass movement :: Rockfalls, landslides, slumps and soil creep weaken and shape cliffs.
+Concordant vs discordant coasts :: Concordant coasts have rock bands parallel to the coast (e.g. Lulworth Cove); discordant coasts have alternating rock bands at right angles.
+Blowholes and geos :: Geos are narrow inlets eroded along joints; blowholes form when a cave roof collapses upwards.
+Climate change and coasts :: Sea-level rise, more storms and greater erosion threaten coastal communities.
+Case study: coastal LIC/MIC :: e.g. Bangladesh or the Maldives: vulnerable to sea-level rise and storm surges; management limited by cost.
+# hazards | 3.1.5 | Hazards
+Plate tectonics :: The Earth's structure, convection currents, ridge push and slab pull. Plate margins: constructive, destructive and conservative.
+Volcanic hazards :: Lava flows, pyroclastic flows, lahars, tephra, gas eruptions and jökulhlaups. Measured by the VEI.
+Seismic hazards :: Earthquakes produce ground shaking, liquefaction, landslides and tsunamis. Measured by the moment magnitude scale and Mercalli scale.
+Park's model :: The hazard-response curve showing how quality of life falls during a disaster and recovers through relief, rehabilitation and reconstruction.
+Hazard management cycle :: Mitigation, preparedness, response and recovery.
+Degg's model :: A disaster occurs when a hazard affects a vulnerable population.
+Tropical storms :: Form over oceans above 26.5 °C, between 5° and 30° from the equator. Hazards: high winds, storm surges, coastal flooding and landslides.
+Wildfires :: Need fuel, dry conditions and ignition. Impacts on people and ecosystems; managed by controlled burns and firebreaks.
+Multi-hazardous environment :: A place facing several hazards, e.g. the Philippines (typhoons, earthquakes, volcanoes).
+Prediction and prevention :: Monitoring (seismometers, tiltmeters, gas sensors), land-use planning, building design, warning systems and education.
+Hazard perception :: How people view a hazard depends on wealth, religion, education and experience; ranges from fatalism to adaptation.
+Volcano case study :: e.g. Eyjafjallajökull 2010: ash cloud disrupted air travel across Europe, costing airlines millions; little loss of life in Iceland.
+Earthquake case study :: e.g. Haiti 2010: magnitude 7.0, over 200,000 deaths due to poverty and poor buildings. Compare with Christchurch 2011.
+Tropical storm case study :: e.g. Typhoon Haiyan 2013 in the Philippines: storm surge killed over 6,000 people.
+Tsunami :: Caused by underwater earthquakes displacing water; e.g. Japan 2011 (Tohoku) caused nuclear disaster at Fukushima.
+Wildfire case study :: e.g. Australia 2019-20 bushfires burned millions of hectares and killed billions of animals.
+# global | 3.2.1 | Global systems and global governance
+Globalisation :: The growing interdependence of economies, cultures and people through trade, investment, technology and migration.
+Dimensions of globalisation :: Flows of capital, labour, products and services, and information.
+Factors in globalisation :: Financial, technological (internet, transport), political (free trade, WTO) and the role of TNCs.
+TNCs :: Transnational corporations spread production across countries for lower costs and access to markets, e.g. Apple or Unilever.
+Global trade and unequal power :: Trade agreements and tariffs favour some countries; many LICs depend on primary products with volatile prices.
+Global governance :: Rules, norms and institutions such as the UN, WTO, IMF and World Bank that regulate global systems.
+The global commons :: Areas beyond national control such as the oceans, atmosphere and Antarctica.
+Antarctica as a global commons :: Threats from climate change, fishing, whaling and tourism. Protected by the Antarctic Treaty, CCAMLR and IWC.
+Impacts of globalisation :: Economic growth and development but also inequality, cultural homogenisation and environmental damage.
+World Trade Organization :: Promotes free trade by reducing barriers and settling disputes; critics say it favours rich countries.
+IMF and World Bank :: The IMF provides loans and stability; the World Bank funds development. Structural adjustment conditions have been criticised.
+Unequal flows of trade :: Developed countries export high-value goods; many developing countries export low-value raw materials.
+Global marketing and products :: Global brands spread consumer culture; supply chains span many countries.
+Case study of a commodity :: e.g. smartphones or coffee: production, trade and global value chains.
+Interdependence :: Countries rely on each other for trade, finance and migration, which brings both opportunities and risks.
+Global governance issues :: Difficulties in governing climate change, migration and the global commons due to national interests.
+# places | 3.2.2 | Changing places
+Place and space :: Place is a location given meaning by people; space is a location without meaning.
+Insider and outsider perspectives :: Insiders know and feel part of a place; outsiders see it from outside, often more objectively.
+Endogenous and exogenous factors :: Endogenous: inside factors such as location, topography and demographics. Exogenous: outside relationships such as flows of people, money and ideas.
+Experienced places :: Near places (local) and far places (distant but known through media).
+Meaning and representation :: Places are represented in different ways, e.g. in media, art, music, statistics and maps.
+Rebranding :: Reimaging and regeneration to change a place's identity and attract investment, e.g. tourism-led or sport-led.
+Qualitative and quantitative sources :: Census data, geospatial data, photographs, interviews and art help study places.
+Case study requirement :: Study your local place and a contrasting place to explore how relationships and meanings change.
+Place identity :: Shaped by physical and human features, history, culture and the people who live there.
+Changing demographics :: Migration, ageing and gentrification change a place's character and identity.
+Economic change and place :: Deindustrialisation and globalisation change jobs and identity (e.g. former mining towns).
+Social inequalities in places :: Differences in income, health and education between and within places.
+Fieldwork methods :: Interviews, questionnaires, photographs, environmental quality surveys and census data.
+# urban | 3.2.3 | Contemporary urban environments
+Urbanisation :: Growth in the proportion of people living in urban areas, driven by rural-urban migration and natural increase.
+Suburbanisation, counter-urbanisation and re-urbanisation :: Movements of people from cities to suburbs, to rural areas, and back into city centres.
+Megacities and world cities :: Megacities have over 10 million people. World cities like London have global influence.
+Urban forms :: Post-industrial cities, mixed-use developments, gated communities and edge cities.
+Urban heat island :: Cities are warmer than surrounding areas because of heat-absorbing surfaces, waste heat and less evapotranspiration.
+Urban drainage :: Impermeable surfaces increase runoff and flood risk. Sustainable urban drainage systems (SUDS) reduce it.
+Urban waste and pollution :: Air pollution from traffic and industry (smog), waste disposal, and environmental problems in growing cities.
+Sustainable cities :: Reducing ecological footprint through public transport, green spaces, renewable energy and recycling.
+Urban social issues :: Inequality, deprivation and segregation in cities; regeneration aims to reduce these.
+Case study contrasting cities :: Compare two cities (e.g. London and Mumbai) in terms of growth, inequality and urban policy.
+Urban regeneration :: Improving run-down areas through redevelopment, e.g. London Docklands or King's Cross.
+Gentrification :: Wealthier people move into poorer areas, improving housing but displacing existing residents.
+Cultural diversity in cities :: Migration creates diverse cultural areas but can lead to segregation.
+Urban microclimate :: Cities have higher temperatures, more rainfall and thunderstorms, poorer air quality and wind tunnels between tall buildings.
+Urban form in LICs :: Rapid growth leads to informal settlements (slums), e.g. Dharavi in Mumbai.
+Waste management :: Landfill, incineration, recycling and reduction strategies; LICs often lack formal systems.
+Urban sustainability measures :: Ecological footprint, green belts, brownfield development and public transport.
+Urban environmental problems :: Air pollution, water pollution, dereliction and loss of green space.

@@ -491,7 +491,8 @@ const rid = (p) => p + Date.now().toString(36).slice(-5) + Math.random().toStrin
 // Ready-made subject packs (library/<id>.json): topics and cards for subjects beyond the three built-in ones.
 let LIB = [], PACKS = {}, PACK_LOADING = {};
 const normName = (x) => String(x || '').toLowerCase().replace(/^a[ -]?level\s+/, '').replace(/[^a-z0-9]+/g, ' ').trim();
-function findPack(c){ const n = normName(c && c.name), b = boardBase(c); return n ? LIB.find(p => p.board === b && p.names.some(x => normName(x) === n)) || null : null; }
+function findPack(c){ const n = normName(c && c.name), b = boardBase(c); return n ? LIB.find(p => (p.boards || [p.board]).includes(b) && p.names.some(x => normName(x) === n)) || null : null; }
+const packBoardText = (p) => (p.boards || []).length > 1 ? 'core content, the same on every board' : p.board + (p.code ? ' ' + p.code : '');
 function packInfo(id){ return LIB.find(p => p.id === id) || null; }
 const isMathsName = (x) => /^(maths?|mathematics)$/.test(normName(x));
 function linkPacks(){
@@ -506,7 +507,7 @@ async function loadPacks(){
     catch(e) { PACK_LOADING[id] = 'failed'; if (!STUDY) render(); } finally { if (PACK_LOADING[id] === true) PACK_LOADING[id] = false; } }
 }
 function packHintHTML(c){ const p = findPack(c);
-  if (p) return `<div class="feedback ok small"><b>Ready-made:</b> ${p.t} topics and ${p.n} flashcards for ${esc(p.name)} (${esc(p.board)}${p.code ? ' ' + esc(p.code) : ''}) load straight away. No Claude needed.</div>`;
+  if (p) return `<div class="feedback ok small"><b>Ready-made:</b> ${p.t} topics and ${p.n} flashcards for ${esc(p.name)} (${esc(packBoardText(p))}) load straight away. No Claude needed.</div>`;
   if (isMathsName(c && c.name)) return `<div class="feedback small">Maths is already built in, with cards, exam questions and drills. The content is the same for every exam board, so tick <b>Maths</b> instead of adding it here.</div>`;
   return ''; }
 function bindPackHint(m){ const draw = () => { const el = m.querySelector('#packHint'); if (el) el.innerHTML = packHintHTML({ name: m.querySelector('#cName').value, board: m.querySelector('#cBoard').value }); };
@@ -1178,8 +1179,8 @@ function vCustomSets(m, s){
   m.innerHTML = `<div class="stack s-${s}">
     <div class="row between"><div><div class="eyebrow">Study sets</div><h1>Sets</h1></div>${subjSeg(s)}</div>
     <section class="card pad-lg stack" style="gap:10px"><div class="row between"><div><span class="pill subj">${esc(SUBJ[s].board)}</span><h2 style="margin-top:6px">${esc(c.name)}</h2></div><button class="btn sm ghost" id="editCourse">Edit subject</button></div>
-      ${pi ? `<p class="small muted">${PACKS[c.pack] ? `Ready-made: ${plural(pi.t,'topic')} and ${plural(pi.n,'flashcard')} for the ${esc(pi.board)} spec. You can still add your own cards to any topic.` : PACK_LOADING[c.pack] === 'failed' ? 'The ready-made cards could not load. Check your connection and reload.' : 'Loading the ready-made cards…'}</p>` : ''}
-      ${offer ? `<div class="feedback ok small stack" style="gap:8px"><span><b>Ready-made cards are available:</b> ${offer.t} topics and ${offer.n} flashcards for ${esc(offer.name)} (${esc(offer.board)}). They're added next to your own topics.</span><button class="btn sm primary" id="usePack" style="align-self:flex-start">Add the ready-made cards</button></div>` : ''}
+      ${pi ? `<p class="small muted">${PACKS[c.pack] ? `Ready-made: ${plural(pi.t,'topic')} and ${plural(pi.n,'flashcard')} (${esc(packBoardText(pi))}). You can still add your own cards to any topic.` : PACK_LOADING[c.pack] === 'failed' ? 'The ready-made cards could not load. Check your connection and reload.' : 'Loading the ready-made cards…'}</p>` : ''}
+      ${offer ? `<div class="feedback ok small stack" style="gap:8px"><span><b>Ready-made cards are available:</b> ${offer.t} topics and ${offer.n} flashcards for ${esc(offer.name)} (${esc(packBoardText(offer))}). They're added next to your own topics.</span><button class="btn sm primary" id="usePack" style="align-self:flex-start">Add the ready-made cards</button></div>` : ''}
       <div class="row">${all.length?`<button class="btn sm primary" id="studyAll">${ic('learn')} Study all ${plural(all.length,'card')}</button>`:''}<button class="btn sm" id="practice">${ic('exam')} Practice question</button></div></section>
     ${ts.length && !c.pack ? `<section class="card stack" style="gap:8px"><h3>${all.length ? 'Add cards to every topic' : 'Make cards for every topic at once'}</h3><p class="small muted">One request to Claude covers all ${plural(ts.length,'topic')}. Copy its whole reply and paste it here: the cards go into the right topics.</p><div class="row"><button class="btn sm ${all.length?'':'primary'}" id="mkAll">${ic('spark')} Ask Claude for all topics</button><button class="btn sm" id="pstAll">Paste reply</button></div>${PASTE_FOR === 'all:'+s ? pasteBoxHTML('all:'+s) : ''}</section>` : ''}
     ${ts.length || waiting ? '' : `<section class="card pad-lg stack"><h3>Add your topics</h3><p class="small muted">Ask Claude for the topic list for your exact spec and options, then paste it below. Or type your topics yourself, one per line.</p><button class="btn sm" id="askTopics" style="align-self:flex-start">${ic('spark')} Get my topic list from Claude</button></section>`}
@@ -1716,7 +1717,7 @@ function vWelcome(m){
         <p class="tiny muted">These three come with ready-made cards, exam questions and drills.</p></div>
       ${W.subjects.has('psych') ? psychOptsHTML() : ''}
       <div class="stack" style="gap:6px"><span class="small muted">Any other subjects? Add each one with its exam board and options.</span>
-        ${LIB.length ? `<div class="stack" style="gap:6px"><span class="tiny muted">Ready-made, tap to add:</span><div class="row" style="gap:6px">${LIB.filter(p=>!(W.extra||[]).some(c=>c.pack===p.id)).map(p=>`<button type="button" class="btn sm" data-wlib="${p.id}">+ ${esc(p.name)} <span class="muted" style="font-weight:500">${esc(p.board)}</span></button>`).join('')}</div><span class="tiny muted">For any other subject, Claude can write the cards for you.</span></div>` : ''}
+        ${LIB.length ? `<div class="stack" style="gap:6px"><span class="tiny muted">Ready-made, tap to add:</span><div class="row" style="gap:6px">${LIB.filter(p=>!(W.extra||[]).some(c=>c.pack===p.id)).map(p=>`<button type="button" class="btn sm" data-wlib="${p.id}">+ ${esc(p.name)} <span class="muted" style="font-weight:500">${esc((p.boards||[]).length > 1 ? "any board" : p.board)}</span></button>`).join('')}</div><span class="tiny muted">For any other subject, Claude can write the cards for you.</span></div>` : ''}
         ${(W.extra||[]).map((c,i)=>`<div class="row between small"><span><b>${esc(c.name)}</b> <span class="muted">${esc([boardLabel(c),c.options].filter(Boolean).join(' · '))}</span>${findPack(c) ? ' <span class="pill" style="font-size:.7rem">Ready-made</span>' : ''}</span><button class="btn sm ghost" data-wdel="${i}">Remove</button></div>`).join('')}
         ${W.adding ? courseFormHTML(null) : `<button class="btn sm" id="wAdd" style="align-self:flex-start">+ Add a subject</button>`}</div>
       ${[...W.subjects].length ? `<div class="stack" style="gap:6px"><span class="small muted">Predicted grade → target grade</span>${[...W.subjects].map(x=>`<div class="row s-${x}" style="gap:8px;flex-wrap:nowrap"><span class="small" style="min-width:110px">${SUBJ[x].name}</span>${[0,1].map(i=>`<select data-wgrade="${x}" data-i="${i}">${['A*','A','B','C','D','E','U'].map(gr=>`<option ${g[x][i]===gr?'selected':''}>${gr}</option>`).join('')}</select>`).join('<span class="muted">→</span>')}</div>`).join('')}</div>` : ''}
