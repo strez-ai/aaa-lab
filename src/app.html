@@ -559,7 +559,7 @@ const NAV = [['home','Home'],['sets','Sets'],['review','Review'],['exam','Exam Q
 let CARDS = [], CARD = {}, BYTOPIC = {}, EXAMQ = [];
 // ---------- state ----------
 const LS_KEY = 'aaalab.v1';
-const blank = () => ({ v:1, ts:0, cards:{}, conf:{}, star:{}, exam:{}, pp:{}, drills:{}, match:{}, days:{}, done:{}, custom:{ courses:{}, sets:{} }, settings:{ name:'', subjects:['psych','maths','econ'], onboarded:false, goal:60, mock:{ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }, grades:{psych:['B','A'],maths:['B','A'],econ:['B','A']}, front:'term', examYear:0, psychOpts:null } });
+const blank = () => ({ v:1, ts:0, cards:{}, conf:{}, star:{}, exam:{}, own:{}, pp:{}, drills:{}, match:{}, days:{}, done:{}, custom:{ courses:{}, sets:{} }, settings:{ name:'', subjects:['psych','maths','econ'], onboarded:false, goal:60, mock:{ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }, grades:{psych:['B','A'],maths:['B','A'],econ:['B','A']}, front:'term', examYear:0, psychOpts:null } });
 let S = blank();
 function loadLocal(){ try { const raw = localStorage.getItem(LS_KEY); if(raw){ const o = JSON.parse(raw); S = Object.assign(blank(), o); S.settings = Object.assign(blank().settings, o.settings||{}); if (!o.settings || o.settings.onboarded === undefined) { S.settings.onboarded = true; if (!S.settings.name) S.settings.name = 'Pedro'; } } } catch(e){} }
 const ALL_SUBJ = ['psych','maths','econ'];
@@ -692,6 +692,7 @@ function mergeState(a, b){ // merge b into a
   const out = JSON.parse(JSON.stringify(a));
   for (const [id, cb] of Object.entries(b.cards||{})) { const ca = out.cards[id]; if (!ca || (cb[7]||0) > (ca[7]||0)) out.cards[id] = cb; }
   for (const [q, arr] of Object.entries(b.exam||{})) { const cur = out.exam[q] || []; const seen = new Set(cur.map(x=>x.at)); arr.forEach(x=>{ if(!seen.has(x.at)) cur.push(x); }); cur.sort((x,y)=>x.at-y.at); out.exam[q] = cur; }
+  out.own ||= {}; for (const [k, v] of Object.entries(b.own||{})) { const cur = out.own[k]; if (!cur) { out.own[k] = v; continue; } const base = (v.upd||0) > (cur.upd||0) ? Object.assign({}, cur, v) : cur; const by = new Map([...(cur.tries||[]), ...(v.tries||[])].map(x=>[x.at, x])); base.tries = [...by.values()].sort((x,y)=>x.at-y.at); base.del = !!(cur.del || v.del); out.own[k] = base; }
   out.pp ||= {}; for (const [k, arr] of Object.entries(b.pp||{})) { const cur = out.pp[k] || []; const by = new Map(cur.map(x=>[x.at, x])); arr.forEach(x=>{ const y = by.get(x.at); if (!y) { cur.push(x); by.set(x.at, x); } else if (x.del) y.del = true; }); cur.sort((x,y)=>x.at-y.at); out.pp[k] = cur; }
   for (const [d, v] of Object.entries(b.days||{})) { const cur = out.days[d] || {}; for (const k of Object.keys(v)) cur[k] = Math.max(cur[k]||0, v[k]||0); out.days[d] = cur; }
   for (const [t, v] of Object.entries(b.drills||{})) { const cur = out.drills[t]; if(!cur || (v.at||0) > (cur.at||0)) out.drills[t] = v; }
@@ -771,7 +772,7 @@ function makeOfflineSample(){
   };
   f.json = (prompt, opts={}) => {
     if (getKey()) return apiAsk(prompt, 'medium').then(t => { const m = t.match(/\{[\s\S]*\}/); if (!m) throw { code:'parse' }; return JSON.parse(m[0]); });
-    handoff(prompt.replace(/Reply with JSON only[\s\S]*$/, 'Give me: the mark out of the total, the level, what earned credit, and exactly what I should add or change to get more marks. Address me as "you". Treat this as a real exam board would.'));
+    handoff(prompt.replace(/Reply with JSON only[\s\S]*$/, opts.handoffText || 'Give me: the mark out of the total, the level, what earned credit, and exactly what I should add or change to get more marks. Address me as "you". Treat this as a real exam board would.'));
     return Promise.resolve({ handoff: true });
   };
   f.offline = true;
@@ -1522,6 +1523,7 @@ function vExam(m){
     <p class="muted" style="max-width:66ch">Original questions written in the style of the ${SUBJ[EXAM_FILTER].board} papers. Answer under timed conditions, then mark against the mark-scheme points${SAMPLE?' yourself or with Claude as your examiner':''}.</p>
     ${mockOn() && !EXAM_TOPIC ? `<div class="row"><button class="btn sm ${useMock?'primary':''}" id="mockOnly">${useMock?'Showing '+esc(mockCfg().title)+' topics':'Show only '+esc(mockCfg().title)+' topics'}</button>${useMock?'<button class="btn ghost sm" id="mockAll">Show everything</button>':''}</div>`:''}
     <a class="card row between s-${EXAM_FILTER}" href="#papers" id="toPP" style="text-decoration:none;color:inherit;gap:10px"><div><h3>Real past papers</h3><p class="small muted">Sit the board's own papers under a timer and track your scores.</p></div><span class="btn sm">${ic('papers')} Past papers</span></a>
+    ${ownCardHTML(EXAM_FILTER)}
     <section class="card stack s-${EXAM_FILTER}" style="gap:10px"><div><h3>Timed mock paper</h3><p class="small muted">A set of questions under one timer, then marked against the mark schemes, or by Claude in one go. Questions you haven't tried come first.</p></div>
       <div class="row" style="gap:8px"><select id="ppP" style="width:auto"><option value="all">All papers</option>${papers.map(p=>`<option ${PAPER_SEL.p===p?'selected':''}>${p}</option>`).join('')}</select><select id="ppM" style="width:auto">${[[25,'About 25 marks'],[45,'About 45 marks'],[80,'About 80 marks']].map(([v,l])=>`<option value="${v}" ${PAPER_SEL.m===v?'selected':''}>${l}</option>`).join('')}</select><button class="btn primary sm" id="ppGo">${ic('exam')} Start mock paper</button></div></section>
     <div class="seg" role="group" aria-label="Question length">${[['all','All'],['s','Short (≤5)'],['m','Medium (6-10)'],['l','Extended (12+)'],['new','Not tried']].map(([k,l])=>`<button data-len="${k}" aria-pressed="${EXAM_LEN===k}">${l}</button>`).join('')}</div>
@@ -1537,6 +1539,7 @@ function vExam(m){
   on(m,'#ppP','change',e=>{ PAPER_SEL.p = e.target.value; });
   on(m,'#ppM','change',e=>{ PAPER_SEL.m = +e.target.value; });
   on(m,'#ppGo','click',()=>{ STUDY = modePaper(EXAM_FILTER, PAPER_SEL.p, PAPER_SEL.m); window.scrollTo(0,0); render(); });
+  bindOwnCard(m, EXAM_FILTER);
   on(m,'[data-q]','click',e=>openExam(e.currentTarget.dataset.q));
 }
 function vCustomExam(m, s){
@@ -1547,9 +1550,102 @@ function vCustomExam(m, s){
       ${ts.length ? `<div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Topic</span><select id="pqT">${ts.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join('')}</select></label>
       <label class="stack" style="gap:4px"><span class="small muted">Marks</span><select id="pqM">${[4,6,8,10,12,15,16,20,25,30].map(x=>`<option ${x===8?'selected':''}>${x}</option>`).join('')}</select></label></div>
       <button class="btn primary" id="pqGo" style="align-self:flex-start">${ic('exam')} Get a question</button>` : `<p class="small">Add your topics first in <a href="#sets">Sets</a>.</p>`}
-    </section></div>`;
+    </section>${ownCardHTML(s)}</div>`;
   on(m,'[data-s]','click',e=>{ EXAM_FILTER = e.currentTarget.dataset.s; EXAM_TOPIC = null; render(); });
   on(m,'#pqGo','click',()=>{ const t = TOPIC[m.querySelector('#pqT').value]; handoff(practicePrompt(c, t.name, +m.querySelector('#pqM').value)); });
+  bindOwnCard(m, s);
+}
+// ---------- your own questions: the student writes a question, answers it, and Claude checks it ----------
+function ownList(s){ return Object.values(S.own || {}).filter(o => o && !o.del && (!s || o.s === s)).sort((a,b)=>(b.at||0)-(a.at||0)); }
+function ownBest(o){ const t = (o.tries || []).filter(x => typeof x.score === 'number' && x.max); return t.length ? Math.max(...t.map(x => x.score / x.max)) : null; }
+function subjLabel(s){ return isCustom(s) ? courseLabel(courseOf(s)) : `A-level ${SUBJ[s].name} (${SUBJ[s].board})`; }
+function ownCardHTML(s){
+  const list = ownList(s);
+  return `<section class="card stack s-${s}" style="gap:10px"><div><h3>Your own question</h3><p class="small muted">Write any question, from your teacher, a textbook or your own head. Answer it, then Claude checks the question, writes a mark scheme and marks your answer with feedback.</p></div>
+    <button class="btn primary sm" id="ownNew" style="align-self:flex-start">${ic('spark')} Write a question</button>
+    ${list.length ? `<div class="stack" style="gap:8px">${list.slice(0, 8).map(o => { const b = ownBest(o); const n = (o.tries||[]).length; return `<button class="topic-row s-${o.s}" data-own="${o.id}" style="grid-template-columns:minmax(0,1fr) auto"><div><div class="tiny muted">${o.t && TOPIC[o.t] ? esc(TOPIC[o.t].name) + ' · ' : ''}<b>${o.marks} marks</b></div><div class="nm" style="margin-top:3px">${esc(o.q.length > 150 ? o.q.slice(0,150) + '…' : o.q)}</div></div><div style="text-align:right">${b == null ? '<span class="pill neutral">Not marked</span>' : `<span class="pill ${b>=.75?'good':b>=.55?'warn':'bad'}">Best ${Math.round(b*100)}%</span>`}<div class="tiny muted" style="margin-top:3px">${plural(n,'attempt')}</div></div></button>`; }).join('')}</div>` : ''}
+  </section>`;
+}
+function bindOwnCard(m, s){
+  on(m,'#ownNew','click',()=>{ STUDY = modeOwn(null, s); window.scrollTo(0,0); render(); });
+  on(m,'[data-own]','click',e=>{ STUDY = modeOwn(e.currentTarget.dataset.own, s); window.scrollTo(0,0); render(); });
+}
+function ownPrompt(o, answer){
+  const t = o.t && TOPIC[o.t];
+  return `You are a senior examiner for ${subjLabel(o.s)}, marking for the summer ${examYear()} exams. The student wrote the question below themselves, then answered it. Mark strictly but fairly, as a real examiner would.
+
+First, check the question: is it a fair exam-style question for this specification${t ? ' and the topic "' + t.name + '"' : ''}, and are ${o.marks} marks about right? If something is wrong (off-spec content, unclear wording, too many or too few marks), say so briefly and mark as if the question were fixed.
+Then write the mark scheme a real examiner would use for ${o.marks} marks (mark points, and levels for extended answers), and mark the answer against it.
+
+QUESTION (${o.marks} marks):
+${o.q}
+${o.notes ? '\nTHE STUDENT\'S OWN NOTES ON WHAT A GOOD ANSWER NEEDS (use only if correct):\n' + o.notes + '\n' : ''}${o.s === 'maths' ? '\nFor maths, award method (M) and accuracy (A) marks; an answer with no working can lose method marks.\n' : ''}
+STUDENT ANSWER:
+"""${answer.slice(0, 6000)}"""
+
+Reply with JSON only, in this shape:
+{"mark": <integer 0-${o.marks}>, "level": "<e.g. Level 3 (9-12) or 'Point-marked'>", "question_check": "<one or two sentences on whether the question and its marks are right for the spec>", "mark_scheme": ["<mark point or level descriptor>", ...], "summary": "<one or two sentences on the overall quality>", "strengths": ["<specific thing that earned credit>", ...], "improvements": ["<specific, actionable change that would gain marks, naming the content to add>", ...]}
+Give 3-8 mark scheme points, 2-4 strengths and 2-4 improvements. Address the student as "you". No markdown.`;
+}
+const OWN_HANDOFF = 'First tell me briefly whether my question and its marks suit the specification. Then give the mark scheme you would use, my mark out of the total, the level, what earned credit, and exactly what I should add or change to get more marks. Address me as "you". Treat this as a real exam board would.';
+function modeOwn(id, s0){
+  const old = id && S.own && S.own[id];
+  const st = { phase: old ? 'write' : 'setup', s: old ? old.s : s0, t: old ? (old.t || '') : '', marks: old ? old.marks : 8, q: old ? old.q : '', notes: old ? (old.notes || '') : '', answer:'', ai:null, aiBusy:false, score:null, saved:false, start:Date.now(), timer:null, id: old ? old.id : null };
+  const o = { leaveMsg: 'Leave this question? Your answer will be lost.', guard: () => !st.saved && (st.answer.trim().length > 20 || (st.phase === 'setup' && st.q.trim().length > 20)), render(m){
+    const mins = Math.max(2, Math.round(st.marks * 1.2));
+    let inner = '';
+    if (st.phase === 'setup') {
+      const ts = TOPICS.filter(t => t.s === st.s && topicOn(t));
+      inner = `<section class="card pad-lg stack s-${st.s}"><h2>Write your question</h2>
+        <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Subject</span><select id="oS">${mySubj().map(k=>`<option value="${k}" ${k===st.s?'selected':''}>${esc(SUBJ[k].name)}</option>`).join('')}</select></label>
+        <label class="stack" style="gap:4px"><span class="small muted">Marks</span><input type="number" id="oM" min="1" max="40" value="${st.marks}"></label></div>
+        ${ts.length ? `<label class="stack" style="gap:4px"><span class="small muted">Topic (optional)</span><select id="oT"><option value="">Any topic</option>${ts.map(t=>`<option value="${t.id}" ${t.id===st.t?'selected':''}>${esc(t.name)}</option>`).join('')}</select></label>` : ''}
+        <label class="stack" style="gap:4px"><span class="small muted">Question</span><textarea id="oQ" style="min-height:120px" placeholder="e.g. Discuss the dopamine hypothesis as an explanation of schizophrenia.">${esc(st.q)}</textarea></label>
+        <label class="stack" style="gap:4px"><span class="small muted">What should a good answer include? (optional)</span><textarea id="oN" style="min-height:70px" placeholder="Leave blank and Claude writes the mark scheme.">${esc(st.notes)}</textarea></label>
+        <div class="row"><button class="btn primary" id="oGo" ${st.q.trim().length < 8 ? 'disabled' : ''}>Start answering</button></div></section>`;
+    } else {
+      inner = `<div class="qbox stack"><section class="card pad-lg stack s-${st.s}"><div class="row between"><span class="pill subj">${esc(SUBJ[st.s].short)} · Your question${st.t && TOPIC[st.t] ? ' · ' + esc(TOPIC[st.t].name) : ''}</span><span class="mono small"><b>${st.marks}</b> marks</span></div>
+        <div style="font-size:1.08rem;font-weight:600;line-height:1.5;white-space:pre-wrap">${esc(st.q)}</div>${st.phase==='write'?`<div class="tiny muted">Suggested time: about ${mins} minutes</div>`:''}</section>`;
+      if (st.phase === 'write') {
+        inner += `<textarea id="ans" style="min-height:${st.marks>=12?320:180}px" placeholder="${st.s==='maths'?'Write your working and answer. Show every step.':'Write your answer here.'}">${esc(st.answer)}</textarea>
+          <div class="row between"><span class="small muted mono" id="clock">0:00 / ${mins}:00</span><div class="row">${old ? '' : '<button class="btn ghost" id="oEdit">Edit question</button>'}<button class="btn primary" id="oDone" ${st.answer.trim().length < 20 ? 'disabled' : ''}>Check my answer</button></div></div>`;
+      } else {
+        inner += `<section class="card stack"><div class="row between"><h3>${ic('spark','style="width:18px;height:18px;vertical-align:-3px"')} Claude as examiner</h3></div>
+          ${st.ai ? aiHTML(st.ai) : `<p class="small muted">Claude checks your question, writes the mark scheme, then marks your answer with what earned credit and what to add. Treat it as a second opinion; it can be wrong.</p>`}
+          ${SAMPLE ? `<button class="btn ${st.ai?'':'primary'}" id="aiBtn" style="align-self:flex-start" ${st.aiBusy?'disabled':''}>${st.aiBusy?'Marking…':st.ai && !st.ai.handoff?'Mark again':'Mark it with Claude'}</button>` : ''}</section>
+          <section class="card stack"><div class="row between" style="gap:8px"><div class="row" style="gap:8px"><span class="small muted">Your mark</span><input type="number" id="score" min="0" max="${st.marks}" style="width:84px" value="${st.score ?? ''}" placeholder="?"><span class="small muted">/ ${st.marks}</span></div><button class="btn primary" id="oSave">${st.saved?'Saved':'Save'}</button></div>
+          <p class="tiny muted">Saving keeps the question so you can try it again later.</p></section>
+          <section class="card stack"><h3>Your answer</h3><div class="ai-out small">${esc(st.answer)}</div><button class="btn ghost sm" id="edit" style="align-self:flex-start">Edit answer</button></section>`;
+      }
+      inner += `</div>`;
+    }
+    m.innerHTML = studyShell('Your own question', st.s, st.phase==='setup'?10:st.phase==='write'?40:100, inner, '');
+    quitHandler(m);
+    const clock = m.querySelector('#clock'); clearInterval(st.timer);
+    if (clock) st.timer = setInterval(()=>{ if (!document.body.contains(clock)) { clearInterval(st.timer); return; } const sec = Math.floor((Date.now()-st.start)/1000); clock.textContent = `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')} / ${mins}:00`; if (sec > mins*60) clock.style.color = 'var(--bad)'; }, 1000);
+    on(m,'#oS','change',e=>{ st.s = e.target.value; st.t = ''; o.render(m); });
+    on(m,'#oT','change',e=>{ st.t = e.target.value; });
+    on(m,'#oM','input',e=>{ st.marks = Math.max(1, Math.min(40, Math.round(+e.target.value || 1))); });
+    on(m,'#oQ','input',e=>{ st.q = e.target.value; const b = m.querySelector('#oGo'); if (b) b.disabled = st.q.trim().length < 8; });
+    on(m,'#oN','input',e=>{ st.notes = e.target.value; });
+    on(m,'#oGo','click',()=>{ st.marks = Math.max(1, Math.min(40, Math.round(+m.querySelector('#oM').value || 8))); st.phase = 'write'; st.start = Date.now(); o.render(m); window.scrollTo(0,0); });
+    on(m,'#oEdit','click',()=>{ st.phase = 'setup'; o.render(m); });
+    on(m,'#ans','input',e=>{ st.answer = e.target.value; const b = m.querySelector('#oDone'); if (b) b.disabled = st.answer.trim().length < 20; });
+    on(m,'#oDone','click',()=>{ st.phase = 'mark'; o.render(m); window.scrollTo(0,0); });
+    on(m,'#edit','click',()=>{ st.phase = 'write'; st.saved = false; o.render(m); });
+    on(m,'#score','input',e=>{ st.score = e.target.value === '' ? null : Math.max(0, Math.min(st.marks, Math.round(+e.target.value || 0))); });
+    on(m,'#aiBtn','click',async ()=>{ st.aiBusy = true; o.render(m);
+      try { st.ai = await SAMPLE.json(ownPrompt(st, st.answer), { modelTier:'default', handoffText: OWN_HANDOFF }); if (typeof st.ai.mark === 'number') st.score = Math.max(0, Math.min(st.marks, Math.round(st.ai.mark))); }
+      catch(err){ st.ai = { error: err && err.code==='not_granted' ? 'Claude marking is switched off for this page.' : 'Marking failed just now. Try again in a moment.' }; }
+      st.aiBusy = false; o.render(m); });
+    on(m,'#oSave','click',()=>{ if (st.saved) { endStudy(); return; }
+      S.own ||= {}; const now = Date.now(); if (!st.id) st.id = rid('q');
+      const rec = S.own[st.id] || { id: st.id, s: st.s, t: st.t, marks: st.marks, q: st.q.trim(), notes: st.notes.trim(), at: now, tries: [] };
+      const ai = st.ai && !st.ai.error && !st.ai.handoff ? { mark: st.ai.mark, level: st.ai.level, summary: st.ai.summary, strengths: st.ai.strengths, improvements: st.ai.improvements, question_check: st.ai.question_check, mark_scheme: st.ai.mark_scheme } : null;
+      rec.tries = [...(rec.tries || []), { at: now, answer: st.answer.slice(0, 6000), score: st.score, max: st.marks, by: ai ? (st.score === ai.mark ? 'claude' : 'claude+self') : 'self', ai }];
+      rec.upd = now; S.own[st.id] = rec; today().x++; save(); st.saved = true; toast(st.score == null ? 'Question saved' : `Saved ${st.score}/${st.marks}`); o.render(m); });
+  }};
+  return o;
 }
 function minsFor(q){ return q.s==='maths' ? Math.round(q.marks * 1.2) : q.s==='psych' ? Math.round(q.marks * 1.25) : Math.round(q.marks * 1.2); }
 function openExam(qid, taskKey){ const q = EXAMQ.find(x=>x.id===qid); STUDY = modeExam(q, taskKey); window.scrollTo(0,0); render(); }
@@ -1597,11 +1693,13 @@ function modeExam(q, taskKey){
   function suggestScore(){ if (q.levels && st.level!=null) { const L = q.levels[st.level]; const frac = st.ticks.size / q.points.length; return Math.round(L[0] + (L[1]-L[0]) * Math.min(1, frac*1.2)); } return Math.min(q.marks, Math.round(st.ticks.size / q.points.length * q.marks)); }
   return o;
 }
-function aiHTML(a){ if (a.handoff) return `<p class="small">Opened Claude with your answer and the mark scheme ready to send (also copied, so paste it if the box is empty). When Claude gives you a mark, type it into <b>Your mark</b> above and save it.</p>`; if (a.error) return `<p class="small" style="color:var(--bad)">${esc(a.error)}</p>`; const list = (arr) => (Array.isArray(arr)?arr:[]).map(x=>`<li>${esc(String(x))}</li>`).join('');
+function aiHTML(a){ if (a.handoff) return `<p class="small">Opened Claude with your answer ready to send (also copied, so paste it if the box is empty). When Claude gives you a mark, type it into <b>Your mark</b> and save it. To mark inside the app instead, add an API key in Progress, Settings.</p>`; if (a.error) return `<p class="small" style="color:var(--bad)">${esc(a.error)}</p>`; const list = (arr) => (Array.isArray(arr)?arr:[]).map(x=>`<li>${esc(String(x))}</li>`).join('');
   return `<div class="row" style="gap:14px;align-items:baseline"><span class="result-big mono" style="font-size:2.2rem">${esc(String(a.mark ?? '?'))}</span><span class="muted">${a.level?esc(String(a.level)):''}</span></div>
+    ${a.question_check?`<div class="feedback small"><b>Your question.</b> ${esc(String(a.question_check))}</div>`:''}
     ${a.summary?`<p class="small">${esc(String(a.summary))}</p>`:''}
     ${a.strengths&&a.strengths.length?`<div><div class="eyebrow" style="color:var(--good)">What earned credit</div><ul class="small" style="margin:6px 0 0;padding-left:18px">${list(a.strengths)}</ul></div>`:''}
-    ${a.improvements&&a.improvements.length?`<div><div class="eyebrow" style="color:var(--warn)">To get more marks</div><ul class="small" style="margin:6px 0 0;padding-left:18px">${list(a.improvements)}</ul></div>`:''}`; }
+    ${a.improvements&&a.improvements.length?`<div><div class="eyebrow" style="color:var(--warn)">To get more marks</div><ul class="small" style="margin:6px 0 0;padding-left:18px">${list(a.improvements)}</ul></div>`:''}
+    ${a.mark_scheme&&a.mark_scheme.length?`<details><summary class="small"><b>Mark scheme Claude used</b></summary><ul class="small" style="margin:6px 0 0;padding-left:18px">${list(a.mark_scheme)}</ul></details>`:''}`; }
 function examPrompt(q, answer){
   return `You are a senior A-level examiner for ${SUBJ[q.s].board} ${SUBJ[q.s].name}, marking a student's answer for the summer ${examYear()} exams. Mark strictly but fairly, as a real examiner would.
 
