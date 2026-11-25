@@ -694,7 +694,7 @@ function mockOn(){ const c = mockCfg(); return !!c.date && daysTo(c.date) >= 0 &
 function mockTopics(s){ return mockCfg().topics.filter(id => TOPIC[id] && topicOn(TOPIC[id]) && mySubj().includes(TOPIC[id].s) && (!s || TOPIC[id].s === s)); }
 function mockCards(s){ return mockTopics(s).flatMap(id => BYTOPIC[id] || []); }
 function mockExamQs(s){ const ts = mockTopics(s); return EXAMQ.filter(q => (!s || q.s === s) && ts.includes(q.t)).sort((a,b) => (a.s==='econ' && b.s==='econ' ? (b.paper==='Paper 3') - (a.paper==='Paper 3') : 0)); }
-function startMockReview(s){ const ids = mockCards(s); if (!ids.length) { toast('No cards in your mock topics'); return; } STUDY = modeFlash({ title: mockCfg().title + ' review', s: s||null, ids: priorityCards(ids, 40), review:true }, 'mock-review'); window.scrollTo(0,0); render(); }
+function startMockReview(s){ const ids = mockCards(s); if (!ids.length) { toast('No cards in your mock topics'); return; } STUDY = reviewSession({ title: mockCfg().title + ' review', s: s||null, ids: priorityCards(ids, 40), review:true }, 'mock-review'); window.scrollTo(0,0); render(); }
 function nextMockQ(s){ return mockExamQs(s).sort((a,b)=>(bestExam(a.id)??-1)-(bestExam(b.id)??-1) || weakness(TOPIC[b.t])-weakness(TOPIC[a.t]))[0]; }
 const EXAMS = [
   {s:'econ',p:'P1',title:'Markets and business behaviour',d:'2027-05-10',t:'AM'},
@@ -752,7 +752,7 @@ const NAV = [['home','Home'],['sets','Sets'],['review','Review'],['exam','Exam Q
 let CARDS = [], CARD = {}, BYTOPIC = {}, EXAMQ = [];
 // ---------- state ----------
 const LS_KEY = 'aaalab.v1';
-const blank = () => ({ v:1, ts:0, cards:{}, conf:{}, star:{}, exam:{}, own:{}, pp:{}, drills:{}, match:{}, days:{}, done:{}, custom:{ courses:{}, sets:{} }, settings:{ name:'', subjects:['psych','maths','econ'], onboarded:false, goal:60, mock:{ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }, grades:{psych:['B','A'],maths:['B','A'],econ:['B','A']}, front:'term', examYear:0, psychOpts:null } });
+const blank = () => ({ v:1, ts:0, cards:{}, conf:{}, star:{}, exam:{}, own:{}, pp:{}, drills:{}, match:{}, days:{}, done:{}, custom:{ courses:{}, sets:{} }, settings:{ name:'', subjects:['psych','maths','econ'], onboarded:false, goal:60, mock:{ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }, grades:{psych:['B','A'],maths:['B','A'],econ:['B','A']}, front:'term', reviewMode:'flash', examYear:0, psychOpts:null } });
 let S = blank();
 function loadLocal(){ try { const raw = localStorage.getItem(LS_KEY); if(raw){ const o = JSON.parse(raw); S = Object.assign(blank(), o); S.settings = Object.assign(blank().settings, o.settings||{}); if (!o.settings || o.settings.onboarded === undefined) { S.settings.onboarded = true; if (!S.settings.name) S.settings.name = 'Pedro'; } } } catch(e){} }
 const ALL_SUBJ = ['psych','maths','econ'];
@@ -1351,7 +1351,7 @@ function priorityCards(ids, n){
   const score = (id) => { const c = cs(id); if (!c) return 2 + Math.random(); if (c[2] <= now) return 3 + (now - c[2]) * .01 + Math.random()*.1; return 1 - cardMastery(id) + Math.random()*.2; };
   return ids.slice().sort((a,b)=>score(b)-score(a)).slice(0, n);
 }
-function studyShell(title, s, pct, inner, extra=''){ return `<div class="stack ${s?'s-'+s:''}" style="gap:18px"><div class="study-top"><button class="btn ghost sm" id="quit" aria-label="Exit">${ic('x')}</button><div class="progress-line"><i style="width:${pct}%"></i></div><span class="small muted mono">${extra}</span></div><div class="row between"><div><div class="eyebrow">${esc(title)}</div></div></div>${inner}</div>`; }
+function studyShell(title, s, pct, inner, extra='', right=''){ return `<div class="stack ${s?'s-'+s:''}" style="gap:18px"><div class="study-top"><button class="btn ghost sm" id="quit" aria-label="Exit">${ic('x')}</button><div class="progress-line"><i style="width:${pct}%"></i></div><span class="small muted mono">${extra}</span></div><div class="row between"><div><div class="eyebrow">${esc(title)}</div></div>${right}</div>${inner}</div>`; }
 function endStudy(){ if (!leaveOK()) return; STUDY = null; render(); }
 function startMode(mode, set, taskKey){
   if (!set.ids.length) { toast('This set has no cards yet'); return; }
@@ -1361,7 +1361,7 @@ function startMode(mode, set, taskKey){
 function startReview(filter){
   const ids = CARDS.filter(c=>cardOn(c) && isDue(c[0]) && (!filter || TOPIC[c[1]].s===filter)).map(c=>c[0]);
   if (!ids.length) { go('review'); return; }
-  STUDY = modeFlash({ title:'Daily review', s:filter||null, ids: priorityCards(ids, 80), review:true }, 'review'); window.scrollTo(0,0); render();
+  STUDY = reviewSession({ title:'Daily review', s:filter||null, ids: priorityCards(ids, 80), review:true }, 'review'); window.scrollTo(0,0); render();
 }
 function quitHandler(m){ on(m,'#quit','click',()=>{ endStudy(); }); }
 function summaryCard(title, big, sub, s, again){ return `<div class="qbox stack ${s?'s-'+s:''}" style="align-items:center;text-align:center;padding:30px 0"><div class="eyebrow">${esc(title)}</div><div class="result-big mono">${big}</div><p class="muted">${sub}</p><div class="row" style="justify-content:center"><button class="btn" id="done">Done</button>${again?'<button class="btn primary" id="again">Go again</button>':''}</div></div>`; }
@@ -1372,7 +1372,7 @@ function modeFlash(set, taskKey){
   const st = { i:0, flipped:false, order, tally:[0,0,0,0], explain:null };
   const front = S.settings.front;
   const o = { render(m){
-    if (st.i >= st.order.length) { markDone(taskKey); m.innerHTML = summaryCard(set.title+' complete', st.order.length, `cards reviewed · ${st.tally[0]} to relearn, ${st.tally[2]+st.tally[3]} known well`, set.s, true); on(m,'#done','click',endStudy); on(m,'#again','click',()=>{ STUDY = modeFlash(set, taskKey); render(); }); return; }
+    if (st.i >= st.order.length) { markDone(taskKey); m.innerHTML = summaryCard(set.title+' complete', st.order.length, `cards reviewed · ${st.tally[0]} to relearn, ${st.tally[2]+st.tally[3]} known well`, set.s, true); on(m,'#done','click',endStudy); on(m,'#again','click',()=>{ STUDY = set.review ? reviewSession(set, taskKey) : modeFlash(set, taskKey); render(); }); return; }
     const c = CARD[st.order[st.i]]; const t = TOPIC[c[1]];
     const qside = front==='term' ? c[2] : c[3], aside = front==='term' ? c[3] : c[2];
     m.innerHTML = studyShell(set.title, t.s, st.i/st.order.length*100, `
@@ -1381,8 +1381,8 @@ function modeFlash(set, taskKey){
         <div class="face back s-${t.s}"><div class="row between"><span class="pill subj">Answer</span>${SAMPLE?`<button class="btn ghost sm" data-explain>${ic('spark')} Explain</button>`:''}</div><div class="body"><div style="width:100%"><div class="row between" style="flex-wrap:nowrap;align-items:flex-start;gap:10px"><span>${esc(aside)}</span>${sayBtn(aside)}</div>${st.explain!=null?`<div class="feedback" style="margin-top:14px"><div class="eyebrow" style="margin-bottom:4px">Claude explains</div><div class="ai-out small" id="explainOut">${esc(st.explain)}</div></div>`:''}</div></div></div>
       </div></div>
       ${st.flipped ? `<div class="grades">${[['again','Again',0],['hard','Hard',1],['goodb','Good',2],['easy','Easy',3]].map(([cl,l,g])=>`<button class="gbtn ${cl}" data-g="${g}">${l}<small>${ivLabel(previewInterval(c[0],g))} <span class="kbd">${g+1}</span></small></button>`).join('')}</div>` : `<div class="row" style="justify-content:center"><button class="btn primary" id="flipBtn">Show answer</button></div>`}
-    `, `${st.i+1}/${st.order.length}`);
-    quitHandler(m);
+    `, `${st.i+1}/${st.order.length}`, set.review ? reviewPickHTML() : '');
+    quitHandler(m); if (set.review) bindReviewPick(m, set, taskKey, () => st.order.slice(st.i));
     const flip = () => { st.flipped = !st.flipped; o.render(m); };
     on(m,'.flash-in','click',e=>{ if(e.target.closest('[data-explain],[data-star],[data-say]')) return; flip(); });
     on(m,'#flipBtn','click',flip);
@@ -1392,7 +1392,84 @@ function modeFlash(set, taskKey){
       catch(err){ st.explain = err && err.code==='not_granted' ? 'Explanations are switched off for this page.' : 'Could not get an explanation just now. Try again in a moment.'; }
       o.render(m); });
     on(m,'[data-g]','click',e=>{ const g = +e.currentTarget.dataset.g; grade(c[0], g); st.tally[g]++; if (g===0 && !set.noRequeue) st.order.push(c[0]); st.i++; st.flipped=false; st.explain=null; o.render(m); });
-  }, key(e, m){ if (e.key===' ' || e.key==='Enter') { if (!e.target.closest('input,textarea,button')) { e.preventDefault(); m.querySelector('#flipBtn')?.click() || m.querySelector('.flash-in')?.click(); } } else if (st.flipped && '1234'.includes(e.key)) m.querySelector(`[data-g="${+e.key-1}"]`)?.click(); } };
+  }, key(e, m){ if (e.key===' ' || e.key==='Enter') { if (!e.target.closest('input,textarea,button,select')) { e.preventDefault(); m.querySelector('#flipBtn')?.click() || m.querySelector('.flash-in')?.click(); } } else if (st.flipped && '1234'.includes(e.key)) m.querySelector(`[data-g="${+e.key-1}"]`)?.click(); } };
+  return o;
+}
+
+// Review styles: every style grades the card through the same spaced-repetition schedule as flashcards.
+const REVIEW_STYLES = [['flash','Flashcards'],['mcq','Multiple choice'],['type','Type the answer'],['blank','Fill the gap'],['mix','Mix']];
+function reviewStyle(){ const v = S.settings.reviewMode; return REVIEW_STYLES.some(x=>x[0]===v) ? v : 'flash'; }
+function reviewSession(set, taskKey){ return reviewStyle()==='flash' ? modeFlash(set, taskKey) : modeQuiz(set, taskKey); }
+function reviewPickHTML(){ return `<label class="row small muted" style="gap:6px;flex-wrap:nowrap">Style <select id="rvStyle" aria-label="Review style">${REVIEW_STYLES.map(([k,l])=>`<option value="${k}" ${reviewStyle()===k?'selected':''}>${l}</option>`).join('')}</select></label>`; }
+function bindReviewPick(m, set, taskKey, left){ on(m,'#rvStyle','change',e=>{ S.settings.reviewMode = e.target.value; save(); const ids = left(); if (!ids.length) return; STUDY = reviewSession({ ...set, ids }, taskKey); render(); }); }
+// Fill the gap: hide one key word of the answer.
+function gapFor(c){
+  const a = c[3]; const keys = keywords(a).filter(k => k.length >= 4 && !/\d/.test(k));
+  const found = keys.map(k => { const re = new RegExp(`(^|[^a-zà-ÿ'-])(${k.replace(/[-]/g,'\\-')})(?=$|[^a-zà-ÿ'-])`, 'i'); const mm = re.exec(a); return mm ? { word: mm[2], at: mm.index + mm[1].length } : null; }).filter(Boolean);
+  if (!found.length) return null;
+  const pick = found.slice().sort((x,y)=>y.word.length-x.word.length)[Math.floor(Math.random()*Math.min(3, found.length))];
+  return { before: a.slice(0, pick.at), word: pick.word, after: a.slice(pick.at + pick.word.length) };
+}
+function editDist(a, b){ const d = Array.from({length:a.length+1}, (_,i)=>[i]); for (let j=1;j<=b.length;j++) d[0][j]=j; for (let i=1;i<=a.length;i++) for (let j=1;j<=b.length;j++) d[i][j] = Math.min(d[i-1][j]+1, d[i][j-1]+1, d[i-1][j-1]+(a[i-1]===b[j-1]?0:1)); return d[a.length][b.length]; }
+function gapOK(typed, word){ const t = typed.trim().toLowerCase().replace(/[^a-zà-ÿ'-]/g,''), w = word.toLowerCase(); if (!t) return false; if (t === w) return true; const slack = w.length >= 9 ? 2 : w.length >= 5 ? 1 : 0; return editDist(t, w) <= slack || (t.length >= 5 && w.startsWith(t.replace(/(es|s|ed|ing)$/,'')) && Math.abs(t.length - w.length) <= 3); }
+function modeQuiz(set, taskKey){
+  const style = reviewStyle();
+  const st = { i:0, order:set.ids.slice(), tally:[0,0,0,0], cur:null };
+  const label = { mcq:'Multiple choice', type:'Type the answer', blank:'Fill the gap' };
+  const setup = () => { const c = CARD[st.order[st.i]]; let kind = style === 'mix' ? ['mcq','type','blank'][Math.floor(Math.random()*3)] : style;
+    const q = { kind, picked:null, typed:'', checked:null };
+    if (kind==='blank') { q.gap = gapFor(c); if (!q.gap) q.kind = kind = 'type'; }
+    if (kind==='mcq') { const ds = distractors(c); if (!ds.length) q.kind = 'type'; else q.opts = shuffle([c, ...ds]); }
+    st.cur = q; };
+  const finish = (g) => { const c = CARD[st.order[st.i]]; grade(c[0], g); st.tally[g]++; if (g===0 && !set.noRequeue) st.order.push(c[0]); st.i++; st.cur = null; };
+  const gradeRow = (gs, hint) => `<div class="grades" style="grid-template-columns:repeat(${gs.length},minmax(0,1fr))">${gs.map(g=>{ const [cl,l] = [['again','Again'],['hard','Hard'],['goodb','Good'],['easy','Easy']][g]; const id = CARD[st.order[st.i]][0]; return `<button class="gbtn ${cl}" data-g="${g}" ${hint===g?'style="border-color:currentColor"':''}>${l}<small>${ivLabel(previewInterval(id,g))} <span class="kbd">${g+1}</span></small></button>`; }).join('')}</div>`;
+  const o = { guard(){ return !!(st.cur && st.cur.typed && st.cur.checked == null); }, leaveMsg:'Leave this review? Your typed answer will be lost.',
+  render(m){
+    if (st.i >= st.order.length) { markDone(taskKey); m.innerHTML = summaryCard(set.title+' complete', st.order.length, `cards reviewed · ${st.tally[0]} to relearn, ${st.tally[2]+st.tally[3]} known well`, set.s, true); on(m,'#done','click',()=>{ STUDY = null; render(); }); on(m,'#again','click',()=>{ STUDY = reviewSession(set, taskKey); render(); }); return; }
+    if (!st.cur) setup();
+    const q = st.cur, c = CARD[st.order[st.i]], t = TOPIC[c[1]];
+    const head = `<div class="row between"><span class="pill subj s-${t.s}">${esc(t.name)} · ${label[q.kind]}</span><button class="star" aria-label="Star" aria-pressed="${!!S.star[c[0]]}" data-star>${ic('star','fill="'+(S.star[c[0]]?'currentColor':'none')+'"')}</button></div>
+      <div class="row between" style="flex-wrap:nowrap;align-items:flex-start;gap:10px"><div class="prompt">${esc(c[2])}</div>${sayBtn(c[2])}</div>`;
+    let body = '';
+    if (q.kind==='mcq') {
+      const ok = q.picked!=null && q.opts[q.picked][0]===c[0];
+      body = `<div class="stack" style="gap:8px">${q.opts.map((x,i)=>{ let cl=''; if(q.picked!=null){ if(x[0]===c[0]) cl='right'; else if(i===q.picked) cl='wrong'; } return `<button class="opt ${cl}" data-o="${i}" ${q.picked!=null?'disabled':''}><span class="k">${i+1}</span>${esc(brief(x[3], 200))}</button>`; }).join('')}</div>`
+        + (q.picked==null ? '' : ok ? `<div class="feedback ok"><b>Correct.</b> <span class="small">${esc(c[3])}</span></div><p class="small muted">How easy was that?</p>${gradeRow([1,2,3], 2)}`
+          : `<div class="feedback no"><b>Not quite.</b> <span class="small">${esc(c[3])}</span><div class="small muted" style="margin-top:6px">The answer you picked describes <b>${esc(q.opts[q.picked][2])}</b>. This card comes back later in the session.</div></div><button class="btn primary" id="next" style="align-self:flex-end">Continue</button>`);
+    } else if (q.kind==='blank') {
+      const g = q.gap, ok = q.checked;
+      body = `<div class="feedback" style="line-height:1.7">${esc(g.before)}${q.checked==null?`<input id="gapIn" autocomplete="off" autocapitalize="off" spellcheck="false" value="${esc(q.typed)}" aria-label="Missing word" style="display:inline-block;width:${Math.max(6, g.word.length+2)}ch;padding:2px 6px;margin:0 2px">`:`<b style="color:var(--${ok?'good':'bad'})">${esc(g.word)}</b>`}${esc(g.after)}</div>`
+        + (q.checked==null ? `<div class="row between"><button class="btn ghost sm" id="dunno">I don't know</button><button class="btn primary" id="checkBtn">Check</button></div>`
+          : ok ? `<div class="feedback ok"><b>Correct.</b>${q.typed.trim().toLowerCase()!==g.word.toLowerCase()?` <span class="small">You wrote “${esc(q.typed.trim())}”, close enough.</span>`:''}</div><p class="small muted">How easy was that?</p>${gradeRow([1,2,3], 2)}`
+          : `<div class="feedback no"><b>Not quite.</b> <span class="small">${q.typed.trim()?`You wrote “${esc(q.typed.trim())}”. `:''}The missing word is <b>${esc(g.word)}</b>. This card comes back later in the session.</span></div><div class="row" style="justify-content:flex-end"><button class="btn ghost sm" id="override">I was right</button><button class="btn primary" id="next">Continue</button></div>`);
+    } else {
+      const r = q.checked;
+      body = r==null ? `<textarea id="typed" placeholder="Type your answer…">${esc(q.typed)}</textarea><div class="row between"><button class="btn ghost sm" id="dunno">I don't know</button><span class="row" style="gap:10px"><span class="tiny faint">Ctrl/⌘ + Enter</span><button class="btn primary" id="checkBtn">Check</button></span></div>`
+        : `${q.typed.trim()?`<div class="feedback"><div class="eyebrow" style="margin-bottom:4px">Your answer</div>${esc(q.typed)}</div>`:''}<div class="feedback ok"><div class="eyebrow" style="margin-bottom:6px">Model answer</div>${esc(c[3])}</div>
+          ${q.typed.trim()?`<div><div class="small muted" style="margin-bottom:4px">Key terms you used (${r.hits.length}/${r.keys.length}):</div>${kwHTML(r)}</div>`:''}
+          <p class="small muted">${!q.typed.trim()?'No answer, so this one is Again.':r.ratio>=.5?'Looks like you got the main ideas. Your own wording can still count.':'You may have missed some key ideas. Your own wording can still count.'} Rate how well you knew it.</p>${gradeRow([0,1,2,3], !q.typed.trim()?0:r.ratio>=.75?2:r.ratio>=.4?1:0)}`;
+    }
+    m.innerHTML = studyShell(set.title, set.s||t.s, st.i/st.order.length*100, `<div class="qbox stack">${head}${body}</div>`, `${st.i+1}/${st.order.length}`, reviewPickHTML());
+    quitHandler(m); bindReviewPick(m, set, taskKey, () => st.order.slice(st.i));
+    on(m,'[data-star]','click',()=>{ S.star[c[0]] = !S.star[c[0]]; if(!S.star[c[0]]) delete S.star[c[0]]; save(); o.render(m); });
+    on(m,'[data-o]','click',e=>{ q.picked = +e.currentTarget.dataset.o; if (q.opts[q.picked][0]!==c[0]) q.wrong = true; o.render(m); });
+    on(m,'#typed','input',e=>{ q.typed = e.target.value; });
+    on(m,'#typed','keydown',e=>{ if (e.key==='Enter' && (e.ctrlKey||e.metaKey)) { e.preventDefault(); m.querySelector('#checkBtn').click(); } });
+    on(m,'#gapIn','input',e=>{ q.typed = e.target.value; });
+    on(m,'#gapIn','keydown',e=>{ if (e.key==='Enter') { e.preventDefault(); e.stopPropagation(); m.querySelector('#checkBtn').click(); } });
+    on(m,'#checkBtn','click',()=>{ q.checked = q.kind==='blank' ? gapOK(q.typed, q.gap.word) : checkTyped(q.typed, c[3]); o.render(m); });
+    on(m,'#dunno','click',()=>{ q.typed = ''; q.checked = q.kind==='blank' ? false : checkTyped('', c[3]); o.render(m); });
+    on(m,'#override','click',()=>{ q.checked = true; o.render(m); });
+    on(m,'#next','click',()=>{ finish(0); o.render(m); });
+    on(m,'[data-g]','click',e=>{ finish(+e.currentTarget.dataset.g); o.render(m); });
+    (m.querySelector('#gapIn') || m.querySelector('#typed'))?.focus();
+  }, key(e, m){
+    if (e.target.closest('textarea,input,select')) return;
+    const q = st.cur; if (!q) { if (e.key==='Enter') m.querySelector('#again')?.click(); return; }
+    if (q.kind==='mcq' && q.picked==null && '1234'.includes(e.key)) { m.querySelector(`[data-o="${+e.key-1}"]`)?.click(); return; }
+    if ('1234'.includes(e.key) && m.querySelector(`[data-g="${+e.key-1}"]`)) { m.querySelector(`[data-g="${+e.key-1}"]`).click(); return; }
+    if (e.key==='Enter') { e.preventDefault(); (m.querySelector('#next') || m.querySelector('[data-g="2"]'))?.click(); }
+  } };
   return o;
 }
 
@@ -1542,6 +1619,7 @@ function vReview(m){
   const weakCards = CARDS.filter(c=>{ const x = cs(c[0]); return cardOn(c) && x && x[6] > 0; }).sort((a,b)=>(cs(b[0])[6]-cs(b[0])[5]*.3)-(cs(a[0])[6]-cs(a[0])[5]*.3)).slice(0, 25).map(c=>c[0]);
   m.innerHTML = `<div class="stack"><div><div class="eyebrow">Spaced repetition</div><h1>Review</h1><p class="muted" style="margin-top:6px;max-width:62ch">Cards come back just before you would forget them. Rate each one honestly and the schedule adapts. Ten minutes a day here does more than an hour of rereading notes.</p></div>
     <section class="card pad-lg stack"><div class="row between"><div><div class="mono" style="font-size:2.4rem;font-weight:700;line-height:1">${due.length}</div><div class="muted small">cards due now</div></div><button class="btn primary" id="all" ${due.length?'':'disabled'}>${ic('review')} Review all due</button></div>
+      <div class="stack" style="gap:6px"><span class="small muted">How do you want to review?</span><div class="seg" role="group" aria-label="Review style" style="flex-wrap:wrap;align-self:flex-start">${REVIEW_STYLES.map(([k,l])=>`<button data-rv="${k}" aria-pressed="${reviewStyle()===k}">${l}</button>`).join('')}</div><span class="tiny muted">${{flash:'Flip each card and rate how well you knew it.',mcq:'Pick the right answer from four. Get it right, then say how easy it felt.',type:'Write the answer from memory, compare it with the model answer, then rate yourself.',blank:'Type the missing key word in the answer. Close spellings count.',mix:'A mix of multiple choice, typing and fill the gap.'}[reviewStyle()]} Every style updates your spaced-repetition schedule.</span></div>
       <div class="row">${bySubj.map(([s,n])=>`<button class="btn sm s-${s}" data-s="${s}" ${n?'':'disabled'}><span class="pill subj">${SUBJ[s].short}</span> ${n} due</button>`).join('')}</div></section>
     <div class="grid g2">
       <section class="card stack"><h3>Learn new cards</h3><p class="small muted">${newPool.length?`20 unseen cards from your weakest topics, mixed across subjects.`:'You have seen every card. Impressive.'}</p><button class="btn" id="new" ${newPool.length?'':'disabled'} style="align-self:flex-start">${ic('flash')} Start</button></section>
@@ -1551,12 +1629,13 @@ function vReview(m){
       <div class="stack" style="gap:4px;max-height:260px;overflow:auto">${myTopics().filter(t=>(BYTOPIC[t.id]||[]).length).map(t=>`<label class="row small s-${t.s}" style="gap:8px;flex-wrap:nowrap"><input type="checkbox" data-bt="${t.id}" ${BUILD_T.has(t.id)?'checked':''}><span class="pill subj">${esc(SUBJ[t.s].short)}</span><span>${confDot(t.id)}${esc(t.name)}</span></label>`).join('') || '<span class="small muted">No cards yet.</span>'}</div>
       <div class="row"><button class="btn sm ghost" id="btWeak">Pick my red and amber topics</button><button class="btn primary sm" id="btGo">${ic('test')} Start test</button></div></section>
     <section class="card stack"><h3>Flashcard settings</h3><div class="row"><span class="small muted">Show on front:</span><div class="seg"><button data-front="term" aria-pressed="${S.settings.front==='term'}">Term</button><button data-front="answer" aria-pressed="${S.settings.front==='answer'}">Answer</button></div></div>
-      <p class="tiny muted">Keyboard: space flips, 1-4 rate (Again, Hard, Good, Easy).</p></section>
+      <p class="tiny muted">Keyboard: space flips, 1-4 rate (Again, Hard, Good, Easy). In multiple choice, 1-4 picks an answer.</p></section>
   </div>`;
   on(m,'#all','click',()=>startReview());
   on(m,'[data-s]','click',e=>startReview(e.currentTarget.dataset.s));
-  on(m,'#new','click',()=>{ STUDY = modeFlash({ title:'New cards', s:null, ids:newPool, review:true }, null); render(); });
+  on(m,'#new','click',()=>{ STUDY = reviewSession({ title:'New cards', s:null, ids:newPool, review:true }, null); render(); });
   on(m,'#weak','click',()=>startMode('learn', { title:'Most-missed cards', s:null, ids:weakCards }));
+  on(m,'[data-rv]','click',e=>{ S.settings.reviewMode = e.currentTarget.dataset.rv; save(); render(); });
   on(m,'[data-front]','click',e=>{ S.settings.front = e.currentTarget.dataset.front; save(); render(); });
   on(m,'[data-bt]','change',e=>{ e.target.checked ? BUILD_T.add(e.target.dataset.bt) : BUILD_T.delete(e.target.dataset.bt); });
   on(m,'#btWeak','click',()=>{ BUILD_T = new Set(myTopics().filter(t=>(BYTOPIC[t.id]||[]).length && ['r','a'].includes((S.conf[t.id]||[])[0])).map(t=>t.id)); if (!BUILD_T.size) toast('Rate topics on their page first (Not yet / Getting there)'); render(); });
