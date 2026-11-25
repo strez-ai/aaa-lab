@@ -1155,7 +1155,10 @@ ${(ans[q.id]||'').trim() || '(no answer)'}`).join('\n\n')}`; }
 
 function priorityCards(ids, n){
   const now = dayNum();
-  const score = (id) => { const c = cs(id); if (!c) return 2 + Math.random(); if (c[2] <= now) return 3 + (now - c[2]) * .01 + Math.random()*.1; return 1 - cardMastery(id) + Math.random()*.2; };
+  // Unseen cards keep the set's own order (the spec order in the source files), so first-time learning builds topic by topic.
+  // Cards already seen are ranked by need: overdue first, then the weakest. Test and Match still shuffle for mixed practice.
+  const pos = new Map(ids.map((id, i) => [id, i]));
+  const score = (id) => { const c = cs(id); if (!c) return 2.9 - pos.get(id) / (ids.length + 1) * .8; if (c[2] <= now) return 3 + (now - c[2]) * .01 + Math.random()*.1; return 1 - cardMastery(id) + Math.random()*.2; };
   return ids.slice().sort((a,b)=>score(b)-score(a)).slice(0, n);
 }
 function studyShell(title, s, pct, inner, extra='', right=''){ return `<div class="stack ${s?'s-'+s:''}" style="gap:18px"><div class="study-top"><button class="btn ghost sm" id="quit" aria-label="Exit">${ic('x')}</button><div class="progress-line"><i style="width:${pct}%"></i></div><span class="small muted mono">${extra}</span></div><div class="row between"><div><div class="eyebrow">${esc(title)}</div></div>${right}</div>${inner}</div>`; }
