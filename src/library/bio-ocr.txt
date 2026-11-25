@@ -65,7 +65,7 @@ Root pressure :: Active pumping of minerals into the xylem lowers water potentia
 Hydrophytes :: Plants adapted to water, e.g. water lilies have air spaces (aerenchyma) and stomata on the upper surface.
 # immune | 4.1.1 | Communicable diseases and immunity
 + bio-aqa:immune
-Pathogens and diseases :: Bacteria (tuberculosis, bacterial meningitis, ring rot), viruses (HIV/AIDS, influenza, TMV), protoctista (malaria, potato blight) and fungi (black sigatoka, ringworm, athlete's foot).
+Pathogens and diseases :: Bacteria (tuberculosis, bacterial meningitis, ring rot in potatoes), viruses (HIV/AIDS, influenza, TMV), protoctista (malaria, potato blight) and fungi (black sigatoka, ringworm, athlete's foot).
 Transmission of disease :: Direct (contact, inoculation, ingestion) and indirect (fomites, droplets, vectors such as mosquitoes for malaria).
 Plant defences :: Passive: cellulose cell walls, waxy cuticle, bark, stomatal closure. Active: callose deposition, chemical defences such as tannins, and necrosis.
 Non-specific defences :: Skin, mucous membranes, blood clotting, inflammation, wound repair and expulsive reflexes.

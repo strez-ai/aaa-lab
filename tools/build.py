@@ -16,7 +16,8 @@ for subj, fn in [('psych', 'psych.txt'), ('maths', 'maths.txt'), ('econ', 'econ.
         seen.add(cid)
         cards.append([cid, topic, q.strip(), a.strip()])
 # Ready-made subject packs: src/library/<id>.txt -> library/<id>.json, loaded when a student adds that subject.
-# Header lines: @name, @aliases (|-separated), @board (|-separated if the content suits several boards), @code.
+# Header lines: @name, @aliases (|-separated), @board (|-separated if the content suits several boards), @code,
+# and @from / @until (first and last exam year) when a board runs an old and a new spec side by side.
 # Topics: "# topic-id | spec ref | Topic name", then "question :: answer" cards.
 # "+ source" under a topic copies cards from elsewhere: "+ builtin:e-1.2" (a built-in topic) or "+ bio-aqa:cells" (another pack's topic).
 lib = []; libdir = os.path.join(src, 'library'); outdir = os.path.join(root, 'library')
@@ -68,7 +69,7 @@ for pid, (meta, topics) in raw.items():
     if empty: sys.exit(f'{pid}: topics with no cards: {empty}')
     open(os.path.join(outdir, pid + '.json'), 'w', encoding='utf8').write(json.dumps({'id': pid, 'topics': out_topics, 'cards': pcards}, ensure_ascii=False, separators=(',', ':')))
     boards = [x.strip() for x in meta['board'].split('|')]
-    lib.append({'id': pid, 'name': meta['name'], 'names': [meta['name']] + [x.strip() for x in meta.get('aliases', '').split('|') if x.strip()], 'board': boards[0], 'boards': boards, 'code': meta.get('code', ''), 't': len(out_topics), 'n': len(pcards)})
+    lib.append({'id': pid, 'name': meta['name'], 'names': [meta['name']] + [x.strip() for x in meta.get('aliases', '').split('|') if x.strip()], 'board': boards[0], 'boards': boards, 'code': meta.get('code', ''), 't': len(out_topics), 'n': len(pcards), **{k: int(meta[k]) for k in ('from', 'until') if k in meta}})
     print(f'  {pid}: {len(out_topics)} topics, {len(pcards)} cards')
 exam = json.load(open(src + 'exam.json', encoding='utf8'))
 ids = [q['id'] for q in exam]

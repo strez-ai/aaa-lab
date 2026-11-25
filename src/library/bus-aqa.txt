@@ -2,6 +2,7 @@
 @aliases Business Studies|AQA Business
 @board AQA
 @code 7132
+@until 2027
 # what-is | 3.1 | What is business?
 Why businesses exist :: To provide goods or services that meet customer needs, generating profit or achieving social or other objectives.
 Mission statement :: A qualitative statement of a business's purpose and values, intended to guide decisions and motivate stakeholders.

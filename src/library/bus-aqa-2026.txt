@@ -1,0 +1,245 @@
+@name Business
+@aliases Business Studies|AQA Business
+@board AQA
+@code 7138
+@from 2028
+
+# objectives | 3.1.1 | Business and objectives
+Reasons for setting up in business :: Financial: profit, higher income, building wealth. Non-financial: independence, being your own boss, following a passion, solving a problem, social or ethical aims.
+Characteristics of entrepreneurs :: Risk taker, resilient, focused, passionate, innovative and adaptable.
+Challenges of setting up in business :: Raising finance, building a customer base, competition, cash flow problems, lack of experience, long hours and the risk of losing personal money.
+Role of the entrepreneur as the business grows :: Moves from doing everything to delegating, managing people and setting strategy. Must build a management team and may lose day-to-day control.
+Business plan :: A document setting out the business idea, objectives, market research, marketing plan, finances (cash flow, break-even) and operations. Value: secures finance, forces planning and gives targets. Limits: based on forecasts that may be wrong.
+Competitiveness :: The ability of a business to win customers and sales against rivals, through price, quality, brand, service or innovation. Without it, a business loses market share and profit.
+Influences on business decisions :: Objectives, risk, reward, resources, market conditions, ethics and opportunity cost.
+Risk and reward in decisions :: Higher-risk decisions (e.g. entering a new market) usually offer higher potential rewards. Managers weigh the chance and size of losses against possible gains and the resources at stake.
+Ethical dilemmas: profit vs ethics :: Choices where the most profitable option is not the most ethical, e.g. cheap suppliers with poor working conditions. Ethical choices can raise costs but build reputation and loyalty.
+SMART objectives :: Specific, Measurable, Accountable, Realistic, Time specific. Effective objectives give direction, motivate staff and allow performance to be measured.
+
+# forms | 3.1.2 | Forms of business and stakeholders
+Sole trader :: Owned by one person with unlimited liability. Full control and keeps all profit, but limited finance and personal assets at risk.
+Private limited company (Ltd) :: Owned by shareholders, shares not sold to the public, limited liability. Easier to raise finance than a sole trader while keeping control within a small group.
+Public limited company (plc) :: Shares are traded on a stock exchange. Can raise large sums by selling shares, but there is a risk of takeover, more regulation and pressure for short-term results.
+Co-operatives :: Owned and run by their members: worker co-operatives (employees), consumer co-operatives (customers) and producer co-operatives (suppliers). Profits are shared among members.
+Social enterprise :: A business with social or environmental aims that reinvests most of its profit into those aims, e.g. The Big Issue.
+Unlimited vs limited liability :: Unlimited: owners are personally responsible for all business debts. Limited: owners can only lose the money they invested.
+Reasons to buy shares :: Dividends (income) and capital growth if the share price rises; some investors also want a say in the business or support its values.
+Influences on share price :: Profits and forecasts, dividends, the economy and interest rates, news about the business (takeovers, scandals), market sentiment and supply and demand for the shares.
+Market capitalisation :: Number of issued shares × current share price. Shows the total market value of a company.
+Dividend per share :: Total dividend paid ÷ number of ordinary shares in issue.
+Internal and external stakeholders :: Internal: employees and owners/shareholders. External: customers, suppliers, other creditors, the community and government.
+Ethical responsibilities to stakeholders :: Fair pay and safe conditions for employees, honest products for customers, prompt payment for suppliers and limiting harm to the community and environment.
+
+# research | 3.1.3 | Marketing: customers, markets and demand
+Purpose of market research :: To identify and understand customer needs, reduce risk in decisions, spot opportunities and track competitors.
+Primary vs secondary research :: Primary: new data collected first-hand (surveys, focus groups), specific but costly and slow. Secondary: existing data (reports, government statistics), cheap and quick but may be out of date or not specific.
+Quantitative vs qualitative data :: Quantitative: numerical, easy to analyse statistically. Qualitative: opinions and reasons, gives depth but hard to analyse and generalise.
+Confidence levels and intervals :: A confidence level (e.g. 95%) is how sure we are that the true value lies within a range; the confidence interval is that range. Larger samples give narrower intervals.
+Market mapping :: Plotting products against two features (e.g. price and quality) to see where competitors are and find gaps in the market.
+Influences on how market research is conducted :: Risk of the decision, cost, time available and the need for reliability.
+B2B, B2C and C2C markets :: Business to business (selling to other firms), business to consumer, and consumer to consumer (e.g. online marketplaces such as Vinted). Goods are tangible; services are intangible.
+Market share :: Sales of one product, brand or business ÷ total sales in the market × 100.
+Market growth :: Change in the size of the market over a period ÷ original size × 100.
+Return on marketing spend :: Profit from marketing activities ÷ amount of marketing spend × 100.
+Sales volume vs sales value :: Volume: number of units sold. Value: revenue from those sales (price × quantity).
+Correlation in marketing data :: A relationship between two variables, e.g. advertising spend and sales. Can be positive or negative, strong or weak. Correlation does not prove cause.
+Index numbers :: Express data relative to a base year set at 100, so changes are easy to compare. Index = (value ÷ base value) × 100.
+Price elasticity of demand (PED) :: % change in quantity demanded ÷ % change in price. Elastic (>1): a price rise cuts revenue. Inelastic (<1): a price rise increases revenue.
+Income elasticity of demand (YED) :: % change in quantity demanded ÷ % change in income. Positive for normal goods (luxuries above 1); negative for inferior goods.
+Influences on demand :: Price, prices of substitutes and complements, incomes, tastes and fashion, marketing, seasonality, demographics and the economy.
+
+# mix | 3.1.3 | Marketing: target market, objectives and the mix
+Market segmentation :: Dividing a market into groups of customers with similar needs: demographic, geographic, psychographic (lifestyle, values) and behavioural (usage, loyalty).
+Niche vs mass markets :: Niche: small specialist segment, less competition and higher prices but limited sales and vulnerable to change. Mass: large market, economies of scale but intense competition.
+Marketing objectives :: Lead generation, sales, market share, brand awareness, customer retention, engagement and conversion.
+Marketing budget :: The money allocated to marketing. Influenced by objectives, finance available, competitors' spending and the stage of the product life cycle.
+Demand changes and the marketing mix :: Rising demand: may raise price or extend distribution. Falling demand: promotions, price cuts or product changes. Seasonal and cyclical demand need timed promotion and pricing.
+Product life cycle :: Development, introduction, growth, maturity and decline. Each stage needs different marketing, finance and operations decisions.
+Extension strategies :: Advertising, rebranding, lowering the price and adapting the product, used to delay decline.
+Boston Matrix :: Products by market share and market growth: stars (high, high), cash cows (high share, low growth), question marks (low share, high growth) and dogs (low, low). Helps balance a product portfolio.
+New product development :: Value: growth and competitiveness. Challenges: high cost, long timescales and a high failure rate.
+Methods of pricing :: Cost based (cost plus), demand based (penetration, skimming, dynamic pricing) and competition based (premium, going rate, discount).
+Dynamic pricing :: Prices change in real time with demand, e.g. airlines and ride apps. Raises revenue at peak times but can anger customers.
+Influences on price :: Marketing objectives, target market, level of demand, PED, costs, competitors' actions and the rest of the marketing mix.
+Distribution channels :: Direct (including e-commerce): more control and margin but higher costs. Through intermediaries (wholesalers, retailers): wider reach but lower margin and less control. Multi-channel: combines both.
+Promotional mix :: Advertising, social media and influencers, sales promotions, sponsorship, personal selling and branding. Influenced by budget, target market, product and competitors.
+Personal selling and account managers :: Sales teams and account managers build relationships with key clients, handle questions and win repeat business, especially in B2B markets.
+Branding :: A strong brand builds loyalty and allows higher prices. Own-label brands are retailers' own products, usually cheaper.
+
+# digital-mkt | 3.1.3 | Marketing: digital, international and ethics
+Digital technology and AI in marketing :: Used for social media campaigns, content marketing, SEO, pay per click (PPC) and website cookies. AI can target ads, write content and predict demand.
+Search engine optimisation (SEO) :: Improving a website so it ranks higher in search results without paying for each click.
+Pay per click (PPC) :: Online advertising where the business pays each time someone clicks the ad. Easy to measure and target, but costs can rise quickly.
+Measures of digital marketing success :: Search performance, click-through rates, time spent on a site, conversion rates, number of users or subscribers and advertising revenue.
+Customer Relationship Management (CRM) :: Systems and methods to manage customer relationships: customer acquisition, retention, lead generation and pipeline management.
+Data analytics in marketing :: Used for segmentation, campaign performance tracking, personalisation, predictions and dynamic pricing.
+International marketing :: Can bring growth and spread risk, but faces cultural differences, language, legal rules and exchange rates. The mix may be adapted (glocalisation) or kept standard.
+Ethical issues in marketing :: Misleading claims, targeting children, exploiting vulnerable customers, price gouging and unsafe or harmful products.
+
+# finance | 3.1.4 | Finance: objectives, sources and break-even
+Financial objectives :: Targets for profit, profitability, cash flow, liquidity and levels of borrowing.
+Internal sources of finance :: Owners' investment, retained profits, sale of assets, sale and leaseback, and better management of working capital. No interest, but may be limited.
+External sources of finance :: Trade credit, share capital, overdraft, loans, business angels, private equity and crowdfunding.
+Business angels and private equity :: Business angels: wealthy individuals who invest in small firms for a share, often bringing expertise. Private equity: firms that buy stakes in businesses, often wanting high returns and control.
+Crowdfunding :: Raising small amounts from many people online, for rewards or equity. Also tests demand, but ideas can be copied if the campaign fails.
+Choosing a source of finance :: Depends on the amount needed, the purpose and timescale, cost, the legal structure, control and current gearing.
+Contribution per unit :: Selling price − variable cost per unit.
+Break-even output :: Fixed costs ÷ contribution per unit.
+Margin of safety :: Actual output − break-even output. Shows how far sales can fall before a loss is made.
+Effects of changes on break-even :: A higher price or lower variable cost raises contribution and lowers break-even; higher fixed costs raise break-even.
+Value of break-even analysis :: Quick and simple, useful for planning and for loans. Limits: assumes all output is sold at one price and that costs are linear.
+
+# fin-reporting | 3.1.4 | Finance: profit, budgets, cash flow and ratios
+Gross profit :: Revenue − cost of sales.
+Operating profit :: Gross profit − operating expenses.
+Profit for the year :: Operating profit + profit from other activities − net finance costs − tax.
+Profit vs cash :: Profit is revenue minus costs over a period; cash is money in the bank. A profitable business can run out of cash if customers pay late.
+Profit vs profitability :: Profit is an absolute amount; profitability compares profit with revenue or capital (margins, ROCE).
+Ways to increase profit :: Increase revenue (raise price, more sales) or cut costs (cheaper suppliers, efficiency). Risks: lost sales, lower quality, low morale.
+Budgets and zero-based budgeting :: Budgets are financial plans for revenue and spending. Zero-based budgeting starts each budget at zero, so every item must be justified.
+Budget variance :: Budgeted figure − actual figure. Favourable: better than planned (higher revenue or lower costs). Adverse: worse than planned.
+Payables and receivables :: Payables: money the business owes suppliers. Receivables: money customers owe the business.
+Ways to improve cash flow :: Debt factoring, shorter payment times for customers, early payment incentives, credit checks, longer payment times to suppliers, cutting outgoings and better invoice management.
+Current ratio :: Current assets ÷ current liabilities. About 1.5 to 2 is usually comfortable.
+Acid test ratio :: (Current assets − inventory) ÷ current liabilities. Below 1 can signal liquidity problems.
+Payables days and receivables days :: Payables days = payables × 365 ÷ cost of sales. Receivables days = receivables × 365 ÷ revenue.
+Profit margins :: Gross, operating and profit for the year margins: each profit ÷ revenue × 100.
+ROCE :: Operating profit ÷ (total equity + non-current liabilities) × 100.
+Return on investment :: Profit from the investment ÷ cost of the investment × 100.
+Gearing :: Non-current liabilities ÷ (total equity + non-current liabilities) × 100. Above 50% is high gearing, so the business is more exposed to interest rate rises.
+Dividend yield :: Dividend per share ÷ share price × 100.
+Income statement and statement of financial position :: Income statement: revenue, costs and profit over a period. Statement of financial position (balance sheet): assets, liabilities and equity at one date.
+Limitations of financial reporting :: Historic, can be manipulated, and ignores non-financial factors such as morale, brand reputation and environmental impact. Compare with trends, benchmarks and context.
+Ethics in finance :: Tax avoidance (legal but seen as unfair) and payment terms, such as large firms paying small suppliers late.
+
+# people | 3.2.1 | People: HR objectives, data and organisation
+HR objectives :: Number and skills of employees, employee turnover and retention, employee engagement, employee costs, and equality, diversity, inclusion and belonging.
+Human resource planning :: Planning recruitment, training, retention, redeployment and redundancy to match future staffing needs. Influenced by the current workforce, future needs, skills gaps and the labour market.
+Forms of employment :: Part-time, full-time, temporary, permanent, zero-hours and freelance. Flexible employment lowers costs and matches labour to demand, but can reduce loyalty and security.
+Employee engagement :: How committed and involved employees are in their work and the business. High engagement improves productivity, quality and retention.
+Employee turnover :: Number of staff leaving ÷ number of staff employed × 100. High turnover raises recruitment and training costs.
+Employee productivity and sales per employee :: Productivity = output over a period ÷ number of employees. Sales per employee = sales ÷ number of employees.
+Employee costs as a percentage of revenue :: Employee costs ÷ revenue × 100.
+Measuring employee wellbeing, diversity and representation :: Surveys, absence rates, diversity data and KPIs show whether HR policies work and where to act.
+Span of control and levels of hierarchy :: Span of control: number of people directly reporting to a manager. Levels of hierarchy: layers of management. Tall structures have narrow spans; flat structures have wide spans.
+Centralisation vs decentralisation :: Centralised: decisions taken at the top, consistent and controlled. Decentralised: decisions delegated, faster and more motivating but less consistent.
+Delayering :: Removing layers of management. Cuts costs and speeds communication, but increases workloads and may lose experience.
+
+# motivation | 3.2.1 | People: leadership, teams, motivation and wellbeing
+Leadership styles :: Autocratic (leader decides), democratic (staff involved in decisions) and transformational (inspires change through vision).
+Influences on leadership style :: The leader's personality, the task, urgency, the skills of the team, the culture and the situation.
+Employee appraisal :: Regular review of an employee's performance against targets, used to set goals, identify training and decide rewards.
+Talent management :: Acquiring, managing, developing and retaining talented employees. Challenges: cost, competition for staff and keeping them.
+Hackman's model of team effectiveness :: Five conditions: a real team, a compelling direction, an enabling structure, a supportive context and expert coaching.
+Taylor's scientific management :: Workers are motivated by money. Break jobs into simple tasks, train workers in the best method and pay by results (piece rate).
+Maslow's hierarchy of needs :: Physiological, safety, love and belonging, esteem and self-actualisation. Lower needs must be met before higher needs motivate.
+Herzberg's two-factor theory :: Hygiene factors (pay, conditions) prevent dissatisfaction but do not motivate. Motivators (achievement, recognition, responsibility) create satisfaction.
+Financial rewards :: Wages, salaries, piece rate, commission, performance-related pay, shares and fringe benefits.
+Non-financial rewards :: Delegation, empowerment, job enrichment, training and development, and remote, hybrid and flexible working.
+Employee wellbeing :: Supporting physical and mental health through health support services, an inclusive work environment, employee voice and flexible working. Benefits: lower absence and turnover. Challenges: cost and measuring impact.
+Employee representation and voice :: Ways employees influence decisions: individually or collectively through trade unions and employee forums.
+Poor employer-employee relations :: Causes: poor communication, low pay, job insecurity. Consequences: strikes, low morale, high turnover and lower productivity.
+Ethics in HR :: Codes of conduct; equality, diversity, inclusion and belonging; gender pay gaps and gaps between senior managers' and other employees' pay.
+
+# operations | 3.2.2 | Operations: objectives, efficiency and quality
+Operations objectives :: Efficiency, quality, volume of goods and services, flexibility and environmental impact.
+Adding value :: Turning inputs into outputs worth more than their cost, through design, quality, branding, convenience or service.
+Choice of operations location :: Costs, demand, access to resources and markets, infrastructure, government incentives, ethical and people considerations, break-even, return on investment and environmental factors.
+Unit costs :: Total costs ÷ number of units of output.
+Capacity utilisation :: Actual output ÷ maximum possible output × 100. High utilisation spreads fixed costs, but near 100% leaves no slack.
+Operations KPIs :: Wait times, returns, defects, complaints, speed of response, delivery times and customer satisfaction ratings.
+Lean production :: Cutting waste: reducing inventory, re-works, waiting times and transport times, kaizen (continuous improvement) and standardised processes.
+Ways to improve efficiency :: Better capacity utilisation, lean production, reducing waste and recycling, effective scheduling, higher productivity and better cost control.
+Costs of poor quality :: Waste, re-work, returns and refunds, complaints, lost customers and damage to reputation.
+Quality control vs quality assurance :: Quality control: inspecting products to find faults. Quality assurance: building quality into every stage of the process to prevent faults.
+Total Quality Management (TQM) :: Every employee is responsible for quality, with a culture of continuous improvement.
+Quality circles and benchmarking :: Quality circles: small groups of workers who meet to solve quality problems. Benchmarking: comparing performance with the best in the industry.
+Environmentally sustainable operations :: Waste reduction, resource efficiency, reducing emissions and carbon footprint, sustainable sourcing and circularity. Challenges: cost, supply chain limits and disruption to processes.
+Matching output to demand :: Change production scheduling, adjust inventory, use flexible employment, outsource, invest in technology, or change capacity.
+
+# supply | 3.2.2 | Operations: supply chain, inventory, innovation and projects
+Make or buy :: Producing internally gives control and keeps profit; buying in (outsourcing) can be cheaper and more flexible but reduces control.
+Supply chain management :: Managing relationships with suppliers and logistics from suppliers to customers, to get the right goods at the right time, cost and quality.
+Influences on choosing suppliers :: Price, quality, reliability, flexibility, payment terms, ethics and sustainability, and the number of suppliers available.
+Supply chain transparency :: Knowing and publishing where materials come from and how they are made, often backed by third-party accreditation (e.g. Fairtrade). Builds trust and reduces ethical risk.
+Distribution of profits along the supply chain :: Depends on bargaining power: powerful buyers (e.g. supermarkets) can squeeze suppliers' margins.
+Just in time vs just in case :: JIT: inventory arrives as needed, cutting storage costs and waste but vulnerable to disruption. Just in case: buffer inventory protects against disruption but costs more.
+Inventory turnover :: Cost of sales ÷ average inventories held. Higher means inventory sells faster.
+Innovation :: Developing new products and processes through R&D, talent, cross-functional teams and intrapreneurship. Can give competitive advantage but is costly and risky.
+Intellectual property :: Patents protect inventions; copyright protects creative work. Both stop rivals copying innovations.
+Network analysis (critical path) :: A diagram of project activities showing the order and duration of tasks. The critical path is the sequence with zero float that sets the minimum project time.
+Float time :: Latest finish time − duration − earliest start time. The time an activity can be delayed without delaying the project.
+Economies of scale :: Lower unit costs as output grows: technical, purchasing and financial economies.
+Diseconomies of scale :: Higher unit costs from being too large: problems of control, communication and coordination.
+Technology and AI in operations :: Used in inventory management, supply chain management and automation to cut costs and improve speed and accuracy. Costs: investment, training and job losses.
+Ethics in operations :: Supplier codes of conduct and audits; ethical issues in sourcing, product safety and environmental impact.
+
+# culture | 3.2.3 | Managing business culture
+Business culture :: The values, attitudes and ways of working shared in a business ("the way we do things around here").
+Influences on business culture :: Leadership and employee values, leadership style, mission, reward systems, organisational structure and customer expectations.
+Positive vs negative culture :: Positive: motivated staff, innovation, good reputation. Negative: low morale, high turnover, poor ethics and resistance to change.
+Changing business culture :: Needed after poor performance, scandal or a takeover. Hard because values are deeply held; needs leadership, communication, new rewards and time.
+Culture and competitiveness :: A strong, positive culture can improve productivity, service and innovation, giving an advantage that rivals find hard to copy.
+
+# society | 3.3.1 | Business and society: sustainability, CSR and ESG
+Sustainability :: Meeting present needs without harming future generations. Environmental (emissions, waste, sourcing), social (fair treatment of workers, communities) and economic (long-term profit without exploiting resources or people).
+Triple Bottom Line :: People, Planet, Profit: judging performance on social and environmental impact as well as profit.
+Challenges of sustainability :: Higher costs, short-term profit pressure, measuring impact and changing supply chains.
+Corporate Social Responsibility (CSR) :: A business taking responsibility for its impact on society and the environment beyond legal requirements.
+Carroll's CSR pyramid :: Economic responsibility (be profitable), legal (obey the law), ethical (do what is right) and philanthropic (be a good corporate citizen).
+Shareholder vs stakeholder approach :: Shareholder: run the business mainly to maximise returns for owners. Stakeholder: balance the interests of all groups affected by the business.
+Greenwashing and bluewashing :: Greenwashing: exaggerating environmental credentials for PR. Bluewashing: exaggerating social responsibility (e.g. signing UN pledges with little action).
+ESG reporting :: Reporting on Environmental, Social and Governance performance, e.g. emissions, resource usage, health and safety, community investment and the composition of directors.
+Value of improving ESG performance :: Attracts investors and talent, builds reputation, reduces risk and regulation, but costs money and can be hard to measure.
+
+# external | 3.3.2 | Business and the external environment
+Porter's five forces :: Rivalry, buyer power, supplier power, threat of entry and threat of substitutes. Strong forces reduce profitability.
+Influencing the five forces :: Branding and differentiation (reduce rivalry and buyer power), long-term supplier contracts, patents and economies of scale (barriers to entry), and integration.
+Trade agreements and protectionism :: Trade agreements cut barriers and open markets. Protectionism (tariffs, quotas, trade regulations) raises the cost of imports and can lead to retaliation.
+Legal environment :: Consumer protection, employee protection (including the Equality Act), competition policy and environmental protection. These raise costs but can create opportunities.
+Economic growth (GDP) :: Rising GDP increases incomes and demand, especially for income-elastic products. Recession cuts demand.
+Taxation :: Direct taxes (on income and profit) and indirect taxes (on spending, e.g. VAT). Higher taxes cut demand or profit.
+Interest rates :: Higher rates raise borrowing costs, reduce consumer spending (especially on credit) and strengthen the pound.
+Exchange rates :: Appreciation makes exports dearer and imports cheaper; depreciation does the opposite. Export price in foreign currency = £ price × exchange rate.
+Inflation and unemployment :: Inflation raises costs and wage demands and can cut real incomes. High unemployment lowers demand but makes recruitment easier.
+Social environment :: Demographic changes, consumer values (e.g. ethics, health) and activism create threats and opportunities.
+Technological change :: Digital and disruptive technologies including AI can cut costs and create new products, but can make existing products and business models obsolete.
+
+# strategy | 3.3.3 | Strategy: planning, influences and selection
+Strategy :: A long-term plan to achieve the business's objectives. Planning gives direction and coordinates functions.
+Assessing business performance :: Use marketing, finance, HR and operations data, alongside qualitative factors, to judge performance and guide decisions.
+Mission and vision :: Vision: where the business wants to be. Mission: its purpose and values. They guide objectives and strategy.
+SWOT analysis :: Internal strengths and weaknesses, external opportunities and threats. Helps match strategy to capabilities, but can be a snapshot that dates quickly.
+Stakeholder mapping :: Plots stakeholders by power and interest (Mendelow): manage closely, keep satisfied, keep informed or monitor.
+Stakeholder actions :: Campaigns, boycotts, strikes, voting at AGMs, legal action or lobbying government to influence business decisions.
+Ansoff Matrix :: Market penetration (existing products, existing markets), market development (new markets), new product development (new products) and diversification (new products, new markets, highest risk).
+Positioning :: How a business places its products in customers' minds in terms of benefits and price.
+Low-cost vs differentiation :: Low-cost: compete on price by having the lowest costs. Differentiation: offer something unique to charge a premium.
+Implementing strategy :: Success depends on resources, quality of planning and monitoring, leadership, communication and external factors.
+Strategic drift :: When a business's strategy gradually loses touch with a changing market, so it loses competitiveness.
+
+# growth | 3.3.3 | Strategy: investment, growth, global and digital
+Payback period :: The time taken for net cash inflows to repay the initial investment. Simple, but ignores cash flows after payback and the time value of money.
+Average rate of return (ARR) :: Average annual return ÷ initial cost × 100.
+Net present value (NPV) :: Sum of discounted future cash flows (cash flow × discount factor) − cost of the investment. Positive NPV means the project is worthwhile at that discount rate.
+Factors influencing investment :: Objectives, non-financial factors (ethics, staff, reputation), risk and business confidence.
+SMEs :: Small and medium-sized enterprises. Advantages: flexible, close to customers. Disadvantages: higher unit costs and harder access to finance.
+Organic vs inorganic growth :: Organic: growing from within (new products, stores). Lower risk but slow. Inorganic: mergers and acquisitions. Fast but costly, with integration problems.
+Franchising :: A franchisor lets franchisees use its brand and model for a fee and royalties. Fast, low-cost growth, but less control over quality.
+Vertical, horizontal and conglomerate integration :: Vertical: joining with a business at a different stage of production (backward towards suppliers, forward towards customers). Horizontal: same stage. Conglomerate: unrelated business.
+Retrenchment :: Cutting back the scale of the business (closing sites, redundancies, selling divisions) to cut costs or refocus.
+Global strategy :: Selling or operating globally gives access to bigger markets and lower costs but brings cultural, legal, currency and political risks.
+Ways to enter international markets :: Exporting, licensing, joint ventures and direct investment, from low risk and control to high risk and control.
+Glocalisation :: Adapting a global product or marketing to local tastes and cultures.
+Producing abroad :: Lower costs and closer to markets, but risks quality, ethical issues, supply chain disruption and reputational damage.
+Digital strategy :: A plan for using digital technology across the business (e-commerce, data, AI, automation) to improve competitiveness.
+
+# change | 3.3.4 | Change, risk and uncertainty
+Reasons for change :: Internal: new leaders, poor performance, growth. External: technology, competitors, the economy, law and consumer tastes.
+Kotter and Schlesinger: reasons for resistance :: Parochial self-interest, misunderstanding and lack of trust, different assessments of the situation, and low tolerance for change.
+Lewin's force field analysis :: Lists driving forces for change and restraining forces against it, each given a weighting. Change happens if driving forces outweigh restraining forces.
+Types of business risk :: Financial, strategic, operational, compliance, reputational and cybersecurity risk.
+Ways to manage risk :: Market research, sales forecasting, contingency and crisis management plans, succession planning, insurance, diversifying products, markets or suppliers, investment and training, and cybersecurity measures.
+Risk vs uncertainty :: Risk can be measured and planned for; uncertainty cannot be predicted, so businesses use scenario planning and agility.
+Scenario planning :: Imagining several possible futures and planning responses to each.
+Agile business :: A business that adapts quickly to change, helped by a flat structure, empowerment, transformational leadership and cross-functional teams.
