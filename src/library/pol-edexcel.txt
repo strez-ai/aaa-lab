@@ -107,6 +107,13 @@ Socialist feminism :: Women's oppression is linked to capitalism (Rowbotham).
 Postmodern feminism and intersectionality :: Women's experiences differ by race, class and sexuality (bell hooks).
 Equality vs difference feminism :: Equality feminists seek the same treatment as men; difference feminists celebrate women's distinct qualities.
 Key feminist thinkers :: Charlotte Perkins Gilman, Simone de Beauvoir ('one is not born, but rather becomes, a woman'), Kate Millett, Sheila Rowbotham and bell hooks.
+Sex and gender :: Sex refers to biological differences between men and women; gender refers to the different roles society ascribes to them. Feminists use the distinction to argue that inequality is socially constructed, not natural.
+Patriarchy :: Society, the state and the economy are characterised by systematic, institutionalised and pervasive gender oppression. Different types of feminism disagree on its causes and importance.
+Gilman's key ideas :: Charlotte Perkins Gilman: sex and domestic economics go hand in hand (women depend on their sexuality, bodies and domestic labour to survive), and societal pressure makes girls prepare for motherhood through toys and clothes marketed to them.
+De Beauvoir's key ideas :: Simone de Beauvoir: 'one is not born, but rather becomes, a woman' (sex versus gender), and 'otherness': men are seen as the norm and women as deviant from it.
+Millett's key ideas :: Kate Millett: the family is patriarchy's chief institution, so undoing the traditional family is key to sexual revolution; patriarchal culture produced art and literature that degraded women.
+Rowbotham's key ideas :: Sheila Rowbotham: under capitalism women are forced to sell their labour and also use it to support their family; the family both subjects women to capitalism and is where men take refuge from alienation.
+bell hooks's key ideas :: bell hooks brought the experiences of women of colour into mainstream feminism and argued for intersectionality: Black female workers face interlocking oppression from racism, capitalism and patriarchy.
 # usa-const | 3.1 | USA: the constitution and federalism
 US Constitution features :: Codified, entrenched and federal; separation of powers and checks and balances.
 Amending the Constitution :: Two-thirds of both houses of Congress and three-quarters of the states; only 27 amendments.
@@ -139,7 +146,8 @@ Supreme Court and politics :: Justices are appointed for life, so a president's 
 Electoral process :: Primaries and caucuses, national conventions, the Electoral College (270 votes needed) and campaign finance.
 Electoral College debate :: Supporters say it protects small states and federalism; critics say it can override the popular vote (e.g. 2000, 2016).
 US parties :: Democrats (liberal) and Republicans (conservative), with internal factions; increasing polarisation.
-Interest groups in the US :: Lobbying, PACs and Super PACs; e.g. NRA and AARP influence policy.
+US party attitudes :: Democrats generally favour more federal government action on social and economic issues, gun control, abortion rights and a path to citizenship for migrants; Republicans favour lower taxes, states' rights, gun rights, restrictions on abortion and tougher immigration enforcement.
+Interest groups in the US :: In a US context the spec calls them interest groups (not pressure groups): single interest, professional and policy groups. Methods include lobbying, PACs and Super PACs, e.g. the NRA and AARP.
 Comparative theories :: Rational, cultural and structural approaches compare the US and UK political systems.
 Campaign finance :: Citizens United (2010) allowed unlimited independent spending by corporations and unions, leading to Super PACs.
 Invisible primary :: The period before primaries when candidates raise money and gain endorsements.
