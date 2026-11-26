@@ -496,9 +496,11 @@ const MOCK_TIMETABLE = [
   { s:'maths', d:'2026-12-17', p:'P5&6', room:'Sports Hall', dur:'2 hours', covers:'Pure book 2 chapters 2 and 3, Stats chapter 1, chapter 9, Mechanics chapter 5' },
 ];
 const MOCK_OLD_TOPICS = ['p-id','p-app','p-att','p-rm','m-diff','m-kin','m-exp','m-proof', ...TOPICS.filter(t=>t.s==='econ').map(t=>t.id)];
-// Maths: functions and graphs, sequences and series, regression and correlation (data + hypothesis tests), differentiation, forces and friction.
-const MOCK_DEFAULT_TOPICS = ['p-id','p-app','p-att','p-rm','m-alg','m-seq','m-data','m-hyp','m-diff','m-force','fm-edexcel:de', ...TOPICS.filter(t=>t.s==='econ').map(t=>t.id)];
-const MOCK_DEFAULT = () => ({ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice(), school:true, v:2 });
+// Maths: functions and graphs, sequences and series, regression and correlation (data, hypothesis tests, exponential models),
+// chapter 9 (differentiation or constant acceleration, so both), forces and friction.
+const MOCK_DEFAULT_TOPICS = ['p-id','p-app','p-att','p-rm','m-alg','m-seq','m-data','m-hyp','m-exp','m-diff','m-kin','m-force','fm-edexcel:conics','fm-edexcel:de', ...TOPICS.filter(t=>t.s==='econ').map(t=>t.id)];
+const MOCK_V2_TOPICS = ['p-id','p-app','p-att','p-rm','m-alg','m-seq','m-data','m-hyp','m-diff','m-force','fm-edexcel:de', ...TOPICS.filter(t=>t.s==='econ').map(t=>t.id)];
+const MOCK_DEFAULT = () => ({ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice(), school:true, v:3 });
 // Year 13 sit their exams in the summer of this academic year; Year 12 a year later.
 function y13Year(){ const d = new Date(); return d.getMonth() >= 7 ? d.getFullYear() + 1 : d.getFullYear(); }
 function examYear(){ return S.settings.examYear || y13Year(); }
@@ -513,6 +515,7 @@ function mockCfg(){
   const m = S.settings.mock;
   if (!m || !Array.isArray(m.topics)) return MOCK_DEFAULT();
   // Saved before the school timetable arrived: untouched defaults get the new topics, edited ones keep their topics and gain the timetable.
+  if (m.v === 2 && m.school && m.topics.slice().sort().join() === MOCK_V2_TOPICS.slice().sort().join()) return Object.assign({}, m, { topics: MOCK_DEFAULT_TOPICS.slice(), v:3 });
   if (m.title === 'December mocks' && !m.v) return m.topics.slice().sort().join() === MOCK_OLD_TOPICS.slice().sort().join() ? MOCK_DEFAULT() : Object.assign({}, m, { school:true, v:2 });
   return m;
 }
@@ -981,6 +984,7 @@ function vHome(m){
   on(m,'[data-mockrev]','click',e=>startMockReview(e.currentTarget.dataset.mockrev || null));
   on(m,'[data-mockq]','click',e=>{ const q = nextMockQ(e.currentTarget.dataset.mockq); if (q) openExam(q.id); else toast('No exam questions for these topics yet'); });
   on(m,'#mockDrill','click',()=>startDrill('mock'));
+  on(m,'#mockAddFM','click',()=>{ const p = packInfo('fm-edexcel'); if (!p) return; const id = rid('c'); S.settings.grades[id] = ['B','A']; saveCourse({ id, created: Date.now(), topics: [], name: p.name, board: p.board, code: p.code, options: '', grades: ['B','A'], exams: [], pack: p.id }); CUSTOM_SIG = null; render(); toast('Further Maths added, with its mock topics'); });
   on(m,'[data-mockt]','click',e=>openTopic(e.currentTarget.dataset.mockt));
   on(m,'#mockEdit','click',()=>{ go('progress'); setTimeout(()=>document.getElementById('mockBox')?.scrollIntoView({block:'start'}), 80); });
   on(m,'[data-topic]','click',e=>{ e.preventDefault(); openTopic(e.currentTarget.dataset.topic); });
@@ -998,7 +1002,7 @@ function mockBanner(){
       <div class="stack" style="gap:5px">${(mockTopics(s).length > 4 ? mockTopics(s).map(id=>TOPIC[id]).sort((a,b)=>weakness(b)-weakness(a)).slice(0,3) : mockTopics(s).map(id=>TOPIC[id])).map(t=>{ const st = topicStats(t.id); return `<a href="#sets" data-mockt="${t.id}" class="small" style="display:block;color:inherit;text-decoration:none"><div class="row between"><span>${esc(t.name)}</span><span class="mono tiny muted">${Math.round(st.mastery*100)}%</span></div><div class="bar" style="margin-top:3px"><i style="width:${Math.round(st.mastery*100)}%"></i></div></a>`; }).join('')}</div>
       ${mockTopics(s).length > 4 ? `<div class="tiny muted">Weakest 3 of ${mockTopics(s).length} topics shown</div>` : ''}
       <button class="btn sm" data-mockq="${s}" style="align-self:flex-start">${ic('exam')} Exam question</button></div>`).join('')}</div>
-    <div class="row"><button class="btn primary sm" data-mockrev="">${ic('flash')} Mixed mock review</button>${mockTopics('maths').some(id=>GEN[id]&&GEN[id].length)?`<button class="btn sm" id="mockDrill">${ic('drills')} Maths mock drill</button>`:''}<button class="btn ghost sm" id="mockEdit">Change topics or date</button></div>
+    <div class="row"><button class="btn primary sm" data-mockrev="">${ic('flash')} Mixed mock review</button>${mockTopics('maths').some(id=>GEN[id]&&GEN[id].length)?`<button class="btn sm" id="mockDrill">${ic('drills')} Maths mock drill</button>`:''}${c.school && packInfo('fm-edexcel') && !customCourses().some(x=>x.pack==='fm-edexcel') && daysTo('2026-12-15') >= 0 ? `<button class="btn sm" id="mockAddFM">+ Add Further Maths (mock Tue 15 Dec)</button>` : ''}<button class="btn ghost sm" id="mockEdit">Change topics or date</button></div>
   </section>`;
 }
 
