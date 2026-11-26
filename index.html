@@ -680,8 +680,18 @@ function readCourseForm(m, base){
 }
 
 // ---------- mocks ----------
-const MOCK_DEFAULT_TOPICS = ['p-id','p-app','p-att','p-rm','m-diff','m-kin','m-exp','m-proof', ...TOPICS.filter(t=>t.s==='econ').map(t=>t.id)];
-const MOCK_NOTE = { econ:'Paper 3 mock: synoptic, every theme' };
+// Year 13 December 2026 mock timetable from school. Each row shows only if the student takes that subject
+// (Further Maths only once the ready-made Further Maths subject is added in Sets).
+const MOCK_TIMETABLE = [
+  { s:'econ', d:'2026-12-08', p:'P5&6', room:'Sports Hall', dur:'2 hours', covers:'Paper 3: Microeconomics and macroeconomics (every theme)' },
+  { s:'psych', d:'2026-12-09', p:'P5&6', room:'Sports Hall', dur:'2 hours', covers:'Y12 and Y13 content: Issues and debates, Research methods, Approaches and Attachment' },
+  { pack:'fm-edexcel', d:'2026-12-15', p:'P1&2', room:'202', dur:'1 hour', covers:'Conic sections and differential equations' },
+  { s:'maths', d:'2026-12-17', p:'P5&6', room:'Sports Hall', dur:'2 hours', covers:'Pure book 2 chapters 2 and 3, Stats chapter 1, chapter 9, Mechanics chapter 5' },
+];
+const MOCK_OLD_TOPICS = ['p-id','p-app','p-att','p-rm','m-diff','m-kin','m-exp','m-proof', ...TOPICS.filter(t=>t.s==='econ').map(t=>t.id)];
+// Maths: functions and graphs, sequences and series, regression and correlation (data + hypothesis tests), differentiation, forces and friction.
+const MOCK_DEFAULT_TOPICS = ['p-id','p-app','p-att','p-rm','m-alg','m-seq','m-data','m-hyp','m-diff','m-force','fm-edexcel:de', ...TOPICS.filter(t=>t.s==='econ').map(t=>t.id)];
+const MOCK_DEFAULT = () => ({ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice(), school:true, v:2 });
 // Year 13 sit their exams in the summer of this academic year; Year 12 a year later.
 function y13Year(){ const d = new Date(); return d.getMonth() >= 7 ? d.getFullYear() + 1 : d.getFullYear(); }
 function examYear(){ return S.settings.examYear || y13Year(); }
@@ -692,9 +702,21 @@ function cardOn(c){ const t = TOPIC[c[1]]; return !!t && mySubj().includes(t.s) 
 const GRADES = ['A*','A','B','C','D','E','U'];
 function gradeGap(s){ const g = S.settings.grades[s]; return g ? Math.max(0, GRADES.indexOf(g[0]) - GRADES.indexOf(g[1])) : 1; }
 function subjWeight(s){ return Math.min(1.15, 0.7 + 0.15 * gradeGap(s)); }
-function mockCfg(){ const m = S.settings.mock; return (m && Array.isArray(m.topics)) ? m : { title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }; }
-function mockOn(){ const c = mockCfg(); return !!c.date && daysTo(c.date) >= 0 && c.topics.length > 0 && mockTopics().length > 0; }
-function mockTopics(s){ return mockCfg().topics.filter(id => TOPIC[id] && topicOn(TOPIC[id]) && mySubj().includes(TOPIC[id].s) && (!s || TOPIC[id].s === s)); }
+function mockCfg(){
+  const m = S.settings.mock;
+  if (!m || !Array.isArray(m.topics)) return MOCK_DEFAULT();
+  // Saved before the school timetable arrived: untouched defaults get the new topics, edited ones keep their topics and gain the timetable.
+  if (m.title === 'December mocks' && !m.v) return m.topics.slice().sort().join() === MOCK_OLD_TOPICS.slice().sort().join() ? MOCK_DEFAULT() : Object.assign({}, m, { school:true, v:2 });
+  return m;
+}
+function mockRow(s){ return mockCfg().school ? MOCK_TIMETABLE.find(r => r.s ? r.s === s : (courseOf(s) || {}).pack === r.pack) || null : null; }
+function mockDate(s){ const c = mockCfg(); return (c.dates && c.dates[s]) || (mockRow(s) || {}).d || c.date || ''; }
+function mockOn(){ return mockCfg().topics.length > 0 && mockTopics().length > 0; }
+// A subject's mock topics stay in focus until the day of that subject's mock, then drop out.
+function mockTopics(s){ return mockCfg().topics.filter(id => TOPIC[id] && topicOn(TOPIC[id]) && mySubj().includes(TOPIC[id].s) && (!s || TOPIC[id].s === s) && mockDate(TOPIC[id].s) && daysTo(mockDate(TOPIC[id].s)) >= 0); }
+function mockSubjs(){ return mySubj().filter(s => mockTopics(s).length).sort((a,b) => mockDate(a).localeCompare(mockDate(b))); }
+function nextMockSubj(){ return mockSubjs()[0] || null; }
+const daysWord = (n) => n === 0 ? 'today' : n === 1 ? 'tomorrow' : `in ${n} days`;
 function mockCards(s){ return mockTopics(s).flatMap(id => BYTOPIC[id] || []); }
 function mockExamQs(s){ const ts = mockTopics(s); return EXAMQ.filter(q => (!s || q.s === s) && ts.includes(q.t)).sort((a,b) => (a.s==='econ' && b.s==='econ' ? (b.paper==='Paper 3') - (a.paper==='Paper 3') : 0)); }
 function startMockReview(s){ const ids = mockCards(s); if (!ids.length) { toast('No cards in your mock topics'); return; } STUDY = reviewSession({ title: mockCfg().title + ' review', s: s||null, ids: priorityCards(ids, 40), review:true }, 'mock-review'); window.scrollTo(0,0); render(); }
@@ -755,7 +777,7 @@ const NAV = [['home','Home'],['sets','Sets'],['review','Review'],['exam','Exam Q
 let CARDS = [], CARD = {}, BYTOPIC = {}, EXAMQ = [];
 // ---------- state ----------
 const LS_KEY = 'aaalab.v1';
-const blank = () => ({ v:1, ts:0, cards:{}, conf:{}, star:{}, exam:{}, own:{}, pp:{}, drills:{}, match:{}, days:{}, done:{}, custom:{ courses:{}, sets:{} }, settings:{ name:'', subjects:['psych','maths','econ'], onboarded:false, goal:60, mock:{ title:'December mocks', date:'2026-12-08', topics: MOCK_DEFAULT_TOPICS.slice() }, grades:{psych:['B','A'],maths:['B','A'],econ:['B','A']}, front:'term', reviewMode:'flash', examYear:0, psychOpts:null } });
+const blank = () => ({ v:1, ts:0, cards:{}, conf:{}, star:{}, exam:{}, own:{}, pp:{}, drills:{}, match:{}, days:{}, done:{}, custom:{ courses:{}, sets:{} }, settings:{ name:'', subjects:['psych','maths','econ'], onboarded:false, goal:60, mock: MOCK_DEFAULT(), grades:{psych:['B','A'],maths:['B','A'],econ:['B','A']}, front:'term', reviewMode:'flash', examYear:0, psychOpts:null } });
 let S = blank();
 function loadLocal(){ try { const raw = localStorage.getItem(LS_KEY); if(raw){ const o = JSON.parse(raw); S = Object.assign(blank(), o); S.settings = Object.assign(blank().settings, o.settings||{}); if (!o.settings || o.settings.onboarded === undefined) { S.settings.onboarded = true; if (!S.settings.name) S.settings.name = 'Pedro'; } } } catch(e){} }
 const ALL_SUBJ = ['psych','maths','econ'];
@@ -1043,7 +1065,8 @@ function dailyTasks(){
   const mockPool = mockOn() && mockTopics().length ? TOPICS.filter(t=>mockTopics().includes(t.id)) : null;
   const subs = mySubj(); if (!subs.length) return tasks;
   const ranked = myTopics().sort((a,b)=>weakness(b)-weakness(a)).sort((a,b)=> mockPool ? mockPool.includes(b) - mockPool.includes(a) : 0);
-  if (mockPool) tasks.push({ key:'mock-review', s:null, icon:'flash', title:`${mockCfg().title}: 40-card focus review`, sub:`Your weakest and due cards from the mock topics · ${plural(daysTo(mockCfg().date),'day')} to go`, go:()=>startMockReview() });
+  const ms = mockPool ? nextMockSubj() : null;
+  if (ms) tasks.push({ key:'mock-review', s:ms, icon:'flash', title:`${SUBJ[ms].name} mock ${daysWord(daysTo(mockDate(ms)))}: 40-card focus review`, sub:`Your weakest and due cards from its mock topics${mockSubjs().length > 1 ? ', it is your next mock' : ''}`, go:()=>startMockReview(ms) });
   const ph = phase();
   // rotate subjects: psych and maths get more days
   // rotate subjects; ones with a bigger gap between predicted and target grade come up more often
@@ -1051,7 +1074,7 @@ function dailyTasks(){
   customCourses().filter(c => !(c.topics||[]).length && !c.pack).forEach(c => tasks.push({ key:'setup-'+c.id, s:c.id, icon:'spark', title:`Set up ${c.name}: add your topics`, sub:'Get the topic list from Claude, or type your own', go:()=>{ SETS_FILTER = c.id; go('sets'); } }));
   const empty = myTopics().find(t => (t.custom || t.stub) && !(BYTOPIC[t.id]||[]).length);
   if (empty) tasks.push({ key:'make-'+empty.id, s:empty.s, icon:'spark', title:`Make cards: ${empty.name}`, sub:`${SUBJ[empty.s].name} · Claude writes them, you paste them in`, go:()=>openTopic(empty.id) });
-  const s1 = rota[d % rota.length], s2r = rota[(d + 3) % rota.length], s2 = s2r !== s1 ? s2r : (subs.find(x=>x!==s1) || s1);
+  const s1 = ms || rota[d % rota.length], s2r = rota[(d + 3) % rota.length], s2 = s2r !== s1 ? s2r : (subs.find(x=>x!==s1) || s1);
   [s1, s2].forEach((s, i) => {
     const t = ranked.filter(t=>t.s===s && (BYTOPIC[t.id]||[]).length)[i===0?0:(s1===s2?1:0)];
     if (!t) return;
@@ -1059,7 +1082,7 @@ function dailyTasks(){
   });
   const mt = subs.includes('maths') ? ranked.filter(t=>t.s==='maths' && GEN[t.id] && GEN[t.id].length)[0] : null;
   if (mt) tasks.push({ key:'drill-'+mt.id, s:'maths', icon:'drills', title:`Maths drill: ${mt.name}`, sub:'10 fresh questions with worked solutions', go:()=>startDrill(mt.id, 'drill-'+mt.id) });
-  const xsl = (ph >= 2 ? ['psych','econ','maths'] : ['psych','econ']).filter(x=>subs.includes(x)), xs = xsl.length ? xsl[d % xsl.length] : subs[0];
+  const xsl = (ph >= 2 ? ['psych','econ','maths'] : ['psych','econ']).filter(x=>subs.includes(x)), xs = ms && mockExamQs(ms).length ? ms : xsl.length ? xsl[d % xsl.length] : subs[0];
   const xq = (mockPool && mockExamQs(xs).length ? mockExamQs(xs) : EXAMQ.filter(q=>q.s===xs && topicOn(TOPIC[q.t]))).slice().sort((a,b)=>(bestExam(a.id)??-1)-(bestExam(b.id)??-1) || weakness(TOPIC[b.t])-weakness(TOPIC[a.t]))[0];
   if (xq) tasks.push({ key:'exam-'+xq.id, s:xs, icon:'exam', title:`Exam question: ${xq.marks}-marker`, sub:`${SUBJ[xs].short} · ${TOPIC[xq.t].name}`, go:()=>openExam(xq.id, 'exam-'+xq.id) });
   return tasks;
@@ -1158,14 +1181,13 @@ function vHome(m){
 }
 
 function mockBanner(){
-  const c = mockCfg(), n = daysTo(c.date);
-  const subj = mySubj().filter(s=>mockTopics(s).length);
+  const c = mockCfg(), subj = mockSubjs(), n = daysTo(mockDate(subj[0]));
   const all = mockCards(); const ready = all.length ? Math.round(all.reduce((a,id)=>a+cardMastery(id),0)/all.length*100) : 0;
   return `<section class="card pad-lg stack" style="gap:14px;border:2px solid var(--accent)">
-    <div class="row between" style="align-items:flex-end"><div><div class="eyebrow" style="color:var(--accent)">Focus mode</div><h2>${esc(c.title)}</h2><div class="small muted">From ${fmtDate(c.date,{weekday:'long',day:'numeric',month:'long'})} · ${ready}% of mock cards mastered</div></div>
+    <div class="row between" style="align-items:flex-end"><div><div class="eyebrow" style="color:var(--accent)">Focus mode</div><h2>${esc(c.title)}</h2><div class="small muted">Next: ${esc(SUBJ[subj[0]].name)}, ${fmtDate(mockDate(subj[0]),{weekday:'long',day:'numeric',month:'long'})} · ${ready}% of mock cards mastered</div></div>
       <div style="text-align:right"><div class="count-big mono" style="color:var(--accent)">${n}</div><div class="small muted">${n===1?'day':'days'} to go</div></div></div>
     <div class="grid g3">${subj.map(s=>`<div class="stack s-${s}" style="gap:6px"><div class="row between"><b>${SUBJ[s].name}</b><button class="btn sm ghost" data-mockrev="${s}">Review</button></div>
-      ${MOCK_NOTE[s] && mockTopics(s).length >= 10 ? `<div class="small muted">${MOCK_NOTE[s]}</div>` : ''}
+      ${(()=>{ const r = mockRow(s), dd = mockDate(s), k = daysTo(dd); return `<div class="small"><b>${fmtDate(dd,{weekday:'short',day:'numeric',month:'short'})}</b> <span class="muted">· ${k===0?'today':k===1?'tomorrow':k+' days'}</span>${r ? `<div class="tiny muted">${esc(r.p)} · ${esc(r.room)} · ${esc(r.dur)}</div><div class="tiny muted" style="margin-top:2px">${esc(r.covers)}</div>` : ''}</div>`; })()}
       <div class="stack" style="gap:5px">${(mockTopics(s).length > 4 ? mockTopics(s).map(id=>TOPIC[id]).sort((a,b)=>weakness(b)-weakness(a)).slice(0,3) : mockTopics(s).map(id=>TOPIC[id])).map(t=>{ const st = topicStats(t.id); return `<a href="#sets" data-mockt="${t.id}" class="small" style="display:block;color:inherit;text-decoration:none"><div class="row between"><span>${esc(t.name)}</span><span class="mono tiny muted">${Math.round(st.mastery*100)}%</span></div><div class="bar" style="margin-top:3px"><i style="width:${Math.round(st.mastery*100)}%"></i></div></a>`; }).join('')}</div>
       ${mockTopics(s).length > 4 ? `<div class="tiny muted">Weakest 3 of ${mockTopics(s).length} topics shown</div>` : ''}
       <button class="btn sm" data-mockq="${s}" style="align-self:flex-start">${ic('exam')} Exam question</button></div>`).join('')}</div>
@@ -1373,10 +1395,13 @@ function priorityCards(ids, n){
 // Interleaving: once a few topics are learned, practise them mixed together, like the exam.
 function learnedTopics(){ return myTopics().filter(t => { const ids = BYTOPIC[t.id] || []; const seen = ids.filter(id => cs(id)).length; return ids.length && seen >= Math.min(ids.length, Math.max(3, ids.length * .5)); }); }
 function mixedPracticeSet(n = 20){
-  const ts = shuffle(learnedTopics()); if (ts.length < 2) return null;
+  let ts = shuffle(learnedTopics());
+  // Before the mocks, mix only the learned mock topics (once there are at least two).
+  const mt = mockOn() ? ts.filter(t => mockTopics().includes(t.id)) : []; if (mt.length >= 2) ts = mt;
+  if (ts.length < 2) return null;
   const queues = ts.map(t => priorityCards((BYTOPIC[t.id] || []).filter(id => cs(id)), n)); const ids = [];
   while (ids.length < n && queues.some(q => q.length)) queues.forEach(q => { if (q.length && ids.length < n) ids.push(q.shift()); });
-  return { title:'Mixed practice', s:null, ids, autoStart:true, mixed:true };
+  return { title: mt.length >= 2 ? 'Mixed practice: mock topics' : 'Mixed practice', s:null, ids, autoStart:true, mixed:true };
 }
 function startMixed(taskKey){ const set = mixedPracticeSet(); if (!set) { toast('Learn at least two topics first, then mix them'); return; } startMode('test', set, taskKey); }
 // Elaboration and dual coding: a short "go deeper" prompt under an answer.
@@ -2172,10 +2197,10 @@ function vProgress(m){
       <section class="card stack"><h3>Exam questions</h3>${(()=>{ const rows = EXAMQ.filter(q=>S.exam[q.id]).map(q=>({q, b:bestExam(q.id)})).sort((a,b)=>a.b-b.b).slice(0,6); return rows.length ? rows.map(({q,b})=>`<div class="row between small"><span style="min-width:0;flex:1">${esc(SUBJ[q.s].short)} · ${esc(TOPIC[q.t].name)} (${q.marks})</span><span class="pill ${b>=.75?'good':b>=.55?'warn':'bad'}">${Math.round(b*100)}%</span></div>`).join('') : '<p class="small muted">No questions marked yet. Your lowest scores will show here so you can retry them.</p>'; })()}</section>
     </div>
     <section class="card pad-lg"><h2>Revision plan to summer ${examYear()}</h2><div style="margin-top:8px">${phases.map(([n,when,name,txt])=>`<div class="phase ${ph===n?'now':''}"><div><div class="mono small ph-n" style="font-weight:700">${when}</div>${ph===n?'<span class="pill good" style="margin-top:4px">You are here</span>':''}</div><div><h3>${name}</h3><p class="small muted" style="margin-top:3px">${txt}</p></div></div>`).join('')}</div></section>
-    <section class="card pad-lg stack" id="mockBox"><div class="row between"><h2>Mocks focus</h2><span class="tiny muted">${mockOn()?plural(daysTo(mockCfg().date),'day')+' to go':'Not active'}</span></div>
-      <p class="small muted">Pick the date and the topics in your next mocks. Until that date, Home, Today's plan, exam questions and drills focus on these topics. Clear the date to turn focus mode off.</p>
-      <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Name</span><input type="text" id="mockTitle" value="${esc(mockCfg().title)}"></label><label class="stack" style="gap:4px"><span class="small muted">First mock date</span><input type="date" id="mockDate" value="${esc(mockCfg().date||'')}"></label></div>
-      <div class="grid g3">${mySubj().map(s=>`<div class="stack s-${s}" style="gap:4px"><b class="small">${SUBJ[s].name}</b>${liveTopics(s).map(t=>`<label class="row small" style="gap:8px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" data-mtopic="${t.id}" ${mockCfg().topics.includes(t.id)?'checked':''} style="margin-top:3px"><span>${esc(t.name)}</span></label>`).join('')}</div>`).join('')}</div>
+    <section class="card pad-lg stack" id="mockBox"><div class="row between"><h2>Mocks focus</h2><span class="tiny muted">${mockOn()?'Next mock '+daysWord(daysTo(mockDate(nextMockSubj()))):'Not active'}</span></div>
+      <p class="small muted">Pick the dates and the topics in your next mocks. Until each subject's mock, Home, Today's plan, mixed practice, exam questions and drills focus on its topics, nearest mock first. Clear the dates to turn focus mode off.</p>
+      <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Name</span><input type="text" id="mockTitle" value="${esc(mockCfg().title)}"></label><label class="stack" style="gap:4px"><span class="small muted">${mockCfg().school ? 'Date for any other subject' : 'First mock date'}</span><input type="date" id="mockDate" value="${esc(mockCfg().date||'')}"></label></div>
+      <div class="grid g3">${mySubj().map(s=>`<div class="stack s-${s}" style="gap:4px"><b class="small">${SUBJ[s].name}</b><input type="date" data-mdate="${s}" value="${esc(mockDate(s))}" aria-label="${esc(SUBJ[s].name)} mock date">${mockRow(s) ? `<span class="tiny muted">${esc(mockRow(s).p)} · ${esc(mockRow(s).room)} · ${esc(mockRow(s).dur)}</span>` : ''}${liveTopics(s).map(t=>`<label class="row small" style="gap:8px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" data-mtopic="${t.id}" ${mockCfg().topics.includes(t.id)?'checked':''} style="margin-top:3px"><span>${esc(t.name)}</span></label>`).join('')}</div>`).join('')}</div>
     </section>
     <section class="card pad-lg stack"><h2>Settings</h2>
       <div class="grid g2"><label class="stack" style="gap:4px"><span class="small muted">Name</span><input type="text" id="setName" value="${esc(S.settings.name)}"></label>
@@ -2209,7 +2234,8 @@ ${FIREBASE_CONFIG && !(window.claude && window.claude.use) ? `<div class="stack"
   on(m,'[data-tsz]','click',e=>{ S.settings.textSize = e.currentTarget.dataset.tsz; save(); render(); });
   on(m,'[data-syear]','click',e=>{ S.settings.examYear = +e.currentTarget.dataset.syear; CUSTOM_SIG = null; save(); render(); toast(`Exams set to summer ${S.settings.examYear}`); });
   bindPsychOpts(m, ()=>{ render(); toast('Paper 3 options saved'); });
-  const mockSave = () => { S.settings.mock = Object.assign({}, mockCfg(), S.settings.mock || {}); save(); renderNav(); };
+  const mockSave = () => { S.settings.mock = JSON.parse(JSON.stringify(mockCfg())); save(); renderNav(); };
+  on(m,'[data-mdate]','change',e=>{ mockSave(); (S.settings.mock.dates ||= {})[e.target.dataset.mdate] = e.target.value || ''; if (!e.target.value && !mockRow(e.target.dataset.mdate)) delete S.settings.mock.dates[e.target.dataset.mdate]; save(); render(); toast(e.target.value ? 'Mock date saved' : 'Mock date cleared'); });
   on(m,'#mockTitle','change',e=>{ mockSave(); S.settings.mock.title = e.target.value.trim() || 'Mocks'; save(); });
   on(m,'#mockDate','change',e=>{ mockSave(); S.settings.mock.date = e.target.value || ''; save(); render(); toast(e.target.value ? 'Mock date saved' : 'Focus mode off'); });
   on(m,'[data-mtopic]','change',e=>{ mockSave(); const id = e.target.dataset.mtopic; const ts = new Set(S.settings.mock.topics); e.target.checked ? ts.add(id) : ts.delete(id); S.settings.mock.topics = TOPICS.map(t=>t.id).filter(x=>ts.has(x)); save(); });
