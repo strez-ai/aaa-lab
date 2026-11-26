@@ -112,3 +112,18 @@ Boundary conditions :: Use given values to find constants in the general solutio
 Forced oscillations :: Adding a forcing term leads to a particular integral; resonance occurs when the forcing frequency matches the natural frequency.
 Modelling with differential equations :: Population growth, Newton's law of cooling, mixing problems and electric circuits.
 Choosing a particular integral :: f(x) = k: try λ. f(x) = ax + b: try λx + μ. f(x) = ke^(px): try λe^(px). f(x) = sin or cos: try λ cos px + μ sin px. Multiply by x if it matches the complementary function.
+# conics | FP1 | Conic sections
+Parabola y² = 4ax :: Focus (a, 0), directrix x = −a. Parametric form x = at², y = 2at. Every point is the same distance from the focus as from the directrix.
+Rectangular hyperbola xy = c² :: Asymptotes are the coordinate axes. Parametric form x = ct, y = c/t.
+Ellipse x²/a² + y²/b² = 1 :: Crosses the axes at (±a, 0) and (0, ±b). Parametric form x = a cos θ, y = b sin θ.
+Hyperbola x²/a² − y²/b² = 1 :: Crosses the x-axis at (±a, 0). Asymptotes y = ±(b/a)x. Parametric form x = a cosh t, y = b sinh t (or x = a sec θ, y = b tan θ).
+Eccentricity e :: Distance to focus = e × distance to directrix. Parabola e = 1, ellipse e < 1, hyperbola e > 1.
+Ellipse: eccentricity, foci and directrices (a > b) :: b² = a²(1 − e²). Foci (±ae, 0), directrices x = ±a/e.
+Hyperbola: eccentricity, foci and directrices :: b² = a²(e² − 1). Foci (±ae, 0), directrices x = ±a/e.
+Tangent to a conic :: Differentiate (implicitly or parametrically) to get the gradient at the point, then y − y₁ = m(x − x₁). Tangent to y² = 4ax at (at², 2at): ty = x + at².
+Normal to a conic :: Gradient −1/m, where m is the tangent gradient. Normal to y² = 4ax at (at², 2at): y + tx = 2at + at³.
+Tangent and normal to xy = c² at (ct, c/t) :: Tangent: x + t²y = 2ct. Normal: t³x − ty = c(t⁴ − 1).
+Line meeting a conic :: Substitute the line into the conic to get a quadratic. Discriminant > 0: two intersections; = 0: the line is a tangent; < 0: no intersection.
+Ellipse: sum of focal distances :: For any point on the ellipse, the distances to the two foci add up to 2a.
+Hyperbola: difference of focal distances :: For any point on the hyperbola, the distances to the two foci differ by 2a.
+Locus problems :: Write the coordinates of the point in terms of the parameter, find x and y of the moving point (e.g. a midpoint), then eliminate the parameter to get a Cartesian equation.

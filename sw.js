@@ -1,5 +1,5 @@
 // Offline support. App files: network first (so updates arrive), cache as backup. Fonts: cache first.
-const CACHE = 'aaalab-v15';
+const CACHE = 'aaalab-v17';
 const CORE = ['./', 'index.html', 'content.json', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
